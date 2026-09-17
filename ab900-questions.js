@@ -1,2136 +1,1845 @@
 window.__AB900_QUESTIONS__ = [
- {
-  "id": 2001,
-  "topic": "M365 core objects & admin centers",
-  "tag": "License effects",
-  "format": "multiple_choice",
-  "q": "A user with a Microsoft 365 E3 license reports that Copilot does not appear in Word or Teams. The tenant purchased Microsoft 365 Copilot licenses last month but nothing was assigned to this user. What is the correct explanation?",
-  "options": [
-   "Microsoft 365 E3 is not an eligible base license for Copilot, so the user must first be moved to Microsoft 365 E5",
-   "Copilot is a separate add-on license that must be assigned to the user, and it can take up to 24 hours to appear",
-   "Copilot appears automatically for every user as soon as the tenant purchases at least one Copilot license",
-   "The user must first be enrolled in the Copilot Frontier program before any Copilot feature becomes visible"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot features are gated by the Microsoft 365 Copilot add-on license (or an E7 subscription that includes it), assigned per user directly or through a group. E3, E5, Business Standard and Premium, Office 365 E1/E3/E5 and many other plans are all eligible base licenses. After assignment, propagation can take up to 24 hours and may need an app restart. Buying licenses does not assign them, and Frontier is an early-access program, not a prerequisite."
- },
- {
-  "id": 2002,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Group-based licensing",
-  "format": "multiple_choice",
-  "q": "Four hundred and fifty sales employees need Microsoft 365 Copilot. New hires who join Sales should get it automatically and people who leave Sales should lose it, without an admin editing each user. Which approach is correct?",
-  "options": [
-   "Assign the Copilot license to each Sales user individually in the Microsoft 365 admin center as they join",
-   "Assign the Copilot license to an Entra security group of Sales users, ideally with dynamic membership",
-   "Enable pay-as-you-go billing for the Sales department so that individual Copilot licenses are no longer needed",
-   "Assign the Copilot license to the Sales distribution list so that membership changes flow through automatically"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Group-based licensing assigns a license to a group; membership changes automatically add or remove the license, and a dynamic membership rule such as department equals Sales removes manual maintenance. Per-user assignment does not scale. Pay-as-you-go is a billing model for Copilot Chat and agents, not a replacement for the full Copilot license. Distribution lists are mail objects and cannot be used for license assignment."
- },
- {
-  "id": 2003,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Service plans",
-  "format": "multiple_choice",
-  "q": "Frontline users keep their Microsoft 365 E3 license but must NOT get an Exchange Online mailbox, while all other E3 features stay enabled. What should the admin do?",
-  "options": [
-   "Remove the Microsoft 365 E3 license from the frontline users and buy Exchange Online Kiosk licenses instead",
-   "Edit the license assignment and turn off the Exchange Online service plan for those users or their group",
-   "Delete the frontline users' mailboxes in the Exchange admin center so that no mailbox is provisioned",
-   "Create a Conditional Access policy that blocks Outlook and Outlook on the web for the frontline users"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "A license is made of service plans; an admin can disable individual plans such as Exchange Online, Teams or SharePoint within the assignment so the user keeps the rest. Removing the license loses all features. Deleting a mailbox is only temporary because a licensed Exchange plan re-provisions it, and Conditional Access blocks access to a service, it does not control provisioning."
- },
- {
-  "id": 2004,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Domains",
-  "format": "multiple_choice",
-  "q": "Contoso wants users to have contoso.com email addresses instead of contoso.onmicrosoft.com. Where is the domain added and how is ownership proved?",
-  "options": [
-   "Microsoft Entra admin center > Enterprise applications, by uploading the registrar's domain certificate",
-   "Microsoft 365 admin center > Settings > Domains, by adding a TXT or MX record at the registrar for verification",
-   "Exchange admin center > Accepted domains, where the domain is added without any ownership verification",
-   "SharePoint admin center > Active sites, by creating a site collection named after the custom domain"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Custom domains are added in the Microsoft 365 admin center (Settings > Domains), and ownership is verified by creating a TXT (or MX) record that Microsoft checks; the wizard then supplies the service records for Exchange, Teams and others. Exchange accepted domains are populated from verified domains, not the other way round. Enterprise applications and SharePoint sites have nothing to do with domain verification."
- },
- {
-  "id": 2005,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Org settings",
-  "format": "multiple_choice",
-  "q": "The company legal team requires the tenant's privacy statement URL and technical contact to be published, and the default time zone to be corrected. Where are these organization-wide settings configured?",
-  "options": [
-   "Microsoft 365 admin center > Settings > Org settings > Organization profile",
-   "Microsoft Purview portal > Settings > Organization privacy and contacts",
-   "Microsoft Entra admin center > Users > User settings > Organization details",
-   "Teams admin center > Org-wide settings > Organization information"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "The Organization profile section of Org settings in the Microsoft 365 admin center holds organization information, the privacy profile (privacy statement and privacy contact), release preferences and related tenant-wide settings. Purview settings are for compliance solutions, Entra user settings govern directory user permissions, and Teams org-wide settings apply only to Teams."
- },
- {
-  "id": 2006,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Mailbox types",
-  "format": "multiple_choice",
-  "q": "The HR team needs a mailbox at hr-onboarding@contoso.com that six people can read and reply from as the address, without buying an additional license. Which object should the admin create in the Exchange admin center?",
-  "options": [
-   "A user mailbox whose password is shared among the six HR people",
-   "A shared mailbox, granting the six users Full Access and Send As",
-   "A room mailbox with the six users configured as booking delegates",
-   "A distribution group named hr-onboarding with the six users as members"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Shared mailboxes are designed for team addresses, need no license up to 50 GB, and delegates receive Full Access to read and Send As (or Send on Behalf) to reply as the address. Sharing a user mailbox password is insecure and consumes a license. Room mailboxes are bookable resources, and a distribution group only forwards messages to members' own mailboxes; it does not hold mail or allow a common inbox."
- },
- {
-  "id": 2007,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Resource mailboxes",
-  "format": "multiple_choice",
-  "q": "Employees must be able to book a conference room from Outlook, with the room automatically accepting non-conflicting requests and declining double bookings. Which Exchange object provides this?",
-  "options": [
-   "An equipment mailbox",
-   "A room mailbox",
-   "A shared mailbox",
-   "A mail-enabled security group"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Room mailboxes are resource mailboxes for physical locations with a calendar that can auto-accept or decline based on availability and booking policies. Equipment mailboxes are the same concept for non-location resources such as projectors or vehicles. Shared mailboxes are for team email, and mail-enabled security groups combine mail distribution with permissions."
- },
- {
-  "id": 2008,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Group types",
-  "format": "multiple_choice",
-  "q": "The legal team needs a single group object that can receive email at legal@contoso.com AND be used to grant permissions to a SharePoint library. Which group type should be created?",
-  "options": [
-   "A distribution group",
-   "A Microsoft 365 group with the team's mailbox hidden",
-   "A mail-enabled security group",
-   "A dynamic distribution group"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "A mail-enabled security group is both a security principal (assignable to permissions and access policies) and an email recipient, which is exactly the dual requirement. Distribution groups and dynamic distribution groups are mail-only and cannot be used for permissions. A Microsoft 365 group can hold SharePoint permissions but comes with its own shared mailbox, site and Planner, and it also cannot be used in some security scenarios the way a security group can."
- },
- {
-  "id": 2009,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Dynamic distribution groups",
-  "format": "multiple_choice",
-  "q": "Corporate communications wants an email address that always reaches everyone whose Department attribute is 'Sales', with membership recalculated automatically at send time. No permissions or shared workspace are needed. Which object is the best fit?",
-  "options": [
-   "A dynamic distribution group in Exchange Online",
-   "A Microsoft 365 group with dynamic membership",
-   "A static distribution group maintained by HR",
-   "A Microsoft Entra security group with assigned membership"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Dynamic distribution groups evaluate a recipient filter (for example Department equals Sales) each time a message is sent, so they are ideal for attribute-based mail distribution with no extra workspace. A Microsoft 365 group with dynamic membership also works but provisions a mailbox, site and more than needed. Static groups require manual upkeep, and an assigned security group is neither dynamic nor necessarily mail-enabled."
- },
- {
-  "id": 2010,
-  "topic": "M365 core objects & admin centers",
-  "tag": "SharePoint site types",
-  "format": "multiple_choice",
-  "q": "The Marketing division has five team sites for different projects and wants them to share common navigation, branding and aggregated news, while each remains a separate site with its own permissions. Which SharePoint object provides this?",
-  "options": [
-   "A communication site that publishes news to the whole division",
-   "A hub site that the five team sites are associated with",
-   "A single team site with five document libraries, one per project",
-   "A private channel site created from the division's Teams team"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Hub sites connect related sites to share navigation, theme and news rollup while preserving each site's own membership and permissions. A communication site is a one-to-many publishing site, a single team site with libraries would merge permissions, and private channel sites are created automatically for Teams private channels."
- },
- {
-  "id": 2011,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Permission levels",
-  "format": "multiple_choice",
-  "q": "External contractors must be able to open and read documents in a SharePoint library in the browser but must NOT be able to download them. Which default SharePoint permission level should be used?",
-  "options": [
-   "Read",
-   "View Only",
-   "Contribute",
-   "Edit"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "View Only allows viewing pages and items and opening documents in browser-based viewers without downloading, whereas Read includes download. Contribute adds creating and editing items, and Edit adds managing lists. Choosing the least-privileged level that meets the need is the pattern the exam expects."
- },
- {
-  "id": 2012,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Permission inheritance",
-  "format": "multiple_choice",
-  "q": "A document library is open to all Finance team members, but one folder named 'Payroll' must be visible only to the two payroll administrators. How should this be configured?",
-  "options": [
-   "Create a separate SharePoint site for the two administrators and move the Payroll folder there",
-   "Break permission inheritance on the Payroll folder and grant unique permissions to the two administrators",
-   "Apply a sensitivity label to the Payroll folder that restricts access to the two administrators",
-   "Enable restricted content discovery on the site so that the folder is hidden from other team members"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "SharePoint permissions inherit from site to library to folder to file; breaking inheritance on the folder gives it unique permissions that exclude the rest of the team. A new site works but is heavier than needed. Sensitivity labels cannot be applied to folders, and restricted content discovery affects search and Copilot discoverability, not who can access content."
- },
- {
-  "id": 2013,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Default SharePoint groups",
-  "format": "multiple_choice",
-  "q": "A user is added to the default 'Members' group of a new SharePoint team site. Which statement describes what the user can do?",
-  "options": [
-   "Only view content, because the default Members group has the Read permission level",
-   "Add, edit and delete items but not change permissions, because Members have the Edit level",
-   "Everything, including managing permissions, because the Members group has Full Control",
-   "Nothing until a site owner also grants the user the Contribute permission level directly"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The three default groups map to permission levels: Owners have Full Control (including permission management), Members have Edit, and Visitors have Read. Edit includes creating, updating and deleting list items and documents and managing lists, but not managing permissions. Knowing this mapping is fundamental to reasoning about oversharing and Copilot data exposure."
- },
- {
-  "id": 2014,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Teams channels",
-  "format": "multiple_choice",
-  "q": "Within the Finance team in Microsoft Teams, a subset of members must discuss a sensitive acquisition in a space that other team members cannot see, and the files must be stored separately from the team's main SharePoint site. Which channel type should be created?",
-  "options": [
-   "A standard channel",
-   "A private channel",
-   "A shared channel",
-   "An org-wide team"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Private channels restrict membership to a subset of the team and provision their own separate SharePoint site for files. Standard channels are visible to all team members and store files in the team site. Shared channels are for collaborating with people outside the team (including other organizations), and an org-wide team automatically includes everyone."
- },
- {
-  "id": 2015,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Shared channels",
-  "format": "multiple_choice",
-  "q": "Contoso must collaborate with a partner company's engineers in a Teams channel. The security team refuses to create guest accounts in the Contoso directory, and partners must use their own home identities. Which Teams object and underlying identity feature satisfy this?",
-  "options": [
-   "A private channel in the team with the partner engineers added as guest users",
-   "A shared channel, which relies on Microsoft Entra B2B direct connect",
-   "A standard channel in an org-wide team that the partners join as members",
-   "A distribution group that includes the partner engineers' email addresses"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Shared channels let people from other Microsoft Entra organizations participate with their home tenant identity and no guest object, using B2B direct connect and cross-tenant access settings. Private channels and standard channels require the participants to be members or guests of the team. A distribution group is an email construct and has no chat or collaboration space."
- },
- {
-  "id": 2016,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Teams policies",
-  "format": "multiple_choice",
-  "q": "Regulators require that a specific group of traders cannot delete or edit messages they have sent in Teams. All other users keep the default behavior. What should the Teams administrator configure?",
-  "options": [
-   "A custom meeting policy assigned to the traders that disables transcription and recording",
-   "A custom messaging policy assigned to the traders that disables deleting and editing sent messages",
-   "An app permission policy assigned to the traders that removes the Chat app from Teams",
-   "A retention policy in Microsoft Purview that retains the traders' chat messages for seven years"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Messaging policies control chat and channel messaging features per user, including whether users can delete or edit sent messages; a custom policy assigned only to the traders leaves the global policy for everyone else. Meeting policies govern meetings, app permission policies control which apps are available, and a Purview retention policy keeps copies for compliance but does not stop the user-facing delete action."
- },
- {
-  "id": 2017,
-  "topic": "M365 core objects & admin centers",
-  "tag": "Teams app management",
-  "format": "multiple_choice",
-  "q": "IT security wants to block all third-party apps in Microsoft Teams except a short approved list, for everyone except the Finance department, who may also use one additional approved app. Where and how is this configured?",
-  "options": [
-   "Microsoft 365 admin center > Settings > Org settings > Services, by disabling third-party apps",
-   "Teams admin center > Teams apps > Manage apps and app permission policies, with a custom policy for Finance",
-   "Microsoft Entra admin center > Enterprise applications > User consent settings, by blocking user consent",
-   "Microsoft Purview portal > Data Loss Prevention, with a policy that blocks third-party app connectors"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Teams app governance lives in the Teams admin center: Manage apps sets org-wide availability, and app permission policies (or the newer app-centric management) allow or block apps for specific users or groups, so a custom policy for Finance can add the extra app. Entra consent settings control OAuth consent to applications, not Teams app availability, and Purview DLP is for content protection."
- },
- {
-  "id": 2018,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Zero Trust principles",
-  "format": "multiple_choice",
-  "q": "An organization replaces permanent Global Administrator assignments with time-limited, approval-based activation through Privileged Identity Management. Which Zero Trust principle does this change MOST directly implement?",
-  "options": [
-   "Verify explicitly on every request",
-   "Use least privilege access",
-   "Assume breach of the environment",
-   "Apply defense in depth"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Least privilege access includes just-in-time and just-enough access, so removing standing administrative rights in favor of PIM activation is its textbook implementation. Verify explicitly is about authenticating and authorizing every request with all available signals, and assume breach is about segmentation, monitoring and response. Defense in depth is a layered-security strategy, not one of the three Zero Trust principles."
- },
- {
-  "id": 2019,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Assume breach",
-  "format": "multiple_choice",
-  "q": "Which set of practices BEST reflects the 'assume breach' principle of Zero Trust in a Microsoft 365 environment?",
-  "options": [
-   "Requiring MFA for every sign-in and evaluating device compliance before granting access to any resource",
-   "Segmenting access, monitoring continuously with Defender XDR and Sentinel, encrypting end to end and rehearsing incident response",
-   "Granting all employees the same standard set of permissions so that access management stays simple, predictable and auditable",
-   "Trusting all traffic that originates inside the corporate network while inspecting only the traffic that arrives from the internet"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Assume breach means designing as if attackers are already inside: minimize blast radius through segmentation, encrypt, monitor with analytics to detect anomalies and be ready to respond. Option A describes verify explicitly. Uniform permissions violate least privilege, and trusting the internal network is the legacy perimeter model that Zero Trust replaces."
- },
- {
-  "id": 2020,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Authentication vs authorization",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nA user signs in successfully with a password and Microsoft Authenticator, then tries to delete a SharePoint site and is refused because she is not a site owner. The refusal is an example of [answer].",
-  "options": [
-   "authentication",
-   "authorization",
-   "federation",
-   "auditing"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Authentication (proving identity, here with two factors) succeeded; authorization (what the authenticated identity is allowed to do) denied the action because the required permission level was missing. Federation is trust between identity providers, and auditing is the recording of the attempt. The exam repeatedly checks that you separate these two steps."
- },
- {
-  "id": 2021,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Authentication methods",
-  "format": "multiple_choice",
-  "q": "Which authentication method is considered phishing-resistant and therefore appropriate for administrators under a Conditional Access authentication strength policy?",
-  "options": [
-   "A six-digit one-time code delivered to the user's phone by SMS",
-   "A Microsoft Authenticator push notification with number matching enabled",
-   "A passkey (FIDO2), such as a hardware security key or a passkey in Authenticator",
-   "A one-time passcode sent to the user's registered email address"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Passkeys and FIDO2 keys, Windows Hello for Business and certificate-based authentication are phishing-resistant because the credential is bound to the legitimate site and cannot be replayed to a fake page. SMS and email codes can be intercepted or phished, and while number matching hardens push approvals against MFA fatigue, standard Authenticator push is not classed as phishing-resistant. Microsoft is also retiring its SMS and voice delivery, making passkeys the direction of travel."
- },
- {
-  "id": 2022,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Legacy authentication",
-  "format": "multiple_choice",
-  "q": "A user's mailbox is accessed by an attacker using an old IMAP client with a stolen password, even though the tenant requires MFA for all users. What is the MOST likely gap and its fix?",
-  "options": [
-   "The password policy is too weak; enforce 16-character passwords and rotation so that stolen passwords cannot be reused by attackers",
-   "Legacy protocols such as IMAP and POP bypass MFA; block legacy authentication with Conditional Access or security defaults",
-   "MFA was never registered for the user; force the user to re-register so that the legacy IMAP client starts prompting for MFA",
-   "The mailbox lacks a sensitivity label; apply one so that the label's encryption blocks the legacy client"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Legacy (basic) authentication does not support MFA, so credentials alone are enough; blocking legacy protocols is one of the highest-impact controls and is included in security defaults and Baseline Security Mode. A longer password would still be phishable, re-registering MFA does not affect protocols that ignore MFA, and sensitivity labels protect content rather than sign-ins."
- },
- {
-  "id": 2023,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Defender for Office 365",
-  "format": "multiple_choice",
-  "q": "Which Microsoft Defender for Office 365 feature opens email attachments in a virtual sandbox to observe their behavior BEFORE the message is delivered to the recipient?",
-  "options": [
-   "Safe Links",
-   "Safe Attachments",
-   "Zero-hour auto purge (ZAP)",
-   "Anti-spam connection filtering"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Safe Attachments detonates attachments in an isolated environment and blocks or replaces malicious ones prior to delivery. Safe Links checks URLs at time of click, ZAP retroactively removes messages already delivered when they are later found to be malicious, and connection filtering evaluates sending IP reputation. Each feature covers a different point in the message lifecycle."
- },
- {
-  "id": 2024,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Defender for Cloud Apps",
-  "format": "multiple_choice",
-  "q": "The security team wants to discover which unsanctioned SaaS applications employees use from corporate devices (shadow IT), assess each app's risk score and block the risky ones. Which Defender XDR component provides this?",
-  "options": [
-   "Microsoft Defender for Endpoint",
-   "Microsoft Defender for Identity",
-   "Microsoft Defender for Cloud Apps",
-   "Microsoft Defender Vulnerability Management"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Defender for Cloud Apps is the cloud access security broker of the suite: Cloud Discovery (fed by Defender for Endpoint network signals) inventories SaaS usage, a catalog of tens of thousands of apps supplies risk scores, and admins can sanction or unsanction apps and apply session controls. Defender for Endpoint protects devices, Defender for Identity protects the directory, and Vulnerability Management finds weaknesses in assets."
- },
- {
-  "id": 2025,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Defender portal",
-  "format": "multiple_choice",
-  "q": "Which statement about the portal used for Microsoft Defender XDR is correct?",
-  "options": [
-   "Defender XDR is managed in the Microsoft 365 Defender portal at protection.office.com, alongside Exchange Online Protection",
-   "Defender XDR is surfaced in the Microsoft Defender portal at security.microsoft.com; 'Microsoft 365 Defender' is a retired name",
-   "Defender XDR is managed from the Microsoft Purview portal because it is classified as a compliance solution",
-   "Defender XDR settings are managed only in the Microsoft Entra admin center under the Protection node"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The Microsoft Defender portal (security.microsoft.com) is the unified security operations portal; Defender XDR is the service inside it, together with Sentinel, Exposure Management and Security Copilot. The old 'Microsoft 365 Defender' branding and protection.office.com are retired. Purview is for compliance and data security, and the Entra admin center is for identity."
- },
- {
-  "id": 2026,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Incidents",
-  "format": "multiple_choice",
-  "q": "A phishing email leads to a compromised account that then uploads a malicious file to SharePoint. In the Microsoft Defender portal, how are these related detections presented to the analyst?",
-  "options": [
-   "As three unrelated alerts in three different product consoles that an analyst must manually cross-reference and time-align",
-   "As a single incident that correlates the email, identity and file alerts into one attack story with a timeline",
-   "As a Secure Score recommendation to review the affected mailbox, account and SharePoint site",
-   "As a Compliance Manager improvement action assigned to the security team for remediation"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender XDR correlates alerts from Defender for Office 365, Entra ID Protection or Defender for Identity, and SharePoint or endpoint signals into one incident so the analyst sees the full chain of the attack. Secure Score is about posture recommendations, and Compliance Manager is a compliance tool; neither represents an active attack."
- },
- {
-  "id": 2027,
-  "topic": "Security principles & Defender XDR",
-  "tag": "Attack simulation training",
-  "format": "multiple_choice",
-  "q": "The security awareness team wants to send realistic simulated phishing emails to employees and automatically assign training to those who click. Which capability and licensing level is needed?",
-  "options": [
-   "Attack simulation training in the Defender portal, which requires Defender for Office 365 Plan 2",
-   "Communication Compliance in Microsoft Purview, which requires Microsoft 365 E5 Compliance",
-   "Insider Risk Management in Microsoft Purview, which requires Microsoft 365 E5 Compliance",
-   "Microsoft Secure Score in the Defender portal, which requires Defender for Office 365 Plan 1"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Attack simulation training is a Defender for Office 365 Plan 2 feature that runs phishing simulations and assigns targeted training. Communication Compliance monitors messages for policy violations, Insider Risk Management detects risky user behavior, and Secure Score recommends configuration improvements. Knowing which Defender for Office 365 plan includes simulations is a common test point."
- },
- {
-  "id": 2028,
-  "topic": "Entra ID & core security features",
-  "tag": "Conditional Access",
-  "format": "multiple_choice",
-  "q": "The security team requires that Microsoft 365 Copilot and the Office apps can be used only from Intune-compliant devices, and that MFA is required whenever a user connects from outside the corporate network. Which Microsoft Entra feature meets both requirements?",
-  "options": [
-   "Privileged Identity Management with a policy requiring compliant devices",
-   "Conditional Access policies using device compliance and named locations",
-   "Microsoft Entra ID Protection with a user risk policy for external sign-ins",
-   "Microsoft Entra Connect with device writeback and filtering enabled"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Conditional Access evaluates signals (user, resource, device state, location, risk) and applies grant controls such as require MFA or require a compliant device; named locations define the trusted corporate network. PIM governs privileged role activation, ID Protection detects identity risk (and feeds Conditional Access), and Entra Connect synchronizes on-premises identities."
- },
- {
-  "id": 2029,
-  "topic": "Entra ID & core security features",
-  "tag": "Policy testing",
-  "format": "multiple_choice",
-  "q": "Before enforcing a new Conditional Access policy that blocks access from unmanaged devices, the admin wants to see which real sign-ins it would have affected, and to check the outcome for one specific user and app. Which TWO tools are designed for this?",
-  "options": [
-   "Report-only policy mode and the What If tool",
-   "Identity Secure Score and the audit log",
-   "Security defaults and PIM",
-   "Microsoft Purview Activity explorer and DSPM for AI"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Report-only mode logs what the policy would have done on every sign-in without enforcing it, and the What If tool simulates the outcome for a chosen user, app and conditions. Identity Secure Score and audit logs do not simulate policies, security defaults and PIM are unrelated controls, and Purview tools cover data rather than sign-ins."
- },
- {
-  "id": 2030,
-  "topic": "Entra ID & core security features",
-  "tag": "Break-glass accounts",
-  "format": "multiple_choice",
-  "q": "When creating a Conditional Access policy that requires MFA for all users and all resources, which best practice prevents administrators from being locked out of the tenant if the MFA service or the policy misbehaves?",
-  "options": [
-   "Set the policy to apply only to guest users until every administrator has registered for MFA",
-   "Exclude the emergency access (break-glass) accounts from the policy and monitor their use",
-   "Assign the Global Administrator role to a second administrator who signs in from a trusted location",
-   "Disable security defaults first so that the Conditional Access policy can never lock anyone out"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Emergency access accounts are excluded from Conditional Access policies (and protected by other means such as long random passwords or FIDO2 keys and alerting on any sign-in) so admins can always get in. Limiting the policy to guests defeats its purpose, another Global Administrator would be locked out too, and disabling security defaults is a prerequisite for using Conditional Access, not a lockout safeguard."
- },
- {
-  "id": 2031,
-  "topic": "Entra ID & core security features",
-  "tag": "Single sign-on",
-  "format": "multiple_choice",
-  "q": "Employees maintain separate passwords for Salesforce and ServiceNow, generating many help-desk password resets, and IT cannot revoke access centrally when someone leaves. Which change addresses both issues?",
-  "options": [
-   "Store the SaaS passwords in a shared spreadsheet that IT can revoke by deleting rows when someone leaves",
-   "Add the apps as enterprise applications in Entra ID, configure SSO (SAML or OIDC) and assign users or groups",
-   "Register each app as an app registration in Entra ID and issue each employee a client secret for sign-in",
-   "Synchronize the SaaS providers' directories into on-premises AD DS so that passwords stay aligned"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "SSO through Entra enterprise applications lets users authenticate once with their Entra identity and access assigned apps without separate passwords, while admins control assignment, enforce Conditional Access and revoke access centrally at offboarding. App registrations are for developers integrating their own apps, and client secrets are for applications, not people. Spreadsheets and reverse synchronization are neither secure nor practical."
- },
- {
-  "id": 2032,
-  "topic": "Entra ID & core security features",
-  "tag": "Users vs groups",
-  "format": "multiple_choice",
-  "q": "An admin must grant 300 employees access to a SharePoint site, target them with a Conditional Access policy and assign them a Copilot license, all automatically based on their department attribute. Which single security object should be created?",
-  "options": [
-   "A distribution group with the 300 employees as members, mail-enabled for notifications",
-   "A Microsoft Entra security group with dynamic membership based on the department attribute",
-   "A mail contact for each employee, grouped in an address list for the department",
-   "An administrative unit containing the 300 employees, with the site permission assigned to it"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "A security group is the object that can be used for resource permissions, Conditional Access targeting and group-based licensing, and dynamic membership rules keep it current from attributes. Distribution groups are for email only and cannot carry permissions or licenses. Mail contacts are external addresses, and administrative units scope administrator roles rather than grant access."
- },
- {
-  "id": 2033,
-  "topic": "Entra ID & core security features",
-  "tag": "Guest users",
-  "format": "multiple_choice",
-  "q": "A vendor's consultant needs access to one SharePoint site for three months. Which approach follows Microsoft's guidance for external access?",
-  "options": [
-   "Create a regular member account with a company email address and a temporary password for the consultant",
-   "Invite the consultant as a B2B guest user who authenticates with their own identity, then grant the site permission",
-   "Share the site owner's credentials with the consultant for the duration of the three-month engagement",
-   "Add the consultant's email address to a distribution group that has been granted access to the site"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "B2B collaboration creates a guest user object that authenticates with the vendor's own identity provider, has limited default permissions, can be governed by access reviews and can be removed cleanly. A member account creates an unnecessary internal identity and license, sharing credentials is a severe security violation, and distribution groups grant no access."
- },
- {
-  "id": 2034,
-  "topic": "Entra ID & core security features",
-  "tag": "Sign-in troubleshooting",
-  "format": "multiple_choice",
-  "q": "A user gets error 53003 ('Access has been blocked by Conditional Access policies') when opening Outlook. Which tool tells the admin exactly which policy blocked the sign-in and why?",
-  "options": [
-   "The Microsoft Entra audit logs, filtered on the Conditional Access policy category",
-   "The Microsoft Entra sign-in logs, opening the entry and reviewing the Conditional Access tab",
-   "Identity Secure Score, filtered to the improvement actions related to Conditional Access",
-   "The Microsoft Purview unified audit log, searching for the user's Outlook activities"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Sign-in logs record every authentication with the applied Conditional Access policies and their result (success, failure, not applied), plus device, location, client app and MFA details, which is where 53003 blocks are diagnosed. Audit logs show directory changes such as who edited a policy, Identity Secure Score gives posture recommendations, and the Purview audit log records user and admin activity across Microsoft 365, not policy evaluation detail."
- },
- {
-  "id": 2035,
-  "topic": "Entra ID & core security features",
-  "tag": "Risky sign-ins",
-  "format": "multiple_choice",
-  "q": "A traveling executive is blocked with the message that their account is at risk after an atypical travel detection. Where does the admin investigate the detection and, if it is legitimate, clear the risk so the executive can sign in?",
-  "options": [
-   "Microsoft Entra admin center > ID Protection > Risky sign-ins and Risky users, then confirm safe or dismiss the risk",
-   "Microsoft 365 admin center > Users > Active users > Block sign-in, then unblock once the executive returns",
-   "Microsoft Purview portal > Insider Risk Management > Alerts, then resolve the alert as benign travel",
-   "Exchange admin center > Mail flow > Rules, then add an exception for the executive's mailbox"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Microsoft Entra ID Protection is where sign-in and user risk are investigated and remediated; admins can confirm a sign-in safe, dismiss risk or confirm compromise, and users can self-remediate through risk-based Conditional Access with MFA or password change. Blocking sign-in makes it worse, Insider Risk Management concerns data-related behavior, and Exchange mail flow is unrelated."
- },
- {
-  "id": 2036,
-  "topic": "Entra ID & core security features",
-  "tag": "MFA troubleshooting",
-  "format": "multiple_choice",
-  "q": "A user has lost the phone that held Microsoft Authenticator and cannot complete MFA. What is the appropriate way to restore access while keeping MFA enforced?",
-  "options": [
-   "Disable MFA for the whole tenant until the user has replaced the phone and registered again",
-   "Reset the user's authentication methods (require re-registration) or issue a Temporary Access Pass",
-   "Delete the account and create a new one so that the user starts with a clean registration",
-   "Add the user permanently to the Conditional Access exclusion group used for service accounts"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Admins can clear the user's registered methods so re-registration is required at the next sign-in, or issue a time-limited Temporary Access Pass that satisfies strong authentication for registering new methods. Disabling MFA tenant-wide or permanently excluding the user weakens security, and deleting the account loses data and licenses."
- },
- {
-  "id": 2037,
-  "topic": "Entra ID & core security features",
-  "tag": "Identity Secure Score",
-  "format": "multiple_choice",
-  "q": "Which statement about Identity Secure Score is correct?",
-  "options": [
-   "It is a separate product that must be licensed per user before any recommendations are shown",
-   "It measures identity best-practice adherence, feeds the Identity category of Microsoft Secure Score and recalculates daily",
-   "It reports the number of risky users and risky sign-ins detected by ID Protection over the last 30 days",
-   "It is the identity view of the compliance score in Compliance Manager and shares that tool's improvement actions and points"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Identity Secure Score lists improvement actions (require MFA for admins, block legacy authentication, enable password protection) with point values and user impact, and its numbers feed the Identity section of Microsoft Secure Score in the Defender portal. It is included with Entra ID, is not a count of risky users, and is unrelated to the regulatory compliance score."
- },
- {
-  "id": 2038,
-  "topic": "Entra ID & core security features",
-  "tag": "Audit logs",
-  "format": "multiple_choice",
-  "q": "On Tuesday someone added an external contractor to the Finance security group. The manager wants to know which administrator did it and when. Which log answers this?",
-  "options": [
-   "Microsoft Entra sign-in logs, filtered on the contractor's interactive sign-ins to the Finance resources",
-   "Microsoft Entra audit logs (activity 'Add member to group'), also in the unified audit log",
-   "Identity Secure Score history, which records group membership changes over time",
-   "The Microsoft 365 Copilot usage report, filtered on the Finance group"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Audit logs record changes to directory objects, including who initiated the change, the target and the timestamp; group membership changes are a typical entry. Sign-in logs only cover authentication events. Secure Score history tracks the score over time, and the Copilot usage report covers Copilot adoption, neither of which records group changes."
- },
- {
-  "id": 2039,
-  "topic": "Entra ID & core security features",
-  "tag": "Unified audit log",
-  "format": "multiple_choice",
-  "q": "A compliance officer needs one search that shows a departing employee's SharePoint file downloads, mailbox activity AND Microsoft 365 Copilot interactions for the last 60 days. Which tool provides this?",
-  "options": [
-   "Microsoft Entra sign-in logs, which record every activity the user performed in each service",
-   "Audit search in the Purview portal (also in the Defender portal), which spans Microsoft 365 services and Copilot",
-   "The Teams admin center usage reports, which include SharePoint downloads and mailbox activity",
-   "Identity Secure Score, which lists the user's file, mailbox and Copilot activity as identity risk indicators over time"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The unified audit log aggregates user and admin activities from Exchange, SharePoint, OneDrive, Teams, Entra ID, Purview and Copilot (recorded as CopilotInteraction events, with details of the resources Copilot accessed) and is searchable from Purview and the Defender portal. Entra sign-in logs cover authentication only, Teams reports show usage statistics, and Secure Score is posture."
- },
- {
-  "id": 2040,
-  "topic": "Entra ID & core security features",
-  "tag": "PIM",
-  "format": "multiple_choice",
-  "q": "An audit finds nine permanent Global Administrators. The CISO wants administrators to activate privileged roles only when needed, with MFA and a justification, expiring automatically after a set time. Which Entra capability delivers this, and what assignment type should be used?",
-  "options": [
-   "Conditional Access with a permanent active assignment and MFA",
-   "Privileged Identity Management with eligible role assignments",
-   "Access reviews with permanent active assignments",
-   "Group-based licensing with a dynamic admin group"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "PIM converts standing privilege into eligible assignments that must be activated just in time under configurable requirements (MFA, justification, approval, duration). Conditional Access alone cannot remove standing privilege, access reviews recertify assignments but do not make them just-in-time, and licensing groups do not govern roles. PIM lives under ID Governance in the Entra admin center and requires Entra ID P2 or ID Governance licensing."
- },
- {
-  "id": 2041,
-  "topic": "Entra ID & core security features",
-  "tag": "PIM concepts",
-  "format": "multiple_choice",
-  "q": "In Privileged Identity Management, what is the difference between an ELIGIBLE and an ACTIVE role assignment?",
-  "options": [
-   "Eligible assignments are used for guest and external users, while active assignments are reserved for member users",
-   "An eligible user must activate the role before using it and the activation expires; an active user holds it continuously",
-   "Eligible assignments grant a broader set of permissions than active assignments of the same role",
-   "Active assignments expire automatically after one hour of inactivity, whereas eligible assignments never expire"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Eligible means the user can activate the role when needed and the activation lasts only for the configured duration, which is the just-in-time model; active means the role is always on. Both types can be permanent or time-bound in duration. Permissions are identical once the eligible role is activated. Emergency access accounts are the usual exception that keep permanent active assignments."
- },
- {
-  "id": 2042,
-  "topic": "Entra ID & core security features",
-  "tag": "App registrations vs enterprise apps",
-  "format": "multiple_choice",
-  "q": "A developer registered a custom app in Microsoft Entra ID. The admin now needs to restrict sign-in to members of one group, configure SSO settings and review the permissions that were consented to. Which area of the Entra admin center should the admin use?",
-  "options": [
-   "App registrations, because the object that was created there also holds the assignment and SSO settings",
-   "Enterprise applications, which represents the app's service principal and holds assignment, SSO and consent",
-   "Identity Governance > Access packages, where the app must be bundled before users can be assigned",
-   "Conditional Access > Named locations, where the app's allowed sign-in group and SSO settings are defined"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "An app registration defines the application object (what the app is: redirect URIs, credentials, API permissions requested). The enterprise application entry is the service principal, the tenant-local instance that governs how the app is used: assignment required, users and groups, SSO, consented permissions and sign-in activity. Access packages and named locations are unrelated. The exam probes this application-object versus service-principal split."
- },
- {
-  "id": 2043,
-  "topic": "Entra ID & core security features",
-  "tag": "Consent",
-  "format": "multiple_choice",
-  "q": "A third-party productivity app asks users for the permission to read every mailbox in the organization. Users cannot grant it themselves. Why, and who can?",
-  "options": [
-   "The permission is high privilege, so it needs admin consent from a privileged administrator after reviewing the app and publisher",
-   "Users can always consent to any permission on their own behalf as long as they hold a license for the application being requested",
-   "Only the app's developer can grant the permission, by adding it to the application manifest and republishing",
-   "The permission can be granted only in the Teams admin center, under Manage apps, by a Teams Administrator"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Entra distinguishes low-risk delegated permissions that users may consent to (subject to tenant user-consent settings) from high-privilege or application permissions that require admin consent. Admins should review the requested scopes and the publisher (verified publisher, certification) before granting tenant-wide consent, and can enable an admin consent workflow for user requests. The Teams admin center and the developer play no role in the consent grant."
- },
- {
-  "id": 2044,
-  "topic": "Entra ID & core security features",
-  "tag": "Objects",
-  "format": "yes_no",
-  "q": "True or False: Registering an application in Microsoft Entra ID creates an application object, while the corresponding entry under Enterprise applications is the service principal that receives user assignments and permission grants in your tenant.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "True. The application object is the global definition (template) and the service principal is the local instance that is authorized, assigned and governed in each tenant where the app is used. Multi-tenant apps have one application object in the home tenant and a service principal in every tenant that uses them."
- },
- {
-  "id": 2045,
-  "topic": "Purview capabilities",
-  "tag": "Solution mapping",
-  "format": "multiple_choice",
-  "q": "Compliance wants to detect when employees ask Microsoft 365 Copilot to draft harassing or threatening messages, route the flagged prompts and responses to a reviewer, and record the remediation. Which Microsoft Purview solution and template fit?",
-  "options": [
-   "Data Loss Prevention with the 'Microsoft 365 Copilot and Copilot Chat' location",
-   "Communication Compliance with the 'Detect Microsoft Copilot interactions' template",
-   "Insider Risk Management with the 'Risky AI usage' policy template",
-   "DSPM for AI, using the AI activities view of activity explorer"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Communication Compliance analyzes messages, including Copilot prompts and responses, against classifiers such as threat, harassment and discrimination, and provides a reviewer workflow with resolve, notify, escalate and tagging actions. DLP prevents sensitive information exposure rather than reviewing tone, Insider Risk Management's Risky AI usage template scores risky user behavior with AI, and DSPM for AI's activity explorer shows AI activity without a reviewer workflow."
- },
- {
-  "id": 2046,
-  "topic": "Purview capabilities",
-  "tag": "DSPM for AI",
-  "format": "multiple_choice",
-  "q": "The CISO wants to see which generative AI applications employees are using (Microsoft 365 Copilot, ChatGPT, others), what sensitive information is being entered into them, and to activate ready-made policies to reduce that risk from one place. Which Purview capability is designed for this?",
-  "options": [
-   "Compliance Manager with the AI regulations templates",
-   "Data Security Posture Management (DSPM) for AI",
-   "Records Management with an AI-usage file plan",
-   "Information barriers between users and AI apps"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "DSPM for AI (the AI-focused posture experience, converging into the unified DSPM) provides an inventory of AI apps and agents, insights into sensitive data in prompts and responses, data risk assessments of SharePoint sites, and one-click policies that create DLP, Insider Risk and Communication Compliance policies. Compliance Manager measures regulatory posture, Records Management handles retention of records, and information barriers block communication between segments."
- },
- {
-  "id": 2047,
-  "topic": "Purview capabilities",
-  "tag": "DLP for Copilot",
-  "format": "multiple_choice",
-  "q": "Documents labeled 'Highly Confidential' must never be summarized or referenced by Microsoft 365 Copilot, even for users who have permission to open them. Which configuration achieves this?",
-  "options": [
-   "Rely on the sensitivity label alone, because Copilot automatically skips any content that carries a label",
-   "A DLP policy for the Copilot location: condition = sensitivity label, action = prevent Copilot from processing the content",
-   "Enable restricted content discovery on every SharePoint site so that no labeled file can be discovered by Copilot or search",
-   "Create a retention policy for Copilot interactions so that any response containing labeled content is deleted"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "DLP supports a Copilot location whose rules can use sensitivity labels (or sensitive information types) as conditions and apply the action that prevents Copilot from processing matching content, including in prompts and web searches. A label by itself only blocks Copilot when its encryption denies the user the required usage rights. Restricted content discovery hides whole sites from Copilot and search rather than targeting labeled files, and retention policies govern how long interactions are kept."
- },
- {
-  "id": 2048,
-  "topic": "Purview capabilities",
-  "tag": "Label inheritance",
-  "format": "multiple_choice",
-  "q": "A user asks Copilot in Word to create a new document that summarizes a file labeled 'Confidential' and a file labeled 'General'. What sensitivity label does the new document receive?",
-  "options": [
-   "No label, because Copilot output is unclassified until the user applies a label manually",
-   "'Confidential', because Copilot output inherits the highest-priority label of the sources it used",
-   "'General', because the lowest-priority label is applied to avoid over-classifying new content",
-   "Both labels, because each source label is carried over to the new document separately"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "When Copilot creates new content from labeled sources, the output inherits the label with the highest priority in the label taxonomy (here Confidential), preserving protection. A file can carry only one sensitivity label. This label inheritance is one of the ways sensitivity labels keep protecting data as it flows through Copilot."
- },
- {
-  "id": 2049,
-  "topic": "Purview capabilities",
-  "tag": "Usage rights",
-  "format": "multiple_choice",
-  "q": "A file is protected by a sensitivity label that encrypts it and grants a user only the 'Viewer' permission set (VIEW but not EXTRACT). The user asks Copilot to summarize the file. What happens?",
-  "options": [
-   "Copilot summarizes the file, because any user who can open a file can have Copilot read it",
-   "Copilot returns nothing from the file, because it requires both VIEW and EXTRACT usage rights on encrypted content",
-   "Copilot asks the file owner for permission and summarizes the file once the owner approves the request",
-   "Copilot removes the encryption temporarily, summarizes the file and then re-applies the sensitivity label"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot honors the usage rights granted by the label's encryption: content can be surfaced only when the user holds both VIEW and EXTRACT (copy) rights. Viewer-only permission blocks extraction, so Copilot cannot use the content. Copilot never elevates permissions, contacts owners for consent, or alters encryption, which is the point of the Copilot honors existing controls principle."
- },
- {
-  "id": 2050,
-  "topic": "Purview capabilities",
-  "tag": "Trainable classifiers",
-  "format": "multiple_choice",
-  "q": "HR wants to automatically identify resumes and source code files across SharePoint so they can be labeled, but these documents have no fixed pattern such as a number format to match. Which classification method should be used?",
-  "options": [
-   "A built-in sensitive information type",
-   "A custom sensitive information type using a regular expression",
-   "A trainable classifier (pre-trained or custom)",
-   "An exact data match schema"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Trainable classifiers use machine learning trained on sample documents to recognize categories of content such as resumes, source code, contracts or harassment, which pattern-based methods cannot do. Sensitive information types need patterns, keywords and checksums, and exact data match requires a table of the actual values to match, which does not exist for resumes."
- },
- {
-  "id": 2051,
-  "topic": "Purview capabilities",
-  "tag": "Exact data match",
-  "format": "multiple_choice",
-  "q": "A DLP policy for customer account numbers generates many false positives because any ten-digit number matches. The company has a database of the real account numbers. Which classification technique reduces false positives by matching only actual values?",
-  "options": [
-   "Increase the confidence level of the built-in sensitive information type so that only high-confidence matches count",
-   "Exact data match (EDM) sensitive information type built from the company's own data",
-   "A trainable classifier trained on sample invoices that contain account numbers",
-   "Document fingerprinting based on the account statement template"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Exact data match hashes and uploads your real data table so detection matches only genuine values (optionally with supporting fields), dramatically cutting false positives. Confidence tuning helps somewhat but still relies on patterns. Trainable classifiers recognize document categories rather than specific values, and fingerprinting matches documents derived from a template form."
- },
- {
-  "id": 2052,
-  "topic": "Purview capabilities",
-  "tag": "Retention for Copilot",
-  "format": "multiple_choice",
-  "q": "Legal requires that Microsoft 365 Copilot prompts and responses be deleted after 90 days unless another policy retains them. Which Purview mechanism is the correct fit?",
-  "options": [
-   "A sensitivity label with a 90-day content expiry applied to every Copilot response",
-   "A retention policy in Data Lifecycle Management that targets Copilot interactions",
-   "A scheduled task that deletes the users' mailboxes every 90 days and recreates them",
-   "An eDiscovery case with a 90-day hold that releases and purges the prompts afterwards"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot prompts and responses are stored in the user's mailbox and are governed by retention policies for Copilot interactions in Data Lifecycle Management, where retain and delete settings apply; conflicting policies resolve to the longest retention. Sensitivity labels have no deletion settings, deleting mailboxes destroys everything, and a hold preserves content rather than deleting it."
- },
- {
-  "id": 2053,
-  "topic": "Purview capabilities",
-  "tag": "Retention policy vs label",
-  "format": "multiple_choice",
-  "q": "Which statement correctly distinguishes a retention POLICY from a retention LABEL in Microsoft Purview?",
-  "options": [
-   "A retention policy applies to individual items that users select manually, while a retention label applies to entire locations such as all SharePoint sites and mailboxes",
-   "A retention policy applies implicitly to whole locations, while a retention label is applied to individual items and can declare records or trigger disposition review",
-   "Retention labels can only delete content at the end of a period, while retention policies can only retain content and never delete it",
-   "Retention policies require Microsoft 365 E5 for every location they cover, while retention labels are included with every subscription"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Policies are location-wide and implicit; labels are item-level and explicit, and only labels can mark records or start a disposition review, or use event-based retention. Both can retain, delete, or retain then delete. Basic retention capabilities are included in E3-level plans, with advanced features (automatic labeling based on classifiers, disposition review) needing E5."
- },
- {
-  "id": 2054,
-  "topic": "Purview capabilities",
-  "tag": "Principles of retention",
-  "format": "multiple_choice",
-  "q": "A Teams chat message is covered by two retention policies: one retains chats for 5 years then deletes, the other deletes chats after 1 year. What happens to the message?",
-  "options": [
-   "It is deleted after 1 year, because the shortest deletion period always wins when policies conflict",
-   "It is retained for 5 years and then deleted, because retention wins over deletion and the longest period applies",
-   "It is retained for 6 years, because the retention periods of the two policies are added together",
-   "An administrator must resolve the conflict manually in the Purview portal before either policy takes effect on the message"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Purview applies the principles of retention: retention wins over deletion, then the longest retention period wins, then explicit wins over implicit, then the shortest deletion period wins when only deletion settings apply. Because one policy retains, the message stays for 5 years and is deleted afterwards. Periods are never summed, and conflicts are resolved automatically."
- },
- {
-  "id": 2055,
-  "topic": "Purview capabilities",
-  "tag": "Adaptive scopes",
-  "format": "multiple_choice",
-  "q": "A retention policy must apply only to the mailboxes of users whose Department attribute is 'Finance', and must automatically include new Finance hires and drop people who transfer out, without editing the policy. Which feature provides this?",
-  "options": [
-   "A static scope that lists each Finance mailbox and is updated by HR when people join or leave",
-   "An adaptive scope based on the department attribute, used as the target of the retention policy",
-   "A Microsoft 365 group with a dynamic membership rule, added as the retention policy's location",
-   "A sensitivity label scoped to the Finance department that carries the retention period"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Adaptive scopes define a dynamic set of users, groups or sites from attributes such as department, and retention policies (or labels) targeted at the scope follow membership changes automatically. Static scopes require manual updates, group rules do not drive retention scoping, and sensitivity labels are a protection mechanism, not a retention scoping tool."
- },
- {
-  "id": 2056,
-  "topic": "Purview capabilities",
-  "tag": "Label encryption",
-  "format": "multiple_choice",
-  "q": "Finance applies the 'Confidential - Finance' sensitivity label, which encrypts files, and then shares an Excel file with external auditors, who cannot open it. How should the admin allow the auditors to open the file while keeping the protection?",
-  "options": [
-   "Remove encryption from the label so that the auditors, and everyone else, can open the file",
-   "Add the auditors' organization or accounts to the label's encryption permissions with usage rights",
-   "Ask Finance to convert the file to PDF before sharing, because encryption does not apply to PDFs",
-   "Turn off external sharing in SharePoint and send the file to the auditors as an email attachment"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Label encryption defines exactly which users, groups or domains have which usage rights; adding the auditors (or their domain) with View or Edit rights lets them authenticate and open the content while it stays encrypted. Removing encryption unprotects every labeled file, converting to PDF does not bypass the label's encryption, and turning off external sharing prevents the collaboration entirely."
- },
- {
-  "id": 2057,
-  "topic": "Purview capabilities",
-  "tag": "Risky AI usage",
-  "format": "multiple_choice",
-  "q": "The security team wants to be alerted when a user repeatedly submits Copilot prompts that attempt to extract confidential content, and to correlate this with other risky activity such as bulk downloads, with the user pseudonymized during initial review. Which Purview solution and template?",
-  "options": [
-   "Communication Compliance, 'Detect Microsoft Copilot interactions'",
-   "Insider Risk Management, 'Risky AI usage'",
-   "Data Loss Prevention, Copilot location",
-   "Compliance Manager, AI regulation template"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Insider Risk Management's Risky AI usage template scores AI-related risk indicators such as risky prompts and sensitive responses alongside other exfiltration signals, producing pseudonymized alerts for triage. Communication Compliance reviews message content rather than scoring user risk, DLP blocks or audits individual actions, and Compliance Manager tracks regulatory readiness."
- },
- {
-  "id": 2058,
-  "topic": "Purview capabilities",
-  "tag": "DLM vs Records Management",
-  "format": "multiple_choice",
-  "q": "Which statement correctly contrasts Data Lifecycle Management with Records Management in Microsoft Purview?",
-  "options": [
-   "They are the same solution under two names, chosen depending on whether the tenant has an E5 license",
-   "Data Lifecycle Management retains and deletes everyday content broadly; Records Management adds records, file plans and disposition",
-   "Records Management is only for paper records scanned into SharePoint, while Data Lifecycle Management covers digital content",
-   "Data Lifecycle Management applies only to Exchange mailboxes, while Records Management covers SharePoint and OneDrive"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "DLM is the everyday retention and deletion capability (retention policies and labels across Exchange, SharePoint, OneDrive, Teams, Copilot interactions). Records Management builds on it for content with legal or regulatory record-keeping needs, adding record declaration and immutability, file plan descriptors, event-based retention and audited disposition. Both cover all supported Microsoft 365 locations."
- },
- {
-  "id": 2059,
-  "topic": "Purview capabilities",
-  "tag": "Purview portal",
-  "format": "yes_no",
-  "q": "True or False: The Microsoft Purview compliance portal at compliance.microsoft.com is the current portal for creating sensitivity labels and DLP policies.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. The compliance portal has been retired; all Purview solutions, including Information Protection (sensitivity labels), Data Loss Prevention, Insider Risk Management, DSPM for AI, eDiscovery and Audit, are managed in the unified Microsoft Purview portal at purview.microsoft.com under Solutions. Expect the retired URL to appear as a distractor."
- },
- {
-  "id": 2060,
-  "topic": "Purview capabilities",
-  "tag": "Sensitivity label capabilities",
-  "format": "multi_select",
-  "q": "Which THREE of the following can a sensitivity label do? (Select three.)",
-  "options": [
-   "Encrypt a document or email and assign usage rights to specific users or groups",
-   "Add content markings such as a header, footer or watermark",
-   "Apply settings to a Microsoft 365 group, Teams team or SharePoint site, such as making it private and controlling guest access",
-   "Retain a document for seven years and then delete it",
-   "Block a file from being copied to a USB drive on a Windows laptop"
-  ],
-  "answer": [
-   0,
-   1,
-   2
-  ],
-  "why": "Sensitivity labels protect and classify: encryption with usage rights, visual markings, and container settings for groups, teams and sites (privacy, external access, unmanaged device access), and they can also be used as DLP conditions. Retention periods belong to retention labels and policies, and blocking USB copies is Endpoint DLP, although a DLP rule can use the sensitivity label as its condition."
- },
- {
-  "id": 2061,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Data access model",
-  "format": "multiple_choice",
-  "q": "A department manager worries that Microsoft 365 Copilot could show employees documents they are not allowed to see. Which statement correctly describes how Copilot accesses organizational data?",
-  "options": [
-   "Copilot runs with elevated service permissions so it can search all tenant content, then filters the answer to the user's clearance",
-   "Copilot retrieves content through Microsoft Graph as the signed-in user, so it can only use data that user already has access to",
-   "Copilot maintains its own permission model, separate from SharePoint and Exchange, that administrators must configure",
-   "Copilot only uses documents that an administrator has marked 'Copilot-accessible' in the SharePoint admin center"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot grounds prompts with Microsoft Graph and the semantic index using the user's identity; existing SharePoint permissions, mailbox rights, sensitivity label usage rights, DLP and Conditional Access all apply, and nothing is elevated. There is no separate Copilot permission layer and no special SharePoint flag, which is why fixing oversharing before rollout is the real remediation."
- },
- {
-  "id": 2062,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Semantic index",
-  "format": "multiple_choice",
-  "q": "What is the semantic index for Copilot?",
-  "options": [
-   "A cache of every tenant document that is copied into the foundation model so that answers can be generated offline",
-   "A permission-aware index over Microsoft Graph and connector content that maps meaning and relationships for retrieval",
-   "A list of SharePoint sites that administrators have approved for Copilot, refreshed each time a site is created",
-   "A per-device search index maintained by Windows Search that Copilot queries through the Microsoft 365 apps"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The semantic index is a superset of the Microsoft Graph content, mapped into a lexical and semantic index that respects permission structures; it lets Copilot find conceptually related documents, emails and chats. Content is never used to train the foundation models, there is no approved-sites list, and it is a cloud service rather than a device index."
- },
- {
-  "id": 2063,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Microsoft Graph",
-  "format": "multiple_choice",
-  "q": "Two users with identical permissions ask Copilot the same question and receive different answers. Which explanation is consistent with how Microsoft Graph influences Copilot responses?",
-  "options": [
-   "Copilot randomly samples documents for each user so that identical prompts do not produce identical answers",
-   "Graph relevance signals (recent activity, collaborators, shared files, meetings) differ per user, so the grounding differs",
-   "One of the users runs an out-of-date Office version, so Copilot falls back to a smaller model for that user",
-   "Copilot answers from the web for one user and from Microsoft Graph for the other, depending on which license each user holds"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft Graph and Work IQ model relationships between people, content and activity; when Copilot grounds a prompt it ranks content by relevance to that user (recency, collaboration, relationships), so two users can be grounded on different items even with equal access. Permissions define what CAN be used; relevance defines what IS used. Randomness and app versions are not the mechanism."
- },
- {
-  "id": 2064,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Web grounding",
-  "format": "multiple_choice",
-  "q": "Leadership decides that Copilot must answer only from organizational data and must never send prompts to a web search to ground answers with public content. Which admin control implements this?",
-  "options": [
-   "A DLP policy for the Copilot location that blocks all prompts containing a URL or web reference",
-   "Turning off the 'Allow web search in Copilot' setting in the Microsoft 365 admin center",
-   "Enabling restricted content discovery on all SharePoint sites so that Copilot uses only internal data",
-   "Removing the Bing app from the Teams app catalog with a Teams app permission policy"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The tenant-level web search setting controls whether Copilot (including Researcher) can use web content from the Bing index; when it is off, Copilot grounds only on Microsoft Graph data. DLP can prevent Copilot processing specific sensitive content but is not a web toggle, restricted content discovery hides SharePoint sites, and the Teams app catalog is unrelated to Copilot grounding."
- },
- {
-  "id": 2065,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Data use",
-  "format": "multiple_choice",
-  "q": "Which statement about how Microsoft 365 Copilot handles customer data is correct?",
-  "options": [
-   "Prompts and responses are used to train the underlying foundation models so that results improve for all customers",
-   "Prompts, responses and Graph data are not used to train the models, stay in the Microsoft 365 boundary and fall under compliance controls",
-   "Prompts and responses are shared with the AI model provider for quality review, as permitted under the Microsoft privacy principles",
-   "Copilot interactions are stored only on the user's device, so they are outside the scope of audit and eDiscovery"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft commits that customer data, prompts and responses are not used to train the foundation models, that processing stays within the Microsoft 365 service boundary (including the EU Data Boundary where applicable), and that interactions are stored in the user's mailbox where audit, retention and eDiscovery apply. This is a core privacy and security fact for the exam."
- },
- {
-  "id": 2066,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Layered controls",
-  "format": "multiple_choice",
-  "q": "An employee outside HR asks Copilot for the salary of a colleague. The salary spreadsheet is in an HR-only SharePoint library and is labeled with an encrypting 'Highly Confidential - HR' label. Which controls prevent Copilot from revealing the salary?",
-  "options": [
-   "A special Copilot exclusion list that HR must maintain in the Microsoft 365 admin center",
-   "The existing SharePoint permissions and the label's encryption usage rights, both of which Copilot honors",
-   "Nothing; Copilot bypasses SharePoint permissions when summarizing and relies on DLP to redact salaries",
-   "A Teams messaging policy that blocks salary-related keywords in prompts sent to Copilot"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot honors the same controls that apply when the user accesses content directly: SharePoint permissions block access to the library, and even if a copy leaked to an open location, the encrypting label would deny the user the usage rights needed for Copilot to extract the content. No Copilot-specific exclusion list is required, and Teams messaging policies control chat features."
- },
- {
-  "id": 2067,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Responsible AI principles",
-  "format": "multiple_choice",
-  "q": "Copilot shows citations with links to the documents and emails it used to generate a response, so users can verify the information and understand its provenance. Which Microsoft responsible AI principle does this feature MOST directly support?",
-  "options": [
-   "Fairness",
-   "Transparency",
-   "Inclusiveness",
-   "Privacy and security"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Transparency means people should understand how an AI system reached its output and its limitations; citations and source references make the grounding visible. Fairness concerns treating people equitably, inclusiveness concerns empowering everyone including people with disabilities, and privacy and security concern protecting data. Microsoft's six principles also include reliability and safety and accountability."
- },
- {
-  "id": 2068,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Accountability",
-  "format": "multiple_choice",
-  "q": "A policy requires that every email drafted by Copilot in Outlook is read and approved by the human sender before it is sent, and names the sender as responsible for its content. Which responsible AI principle is this policy applying?",
-  "options": [
-   "Accountability, through human oversight",
-   "Fairness across employee groups",
-   "Inclusiveness of every user",
-   "Reliability and safety of the generated outputs"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Accountability means humans are answerable for AI systems and their outputs, which is realized through human review and oversight before consequential actions such as sending communications. Reliability and safety is about the system performing consistently and safely, fairness about equitable treatment, and inclusiveness about empowering all users."
- },
- {
-  "id": 2069,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Copilot audit",
-  "format": "multiple_choice",
-  "q": "An investigator must prove which files Copilot referenced when a specific user asked it about a project last month, and whether any of those files carried a sensitivity label. Which tool provides this evidence?",
-  "options": [
-   "The Microsoft 365 Copilot usage report, filtered on the user and the month in question",
-   "The Purview audit log, searching CopilotInteraction records with their accessed resources and label identifiers",
-   "The Viva Insights Copilot Dashboard, using the per-user drill-down of referenced documents",
-   "The Microsoft Entra sign-in logs, which record every resource Copilot accessed during each authenticated session"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot interactions are captured in the unified audit log as CopilotInteraction events (part of Audit Standard) with properties such as AccessedResources, including SensitivityLabelId, and even a flag for detected cross-prompt injection attacks. The usage report and the Copilot Dashboard aggregate adoption metrics without per-interaction evidence, and sign-in logs only cover authentication."
- },
- {
-  "id": 2070,
-  "topic": "Copilot data security & responsible AI",
-  "tag": "Permission boundary",
-  "format": "yes_no",
-  "q": "True or False: Microsoft 365 Copilot can surface content from a SharePoint site that the user does not have permission to access, provided the site has been indexed in the semantic index.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Indexing does not grant access. Copilot queries Microsoft Graph and the semantic index as the signed-in user, and only content the user is permitted to access is returned. The realistic risk is the opposite: sites that are overshared (for example with 'Everyone except external users') ARE accessible and therefore discoverable through Copilot, which is why oversharing remediation matters."
- },
- {
-  "id": 2071,
-  "topic": "Purview risk & discovery tools",
-  "tag": "Compliance Manager vs Secure Score",
-  "format": "multiple_choice",
-  "q": "An auditor asks for evidence of the organization's compliance posture against GDPR: a score, a list of controls, and the status of remediation actions with assigned owners. Which tool should the compliance administrator use?",
-  "options": [
-   "Microsoft Secure Score in the Microsoft Defender portal",
-   "Microsoft Purview Compliance Manager",
-   "Identity Secure Score",
-   "The Service Trust Portal"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Compliance Manager provides assessments built from regulatory templates (GDPR, ISO 27001, HIPAA and many more, including AI regulations), a compliance score, controls mapped to improvement actions and owner assignment with testing status. Secure Score and Identity Secure Score measure security configuration posture, and the Service Trust Portal holds Microsoft's own audit reports rather than your organization's posture."
- },
- {
-  "id": 2072,
-  "topic": "Purview risk & discovery tools",
-  "tag": "AI regulations",
-  "format": "multiple_choice",
-  "q": "Before expanding Copilot and custom agents, leadership wants to assess readiness against the EU AI Act and other AI regulations using pre-built control sets and recommended actions. Which Purview tool provides this?",
-  "options": [
-   "DSPM for AI activity explorer, filtered on the EU AI Act risk categories",
-   "Compliance Manager, using its AI regulatory assessment templates",
-   "Data explorer, filtered on files that mention the EU AI Act",
-   "Communication Compliance, with an AI regulation policy template"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Compliance Manager includes regulatory templates for AI frameworks such as the EU AI Act, NIST AI RMF and ISO/IEC 42001, and DSPM for AI even links to Compliance Manager for guided assistance to AI regulations. Activity explorer and Data explorer show activity and sensitive content, and Communication Compliance monitors messages."
- },
- {
-  "id": 2073,
-  "topic": "Purview risk & discovery tools",
-  "tag": "Data explorer",
-  "format": "multiple_choice",
-  "q": "Before rolling out Copilot, the security team must identify every file across SharePoint and OneDrive that contains credit card numbers or carries the 'Highly Confidential' label, and see where those files live. Which Purview tool is the current answer for this task?",
-  "options": [
-   "Activity explorer under Information Protection > Explorers",
-   "Data explorer (successor of Content explorer) under Information Protection > Explorers",
-   "Content search inside eDiscovery, with a sensitive information type condition",
-   "Compliance Manager, using the improvement action for sensitive data discovery"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Data explorer shows what sensitive information exists and where it is located, filtered by sensitivity label, retention label or sensitive information type, with role groups for list view versus content view. The older tool is now labeled Content Explorer (classic). Activity explorer shows label and DLP activity over time, Content search finds content for legal matters, and Compliance Manager tracks regulatory posture."
- },
- {
-  "id": 2074,
-  "topic": "Purview risk & discovery tools",
-  "tag": "Activity explorer",
-  "format": "multiple_choice",
-  "q": "A compliance analyst wants a timeline of DLP policy matches, sensitivity labels applied, changed or removed, and files shared externally over the last 30 days, with the ability to filter by user, location and label. Which tool provides this?",
-  "options": [
-   "Data explorer",
-   "Activity explorer",
-   "Identity Secure Score",
-   "The SharePoint admin center data access governance reports"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Activity explorer aggregates label and DLP-related activities from Microsoft 365 and endpoints with dozens of filters and predefined filter sets. Data explorer is a snapshot of where sensitive content lives rather than what happened to it, Identity Secure Score covers identity posture, and data access governance reports show SharePoint sharing and permission state."
- },
- {
-  "id": 2075,
-  "topic": "Purview risk & discovery tools",
-  "tag": "IRM alerts",
-  "format": "multiple_choice",
-  "q": "Insider Risk Management generated an alert for a pseudonymized user with a high risk score after unusual downloads before a resignation date. What is the correct order of the reviewer's next steps?",
-  "options": [
-   "Notify HR by email about the alert, then delete the user's account to prevent further downloads",
-   "Triage the alert, open a case to investigate the activity timeline and content, then act (notice or escalation)",
-   "Immediately disable the user in Microsoft Entra ID, then review the alert once the account is locked",
-   "Dismiss the alert, because pseudonymized users cannot be investigated until they are revealed by HR"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The IRM workflow is policies, alerts, triage, investigate, action. Reviewers evaluate the alert, create a case for investigation (with the option to reveal the identity through an audited step), and then act with notices, escalation to eDiscovery or ServiceNow integration. Disabling accounts or deleting users before investigation is not the designed process, and pseudonymization does not prevent investigation."
- },
- {
-  "id": 2076,
-  "topic": "Purview risk & discovery tools",
-  "tag": "DLP alerts",
-  "format": "multiple_choice",
-  "q": "A DLP policy that detects health records in Teams generates alerts. A reviewer determines that several are false positives caused by training documents. Where are DLP alerts managed, and what is the appropriate handling?",
-  "options": [
-   "Alerts are visible only on the Microsoft 365 admin center Service health page and can be ignored once read",
-   "In the Purview portal under Data Loss Prevention > Alerts, where the reviewer resolves or dismisses them and then tunes the policy",
-   "Alerts must be deleted from the affected user's mailbox by an Exchange administrator before the DLP policy can run again",
-   "Alerts are resolved by removing the user's Microsoft 365 license until the policy stops generating matches"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "DLP alerts are surfaced in the Purview DLP alerts dashboard (and can flow to the Defender portal) with details of the matched content, user and action, and support statuses such as active, investigating, resolved and dismissed. After handling false positives, the right follow-up is to tune conditions, exceptions or confidence levels in the policy rather than removing licenses or ignoring alerts."
- },
- {
-  "id": 2077,
-  "topic": "Purview risk & discovery tools",
-  "tag": "DLP rule configuration",
-  "format": "multiple_choice",
-  "q": "A DLP policy blocks sharing of credit card numbers, but administrators never receive any alert when it triggers. Which rule setting must be configured?",
-  "options": [
-   "Enable Endpoint DLP on all devices, because alerts are generated only for device-based policies",
-   "Turn on incident reports and alerts in the rule, with the recipients and severity configured",
-   "Add a retention label to the policy so that matched items are retained and reported",
-   "Publish a sensitivity label policy to the same users, which activates DLP alerting"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Detection and enforcement are separate from notification: each DLP rule has user notification settings (policy tips) and incident report or alert settings that determine whether and how admins are alerted, with severity and aggregation options. Endpoint DLP, retention labels and sensitivity label policies do not control alerting."
- },
- {
-  "id": 2078,
-  "topic": "Purview risk & discovery tools",
-  "tag": "Communication Compliance",
-  "format": "multiple_choice",
-  "q": "A Communication Compliance policy flags a Teams message for possible harassment. Which actions are available to the designated reviewer for the flagged item?",
-  "options": [
-   "Only delete the flagged message, because Communication Compliance offers no other remediation or notification actions",
-   "Resolve, tag, notify the user, escalate for investigation (including to eDiscovery) or remove the message",
-   "Reset the sender's password and block their sign-in until the investigation is complete",
-   "Apply a sensitivity label to the sender's mailbox so that further messages are encrypted"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Communication Compliance provides a reviewer workflow with remediation actions: resolve, tagging, notify the user with a template, escalate to a manager or investigation, and remove the message in Teams. It does not perform identity actions such as password resets, and sensitivity labels are not applied to mailboxes as remediation."
- },
- {
-  "id": 2079,
-  "topic": "Purview risk & discovery tools",
-  "tag": "DSPM for AI assessments",
-  "format": "multiple_choice",
-  "q": "An administrator asks how to schedule the DSPM for AI data risk assessment that identifies overshared SharePoint sites before Copilot deployment. What is the correct answer?",
-  "options": [
-   "The default assessment runs automatically every week for the top 100 SharePoint sites; custom assessments can be added",
-   "Assessments must be started manually every Monday by a Compliance Administrator from the DSPM dashboard",
-   "Assessments require a Microsoft Sentinel workspace so that the SharePoint activity logs can be analyzed",
-   "Assessments run only once when DSPM for AI is first enabled and cannot be repeated without a support ticket"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "DSPM for AI includes a default weekly data risk assessment covering the top 100 most-used SharePoint sites with no configuration, plus custom assessments an admin can create for chosen sites. Allow about 24 hours after activating one-click policies for data to populate. Sentinel is unrelated, and there is no manual weekly start."
- },
- {
-  "id": 2080,
-  "topic": "Purview risk & discovery tools",
-  "tag": "DSPM for AI access",
-  "format": "multiple_choice",
-  "q": "A SharePoint Administrator cannot open DSPM for AI in the Microsoft Purview portal. Which role would allow access following least privilege?",
-  "options": [
-   "Global Administrator, because DSPM for AI is a tenant-wide setting",
-   "The Compliance Administrator role (Entra) or the Purview Compliance Administrator role group",
-   "Teams Administrator, because Copilot interactions are stored as Teams messages",
-   "Billing Administrator, because DSPM for AI reports primarily on pay-as-you-go Copilot consumption"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "DSPM for AI requires the Compliance Administrator role (Entra) or the Purview Compliance Administrator role group; Global Administrator also works but violates least privilege. SharePoint, Teams and Billing administrator roles have no Purview data security scope. Least-privilege role selection recurs throughout AB-900."
- },
- {
-  "id": 2081,
-  "topic": "Purview risk & discovery tools",
-  "tag": "Content search",
-  "format": "multiple_choice",
-  "q": "Legal asks for all emails and files that mention 'Project Atlas' across the tenant, exported to a file, with no need to preserve anything or run a review. Where is this done in the current Purview portal?",
-  "options": [
-   "Content search, which remains a standalone solution on the Purview portal home page, separate from eDiscovery",
-   "Content search inside Microsoft Purview eDiscovery, within the system-generated Content search case",
-   "Data explorer, filtered by the keyword, with the results exported from the explorer",
-   "DSPM for AI activity explorer, filtered by keyword across prompts and responses"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Since the eDiscovery experiences were unified, Content search is a component within eDiscovery: a default system case named Content search lets authorized users run keyword and condition searches across mailboxes, sites and Teams and export the results. Data explorer filters by classification rather than keywords, and DSPM for AI shows AI activity."
- },
- {
-  "id": 2082,
-  "topic": "Purview risk & discovery tools",
-  "tag": "eDiscovery for Copilot",
-  "format": "multiple_choice",
-  "q": "For a legal matter, investigators need a specific user's Microsoft 365 Copilot prompts and responses from the past six months. Where is this content stored and how is it collected?",
-  "options": [
-   "In the Copilot usage report, which can be exported to CSV with each user's prompts and responses included",
-   "In the user's mailbox; create an eDiscovery case with the mailbox as data source and a Copilot activity condition",
-   "In a separate Copilot database that Microsoft exports on request through a support case",
-   "In the Viva Insights Copilot Dashboard, using the per-user conversation history export"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot interactions are stored in the user's Exchange mailbox, where retention, hold and eDiscovery apply; an eDiscovery search targeting the mailbox with the Copilot activity type condition returns prompts and responses. Usage reports and the Copilot Dashboard contain aggregate metrics, not content, and there is no separate database requiring support."
- },
- {
-  "id": 2083,
-  "topic": "Purview risk & discovery tools",
-  "tag": "Reporting sources",
-  "format": "yes_no",
-  "q": "True or False: Microsoft recommends using Purview audit log data as the primary basis for reporting Copilot adoption and usage to leadership.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Microsoft explicitly states that audit log data is not intended for usage reporting and that metrics derived from it may not match the official reports. Use the Microsoft 365 Copilot usage report in the admin center or the Copilot Dashboard in Viva Insights for adoption and impact; use the audit log for compliance investigations."
- },
- {
-  "id": 2084,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "Data access governance reports",
-  "format": "multiple_choice",
-  "q": "Before deploying Copilot, an admin must find all SharePoint sites where content was shared with 'Everyone except external users' or via 'Anyone' links in the last 28 days. Which tool provides this?",
-  "options": [
-   "Microsoft Purview Data explorer, filtered on the 'Everyone except external users' sharing group",
-   "Data access governance reports in the SharePoint admin center (Reports > Data access governance)",
-   "The Microsoft 365 Copilot usage report, filtered on sites that Copilot has referenced recently",
-   "Microsoft Entra access reviews of the 'Everyone except external users' claim"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Data access governance reports show sharing link activity (Anyone, People in your organization, Specific people), content shared with Everyone except external users, sensitivity label coverage and site permission snapshots, with a 28-day activity window, and let admins launch remediation such as site access reviews or restricted access control. Data explorer shows sensitive content classification, the usage report covers Copilot adoption, and access reviews recertify group and app access."
- },
- {
-  "id": 2085,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "RCD vs RAC",
-  "format": "multiple_choice",
-  "q": "A site's permissions are believed to be correct but are under review. Until the review finishes, its content must not appear in Copilot answers or organization-wide search, while users who already have access must still be able to open the site directly. Which SharePoint Advanced Management control fits?",
-  "options": [
-   "Restricted access control (RAC)",
-   "Restricted content discovery (RCD)",
-   "Restricted SharePoint Search",
-   "Break permission inheritance on every library"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Restricted content discovery hides a site's content from Copilot and org-wide search without changing any permissions, so existing users keep direct access; Microsoft positions it as a temporary governance control during permission reviews. Restricted access control changes who can access the site. Restricted SharePoint Search is a legacy allow-list approach that Microsoft is retiring (new enablement blocked from July 31, 2026), and breaking inheritance everywhere is unmanageable."
- },
- {
-  "id": 2086,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "Restricted access control",
-  "format": "multiple_choice",
-  "q": "A site containing merger documents was overshared. Security requires that only members of two named security groups can access the site at all, even users who previously received a sharing link or had direct permissions. Which control enforces this?",
-  "options": [
-   "Restricted content discovery, configured on the site with the two security groups as exceptions",
-   "Restricted access control, enabled at the tenant and configured on the site with the allowed groups",
-   "A sensitivity label with a watermark and the two security groups as the only assigned users",
-   "A Teams messaging policy that blocks sharing of links to the merger site outside the two groups"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Restricted access control restricts access to a SharePoint site (up to ten groups per site) so that users outside the specified groups cannot open the content even with prior permissions or links; a user needs both a site permission and membership in the control group. Restricted content discovery only affects discoverability, watermarks do not restrict access, and Teams policies are unrelated. RAC changes access; RCD changes discoverability."
- },
- {
-  "id": 2087,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "Restricted SharePoint Search",
-  "format": "multiple_choice",
-  "q": "Which oversharing control is NO LONGER recommended by Microsoft as a Copilot readiness measure because it is being retired?",
-  "options": [
-   "Restricted content discovery on sensitive sites",
-   "Restricted SharePoint Search (the site allow-list)",
-   "Data access governance reports and remediation",
-   "Site access reviews delegated to site owners"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Restricted SharePoint Search limited organization-wide search and Copilot to an allow-list of sites; Microsoft is retiring it and blocks new enablement starting July 31, 2026, directing customers to restricted content discovery and proper permission remediation instead. Also note that when Restricted SharePoint Search is enabled, SharePoint cannot be used as a knowledge source for declarative agents."
- },
- {
-  "id": 2088,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "Site access reviews",
-  "format": "multiple_choice",
-  "q": "The data access governance report lists 400 overshared sites. IT does not know the business context of each site and wants the site owners themselves to review and fix the permissions, with tracking. Which SharePoint Advanced Management feature supports this?",
-  "options": [
-   "Site access reviews initiated from the data access governance report",
-   "Microsoft Entra access reviews of the SharePoint Administrator role",
-   "Restricted content discovery on all 400 sites",
-   "Deleting the sites and asking owners to recreate them"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Site access reviews delegate the remediation to site owners: from the report the admin selects sites and starts reviews, owners receive a task to review sharing links and permissions, and the admin tracks completion. Entra access reviews cover groups, apps and roles rather than site sharing. Applying RCD everywhere only hides content, and deleting sites destroys data."
- },
- {
-  "id": 2089,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "SAM licensing",
-  "format": "multiple_choice",
-  "q": "Which statement about licensing for SharePoint Advanced Management (SAM) is correct?",
-  "options": [
-   "SAM is free for every Microsoft 365 tenant with no prerequisites, so all of its features are available immediately",
-   "The Copilot-readiness subset of SAM is unlocked by one Copilot license; the full feature set needs the Plan 1 add-on or E7",
-   "SAM requires Microsoft Entra ID P2 for every user, because its reports are built on access reviews",
-   "SAM is included with every Microsoft 365 E3 license, and E5 adds only the restricted access control feature"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft unlocks the Copilot-readiness subset of SAM for any tenant with at least one Copilot license; other SAM features (for example restricted site creation) still need the paid Plan 1 add-on, which E7 bundles. It is neither free without prerequisites nor included in plain E3, and Entra P2 is unrelated."
- },
- {
-  "id": 2090,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "Sharing settings",
-  "format": "multiple_choice",
-  "q": "To reduce future oversharing, an admin wants newly created sharing links to default to 'Specific people' instead of 'People in your organization' across the tenant. Where is this configured?",
-  "options": [
-   "Microsoft Purview portal > Information Protection > Sharing defaults",
-   "SharePoint admin center > Policies > Sharing (default sharing link type)",
-   "Teams admin center > Meeting policies > File sharing defaults",
-   "Microsoft Entra admin center > External collaboration settings > Guest invites"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Tenant-wide sharing defaults, including the external sharing level and the default link type and permission, are set in the SharePoint admin center under Policies > Sharing (with per-site overrides in Active sites). Purview Information Protection defines labels, Teams meeting policies cover meetings, and Entra external collaboration settings govern guest invitations rather than SharePoint link defaults."
- },
- {
-  "id": 2091,
-  "topic": "SharePoint oversharing & SAM",
-  "tag": "RCD behavior",
-  "format": "yes_no",
-  "q": "True or False: Enabling restricted content discovery on a SharePoint site removes users' permissions so they can no longer open the site.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Restricted content discovery does not change permissions at all; it prevents the site's content from surfacing in organization-wide search and Copilot (unless a user recently interacted with the content), while users with permissions can still navigate to the site directly. To change who can access a site, use restricted access control."
- },
- {
-  "id": 2092,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Copilot vs agents",
-  "format": "multiple_choice",
-  "q": "Finance wants two things: (1) help drafting an email in Outlook based on a meeting that just ended, and (2) a nightly, unattended process that reads invoices from an ERP system, checks approvals and posts results to Teams. Which tools map to these needs?",
-  "options": [
-   "Both are Microsoft 365 Copilot tasks, because Copilot in Outlook can also be scheduled to run overnight",
-   "(1) Microsoft 365 Copilot in Outlook for real-time assistance; (2) an agent for the scheduled multi-step automation",
-   "(1) A SharePoint agent scoped to the meeting notes; (2) Researcher, scheduled through a saved prompt",
-   "Both require a custom engine agent, because Copilot cannot read meeting content or connect to an ERP system"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot is reactive and assistive inside the apps, working in the user's context and permissions. Agents can run on schedules or triggers, chain steps across systems and act with their own identity and connectors, which fits the invoice workflow. Researcher and SharePoint agents are grounded assistants, not scheduled automations, and a custom engine agent is unnecessary for the Outlook drafting task."
- },
- {
-  "id": 2093,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Copilot Chat",
-  "format": "multiple_choice",
-  "q": "An employee without a Microsoft 365 Copilot license opens Microsoft 365 Copilot Chat with their work account. Which statement describes what they can and cannot do?",
-  "options": [
-   "They can do nothing in Copilot Chat until a Microsoft 365 Copilot license has been assigned to them",
-   "They can use web-grounded chat at no extra cost, but work-grounded chat over Microsoft 365 data needs a Copilot license",
-   "They get the full Copilot experience in Word, Excel and Teams for free because the tenant already owns licenses",
-   "They can use work-grounded chat over their own mailbox and files, but web-grounded chat requires a license"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot Chat is included with eligible Microsoft 365 subscriptions: the web-grounded mode is free with enterprise data protection, while the work-grounded mode (Microsoft Graph data) and Copilot inside the Office apps, plus Researcher and Analyst, require the Copilot license. Agents that use organizational data can be made available to unlicensed users through pay-as-you-go billing."
- },
- {
-  "id": 2094,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Licensing model choice",
-  "format": "multiple_choice",
-  "q": "Woodgrove has 5,000 employees. One hundred analysts will use Copilot heavily every day; 600 other employees will use Copilot Chat over organizational data a few times a month. Which approach is the MOST cost-effective while giving everyone access?",
-  "options": [
-   "Buy 700 Microsoft 365 Copilot licenses so that every analyst and occasional user has the same experience",
-   "Buy 100 Copilot licenses for the analysts and enable a pay-as-you-go billing policy for the occasional users",
-   "Buy 700 pay-as-you-go licenses and assign them individually to the analysts and the occasional users",
-   "Upgrade all 5,000 users to Microsoft 365 E5, which includes Microsoft 365 Copilot in the base subscription"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The flat per-user license suits heavy daily users, while pay-as-you-go is a billing model (not a license) that charges consumption at 0.01 USD per Copilot Credit for unlicensed users, ideal for occasional use. There is no such thing as an individual pay-as-you-go license. Microsoft 365 E5 does not include Copilot; the E7 SKU is the one that bundles it."
- },
- {
-  "id": 2095,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "SharePoint agents billing",
-  "format": "multiple_choice",
-  "q": "A department wants to use agents in SharePoint. Some users have Microsoft 365 Copilot licenses and others do not. How is usage billed?",
-  "options": [
-   "SharePoint agents are free for everyone who holds a SharePoint license, regardless of Copilot licensing",
-   "Licensed Copilot users pay nothing extra; unlicensed users need pay-as-you-go billing and consume Copilot Credits",
-   "Every user of a SharePoint agent needs a Copilot Studio license assigned in the Microsoft 365 admin center",
-   "Unlicensed users are blocked from SharePoint agents entirely, with no billing alternative available"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The objective specifically compares the monthly license with pay-as-you-go 'including SharePoint'. Copilot-licensed users are covered; for others, a pay-as-you-go billing policy (linked to an Azure subscription) meters Copilot Credits, and because SharePoint agents ground on the tenant graph a single complex prompt consumes more than one credit. No Copilot Studio license is required to use a SharePoint agent."
- },
- {
-  "id": 2096,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Seat limits",
-  "format": "multiple_choice",
-  "q": "Which statement about Microsoft 365 Copilot seat requirements is correct in 2026?",
-  "options": [
-   "The enterprise Microsoft 365 Copilot add-on has a 300-seat minimum purchase requirement",
-   "There is no minimum; the only 300 figure is a maximum on Copilot Business and the bundled SMB SKUs",
-   "Copilot can only be bought in blocks of 100 seats through a volume licensing agreement",
-   "Microsoft 365 Copilot Business has no seat maximum and is sold to enterprises of any size"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft removed the original 300-seat minimum in January 2024 (and broadened eligibility to Office 365 E1/E3/E5). Today the 300 number appears only as a cap on the SMB SKUs (Copilot Business and the bundled Business Standard/Premium with Copilot). Stale study material still teaches the minimum, which is exactly why this is a trap."
- },
- {
-  "id": 2097,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "SKUs",
-  "format": "multiple_choice",
-  "q": "A CFO asks which Microsoft 365 enterprise subscription includes Microsoft 365 Copilot in the base SKU without buying an add-on. What is the correct answer?",
-  "options": [
-   "Microsoft 365 E5, the top enterprise suite",
-   "Microsoft 365 E7, which bundles E5 with Copilot",
-   "Office 365 E3 with the Entra Suite add-on",
-   "Microsoft 365 F3 for frontline workers"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft 365 E7 (generally available May 2026) is a strict superset of E5 that adds Copilot, the Entra Suite and Agent 365. E5, Office 365 E3 and F3 are eligible base plans for the Copilot add-on but do not include it. Any licensing answer that treats E5 as the top SKU is now incomplete."
- },
- {
-  "id": 2098,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Researcher vs Analyst",
-  "format": "multiple_choice",
-  "q": "Two requests arrive: (A) a market analyst needs a structured report that synthesizes internal Teams discussions, SharePoint documents and current web sources with citations; (B) an operations lead has a messy Excel export and wants anomalies found and a forecast built with generated code. Which built-in agents fit?",
-  "options": [
-   "(A) Analyst; (B) Researcher",
-   "(A) Researcher; (B) Analyst",
-   "Both are Researcher tasks",
-   "Both require a SharePoint agent"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Researcher performs deep, multi-step research across Microsoft Graph work data, Copilot connectors and the Bing web index, producing cited reports. Analyst applies chain-of-thought reasoning and Python to structured data, and Microsoft names it as better suited than Researcher for Excel tasks. Both are GA since June 2025, require a Microsoft 365 Copilot license, and are preinstalled for licensed users."
- },
- {
-  "id": 2099,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Governing Researcher and Analyst",
-  "format": "multiple_choice",
-  "q": "An admin turns off agents for all users in the agent settings, yet Researcher and Analyst are still available in Copilot Chat under Tools. The admin also wants Researcher limited to a pilot group. What is correct?",
-  "options": [
-   "They are core Copilot Chat Tools outside agent settings; block each tenant-wide, and per-group scoping is not possible",
-   "The agent settings take up to 24 hours to apply, after which Researcher disappears for the users who were turned off",
-   "Remove the non-pilot users' Copilot licenses, which hides Researcher while leaving the rest of Copilot available",
-   "Researcher can be scoped to the pilot group with a Conditional Access policy that targets the Researcher resource"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Microsoft states that Researcher and Analyst are core chat Tools outside any agent setting, so the agent toggle never affects them. The only control is a tenant-wide Block on each one; granular assignment is unavailable. Removing licenses removes all Copilot capabilities, not just Researcher, and Conditional Access does not scope individual Copilot features."
- },
- {
-  "id": 2100,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Declarative vs custom engine",
-  "format": "multiple_choice",
-  "q": "A developer must build an agent that uses a specialized third-party model, runs its own orchestration, and proactively sends notifications without a user prompting it. Which agent type is required and what does it imply?",
-  "options": [
-   "A declarative agent, because it uses Copilot's orchestrator, needs no hosting and can be scheduled to run proactively",
-   "A custom engine agent, hosted outside Microsoft 365 with its own model and orchestration; the builder owns compliance",
-   "A SharePoint agent, because SharePoint agents can call third-party models through Copilot connectors",
-   "A Researcher instance connected to the third-party model through the Connected Agents tab"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Declarative agents run on Copilot's models and orchestrator, inherit Microsoft 365 compliance, need no hosting and only respond to user-initiated prompts. Custom engine agents give full control over model and orchestration, can run proactively and work in and beyond Microsoft 365, at the cost of the builder owning hosting and compliance. SharePoint agents and Researcher are declarative-style grounded assistants."
- },
- {
-  "id": 2101,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Which builder",
-  "format": "multiple_choice",
-  "q": "A site owner wants, within minutes and without leaving SharePoint, an assistant scoped to one document library that answers questions about its policies. Which creation option is the best fit?",
-  "options": [
-   "A SharePoint agent created from the library, stored as an .agent file whose permissions govern access",
-   "A custom engine agent built with the Microsoft 365 Agents SDK and hosted in Azure",
-   "An agent built in Copilot Studio with a Dataverse connection to the document library's metadata",
-   "A Researcher connected agent, scoped to the library through the Connected Agents tab"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "SharePoint agents are created directly in a site or library, scoped to up to 20 sources, and are available to users with a Copilot license or when pay-as-you-go billing is configured; access follows the .agent file permissions. Pro-code SDK agents and Copilot Studio are heavier tools for makers and developers, and Researcher is a Microsoft-installed agent rather than something a site owner scopes."
- },
- {
-  "id": 2102,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Feature controls",
-  "format": "multiple_choice",
-  "q": "A tenant wants a small pilot group to try pre-release Copilot features and agents through the Copilot Frontier program while everyone else stays on the standard release. Where is this configured and what is the default?",
-  "options": [
-   "Microsoft 365 admin center > Copilot > Settings > Copilot Frontier; the default is No access",
-   "Microsoft Entra admin center > Conditional Access > a policy targeting the Frontier resource",
-   "Teams admin center > Teams update policies, with the Public preview option enabled",
-   "Power Platform admin center > Environments > Early release cycle for the environment"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Copilot Frontier is the opt-in early-access channel configured under Copilot settings in the Microsoft 365 admin center, defaulting to No access; enabled users see Frontier-tagged agents in the Agent Store. Note that the Frontier control never overrides agent settings: an agent blocked in the Agents view stays blocked. The other admin centers do not manage Copilot release channels."
- },
- {
-  "id": 2103,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Copilot Credits",
-  "format": "multiple_choice",
-  "q": "An organization buys prepaid Copilot Studio capacity packs and also configures pay-as-you-go. Which statement about how consumption is charged is correct?",
-  "options": [
-   "Pay-as-you-go is charged first; prepaid credits are used only once the monthly pay-as-you-go bill exceeds a threshold",
-   "Prepaid capacity pack credits are consumed first and replenish monthly; pay-as-you-go covers overage per credit",
-   "Prepaid and pay-as-you-go credits are charged simultaneously for every interaction, halving the cost of each",
-   "Capacity packs apply only to Microsoft 365 Copilot licenses, so agent usage is always billed pay-as-you-go"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot Credits are the unit of consumption for agents and Copilot Chat interactions by unlicensed users. Prepaid capacity packs (25,000 credits per pack per month) are drawn down first, then pay-as-you-go billing to the linked Azure subscription covers overage at one cent per credit; the Azure meter is still named Copilot Studio. Different features consume different numbers of credits."
- },
- {
-  "id": 2104,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Copilot Business",
-  "format": "yes_no",
-  "q": "True or False: Microsoft 365 Copilot Business delivers a reduced set of Copilot capabilities compared with the enterprise Microsoft 365 Copilot add-on.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Microsoft states that Copilot Business delivers the same capabilities as the enterprise offering; the differences are price, eligibility (Business Basic, Standard, Premium or Apps for business), the 300-seat maximum and annual-commitment terms. Assuming the SMB SKU is feature-limited is a common wrong answer."
- },
- {
-  "id": 2105,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "Knowledge source licensing",
-  "format": "multiple_choice",
-  "q": "A maker builds an agent in Agent Builder that uses public websites, uploaded files, SharePoint content and the user's email and Teams messages as knowledge. Which statement about licensing for these knowledge sources is correct?",
-  "options": [
-   "All knowledge sources are free to use with Copilot Chat, because Agent Builder itself requires no license",
-   "Web and uploaded content need no license; SharePoint and connectors need a license or metering; email and Teams messages need the Copilot license",
-   "Every knowledge source requires a Copilot Studio license, because Agent Builder is a Copilot Studio experience under the hood",
-   "Only Copilot Studio agents can use SharePoint as knowledge; Agent Builder agents are limited to uploaded files and public websites"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Agent Builder capabilities such as web search, scoped web search, code interpreter and image generator need no license or metering; organizational content sources (SharePoint, OneDrive, Copilot connectors, embedded files, Dataverse) need a Copilot license OR metered usage; and personal Microsoft Graph sources (email, people, Teams messages and meetings) require the Copilot license itself. Copilot Studio is not required for Agent Builder agents to use SharePoint."
- },
- {
-  "id": 2124,
-  "topic": "Copilot & agents — features & licensing",
-  "tag": "License-gated features",
-  "format": "multi_select",
-  "q": "Which TWO of the following require a Microsoft 365 Copilot license per user and cannot be made available through pay-as-you-go billing? (Select two.)",
-  "options": [
-   "Researcher",
-   "Analyst",
-   "Web-grounded Microsoft 365 Copilot Chat",
-   "SharePoint agents used by occasional users",
-   "Agent Store agents that use only public web content"
-  ],
-  "answer": [
-   0,
-   1
-  ],
-  "why": "Researcher and Analyst are advanced agents that require a Microsoft 365 Copilot license, with no separate add-on and no metered alternative. Web-grounded Copilot Chat is included free with eligible subscriptions, SharePoint agents can be consumed by unlicensed users through a pay-as-you-go billing policy, and agents that rely only on public web content are available to Copilot Chat users when the admin enables them."
- },
- {
-  "id": 2106,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Assigning licenses",
-  "format": "multiple_choice",
-  "q": "An admin assigns a Microsoft 365 Copilot license to a user at 9:00. At 9:30 the user still sees no Copilot in Teams. Which statement is correct?",
-  "options": [
-   "The assignment failed silently; the admin must remove and reassign the license to trigger provisioning",
-   "Copilot can take up to 24 hours to appear after assignment, and the user may need to restart the app",
-   "The user must also be assigned the AI Administrator role before Copilot features become visible",
-   "Copilot requires a license reassignment every 30 days, so the first assignment is only a reservation"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "License propagation to the Copilot experiences can take up to 24 hours, so a 30-minute gap is expected. Licenses are assigned per user in the admin center, through Entra groups, or with the Microsoft Graph PowerShell SDK for scale; Copilot licenses cannot be assigned to guest or cross-tenant users. No admin role is needed for a user to consume Copilot."
- },
- {
-  "id": 2107,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Pay-as-you-go prerequisites",
-  "format": "multiple_choice",
-  "q": "An admin tries to create a Copilot pay-as-you-go billing policy but cannot complete the wizard. Which set of prerequisites must be in place?",
-  "options": [
-   "A Microsoft 365 E5 license for every user in scope of the billing policy, plus the Global Administrator role for the admin",
-   "An Azure subscription and resource group in the same tenant, Owner or Contributor rights on both, and an eligible admin role",
-   "A Power BI Pro license and a Dataverse environment in which the billing policy's consumption data is stored",
-   "A Microsoft Sentinel workspace to receive the billing logs and a Log Analytics contributor role"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Pay-as-you-go bills consumption to Azure, so the policy needs an Azure subscription and resource group in the same tenant, appropriate Azure rights, and an eligible Microsoft 365 admin role. E5 licenses, Power BI, Dataverse and Sentinel play no part. This prerequisite list is a frequent exam item because it crosses the Microsoft 365 and Azure boundary."
- },
- {
-  "id": 2108,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Two-step setup",
-  "format": "multiple_choice",
-  "q": "An admin creates a pay-as-you-go billing policy for the Legal group, but unlicensed Legal users still cannot use work-grounded Copilot Chat. What was most likely missed?",
-  "options": [
-   "The Azure subscription must be moved to the same region as the Microsoft 365 tenant before billing starts",
-   "The policy must also be connected to a Copilot service on the Pay-as-you-go services tab",
-   "The users must be added to the Copilot Frontier program before pay-as-you-go applies to them",
-   "The users need the AI Administrator role to consume Copilot Chat under a billing policy"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Enabling pay-as-you-go is a two-step process: create the billing policy (Azure subscription, resource group, scope, optional budget), then connect it to a Copilot service such as Microsoft 365 Copilot Chat or SharePoint agents. If the second step is skipped, pay-as-you-go stays disabled. Regions, Frontier and admin roles are unrelated to enabling metered access."
- },
- {
-  "id": 2109,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Budgets",
-  "format": "multiple_choice",
-  "q": "A budget of 2,000 USD per month is set on a Copilot pay-as-you-go billing policy. Consumption reaches 2,000 USD on the 20th of the month. What happens next?",
-  "options": [
-   "Copilot Chat is automatically disabled for the policy's users until the next billing month begins and the budget resets",
-   "Email notifications are sent to the configured recipients, but the budget is not enforced and usage continues",
-   "The Azure subscription is suspended until an administrator raises the budget in Cost Management",
-   "The excess is charged to the users' personal Microsoft accounts until the budget is increased"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Budgets on pay-as-you-go billing policies are for visibility only: they trigger alerts (which can take up to 24 hours) and never stop consumption. Organizations that want a hard cap must monitor usage and adjust policies or switch heavy users to licenses. Subscriptions are not suspended and users are never personally charged."
- },
- {
-  "id": 2110,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Billing location",
-  "format": "multiple_choice",
-  "q": "Where does an administrator create and manage Copilot pay-as-you-go billing policies?",
-  "options": [
-   "Microsoft 365 admin center > Billing > Bills & payments > Pay-as-you-go",
-   "Microsoft 365 admin center > Copilot > Billing & usage (Billing policies tab)",
-   "Azure portal > Cost Management > Budgets > Copilot billing policies",
-   "Power Platform admin center > Billing > Copilot Studio capacity"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Copilot billing policies live under the Copilot node of the Microsoft 365 admin center, not under the general Billing node (whose pay-as-you-go page covers services such as Microsoft 365 Backup and only links onward for Copilot). Azure Cost Management shows the resulting charges and can hold Azure budgets, and the Power Platform admin center manages Copilot Studio capacity rather than the Microsoft 365 Copilot billing policy."
- },
- {
-  "id": 2111,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Usage reports",
-  "format": "multiple_choice",
-  "q": "Leadership asks how many licensed users are actually active in Copilot, in which apps, and when each user last used it, exported to CSV. Which report should the admin use?",
-  "options": [
-   "Microsoft 365 admin center > Reports > Usage > Microsoft 365 Copilot (Readiness and Usage tabs)",
-   "Microsoft Purview portal > Audit, searching for CopilotInteraction events and exporting the results",
-   "Microsoft Entra admin center > Sign-in logs, filtered on the Microsoft 365 Copilot application",
-   "Exchange admin center > Reports > Mail flow, filtered on messages generated by Copilot"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "The Copilot usage report shows enabled versus active users, per-app usage and last activity date with CSV export, alongside Readiness, Credits and Agents views. Audit logs are explicitly not intended for usage reporting, sign-in logs show authentication events, and Exchange reports cover mailbox activity."
- },
- {
-  "id": 2112,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Copilot Dashboard",
-  "format": "multiple_choice",
-  "q": "Beyond raw adoption counts, executives want impact metrics such as Copilot-assisted hours, usage trends by department and sentiment, in a dashboard they can open themselves. Which tool and role apply?",
-  "options": [
-   "The Copilot Dashboard in Viva Insights, with access enabled and delegated by an AI Administrator",
-   "Microsoft Secure Score in the Defender portal, filtered to the Copilot improvement actions",
-   "The DSPM for AI dashboard in Purview, opened by a Compliance Administrator",
-   "The Teams admin center analytics dashboard, filtered to Copilot in Teams meetings"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Copilot Analytics spans the admin center reports, the Copilot Dashboard and Agent Dashboard in Viva Insights, ready-to-use reports and advanced Power BI reporting; the Copilot Dashboard is where impact and sentiment metrics live, and the AI Administrator role manages Copilot reporting access. Secure Score is security posture, DSPM for AI is data risk, and Teams analytics covers Teams usage only."
- },
- {
-  "id": 2113,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Credits report",
-  "format": "multiple_choice",
-  "q": "Finance wants to see how many Copilot Credits were consumed by each user, agent and billing policy over the last 30 days. Where is this available?",
-  "options": [
-   "Microsoft 365 admin center > Reports > Usage > Microsoft 365 Copilot > Credits",
-   "Microsoft Purview portal > Activity explorer, filtered on Copilot activities",
-   "Microsoft Entra admin center > Billing > Licenses > Copilot consumption",
-   "SharePoint admin center > Reports > Data access governance > Agents"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "The Credits report breaks consumption down by user, agent, billing policy and agent-user pair, with daily and cumulative views, and alerts when a user exceeds a high credit threshold. Activity explorer covers label and DLP events, Entra licensing shows license counts, and data access governance reports cover SharePoint sharing."
- },
- {
-  "id": 2114,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Prompt management",
-  "format": "multiple_choice",
-  "q": "A finance analyst runs the same Copilot prompt every Monday at 08:00 to produce a weekly KPI summary and wants it to run automatically. Which prompt management capability is this?",
-  "options": [
-   "Saving the prompt",
-   "Sharing the prompt with the team",
-   "Scheduling the prompt",
-   "Deleting and recreating the prompt each week"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Copilot prompt management covers saving prompts for reuse, sharing them with colleagues or groups, scheduling them to run at defined times (with outputs delivered to the user), and deleting stale prompts. Scheduling is the automation piece. Saved prompts still need manual invocation, and sharing is about distribution."
- },
- {
-  "id": 2115,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Agent access",
-  "format": "multiple_choice",
-  "q": "Only the Finance department should be able to use agents in Microsoft 365 Copilot during a pilot; everyone else should have no agent access. Where is this configured?",
-  "options": [
-   "Microsoft Purview portal > Data Loss Prevention, with a policy that blocks agents for non-Finance users",
-   "Microsoft 365 admin center > Agents > Settings > User access, choosing Specific users/groups (Finance)",
-   "Teams admin center > Meeting policies, with a custom policy that enables agents for the Finance group",
-   "Microsoft Entra admin center > Administrative units, with an agent unit containing the Finance users"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The Agents node in the Microsoft 365 admin center contains Settings with User access (All users, No users, Specific users/groups), allowed agent types, sharing controls, security templates and management rules. Purview DLP, Teams meeting policies and administrative units do not control agent availability."
- },
- {
-  "id": 2116,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Creating agents",
-  "format": "multiple_choice",
-  "q": "A business user creates an agent in Agent Builder. On which tab are knowledge sources such as SharePoint sites and uploaded files added, and what is the difference from the other tab?",
-  "options": [
-   "The Describe tab, which is the only place to add knowledge; the Configure tab just previews the result",
-   "The Configure tab, where knowledge, capabilities and starter prompts are set; the Describe tab uses natural language and stays in sync",
-   "The Publish tab in the Power Platform admin center, where knowledge sources are approved and attached",
-   "Knowledge sources can only be added in SharePoint; Agent Builder agents ground on the semantic index alone and cannot be scoped"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Agent Builder offers a conversational Describe tab and a structured Configure tab that are kept in sync; knowledge (SharePoint, OneDrive, embedded files, websites, Teams chats, connectors), capabilities such as code interpreter and image generation, and starter prompts are managed on Configure. Publishing to the organization then goes through the admin approval process."
- },
- {
-  "id": 2117,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Approval process",
-  "format": "multiple_choice",
-  "q": "A maker submits a Copilot Studio agent for organization-wide availability in Microsoft 365 Copilot. Where does the request appear for approval, and which roles can approve it?",
-  "options": [
-   "In the Power Platform admin center only, where any Environment Admin can approve it for the whole tenant without further review",
-   "In the Microsoft 365 admin center under Agents > All agents > Requests, approved by an AI Administrator or Global Administrator",
-   "In the Teams admin center under Manage apps, approved by a Teams Administrator for all channels",
-   "In the Microsoft Purview portal, approved by a Compliance Administrator after a DSPM for AI review"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Agent publication to the tenant catalog is governed by the Requests queue in the Microsoft 365 admin center, with states such as Pending review, Pending update and Pending activate; only the AI Administrator and Global Administrator roles can approve or reject. Copilot Studio agents are additionally governed by Power Platform admin center policies (DLP, sharing limits) but still need Microsoft 365 admin center approval to reach the Copilot or Teams catalog."
- },
- {
-  "id": 2118,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Block vs remove",
-  "format": "multiple_choice",
-  "q": "An agent must be made unusable immediately for everyone in the tenant, including the users who have already installed it. Which action should the admin take in Agents > All agents, and how does it differ from the alternative?",
-  "options": [
-   "Uninstall/Remove, which prevents all access permanently because the agent cannot be reacquired",
-   "Block, which stops all access and removes the agent from existing installs; Remove only takes it out of the inventory",
-   "Delete the maker's account, which removes every agent the maker created from the tenant",
-   "Change the agent's availability to 'Specific users' with an empty list, which hides it from everyone without an audit entry"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Block is the enforcement action that stops all use and strips it from existing installs. Uninstall or Remove only removes the agent from the inventory (for first-party or external agents) and it can be added back from the store. Note the scope nuance: blocking Agent Builder or Copilot Studio agents affects Copilot plus Outlook and Teams, while blocking SharePoint or Foundry agents affects Copilot Chat only."
- },
- {
-  "id": 2119,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Monitoring across admin centers",
-  "format": "multiple_choice",
-  "q": "Which statement correctly describes the division of monitoring between the Microsoft 365 admin center and the Power Platform admin center for agents?",
-  "options": [
-   "All agent monitoring happens in the Power Platform admin center, which is the only place with agent usage reports and the agent registry",
-   "Tenant-wide agent usage and the Agents overview live in the Microsoft 365 admin center; the Power Platform admin center adds performance detail for Copilot Studio agents",
-   "The Microsoft Purview portal is the only place to monitor agents, through the DSPM for AI apps and agents view",
-   "Agents cannot be monitored directly; only overall Copilot usage is reported in the Microsoft 365 admin center and Viva Insights"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Agents built with Agent Builder and SharePoint are managed and monitored primarily in the Microsoft 365 admin center; Copilot Studio agents are monitored and governed in the Power Platform admin center (Copilot hub, Power Platform inventory, environment policies) while still appearing in the Microsoft 365 admin center registry and reports. Purview provides audit and compliance monitoring, not operational agent metrics."
- },
- {
-  "id": 2120,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Agent lifecycle",
-  "format": "multiple_choice",
-  "q": "An approved agent receives an update that now requests full CRM access instead of read-only contact data. What should the administrator do, and what do users see meanwhile?",
-  "options": [
-   "Approve the update automatically, because the agent already passed review when it was first published",
-   "Review the Pending update request and its new permissions before approving; users keep the previous version until then",
-   "Block the agent permanently, because any request for expanded permissions indicates that the maker's account is compromised",
-   "Nothing; updates to already-approved agents bypass the approval queue and roll out to users immediately"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Agent lifecycle management treats updates as new approval events: a Pending update request shows the changed capabilities, data sources and permissions, the admin decides whether the expanded access is acceptable, and users keep the prior version until approval. Automatic approval or ignoring updates would let permission creep bypass governance, and a permanent block is disproportionate."
- },
- {
-  "id": 2121,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Consumer licensing",
-  "format": "yes_no",
-  "q": "True or False: A user who only interacts with a published Copilot Studio agent in Microsoft Teams must hold a Copilot Studio license and an Environment Maker role.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. End users of a published agent need only access to the published endpoint (Teams, SharePoint, Copilot); Copilot Studio licensing and Power Platform environment roles such as Environment Maker or Environment Admin apply to people who create, edit or publish agents. Consumption may still be metered in Copilot Credits depending on the agent's grounding and the user's licenses."
- },
- {
-  "id": 2122,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Environment roles",
-  "format": "multiple_choice",
-  "q": "An HR power user has a Copilot Studio license but cannot create or edit agents in the HR Power Platform environment. What is missing?",
-  "options": [
-   "A Microsoft 365 Copilot license, which is required in addition to the Copilot Studio license",
-   "An environment security role such as Environment Maker, assigned in the Power Platform admin center",
-   "The AI Administrator role in Microsoft Entra ID, which grants maker rights in every environment",
-   "A SharePoint site collection administrator permission on the site that stores the agent files"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Building agents in Copilot Studio requires both the license and an environment role: Environment Maker allows creating and editing agents, Environment Admin gives full control, and Basic User only allows interacting with shared agents. Roles can be assigned through Entra security groups for scale. The AI Administrator role governs tenant-level Copilot administration, not environment maker rights."
- },
- {
-  "id": 2123,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Agent actions",
-  "format": "multi_select",
-  "q": "In the Microsoft 365 admin center, an administrator selects an agent under Agents > All agents. Which THREE of the following are actions available for the agent? (Select three.)",
-  "options": [
-   "Install the agent for specific users or the entire organization",
-   "Block the agent for the whole tenant",
-   "Pin the agent for end users (up to three admin pins)",
-   "Apply a sensitivity label to the agent",
-   "Reset the password of the agent's maker"
-  ],
-  "answer": [
-   0,
-   1,
-   2
-  ],
-  "why": "The agent details pane offers Install, Uninstall, Block, Update in store and Pin for users; admins can pin at most three agents, and a pinned agent must be deployed and not blocked. Sensitivity labels apply to content, not to agents, and password resets are user administration in Entra, not an agent action. Multi-select items like this require every correct option and no incorrect one."
- },
- {
-  "id": 2125,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "Request states",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn the Microsoft 365 admin center Requests queue, an agent request in the [answer] state means an updated version of an already published agent is waiting for approval, and users keep the previous version until an admin approves it.",
-  "options": [
-   "Pending review",
-   "Pending update",
-   "Pending activate",
-   "Allow user to install"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Pending review is a brand-new agent submitted for publication (Publish to store). Pending update is a new version of an agent that is already in the store (Update in store), and users continue on the prior version until approval. Pending activate is a request to activate a template agent so that agent instances can be created. 'Allow user to install' appears when a user requests a blocked Microsoft-built agent, which the admin must first unblock."
- },
- {
-  "id": 2126,
-  "topic": "Copilot & agent admin tasks",
-  "tag": "License scope",
-  "format": "yes_no",
-  "q": "True or False: A Microsoft 365 Copilot license can be assigned to a guest (B2B) user from a partner organization so that the guest can use Copilot in your tenant.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Copilot licenses cannot be assigned to cross-tenant or guest users; guests would need a Copilot license from their own organization, and even then Copilot grounds on their home tenant. Licenses are assigned to member users directly, through group-based licensing, or in bulk with PowerShell."
- }
+    {
+        id: 2001,
+        topic: "M365 core objects & admin centers",
+        tag: "License effects",
+        format: "multiple_choice",
+        q: "A user with a Microsoft 365 E3 license reports that Copilot does not appear in Word or Teams. The tenant purchased Microsoft 365 Copilot licenses last month but nothing was assigned to this user. What is the correct explanation?",
+        options: [
+            "Microsoft 365 E3 is not an eligible base license for Copilot, so the user must first be moved to Microsoft 365 E5",
+            "Copilot is a separate add-on license that must be assigned to the user, and it can take up to 24 hours to appear",
+            "Copilot appears automatically for every user as soon as the tenant purchases at least one Copilot license",
+            "The user must first be enrolled in the Copilot Frontier program before any Copilot feature becomes visible",
+        ],
+        answer: [1],
+        why: "Copilot features are gated by the Microsoft 365 Copilot add-on license (or an E7 subscription that includes it), assigned per user directly or through a group. E3, E5, Business Standard and Premium, Office 365 E1/E3/E5 and many other plans are all eligible base licenses. After assignment, propagation can take up to 24 hours and may need an app restart. Buying licenses does not assign them, and Frontier is an early-access program, not a prerequisite.",
+    },
+    {
+        id: 2002,
+        topic: "M365 core objects & admin centers",
+        tag: "Group-based licensing",
+        format: "multiple_choice",
+        q: "Four hundred and fifty sales employees need Microsoft 365 Copilot. New hires who join Sales should get it automatically and people who leave Sales should lose it, without an admin editing each user. Which approach is correct?",
+        options: [
+            "Assign the Copilot license to each Sales user individually in the Microsoft 365 admin center as they join",
+            "Assign the Copilot license to an Entra security group of Sales users, ideally with dynamic membership",
+            "Enable pay-as-you-go billing for the Sales department so that individual Copilot licenses are no longer needed",
+            "Assign the Copilot license to the Sales distribution list so that membership changes flow through automatically",
+        ],
+        answer: [1],
+        why: "Group-based licensing assigns a license to a group; membership changes automatically add or remove the license, and a dynamic membership rule such as department equals Sales removes manual maintenance. Per-user assignment does not scale. Pay-as-you-go is a billing model for Copilot Chat and agents, not a replacement for the full Copilot license. Distribution lists are mail objects and cannot be used for license assignment.",
+    },
+    {
+        id: 2003,
+        topic: "M365 core objects & admin centers",
+        tag: "Service plans",
+        format: "multiple_choice",
+        q: "Frontline users keep their Microsoft 365 E3 license but must NOT get an Exchange Online mailbox, while all other E3 features stay enabled. What should the admin do?",
+        options: [
+            "Remove the Microsoft 365 E3 license from the frontline users and buy Exchange Online Kiosk licenses instead",
+            "Edit the license assignment and turn off the Exchange Online service plan for those users or their group",
+            "Delete the frontline users' mailboxes in the Exchange admin center so that no mailbox is provisioned",
+            "Create a Conditional Access policy that blocks Outlook and Outlook on the web for the frontline users",
+        ],
+        answer: [1],
+        why: "A license is made of service plans; an admin can disable individual plans such as Exchange Online, Teams or SharePoint within the assignment so the user keeps the rest. Removing the license loses all features. Deleting a mailbox is only temporary because a licensed Exchange plan re-provisions it, and Conditional Access blocks access to a service, it does not control provisioning.",
+    },
+    {
+        id: 2004,
+        topic: "M365 core objects & admin centers",
+        tag: "Domains",
+        format: "multiple_choice",
+        q: "Contoso wants users to have contoso.com email addresses instead of contoso.onmicrosoft.com. Where is the domain added and how is ownership proved?",
+        options: [
+            "Microsoft Entra admin center > Enterprise applications, by uploading the registrar's domain certificate",
+            "Microsoft 365 admin center > Settings > Domains, by adding a TXT or MX record at the registrar for verification",
+            "Exchange admin center > Accepted domains, where the domain is added without any ownership verification",
+            "SharePoint admin center > Active sites, by creating a site collection named after the custom domain",
+        ],
+        answer: [1],
+        why: "Custom domains are added in the Microsoft 365 admin center (Settings > Domains), and ownership is verified by creating a TXT (or MX) record that Microsoft checks; the wizard then supplies the service records for Exchange, Teams and others. Exchange accepted domains are populated from verified domains, not the other way round. Enterprise applications and SharePoint sites have nothing to do with domain verification.",
+    },
+    {
+        id: 2005,
+        topic: "M365 core objects & admin centers",
+        tag: "Org settings",
+        format: "multiple_choice",
+        q: "The company legal team requires the tenant's privacy statement URL and technical contact to be published, and the default time zone to be corrected. Where are these organization-wide settings configured?",
+        options: [
+            "Microsoft 365 admin center > Settings > Org settings > Organization profile",
+            "Microsoft Purview portal > Settings > Organization privacy and contacts",
+            "Microsoft Entra admin center > Users > User settings > Organization details",
+            "Teams admin center > Org-wide settings > Organization information",
+        ],
+        answer: [0],
+        why: "The Organization profile section of Org settings in the Microsoft 365 admin center holds organization information, the privacy profile (privacy statement and privacy contact), release preferences and related tenant-wide settings. Purview settings are for compliance solutions, Entra user settings govern directory user permissions, and Teams org-wide settings apply only to Teams.",
+    },
+    {
+        id: 2006,
+        topic: "M365 core objects & admin centers",
+        tag: "Mailbox types",
+        format: "multiple_choice",
+        q: "The HR team needs a mailbox at hr-onboarding@contoso.com that six people can read and reply from as the address, without buying an additional license. Which object should the admin create in the Exchange admin center?",
+        options: [
+            "A user mailbox whose password is shared among the six HR people",
+            "A shared mailbox, granting the six users Full Access and Send As",
+            "A room mailbox with the six users configured as booking delegates",
+            "A distribution group named hr-onboarding with the six users as members",
+        ],
+        answer: [1],
+        why: "Shared mailboxes are designed for team addresses, need no license up to 50 GB, and delegates receive Full Access to read and Send As (or Send on Behalf) to reply as the address. Sharing a user mailbox password is insecure and consumes a license. Room mailboxes are bookable resources, and a distribution group only forwards messages to members' own mailboxes; it does not hold mail or allow a common inbox.",
+    },
+    {
+        id: 2007,
+        topic: "M365 core objects & admin centers",
+        tag: "Resource mailboxes",
+        format: "multiple_choice",
+        q: "Employees must be able to book a conference room from Outlook, with the room automatically accepting non-conflicting requests and declining double bookings. Which Exchange object provides this?",
+        options: [
+            "An equipment mailbox",
+            "A room mailbox",
+            "A shared mailbox",
+            "A mail-enabled security group",
+        ],
+        answer: [1],
+        why: "Room mailboxes are resource mailboxes for physical locations with a calendar that can auto-accept or decline based on availability and booking policies. Equipment mailboxes are the same concept for non-location resources such as projectors or vehicles. Shared mailboxes are for team email, and mail-enabled security groups combine mail distribution with permissions.",
+    },
+    {
+        id: 2008,
+        topic: "M365 core objects & admin centers",
+        tag: "Group types",
+        format: "multiple_choice",
+        q: "The legal team needs a single group object that can receive email at legal@contoso.com AND be used to grant permissions to a SharePoint library. Which group type should be created?",
+        options: [
+            "A distribution group",
+            "A Microsoft 365 group with the team's mailbox hidden",
+            "A mail-enabled security group",
+            "A dynamic distribution group",
+        ],
+        answer: [2],
+        why: "A mail-enabled security group is both a security principal (assignable to permissions and access policies) and an email recipient, which is exactly the dual requirement. Distribution groups and dynamic distribution groups are mail-only and cannot be used for permissions. A Microsoft 365 group can hold SharePoint permissions but comes with its own shared mailbox, site and Planner, and it also cannot be used in some security scenarios the way a security group can.",
+    },
+    {
+        id: 2009,
+        topic: "M365 core objects & admin centers",
+        tag: "Dynamic distribution groups",
+        format: "multiple_choice",
+        q: "Corporate communications wants an email address that always reaches everyone whose Department attribute is 'Sales', with membership recalculated automatically at send time. No permissions or shared workspace are needed. Which object is the best fit?",
+        options: [
+            "A dynamic distribution group in Exchange Online",
+            "A Microsoft 365 group with dynamic membership",
+            "A static distribution group maintained by HR",
+            "A Microsoft Entra security group with assigned membership",
+        ],
+        answer: [0],
+        why: "Dynamic distribution groups evaluate a recipient filter (for example Department equals Sales) each time a message is sent, so they are ideal for attribute-based mail distribution with no extra workspace. A Microsoft 365 group with dynamic membership also works but provisions a mailbox, site and more than needed. Static groups require manual upkeep, and an assigned security group is neither dynamic nor necessarily mail-enabled.",
+    },
+    {
+        id: 2010,
+        topic: "M365 core objects & admin centers",
+        tag: "SharePoint site types",
+        format: "multiple_choice",
+        q: "The Marketing division has five team sites for different projects and wants them to share common navigation, branding and aggregated news, while each remains a separate site with its own permissions. Which SharePoint object provides this?",
+        options: [
+            "A communication site that publishes news to the whole division",
+            "A hub site that the five team sites are associated with",
+            "A single team site with five document libraries, one per project",
+            "A private channel site created from the division's Teams team",
+        ],
+        answer: [1],
+        why: "Hub sites connect related sites to share navigation, theme and news rollup while preserving each site's own membership and permissions. A communication site is a one-to-many publishing site, a single team site with libraries would merge permissions, and private channel sites are created automatically for Teams private channels.",
+    },
+    {
+        id: 2011,
+        topic: "M365 core objects & admin centers",
+        tag: "Permission levels",
+        format: "multiple_choice",
+        q: "External contractors must be able to open and read documents in a SharePoint library in the browser but must NOT be able to download them. Which default SharePoint permission level should be used?",
+        options: ["Read", "View Only", "Contribute", "Edit"],
+        answer: [1],
+        why: "View Only allows viewing pages and items and opening documents in browser-based viewers without downloading, whereas Read includes download. Contribute adds creating and editing items, and Edit adds managing lists. Choosing the least-privileged level that meets the need is the pattern the exam expects.",
+    },
+    {
+        id: 2012,
+        topic: "M365 core objects & admin centers",
+        tag: "Permission inheritance",
+        format: "multiple_choice",
+        q: "A document library is open to all Finance team members, but one folder named 'Payroll' must be visible only to the two payroll administrators. How should this be configured?",
+        options: [
+            "Create a separate SharePoint site for the two administrators and move the Payroll folder there",
+            "Break permission inheritance on the Payroll folder and grant unique permissions to the two administrators",
+            "Apply a sensitivity label to the Payroll folder that restricts access to the two administrators",
+            "Enable restricted content discovery on the site so that the folder is hidden from other team members",
+        ],
+        answer: [1],
+        why: "SharePoint permissions inherit from site to library to folder to file; breaking inheritance on the folder gives it unique permissions that exclude the rest of the team. A new site works but is heavier than needed. Sensitivity labels cannot be applied to folders, and restricted content discovery affects search and Copilot discoverability, not who can access content.",
+    },
+    {
+        id: 2013,
+        topic: "M365 core objects & admin centers",
+        tag: "Default SharePoint groups",
+        format: "multiple_choice",
+        q: "A user is added to the default 'Members' group of a new SharePoint team site. Which statement describes what the user can do?",
+        options: [
+            "Only view content, because the default Members group has the Read permission level",
+            "Add, edit and delete items but not change permissions, because Members have the Edit level",
+            "Everything, including managing permissions, because the Members group has Full Control",
+            "Nothing until a site owner also grants the user the Contribute permission level directly",
+        ],
+        answer: [1],
+        why: "The three default groups map to permission levels: Owners have Full Control (including permission management), Members have Edit, and Visitors have Read. Edit includes creating, updating and deleting list items and documents and managing lists, but not managing permissions. Knowing this mapping is fundamental to reasoning about oversharing and Copilot data exposure.",
+    },
+    {
+        id: 2014,
+        topic: "M365 core objects & admin centers",
+        tag: "Teams channels",
+        format: "multiple_choice",
+        q: "Within the Finance team in Microsoft Teams, a subset of members must discuss a sensitive acquisition in a space that other team members cannot see, and the files must be stored separately from the team's main SharePoint site. Which channel type should be created?",
+        options: [
+            "A standard channel",
+            "A private channel",
+            "A shared channel",
+            "An org-wide team",
+        ],
+        answer: [1],
+        why: "Private channels restrict membership to a subset of the team and provision their own separate SharePoint site for files. Standard channels are visible to all team members and store files in the team site. Shared channels are for collaborating with people outside the team (including other organizations), and an org-wide team automatically includes everyone.",
+    },
+    {
+        id: 2015,
+        topic: "M365 core objects & admin centers",
+        tag: "Shared channels",
+        format: "multiple_choice",
+        q: "Contoso must collaborate with a partner company's engineers in a Teams channel. The security team refuses to create guest accounts in the Contoso directory, and partners must use their own home identities. Which Teams object and underlying identity feature satisfy this?",
+        options: [
+            "A private channel in the team with the partner engineers added as guest users",
+            "A shared channel, which relies on Microsoft Entra B2B direct connect",
+            "A standard channel in an org-wide team that the partners join as members",
+            "A distribution group that includes the partner engineers' email addresses",
+        ],
+        answer: [1],
+        why: "Shared channels let people from other Microsoft Entra organizations participate with their home tenant identity and no guest object, using B2B direct connect and cross-tenant access settings. Private channels and standard channels require the participants to be members or guests of the team. A distribution group is an email construct and has no chat or collaboration space.",
+    },
+    {
+        id: 2016,
+        topic: "M365 core objects & admin centers",
+        tag: "Teams policies",
+        format: "multiple_choice",
+        q: "Regulators require that a specific group of traders cannot delete or edit messages they have sent in Teams. All other users keep the default behavior. What should the Teams administrator configure?",
+        options: [
+            "A custom meeting policy assigned to the traders that disables transcription and recording",
+            "A custom messaging policy assigned to the traders that disables deleting and editing sent messages",
+            "An app permission policy assigned to the traders that removes the Chat app from Teams",
+            "A retention policy in Microsoft Purview that retains the traders' chat messages for seven years",
+        ],
+        answer: [1],
+        why: "Messaging policies control chat and channel messaging features per user, including whether users can delete or edit sent messages; a custom policy assigned only to the traders leaves the global policy for everyone else. Meeting policies govern meetings, app permission policies control which apps are available, and a Purview retention policy keeps copies for compliance but does not stop the user-facing delete action.",
+    },
+    {
+        id: 2017,
+        topic: "M365 core objects & admin centers",
+        tag: "Teams app management",
+        format: "multiple_choice",
+        q: "IT security wants to block all third-party apps in Microsoft Teams except a short approved list, for everyone except the Finance department, who may also use one additional approved app. Where and how is this configured?",
+        options: [
+            "Microsoft 365 admin center > Settings > Org settings > Services, by disabling third-party apps",
+            "Teams admin center > Teams apps > Manage apps and app permission policies, with a custom policy for Finance",
+            "Microsoft Entra admin center > Enterprise applications > User consent settings, by blocking user consent",
+            "Microsoft Purview portal > Data Loss Prevention, with a policy that blocks third-party app connectors",
+        ],
+        answer: [1],
+        why: "Teams app governance lives in the Teams admin center: Manage apps sets org-wide availability, and app permission policies (or the newer app-centric management) allow or block apps for specific users or groups, so a custom policy for Finance can add the extra app. Entra consent settings control OAuth consent to applications, not Teams app availability, and Purview DLP is for content protection.",
+    },
+    {
+        id: 2018,
+        topic: "Security principles & Defender XDR",
+        tag: "Zero Trust principles",
+        format: "multiple_choice",
+        q: "An organization replaces permanent Global Administrator assignments with time-limited, approval-based activation through Privileged Identity Management. Which Zero Trust principle does this change MOST directly implement?",
+        options: [
+            "Verify explicitly on every request",
+            "Use least privilege access",
+            "Assume breach of the environment",
+            "Apply defense in depth",
+        ],
+        answer: [1],
+        why: "Least privilege access includes just-in-time and just-enough access, so removing standing administrative rights in favor of PIM activation is its textbook implementation. Verify explicitly is about authenticating and authorizing every request with all available signals, and assume breach is about segmentation, monitoring and response. Defense in depth is a layered-security strategy, not one of the three Zero Trust principles.",
+    },
+    {
+        id: 2019,
+        topic: "Security principles & Defender XDR",
+        tag: "Assume breach",
+        format: "multiple_choice",
+        q: "Which set of practices BEST reflects the 'assume breach' principle of Zero Trust in a Microsoft 365 environment?",
+        options: [
+            "Requiring MFA for every sign-in and evaluating device compliance before granting access to any resource",
+            "Segmenting access, monitoring continuously with Defender XDR and Sentinel, encrypting end to end and rehearsing incident response",
+            "Granting all employees the same standard set of permissions so that access management stays simple, predictable and auditable",
+            "Trusting all traffic that originates inside the corporate network while inspecting only the traffic that arrives from the internet",
+        ],
+        answer: [1],
+        why: "Assume breach means designing as if attackers are already inside: minimize blast radius through segmentation, encrypt, monitor with analytics to detect anomalies and be ready to respond. Option A describes verify explicitly. Uniform permissions violate least privilege, and trusting the internal network is the legacy perimeter model that Zero Trust replaces.",
+    },
+    {
+        id: 2020,
+        topic: "Security principles & Defender XDR",
+        tag: "Authentication vs authorization",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nA user signs in successfully with a password and Microsoft Authenticator, then tries to delete a SharePoint site and is refused because she is not a site owner. The refusal is an example of [answer].",
+        options: ["authentication", "authorization", "federation", "auditing"],
+        answer: [1],
+        why: "Authentication (proving identity, here with two factors) succeeded; authorization (what the authenticated identity is allowed to do) denied the action because the required permission level was missing. Federation is trust between identity providers, and auditing is the recording of the attempt. The exam repeatedly checks that you separate these two steps.",
+    },
+    {
+        id: 2021,
+        topic: "Security principles & Defender XDR",
+        tag: "Authentication methods",
+        format: "multiple_choice",
+        q: "Which authentication method is considered phishing-resistant and therefore appropriate for administrators under a Conditional Access authentication strength policy?",
+        options: [
+            "A six-digit one-time code delivered to the user's phone by SMS",
+            "A Microsoft Authenticator push notification with number matching enabled",
+            "A passkey (FIDO2), such as a hardware security key or a passkey in Authenticator",
+            "A one-time passcode sent to the user's registered email address",
+        ],
+        answer: [2],
+        why: "Passkeys and FIDO2 keys, Windows Hello for Business and certificate-based authentication are phishing-resistant because the credential is bound to the legitimate site and cannot be replayed to a fake page. SMS and email codes can be intercepted or phished, and while number matching hardens push approvals against MFA fatigue, standard Authenticator push is not classed as phishing-resistant. Microsoft is also retiring its SMS and voice delivery, making passkeys the direction of travel.",
+    },
+    {
+        id: 2022,
+        topic: "Security principles & Defender XDR",
+        tag: "Legacy authentication",
+        format: "multiple_choice",
+        q: "A user's mailbox is accessed by an attacker using an old IMAP client with a stolen password, even though the tenant requires MFA for all users. What is the MOST likely gap and its fix?",
+        options: [
+            "The password policy is too weak; enforce 16-character passwords and rotation so that stolen passwords cannot be reused by attackers",
+            "Legacy protocols such as IMAP and POP bypass MFA; block legacy authentication with Conditional Access or security defaults",
+            "MFA was never registered for the user; force the user to re-register so that the legacy IMAP client starts prompting for MFA",
+            "The mailbox lacks a sensitivity label; apply one so that the label's encryption blocks the legacy client",
+        ],
+        answer: [1],
+        why: "Legacy (basic) authentication does not support MFA, so credentials alone are enough; blocking legacy protocols is one of the highest-impact controls and is included in security defaults and Baseline Security Mode. A longer password would still be phishable, re-registering MFA does not affect protocols that ignore MFA, and sensitivity labels protect content rather than sign-ins.",
+    },
+    {
+        id: 2023,
+        topic: "Security principles & Defender XDR",
+        tag: "Defender for Office 365",
+        format: "multiple_choice",
+        q: "Which Microsoft Defender for Office 365 feature opens email attachments in a virtual sandbox to observe their behavior BEFORE the message is delivered to the recipient?",
+        options: [
+            "Safe Links",
+            "Safe Attachments",
+            "Zero-hour auto purge (ZAP)",
+            "Anti-spam connection filtering",
+        ],
+        answer: [1],
+        why: "Safe Attachments detonates attachments in an isolated environment and blocks or replaces malicious ones prior to delivery. Safe Links checks URLs at time of click, ZAP retroactively removes messages already delivered when they are later found to be malicious, and connection filtering evaluates sending IP reputation. Each feature covers a different point in the message lifecycle.",
+    },
+    {
+        id: 2024,
+        topic: "Security principles & Defender XDR",
+        tag: "Defender for Cloud Apps",
+        format: "multiple_choice",
+        q: "The security team wants to discover which unsanctioned SaaS applications employees use from corporate devices (shadow IT), assess each app's risk score and block the risky ones. Which Defender XDR component provides this?",
+        options: [
+            "Microsoft Defender for Endpoint",
+            "Microsoft Defender for Identity",
+            "Microsoft Defender for Cloud Apps",
+            "Microsoft Defender Vulnerability Management",
+        ],
+        answer: [2],
+        why: "Defender for Cloud Apps is the cloud access security broker of the suite: Cloud Discovery (fed by Defender for Endpoint network signals) inventories SaaS usage, a catalog of tens of thousands of apps supplies risk scores, and admins can sanction or unsanction apps and apply session controls. Defender for Endpoint protects devices, Defender for Identity protects the directory, and Vulnerability Management finds weaknesses in assets.",
+    },
+    {
+        id: 2025,
+        topic: "Security principles & Defender XDR",
+        tag: "Defender portal",
+        format: "multiple_choice",
+        q: "Which statement about the portal used for Microsoft Defender XDR is correct?",
+        options: [
+            "Defender XDR is managed in the Microsoft 365 Defender portal at protection.office.com, alongside Exchange Online Protection",
+            "Defender XDR is surfaced in the Microsoft Defender portal at security.microsoft.com; 'Microsoft 365 Defender' is a retired name",
+            "Defender XDR is managed from the Microsoft Purview portal because it is classified as a compliance solution",
+            "Defender XDR settings are managed only in the Microsoft Entra admin center under the Protection node",
+        ],
+        answer: [1],
+        why: "The Microsoft Defender portal (security.microsoft.com) is the unified security operations portal; Defender XDR is the service inside it, together with Sentinel, Exposure Management and Security Copilot. The old 'Microsoft 365 Defender' branding and protection.office.com are retired. Purview is for compliance and data security, and the Entra admin center is for identity.",
+    },
+    {
+        id: 2026,
+        topic: "Security principles & Defender XDR",
+        tag: "Incidents",
+        format: "multiple_choice",
+        q: "A phishing email leads to a compromised account that then uploads a malicious file to SharePoint. In the Microsoft Defender portal, how are these related detections presented to the analyst?",
+        options: [
+            "As three unrelated alerts in three different product consoles that an analyst must manually cross-reference and time-align",
+            "As a single incident that correlates the email, identity and file alerts into one attack story with a timeline",
+            "As a Secure Score recommendation to review the affected mailbox, account and SharePoint site",
+            "As a Compliance Manager improvement action assigned to the security team for remediation",
+        ],
+        answer: [1],
+        why: "Defender XDR correlates alerts from Defender for Office 365, Entra ID Protection or Defender for Identity, and SharePoint or endpoint signals into one incident so the analyst sees the full chain of the attack. Secure Score is about posture recommendations, and Compliance Manager is a compliance tool; neither represents an active attack.",
+    },
+    {
+        id: 2027,
+        topic: "Security principles & Defender XDR",
+        tag: "Attack simulation training",
+        format: "multiple_choice",
+        q: "The security awareness team wants to send realistic simulated phishing emails to employees and automatically assign training to those who click. Which capability and licensing level is needed?",
+        options: [
+            "Attack simulation training in the Defender portal, which requires Defender for Office 365 Plan 2",
+            "Communication Compliance in Microsoft Purview, which requires Microsoft 365 E5 Compliance",
+            "Insider Risk Management in Microsoft Purview, which requires Microsoft 365 E5 Compliance",
+            "Microsoft Secure Score in the Defender portal, which requires Defender for Office 365 Plan 1",
+        ],
+        answer: [0],
+        why: "Attack simulation training is a Defender for Office 365 Plan 2 feature that runs phishing simulations and assigns targeted training. Communication Compliance monitors messages for policy violations, Insider Risk Management detects risky user behavior, and Secure Score recommends configuration improvements. Knowing which Defender for Office 365 plan includes simulations is a common test point.",
+    },
+    {
+        id: 2028,
+        topic: "Entra ID & core security features",
+        tag: "Conditional Access",
+        format: "multiple_choice",
+        q: "The security team requires that Microsoft 365 Copilot and the Office apps can be used only from Intune-compliant devices, and that MFA is required whenever a user connects from outside the corporate network. Which Microsoft Entra feature meets both requirements?",
+        options: [
+            "Privileged Identity Management with a policy requiring compliant devices",
+            "Conditional Access policies using device compliance and named locations",
+            "Microsoft Entra ID Protection with a user risk policy for external sign-ins",
+            "Microsoft Entra Connect with device writeback and filtering enabled",
+        ],
+        answer: [1],
+        why: "Conditional Access evaluates signals (user, resource, device state, location, risk) and applies grant controls such as require MFA or require a compliant device; named locations define the trusted corporate network. PIM governs privileged role activation, ID Protection detects identity risk (and feeds Conditional Access), and Entra Connect synchronizes on-premises identities.",
+    },
+    {
+        id: 2029,
+        topic: "Entra ID & core security features",
+        tag: "Policy testing",
+        format: "multiple_choice",
+        q: "Before enforcing a new Conditional Access policy that blocks access from unmanaged devices, the admin wants to see which real sign-ins it would have affected, and to check the outcome for one specific user and app. Which TWO tools are designed for this?",
+        options: [
+            "Report-only policy mode and the What If tool",
+            "Identity Secure Score and the audit log",
+            "Security defaults and PIM",
+            "Microsoft Purview Activity explorer and DSPM for AI",
+        ],
+        answer: [0],
+        why: "Report-only mode logs what the policy would have done on every sign-in without enforcing it, and the What If tool simulates the outcome for a chosen user, app and conditions. Identity Secure Score and audit logs do not simulate policies, security defaults and PIM are unrelated controls, and Purview tools cover data rather than sign-ins.",
+    },
+    {
+        id: 2030,
+        topic: "Entra ID & core security features",
+        tag: "Break-glass accounts",
+        format: "multiple_choice",
+        q: "When creating a Conditional Access policy that requires MFA for all users and all resources, which best practice prevents administrators from being locked out of the tenant if the MFA service or the policy misbehaves?",
+        options: [
+            "Set the policy to apply only to guest users until every administrator has registered for MFA",
+            "Exclude the emergency access (break-glass) accounts from the policy and monitor their use",
+            "Assign the Global Administrator role to a second administrator who signs in from a trusted location",
+            "Disable security defaults first so that the Conditional Access policy can never lock anyone out",
+        ],
+        answer: [1],
+        why: "Emergency access accounts are excluded from Conditional Access policies (and protected by other means such as long random passwords or FIDO2 keys and alerting on any sign-in) so admins can always get in. Limiting the policy to guests defeats its purpose, another Global Administrator would be locked out too, and disabling security defaults is a prerequisite for using Conditional Access, not a lockout safeguard.",
+    },
+    {
+        id: 2031,
+        topic: "Entra ID & core security features",
+        tag: "Single sign-on",
+        format: "multiple_choice",
+        q: "Employees maintain separate passwords for Salesforce and ServiceNow, generating many help-desk password resets, and IT cannot revoke access centrally when someone leaves. Which change addresses both issues?",
+        options: [
+            "Store the SaaS passwords in a shared spreadsheet that IT can revoke by deleting rows when someone leaves",
+            "Add the apps as enterprise applications in Entra ID, configure SSO (SAML or OIDC) and assign users or groups",
+            "Register each app as an app registration in Entra ID and issue each employee a client secret for sign-in",
+            "Synchronize the SaaS providers' directories into on-premises AD DS so that passwords stay aligned",
+        ],
+        answer: [1],
+        why: "SSO through Entra enterprise applications lets users authenticate once with their Entra identity and access assigned apps without separate passwords, while admins control assignment, enforce Conditional Access and revoke access centrally at offboarding. App registrations are for developers integrating their own apps, and client secrets are for applications, not people. Spreadsheets and reverse synchronization are neither secure nor practical.",
+    },
+    {
+        id: 2032,
+        topic: "Entra ID & core security features",
+        tag: "Users vs groups",
+        format: "multiple_choice",
+        q: "An admin must grant 300 employees access to a SharePoint site, target them with a Conditional Access policy and assign them a Copilot license, all automatically based on their department attribute. Which single security object should be created?",
+        options: [
+            "A distribution group with the 300 employees as members, mail-enabled for notifications",
+            "A Microsoft Entra security group with dynamic membership based on the department attribute",
+            "A mail contact for each employee, grouped in an address list for the department",
+            "An administrative unit containing the 300 employees, with the site permission assigned to it",
+        ],
+        answer: [1],
+        why: "A security group is the object that can be used for resource permissions, Conditional Access targeting and group-based licensing, and dynamic membership rules keep it current from attributes. Distribution groups are for email only and cannot carry permissions or licenses. Mail contacts are external addresses, and administrative units scope administrator roles rather than grant access.",
+    },
+    {
+        id: 2033,
+        topic: "Entra ID & core security features",
+        tag: "Guest users",
+        format: "multiple_choice",
+        q: "A vendor's consultant needs access to one SharePoint site for three months. Which approach follows Microsoft's guidance for external access?",
+        options: [
+            "Create a regular member account with a company email address and a temporary password for the consultant",
+            "Invite the consultant as a B2B guest user who authenticates with their own identity, then grant the site permission",
+            "Share the site owner's credentials with the consultant for the duration of the three-month engagement",
+            "Add the consultant's email address to a distribution group that has been granted access to the site",
+        ],
+        answer: [1],
+        why: "B2B collaboration creates a guest user object that authenticates with the vendor's own identity provider, has limited default permissions, can be governed by access reviews and can be removed cleanly. A member account creates an unnecessary internal identity and license, sharing credentials is a severe security violation, and distribution groups grant no access.",
+    },
+    {
+        id: 2034,
+        topic: "Entra ID & core security features",
+        tag: "Sign-in troubleshooting",
+        format: "multiple_choice",
+        q: "A user gets error 53003 ('Access has been blocked by Conditional Access policies') when opening Outlook. Which tool tells the admin exactly which policy blocked the sign-in and why?",
+        options: [
+            "The Microsoft Entra audit logs, filtered on the Conditional Access policy category",
+            "The Microsoft Entra sign-in logs, opening the entry and reviewing the Conditional Access tab",
+            "Identity Secure Score, filtered to the improvement actions related to Conditional Access",
+            "The Microsoft Purview unified audit log, searching for the user's Outlook activities",
+        ],
+        answer: [1],
+        why: "Sign-in logs record every authentication with the applied Conditional Access policies and their result (success, failure, not applied), plus device, location, client app and MFA details, which is where 53003 blocks are diagnosed. Audit logs show directory changes such as who edited a policy, Identity Secure Score gives posture recommendations, and the Purview audit log records user and admin activity across Microsoft 365, not policy evaluation detail.",
+    },
+    {
+        id: 2035,
+        topic: "Entra ID & core security features",
+        tag: "Risky sign-ins",
+        format: "multiple_choice",
+        q: "A traveling executive is blocked with the message that their account is at risk after an atypical travel detection. Where does the admin investigate the detection and, if it is legitimate, clear the risk so the executive can sign in?",
+        options: [
+            "Microsoft Entra admin center > ID Protection > Risky sign-ins and Risky users, then confirm safe or dismiss the risk",
+            "Microsoft 365 admin center > Users > Active users > Block sign-in, then unblock once the executive returns",
+            "Microsoft Purview portal > Insider Risk Management > Alerts, then resolve the alert as benign travel",
+            "Exchange admin center > Mail flow > Rules, then add an exception for the executive's mailbox",
+        ],
+        answer: [0],
+        why: "Microsoft Entra ID Protection is where sign-in and user risk are investigated and remediated; admins can confirm a sign-in safe, dismiss risk or confirm compromise, and users can self-remediate through risk-based Conditional Access with MFA or password change. Blocking sign-in makes it worse, Insider Risk Management concerns data-related behavior, and Exchange mail flow is unrelated.",
+    },
+    {
+        id: 2036,
+        topic: "Entra ID & core security features",
+        tag: "MFA troubleshooting",
+        format: "multiple_choice",
+        q: "A user has lost the phone that held Microsoft Authenticator and cannot complete MFA. What is the appropriate way to restore access while keeping MFA enforced?",
+        options: [
+            "Disable MFA for the whole tenant until the user has replaced the phone and registered again",
+            "Reset the user's authentication methods (require re-registration) or issue a Temporary Access Pass",
+            "Delete the account and create a new one so that the user starts with a clean registration",
+            "Add the user permanently to the Conditional Access exclusion group used for service accounts",
+        ],
+        answer: [1],
+        why: "Admins can clear the user's registered methods so re-registration is required at the next sign-in, or issue a time-limited Temporary Access Pass that satisfies strong authentication for registering new methods. Disabling MFA tenant-wide or permanently excluding the user weakens security, and deleting the account loses data and licenses.",
+    },
+    {
+        id: 2037,
+        topic: "Entra ID & core security features",
+        tag: "Identity Secure Score",
+        format: "multiple_choice",
+        q: "Which statement about Identity Secure Score is correct?",
+        options: [
+            "It is a separate product that must be licensed per user before any recommendations are shown",
+            "It measures identity best-practice adherence, feeds the Identity category of Microsoft Secure Score and recalculates daily",
+            "It reports the number of risky users and risky sign-ins detected by ID Protection over the last 30 days",
+            "It is the identity view of the compliance score in Compliance Manager and shares that tool's improvement actions and points",
+        ],
+        answer: [1],
+        why: "Identity Secure Score lists improvement actions (require MFA for admins, block legacy authentication, enable password protection) with point values and user impact, and its numbers feed the Identity section of Microsoft Secure Score in the Defender portal. It is included with Entra ID, is not a count of risky users, and is unrelated to the regulatory compliance score.",
+    },
+    {
+        id: 2038,
+        topic: "Entra ID & core security features",
+        tag: "Audit logs",
+        format: "multiple_choice",
+        q: "On Tuesday someone added an external contractor to the Finance security group. The manager wants to know which administrator did it and when. Which log answers this?",
+        options: [
+            "Microsoft Entra sign-in logs, filtered on the contractor's interactive sign-ins to the Finance resources",
+            "Microsoft Entra audit logs (activity 'Add member to group'), also in the unified audit log",
+            "Identity Secure Score history, which records group membership changes over time",
+            "The Microsoft 365 Copilot usage report, filtered on the Finance group",
+        ],
+        answer: [1],
+        why: "Audit logs record changes to directory objects, including who initiated the change, the target and the timestamp; group membership changes are a typical entry. Sign-in logs only cover authentication events. Secure Score history tracks the score over time, and the Copilot usage report covers Copilot adoption, neither of which records group changes.",
+    },
+    {
+        id: 2039,
+        topic: "Entra ID & core security features",
+        tag: "Unified audit log",
+        format: "multiple_choice",
+        q: "A compliance officer needs one search that shows a departing employee's SharePoint file downloads, mailbox activity AND Microsoft 365 Copilot interactions for the last 60 days. Which tool provides this?",
+        options: [
+            "Microsoft Entra sign-in logs, which record every activity the user performed in each service",
+            "Audit search in the Purview portal (also in the Defender portal), which spans Microsoft 365 services and Copilot",
+            "The Teams admin center usage reports, which include SharePoint downloads and mailbox activity",
+            "Identity Secure Score, which lists the user's file, mailbox and Copilot activity as identity risk indicators over time",
+        ],
+        answer: [1],
+        why: "The unified audit log aggregates user and admin activities from Exchange, SharePoint, OneDrive, Teams, Entra ID, Purview and Copilot (recorded as CopilotInteraction events, with details of the resources Copilot accessed) and is searchable from Purview and the Defender portal. Entra sign-in logs cover authentication only, Teams reports show usage statistics, and Secure Score is posture.",
+    },
+    {
+        id: 2040,
+        topic: "Entra ID & core security features",
+        tag: "PIM",
+        format: "multiple_choice",
+        q: "An audit finds nine permanent Global Administrators. The CISO wants administrators to activate privileged roles only when needed, with MFA and a justification, expiring automatically after a set time. Which Entra capability delivers this, and what assignment type should be used?",
+        options: [
+            "Conditional Access with a permanent active assignment and MFA",
+            "Privileged Identity Management with eligible role assignments",
+            "Access reviews with permanent active assignments",
+            "Group-based licensing with a dynamic admin group",
+        ],
+        answer: [1],
+        why: "PIM converts standing privilege into eligible assignments that must be activated just in time under configurable requirements (MFA, justification, approval, duration). Conditional Access alone cannot remove standing privilege, access reviews recertify assignments but do not make them just-in-time, and licensing groups do not govern roles. PIM lives under ID Governance in the Entra admin center and requires Entra ID P2 or ID Governance licensing.",
+    },
+    {
+        id: 2041,
+        topic: "Entra ID & core security features",
+        tag: "PIM concepts",
+        format: "multiple_choice",
+        q: "In Privileged Identity Management, what is the difference between an ELIGIBLE and an ACTIVE role assignment?",
+        options: [
+            "Eligible assignments are used for guest and external users, while active assignments are reserved for member users",
+            "An eligible user must activate the role before using it and the activation expires; an active user holds it continuously",
+            "Eligible assignments grant a broader set of permissions than active assignments of the same role",
+            "Active assignments expire automatically after one hour of inactivity, whereas eligible assignments never expire",
+        ],
+        answer: [1],
+        why: "Eligible means the user can activate the role when needed and the activation lasts only for the configured duration, which is the just-in-time model; active means the role is always on. Both types can be permanent or time-bound in duration. Permissions are identical once the eligible role is activated. Emergency access accounts are the usual exception that keep permanent active assignments.",
+    },
+    {
+        id: 2042,
+        topic: "Entra ID & core security features",
+        tag: "App registrations vs enterprise apps",
+        format: "multiple_choice",
+        q: "A developer registered a custom app in Microsoft Entra ID. The admin now needs to restrict sign-in to members of one group, configure SSO settings and review the permissions that were consented to. Which area of the Entra admin center should the admin use?",
+        options: [
+            "App registrations, because the object that was created there also holds the assignment and SSO settings",
+            "Enterprise applications, which represents the app's service principal and holds assignment, SSO and consent",
+            "Identity Governance > Access packages, where the app must be bundled before users can be assigned",
+            "Conditional Access > Named locations, where the app's allowed sign-in group and SSO settings are defined",
+        ],
+        answer: [1],
+        why: "An app registration defines the application object (what the app is: redirect URIs, credentials, API permissions requested). The enterprise application entry is the service principal, the tenant-local instance that governs how the app is used: assignment required, users and groups, SSO, consented permissions and sign-in activity. Access packages and named locations are unrelated. The exam probes this application-object versus service-principal split.",
+    },
+    {
+        id: 2043,
+        topic: "Entra ID & core security features",
+        tag: "Consent",
+        format: "multiple_choice",
+        q: "A third-party productivity app asks users for the permission to read every mailbox in the organization. Users cannot grant it themselves. Why, and who can?",
+        options: [
+            "The permission is high privilege, so it needs admin consent from a privileged administrator after reviewing the app and publisher",
+            "Users can always consent to any permission on their own behalf as long as they hold a license for the application being requested",
+            "Only the app's developer can grant the permission, by adding it to the application manifest and republishing",
+            "The permission can be granted only in the Teams admin center, under Manage apps, by a Teams Administrator",
+        ],
+        answer: [0],
+        why: "Entra distinguishes low-risk delegated permissions that users may consent to (subject to tenant user-consent settings) from high-privilege or application permissions that require admin consent. Admins should review the requested scopes and the publisher (verified publisher, certification) before granting tenant-wide consent, and can enable an admin consent workflow for user requests. The Teams admin center and the developer play no role in the consent grant.",
+    },
+    {
+        id: 2044,
+        topic: "Entra ID & core security features",
+        tag: "Objects",
+        format: "yes_no",
+        q: "True or False: Registering an application in Microsoft Entra ID creates an application object, while the corresponding entry under Enterprise applications is the service principal that receives user assignments and permission grants in your tenant.",
+        options: ["True", "False"],
+        answer: [0],
+        why: "True. The application object is the global definition (template) and the service principal is the local instance that is authorized, assigned and governed in each tenant where the app is used. Multi-tenant apps have one application object in the home tenant and a service principal in every tenant that uses them.",
+    },
+    {
+        id: 2045,
+        topic: "Purview capabilities",
+        tag: "Solution mapping",
+        format: "multiple_choice",
+        q: "Compliance wants to detect when employees ask Microsoft 365 Copilot to draft harassing or threatening messages, route the flagged prompts and responses to a reviewer, and record the remediation. Which Microsoft Purview solution and template fit?",
+        options: [
+            "Data Loss Prevention with the 'Microsoft 365 Copilot and Copilot Chat' location",
+            "Communication Compliance with the 'Detect Microsoft Copilot interactions' template",
+            "Insider Risk Management with the 'Risky AI usage' policy template",
+            "DSPM for AI, using the AI activities view of activity explorer",
+        ],
+        answer: [1],
+        why: "Communication Compliance analyzes messages, including Copilot prompts and responses, against classifiers such as threat, harassment and discrimination, and provides a reviewer workflow with resolve, notify, escalate and tagging actions. DLP prevents sensitive information exposure rather than reviewing tone, Insider Risk Management's Risky AI usage template scores risky user behavior with AI, and DSPM for AI's activity explorer shows AI activity without a reviewer workflow.",
+    },
+    {
+        id: 2046,
+        topic: "Purview capabilities",
+        tag: "DSPM for AI",
+        format: "multiple_choice",
+        q: "The CISO wants to see which generative AI applications employees are using (Microsoft 365 Copilot, ChatGPT, others), what sensitive information is being entered into them, and to activate ready-made policies to reduce that risk from one place. Which Purview capability is designed for this?",
+        options: [
+            "Compliance Manager with the AI regulations templates",
+            "Data Security Posture Management (DSPM) for AI",
+            "Records Management with an AI-usage file plan",
+            "Information barriers between users and AI apps",
+        ],
+        answer: [1],
+        why: "DSPM for AI (the AI-focused posture experience, converging into the unified DSPM) provides an inventory of AI apps and agents, insights into sensitive data in prompts and responses, data risk assessments of SharePoint sites, and one-click policies that create DLP, Insider Risk and Communication Compliance policies. Compliance Manager measures regulatory posture, Records Management handles retention of records, and information barriers block communication between segments.",
+    },
+    {
+        id: 2047,
+        topic: "Purview capabilities",
+        tag: "DLP for Copilot",
+        format: "multiple_choice",
+        q: "Documents labeled 'Highly Confidential' must never be summarized or referenced by Microsoft 365 Copilot, even for users who have permission to open them. Which configuration achieves this?",
+        options: [
+            "Rely on the sensitivity label alone, because Copilot automatically skips any content that carries a label",
+            "A DLP policy for the Copilot location: condition = sensitivity label, action = prevent Copilot from processing the content",
+            "Enable restricted content discovery on every SharePoint site so that no labeled file can be discovered by Copilot or search",
+            "Create a retention policy for Copilot interactions so that any response containing labeled content is deleted",
+        ],
+        answer: [1],
+        why: "DLP supports a Copilot location whose rules can use sensitivity labels (or sensitive information types) as conditions and apply the action that prevents Copilot from processing matching content, including in prompts and web searches. A label by itself only blocks Copilot when its encryption denies the user the required usage rights. Restricted content discovery hides whole sites from Copilot and search rather than targeting labeled files, and retention policies govern how long interactions are kept.",
+    },
+    {
+        id: 2048,
+        topic: "Purview capabilities",
+        tag: "Label inheritance",
+        format: "multiple_choice",
+        q: "A user asks Copilot in Word to create a new document that summarizes a file labeled 'Confidential' and a file labeled 'General'. What sensitivity label does the new document receive?",
+        options: [
+            "No label, because Copilot output is unclassified until the user applies a label manually",
+            "'Confidential', because Copilot output inherits the highest-priority label of the sources it used",
+            "'General', because the lowest-priority label is applied to avoid over-classifying new content",
+            "Both labels, because each source label is carried over to the new document separately",
+        ],
+        answer: [1],
+        why: "When Copilot creates new content from labeled sources, the output inherits the label with the highest priority in the label taxonomy (here Confidential), preserving protection. A file can carry only one sensitivity label. This label inheritance is one of the ways sensitivity labels keep protecting data as it flows through Copilot.",
+    },
+    {
+        id: 2049,
+        topic: "Purview capabilities",
+        tag: "Usage rights",
+        format: "multiple_choice",
+        q: "A file is protected by a sensitivity label that encrypts it and grants a user only the 'Viewer' permission set (VIEW but not EXTRACT). The user asks Copilot to summarize the file. What happens?",
+        options: [
+            "Copilot summarizes the file, because any user who can open a file can have Copilot read it",
+            "Copilot returns nothing from the file, because it requires both VIEW and EXTRACT usage rights on encrypted content",
+            "Copilot asks the file owner for permission and summarizes the file once the owner approves the request",
+            "Copilot removes the encryption temporarily, summarizes the file and then re-applies the sensitivity label",
+        ],
+        answer: [1],
+        why: "Copilot honors the usage rights granted by the label's encryption: content can be surfaced only when the user holds both VIEW and EXTRACT (copy) rights. Viewer-only permission blocks extraction, so Copilot cannot use the content. Copilot never elevates permissions, contacts owners for consent, or alters encryption, which is the point of the Copilot honors existing controls principle.",
+    },
+    {
+        id: 2050,
+        topic: "Purview capabilities",
+        tag: "Trainable classifiers",
+        format: "multiple_choice",
+        q: "HR wants to automatically identify resumes and source code files across SharePoint so they can be labeled, but these documents have no fixed pattern such as a number format to match. Which classification method should be used?",
+        options: [
+            "A built-in sensitive information type",
+            "A custom sensitive information type using a regular expression",
+            "A trainable classifier (pre-trained or custom)",
+            "An exact data match schema",
+        ],
+        answer: [2],
+        why: "Trainable classifiers use machine learning trained on sample documents to recognize categories of content such as resumes, source code, contracts or harassment, which pattern-based methods cannot do. Sensitive information types need patterns, keywords and checksums, and exact data match requires a table of the actual values to match, which does not exist for resumes.",
+    },
+    {
+        id: 2051,
+        topic: "Purview capabilities",
+        tag: "Exact data match",
+        format: "multiple_choice",
+        q: "A DLP policy for customer account numbers generates many false positives because any ten-digit number matches. The company has a database of the real account numbers. Which classification technique reduces false positives by matching only actual values?",
+        options: [
+            "Increase the confidence level of the built-in sensitive information type so that only high-confidence matches count",
+            "Exact data match (EDM) sensitive information type built from the company's own data",
+            "A trainable classifier trained on sample invoices that contain account numbers",
+            "Document fingerprinting based on the account statement template",
+        ],
+        answer: [1],
+        why: "Exact data match hashes and uploads your real data table so detection matches only genuine values (optionally with supporting fields), dramatically cutting false positives. Confidence tuning helps somewhat but still relies on patterns. Trainable classifiers recognize document categories rather than specific values, and fingerprinting matches documents derived from a template form.",
+    },
+    {
+        id: 2052,
+        topic: "Purview capabilities",
+        tag: "Retention for Copilot",
+        format: "multiple_choice",
+        q: "Legal requires that Microsoft 365 Copilot prompts and responses be deleted after 90 days unless another policy retains them. Which Purview mechanism is the correct fit?",
+        options: [
+            "A sensitivity label with a 90-day content expiry applied to every Copilot response",
+            "A retention policy in Data Lifecycle Management that targets Copilot interactions",
+            "A scheduled task that deletes the users' mailboxes every 90 days and recreates them",
+            "An eDiscovery case with a 90-day hold that releases and purges the prompts afterwards",
+        ],
+        answer: [1],
+        why: "Copilot prompts and responses are stored in the user's mailbox and are governed by retention policies for Copilot interactions in Data Lifecycle Management, where retain and delete settings apply; conflicting policies resolve to the longest retention. Sensitivity labels have no deletion settings, deleting mailboxes destroys everything, and a hold preserves content rather than deleting it.",
+    },
+    {
+        id: 2053,
+        topic: "Purview capabilities",
+        tag: "Retention policy vs label",
+        format: "multiple_choice",
+        q: "Which statement correctly distinguishes a retention POLICY from a retention LABEL in Microsoft Purview?",
+        options: [
+            "A retention policy applies to individual items that users select manually, while a retention label applies to entire locations such as all SharePoint sites and mailboxes",
+            "A retention policy applies implicitly to whole locations, while a retention label is applied to individual items and can declare records or trigger disposition review",
+            "Retention labels can only delete content at the end of a period, while retention policies can only retain content and never delete it",
+            "Retention policies require Microsoft 365 E5 for every location they cover, while retention labels are included with every subscription",
+        ],
+        answer: [1],
+        why: "Policies are location-wide and implicit; labels are item-level and explicit, and only labels can mark records or start a disposition review, or use event-based retention. Both can retain, delete, or retain then delete. Basic retention capabilities are included in E3-level plans, with advanced features (automatic labeling based on classifiers, disposition review) needing E5.",
+    },
+    {
+        id: 2054,
+        topic: "Purview capabilities",
+        tag: "Principles of retention",
+        format: "multiple_choice",
+        q: "A Teams chat message is covered by two retention policies: one retains chats for 5 years then deletes, the other deletes chats after 1 year. What happens to the message?",
+        options: [
+            "It is deleted after 1 year, because the shortest deletion period always wins when policies conflict",
+            "It is retained for 5 years and then deleted, because retention wins over deletion and the longest period applies",
+            "It is retained for 6 years, because the retention periods of the two policies are added together",
+            "An administrator must resolve the conflict manually in the Purview portal before either policy takes effect on the message",
+        ],
+        answer: [1],
+        why: "Purview applies the principles of retention: retention wins over deletion, then the longest retention period wins, then explicit wins over implicit, then the shortest deletion period wins when only deletion settings apply. Because one policy retains, the message stays for 5 years and is deleted afterwards. Periods are never summed, and conflicts are resolved automatically.",
+    },
+    {
+        id: 2055,
+        topic: "Purview capabilities",
+        tag: "Adaptive scopes",
+        format: "multiple_choice",
+        q: "A retention policy must apply only to the mailboxes of users whose Department attribute is 'Finance', and must automatically include new Finance hires and drop people who transfer out, without editing the policy. Which feature provides this?",
+        options: [
+            "A static scope that lists each Finance mailbox and is updated by HR when people join or leave",
+            "An adaptive scope based on the department attribute, used as the target of the retention policy",
+            "A Microsoft 365 group with a dynamic membership rule, added as the retention policy's location",
+            "A sensitivity label scoped to the Finance department that carries the retention period",
+        ],
+        answer: [1],
+        why: "Adaptive scopes define a dynamic set of users, groups or sites from attributes such as department, and retention policies (or labels) targeted at the scope follow membership changes automatically. Static scopes require manual updates, group rules do not drive retention scoping, and sensitivity labels are a protection mechanism, not a retention scoping tool.",
+    },
+    {
+        id: 2056,
+        topic: "Purview capabilities",
+        tag: "Label encryption",
+        format: "multiple_choice",
+        q: "Finance applies the 'Confidential - Finance' sensitivity label, which encrypts files, and then shares an Excel file with external auditors, who cannot open it. How should the admin allow the auditors to open the file while keeping the protection?",
+        options: [
+            "Remove encryption from the label so that the auditors, and everyone else, can open the file",
+            "Add the auditors' organization or accounts to the label's encryption permissions with usage rights",
+            "Ask Finance to convert the file to PDF before sharing, because encryption does not apply to PDFs",
+            "Turn off external sharing in SharePoint and send the file to the auditors as an email attachment",
+        ],
+        answer: [1],
+        why: "Label encryption defines exactly which users, groups or domains have which usage rights; adding the auditors (or their domain) with View or Edit rights lets them authenticate and open the content while it stays encrypted. Removing encryption unprotects every labeled file, converting to PDF does not bypass the label's encryption, and turning off external sharing prevents the collaboration entirely.",
+    },
+    {
+        id: 2057,
+        topic: "Purview capabilities",
+        tag: "Risky AI usage",
+        format: "multiple_choice",
+        q: "The security team wants to be alerted when a user repeatedly submits Copilot prompts that attempt to extract confidential content, and to correlate this with other risky activity such as bulk downloads, with the user pseudonymized during initial review. Which Purview solution and template?",
+        options: [
+            "Communication Compliance, 'Detect Microsoft Copilot interactions'",
+            "Insider Risk Management, 'Risky AI usage'",
+            "Data Loss Prevention, Copilot location",
+            "Compliance Manager, AI regulation template",
+        ],
+        answer: [1],
+        why: "Insider Risk Management's Risky AI usage template scores AI-related risk indicators such as risky prompts and sensitive responses alongside other exfiltration signals, producing pseudonymized alerts for triage. Communication Compliance reviews message content rather than scoring user risk, DLP blocks or audits individual actions, and Compliance Manager tracks regulatory readiness.",
+    },
+    {
+        id: 2058,
+        topic: "Purview capabilities",
+        tag: "DLM vs Records Management",
+        format: "multiple_choice",
+        q: "Which statement correctly contrasts Data Lifecycle Management with Records Management in Microsoft Purview?",
+        options: [
+            "They are the same solution under two names, chosen depending on whether the tenant has an E5 license",
+            "Data Lifecycle Management retains and deletes everyday content broadly; Records Management adds records, file plans and disposition",
+            "Records Management is only for paper records scanned into SharePoint, while Data Lifecycle Management covers digital content",
+            "Data Lifecycle Management applies only to Exchange mailboxes, while Records Management covers SharePoint and OneDrive",
+        ],
+        answer: [1],
+        why: "DLM is the everyday retention and deletion capability (retention policies and labels across Exchange, SharePoint, OneDrive, Teams, Copilot interactions). Records Management builds on it for content with legal or regulatory record-keeping needs, adding record declaration and immutability, file plan descriptors, event-based retention and audited disposition. Both cover all supported Microsoft 365 locations.",
+    },
+    {
+        id: 2059,
+        topic: "Purview capabilities",
+        tag: "Purview portal",
+        format: "yes_no",
+        q: "True or False: The Microsoft Purview compliance portal at compliance.microsoft.com is the current portal for creating sensitivity labels and DLP policies.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. The compliance portal has been retired; all Purview solutions, including Information Protection (sensitivity labels), Data Loss Prevention, Insider Risk Management, DSPM for AI, eDiscovery and Audit, are managed in the unified Microsoft Purview portal at purview.microsoft.com under Solutions. Expect the retired URL to appear as a distractor.",
+    },
+    {
+        id: 2060,
+        topic: "Purview capabilities",
+        tag: "Sensitivity label capabilities",
+        format: "multi_select",
+        q: "Which THREE of the following can a sensitivity label do? (Select three.)",
+        options: [
+            "Encrypt a document or email and assign usage rights to specific users or groups",
+            "Add content markings such as a header, footer or watermark",
+            "Apply settings to a Microsoft 365 group, Teams team or SharePoint site, such as making it private and controlling guest access",
+            "Retain a document for seven years and then delete it",
+            "Block a file from being copied to a USB drive on a Windows laptop",
+        ],
+        answer: [0, 1, 2],
+        why: "Sensitivity labels protect and classify: encryption with usage rights, visual markings, and container settings for groups, teams and sites (privacy, external access, unmanaged device access), and they can also be used as DLP conditions. Retention periods belong to retention labels and policies, and blocking USB copies is Endpoint DLP, although a DLP rule can use the sensitivity label as its condition.",
+    },
+    {
+        id: 2061,
+        topic: "Copilot data security & responsible AI",
+        tag: "Data access model",
+        format: "multiple_choice",
+        q: "A department manager worries that Microsoft 365 Copilot could show employees documents they are not allowed to see. Which statement correctly describes how Copilot accesses organizational data?",
+        options: [
+            "Copilot runs with elevated service permissions so it can search all tenant content, then filters the answer to the user's clearance",
+            "Copilot retrieves content through Microsoft Graph as the signed-in user, so it can only use data that user already has access to",
+            "Copilot maintains its own permission model, separate from SharePoint and Exchange, that administrators must configure",
+            "Copilot only uses documents that an administrator has marked 'Copilot-accessible' in the SharePoint admin center",
+        ],
+        answer: [1],
+        why: "Copilot grounds prompts with Microsoft Graph and the semantic index using the user's identity; existing SharePoint permissions, mailbox rights, sensitivity label usage rights, DLP and Conditional Access all apply, and nothing is elevated. There is no separate Copilot permission layer and no special SharePoint flag, which is why fixing oversharing before rollout is the real remediation.",
+    },
+    {
+        id: 2062,
+        topic: "Copilot data security & responsible AI",
+        tag: "Semantic index",
+        format: "multiple_choice",
+        q: "What is the semantic index for Copilot?",
+        options: [
+            "A cache of every tenant document that is copied into the foundation model so that answers can be generated offline",
+            "A permission-aware index over Microsoft Graph and connector content that maps meaning and relationships for retrieval",
+            "A list of SharePoint sites that administrators have approved for Copilot, refreshed each time a site is created",
+            "A per-device search index maintained by Windows Search that Copilot queries through the Microsoft 365 apps",
+        ],
+        answer: [1],
+        why: "The semantic index is a superset of the Microsoft Graph content, mapped into a lexical and semantic index that respects permission structures; it lets Copilot find conceptually related documents, emails and chats. Content is never used to train the foundation models, there is no approved-sites list, and it is a cloud service rather than a device index.",
+    },
+    {
+        id: 2063,
+        topic: "Copilot data security & responsible AI",
+        tag: "Microsoft Graph",
+        format: "multiple_choice",
+        q: "Two users with identical permissions ask Copilot the same question and receive different answers. Which explanation is consistent with how Microsoft Graph influences Copilot responses?",
+        options: [
+            "Copilot randomly samples documents for each user so that identical prompts do not produce identical answers",
+            "Graph relevance signals (recent activity, collaborators, shared files, meetings) differ per user, so the grounding differs",
+            "One of the users runs an out-of-date Office version, so Copilot falls back to a smaller model for that user",
+            "Copilot answers from the web for one user and from Microsoft Graph for the other, depending on which license each user holds",
+        ],
+        answer: [1],
+        why: "Microsoft Graph and Work IQ model relationships between people, content and activity; when Copilot grounds a prompt it ranks content by relevance to that user (recency, collaboration, relationships), so two users can be grounded on different items even with equal access. Permissions define what CAN be used; relevance defines what IS used. Randomness and app versions are not the mechanism.",
+    },
+    {
+        id: 2064,
+        topic: "Copilot data security & responsible AI",
+        tag: "Web grounding",
+        format: "multiple_choice",
+        q: "Leadership decides that Copilot must answer only from organizational data and must never send prompts to a web search to ground answers with public content. Which admin control implements this?",
+        options: [
+            "A DLP policy for the Copilot location that blocks all prompts containing a URL or web reference",
+            "Turning off the 'Allow web search in Copilot' setting in the Microsoft 365 admin center",
+            "Enabling restricted content discovery on all SharePoint sites so that Copilot uses only internal data",
+            "Removing the Bing app from the Teams app catalog with a Teams app permission policy",
+        ],
+        answer: [1],
+        why: "The tenant-level web search setting controls whether Copilot (including Researcher) can use web content from the Bing index; when it is off, Copilot grounds only on Microsoft Graph data. DLP can prevent Copilot processing specific sensitive content but is not a web toggle, restricted content discovery hides SharePoint sites, and the Teams app catalog is unrelated to Copilot grounding.",
+    },
+    {
+        id: 2065,
+        topic: "Copilot data security & responsible AI",
+        tag: "Data use",
+        format: "multiple_choice",
+        q: "Which statement about how Microsoft 365 Copilot handles customer data is correct?",
+        options: [
+            "Prompts and responses are used to train the underlying foundation models so that results improve for all customers",
+            "Prompts, responses and Graph data are not used to train the models, stay in the Microsoft 365 boundary and fall under compliance controls",
+            "Prompts and responses are shared with the AI model provider for quality review, as permitted under the Microsoft privacy principles",
+            "Copilot interactions are stored only on the user's device, so they are outside the scope of audit and eDiscovery",
+        ],
+        answer: [1],
+        why: "Microsoft commits that customer data, prompts and responses are not used to train the foundation models, that processing stays within the Microsoft 365 service boundary (including the EU Data Boundary where applicable), and that interactions are stored in the user's mailbox where audit, retention and eDiscovery apply. This is a core privacy and security fact for the exam.",
+    },
+    {
+        id: 2066,
+        topic: "Copilot data security & responsible AI",
+        tag: "Layered controls",
+        format: "multiple_choice",
+        q: "An employee outside HR asks Copilot for the salary of a colleague. The salary spreadsheet is in an HR-only SharePoint library and is labeled with an encrypting 'Highly Confidential - HR' label. Which controls prevent Copilot from revealing the salary?",
+        options: [
+            "A special Copilot exclusion list that HR must maintain in the Microsoft 365 admin center",
+            "The existing SharePoint permissions and the label's encryption usage rights, both of which Copilot honors",
+            "Nothing; Copilot bypasses SharePoint permissions when summarizing and relies on DLP to redact salaries",
+            "A Teams messaging policy that blocks salary-related keywords in prompts sent to Copilot",
+        ],
+        answer: [1],
+        why: "Copilot honors the same controls that apply when the user accesses content directly: SharePoint permissions block access to the library, and even if a copy leaked to an open location, the encrypting label would deny the user the usage rights needed for Copilot to extract the content. No Copilot-specific exclusion list is required, and Teams messaging policies control chat features.",
+    },
+    {
+        id: 2067,
+        topic: "Copilot data security & responsible AI",
+        tag: "Responsible AI principles",
+        format: "multiple_choice",
+        q: "Copilot shows citations with links to the documents and emails it used to generate a response, so users can verify the information and understand its provenance. Which Microsoft responsible AI principle does this feature MOST directly support?",
+        options: [
+            "Fairness",
+            "Transparency",
+            "Inclusiveness",
+            "Privacy and security",
+        ],
+        answer: [1],
+        why: "Transparency means people should understand how an AI system reached its output and its limitations; citations and source references make the grounding visible. Fairness concerns treating people equitably, inclusiveness concerns empowering everyone including people with disabilities, and privacy and security concern protecting data. Microsoft's six principles also include reliability and safety and accountability.",
+    },
+    {
+        id: 2068,
+        topic: "Copilot data security & responsible AI",
+        tag: "Accountability",
+        format: "multiple_choice",
+        q: "A policy requires that every email drafted by Copilot in Outlook is read and approved by the human sender before it is sent, and names the sender as responsible for its content. Which responsible AI principle is this policy applying?",
+        options: [
+            "Accountability, through human oversight",
+            "Fairness across employee groups",
+            "Inclusiveness of every user",
+            "Reliability and safety of the generated outputs",
+        ],
+        answer: [0],
+        why: "Accountability means humans are answerable for AI systems and their outputs, which is realized through human review and oversight before consequential actions such as sending communications. Reliability and safety is about the system performing consistently and safely, fairness about equitable treatment, and inclusiveness about empowering all users.",
+    },
+    {
+        id: 2069,
+        topic: "Copilot data security & responsible AI",
+        tag: "Copilot audit",
+        format: "multiple_choice",
+        q: "An investigator must prove which files Copilot referenced when a specific user asked it about a project last month, and whether any of those files carried a sensitivity label. Which tool provides this evidence?",
+        options: [
+            "The Microsoft 365 Copilot usage report, filtered on the user and the month in question",
+            "The Purview audit log, searching CopilotInteraction records with their accessed resources and label identifiers",
+            "The Viva Insights Copilot Dashboard, using the per-user drill-down of referenced documents",
+            "The Microsoft Entra sign-in logs, which record every resource Copilot accessed during each authenticated session",
+        ],
+        answer: [1],
+        why: "Copilot interactions are captured in the unified audit log as CopilotInteraction events (part of Audit Standard) with properties such as AccessedResources, including SensitivityLabelId, and even a flag for detected cross-prompt injection attacks. The usage report and the Copilot Dashboard aggregate adoption metrics without per-interaction evidence, and sign-in logs only cover authentication.",
+    },
+    {
+        id: 2070,
+        topic: "Copilot data security & responsible AI",
+        tag: "Permission boundary",
+        format: "yes_no",
+        q: "True or False: Microsoft 365 Copilot can surface content from a SharePoint site that the user does not have permission to access, provided the site has been indexed in the semantic index.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Indexing does not grant access. Copilot queries Microsoft Graph and the semantic index as the signed-in user, and only content the user is permitted to access is returned. The realistic risk is the opposite: sites that are overshared (for example with 'Everyone except external users') ARE accessible and therefore discoverable through Copilot, which is why oversharing remediation matters.",
+    },
+    {
+        id: 2071,
+        topic: "Purview risk & discovery tools",
+        tag: "Compliance Manager vs Secure Score",
+        format: "multiple_choice",
+        q: "An auditor asks for evidence of the organization's compliance posture against GDPR: a score, a list of controls, and the status of remediation actions with assigned owners. Which tool should the compliance administrator use?",
+        options: [
+            "Microsoft Secure Score in the Microsoft Defender portal",
+            "Microsoft Purview Compliance Manager",
+            "Identity Secure Score",
+            "The Service Trust Portal",
+        ],
+        answer: [1],
+        why: "Compliance Manager provides assessments built from regulatory templates (GDPR, ISO 27001, HIPAA and many more, including AI regulations), a compliance score, controls mapped to improvement actions and owner assignment with testing status. Secure Score and Identity Secure Score measure security configuration posture, and the Service Trust Portal holds Microsoft's own audit reports rather than your organization's posture.",
+    },
+    {
+        id: 2072,
+        topic: "Purview risk & discovery tools",
+        tag: "AI regulations",
+        format: "multiple_choice",
+        q: "Before expanding Copilot and custom agents, leadership wants to assess readiness against the EU AI Act and other AI regulations using pre-built control sets and recommended actions. Which Purview tool provides this?",
+        options: [
+            "DSPM for AI activity explorer, filtered on the EU AI Act risk categories",
+            "Compliance Manager, using its AI regulatory assessment templates",
+            "Data explorer, filtered on files that mention the EU AI Act",
+            "Communication Compliance, with an AI regulation policy template",
+        ],
+        answer: [1],
+        why: "Compliance Manager includes regulatory templates for AI frameworks such as the EU AI Act, NIST AI RMF and ISO/IEC 42001, and DSPM for AI even links to Compliance Manager for guided assistance to AI regulations. Activity explorer and Data explorer show activity and sensitive content, and Communication Compliance monitors messages.",
+    },
+    {
+        id: 2073,
+        topic: "Purview risk & discovery tools",
+        tag: "Data explorer",
+        format: "multiple_choice",
+        q: "Before rolling out Copilot, the security team must identify every file across SharePoint and OneDrive that contains credit card numbers or carries the 'Highly Confidential' label, and see where those files live. Which Purview tool is the current answer for this task?",
+        options: [
+            "Activity explorer under Information Protection > Explorers",
+            "Data explorer (successor of Content explorer) under Information Protection > Explorers",
+            "Content search inside eDiscovery, with a sensitive information type condition",
+            "Compliance Manager, using the improvement action for sensitive data discovery",
+        ],
+        answer: [1],
+        why: "Data explorer shows what sensitive information exists and where it is located, filtered by sensitivity label, retention label or sensitive information type, with role groups for list view versus content view. The older tool is now labeled Content Explorer (classic). Activity explorer shows label and DLP activity over time, Content search finds content for legal matters, and Compliance Manager tracks regulatory posture.",
+    },
+    {
+        id: 2074,
+        topic: "Purview risk & discovery tools",
+        tag: "Activity explorer",
+        format: "multiple_choice",
+        q: "A compliance analyst wants a timeline of DLP policy matches, sensitivity labels applied, changed or removed, and files shared externally over the last 30 days, with the ability to filter by user, location and label. Which tool provides this?",
+        options: [
+            "Data explorer",
+            "Activity explorer",
+            "Identity Secure Score",
+            "The SharePoint admin center data access governance reports",
+        ],
+        answer: [1],
+        why: "Activity explorer aggregates label and DLP-related activities from Microsoft 365 and endpoints with dozens of filters and predefined filter sets. Data explorer is a snapshot of where sensitive content lives rather than what happened to it, Identity Secure Score covers identity posture, and data access governance reports show SharePoint sharing and permission state.",
+    },
+    {
+        id: 2075,
+        topic: "Purview risk & discovery tools",
+        tag: "IRM alerts",
+        format: "multiple_choice",
+        q: "Insider Risk Management generated an alert for a pseudonymized user with a high risk score after unusual downloads before a resignation date. What is the correct order of the reviewer's next steps?",
+        options: [
+            "Notify HR by email about the alert, then delete the user's account to prevent further downloads",
+            "Triage the alert, open a case to investigate the activity timeline and content, then act (notice or escalation)",
+            "Immediately disable the user in Microsoft Entra ID, then review the alert once the account is locked",
+            "Dismiss the alert, because pseudonymized users cannot be investigated until they are revealed by HR",
+        ],
+        answer: [1],
+        why: "The IRM workflow is policies, alerts, triage, investigate, action. Reviewers evaluate the alert, create a case for investigation (with the option to reveal the identity through an audited step), and then act with notices, escalation to eDiscovery or ServiceNow integration. Disabling accounts or deleting users before investigation is not the designed process, and pseudonymization does not prevent investigation.",
+    },
+    {
+        id: 2076,
+        topic: "Purview risk & discovery tools",
+        tag: "DLP alerts",
+        format: "multiple_choice",
+        q: "A DLP policy that detects health records in Teams generates alerts. A reviewer determines that several are false positives caused by training documents. Where are DLP alerts managed, and what is the appropriate handling?",
+        options: [
+            "Alerts are visible only on the Microsoft 365 admin center Service health page and can be ignored once read",
+            "In the Purview portal under Data Loss Prevention > Alerts, where the reviewer resolves or dismisses them and then tunes the policy",
+            "Alerts must be deleted from the affected user's mailbox by an Exchange administrator before the DLP policy can run again",
+            "Alerts are resolved by removing the user's Microsoft 365 license until the policy stops generating matches",
+        ],
+        answer: [1],
+        why: "DLP alerts are surfaced in the Purview DLP alerts dashboard (and can flow to the Defender portal) with details of the matched content, user and action, and support statuses such as active, investigating, resolved and dismissed. After handling false positives, the right follow-up is to tune conditions, exceptions or confidence levels in the policy rather than removing licenses or ignoring alerts.",
+    },
+    {
+        id: 2077,
+        topic: "Purview risk & discovery tools",
+        tag: "DLP rule configuration",
+        format: "multiple_choice",
+        q: "A DLP policy blocks sharing of credit card numbers, but administrators never receive any alert when it triggers. Which rule setting must be configured?",
+        options: [
+            "Enable Endpoint DLP on all devices, because alerts are generated only for device-based policies",
+            "Turn on incident reports and alerts in the rule, with the recipients and severity configured",
+            "Add a retention label to the policy so that matched items are retained and reported",
+            "Publish a sensitivity label policy to the same users, which activates DLP alerting",
+        ],
+        answer: [1],
+        why: "Detection and enforcement are separate from notification: each DLP rule has user notification settings (policy tips) and incident report or alert settings that determine whether and how admins are alerted, with severity and aggregation options. Endpoint DLP, retention labels and sensitivity label policies do not control alerting.",
+    },
+    {
+        id: 2078,
+        topic: "Purview risk & discovery tools",
+        tag: "Communication Compliance",
+        format: "multiple_choice",
+        q: "A Communication Compliance policy flags a Teams message for possible harassment. Which actions are available to the designated reviewer for the flagged item?",
+        options: [
+            "Only delete the flagged message, because Communication Compliance offers no other remediation or notification actions",
+            "Resolve, tag, notify the user, escalate for investigation (including to eDiscovery) or remove the message",
+            "Reset the sender's password and block their sign-in until the investigation is complete",
+            "Apply a sensitivity label to the sender's mailbox so that further messages are encrypted",
+        ],
+        answer: [1],
+        why: "Communication Compliance provides a reviewer workflow with remediation actions: resolve, tagging, notify the user with a template, escalate to a manager or investigation, and remove the message in Teams. It does not perform identity actions such as password resets, and sensitivity labels are not applied to mailboxes as remediation.",
+    },
+    {
+        id: 2079,
+        topic: "Purview risk & discovery tools",
+        tag: "DSPM for AI assessments",
+        format: "multiple_choice",
+        q: "An administrator asks how to schedule the DSPM for AI data risk assessment that identifies overshared SharePoint sites before Copilot deployment. What is the correct answer?",
+        options: [
+            "The default assessment runs automatically every week for the top 100 SharePoint sites; custom assessments can be added",
+            "Assessments must be started manually every Monday by a Compliance Administrator from the DSPM dashboard",
+            "Assessments require a Microsoft Sentinel workspace so that the SharePoint activity logs can be analyzed",
+            "Assessments run only once when DSPM for AI is first enabled and cannot be repeated without a support ticket",
+        ],
+        answer: [0],
+        why: "DSPM for AI includes a default weekly data risk assessment covering the top 100 most-used SharePoint sites with no configuration, plus custom assessments an admin can create for chosen sites. Allow about 24 hours after activating one-click policies for data to populate. Sentinel is unrelated, and there is no manual weekly start.",
+    },
+    {
+        id: 2080,
+        topic: "Purview risk & discovery tools",
+        tag: "DSPM for AI access",
+        format: "multiple_choice",
+        q: "A SharePoint Administrator cannot open DSPM for AI in the Microsoft Purview portal. Which role would allow access following least privilege?",
+        options: [
+            "Global Administrator, because DSPM for AI is a tenant-wide setting",
+            "The Compliance Administrator role (Entra) or the Purview Compliance Administrator role group",
+            "Teams Administrator, because Copilot interactions are stored as Teams messages",
+            "Billing Administrator, because DSPM for AI reports primarily on pay-as-you-go Copilot consumption",
+        ],
+        answer: [1],
+        why: "DSPM for AI requires the Compliance Administrator role (Entra) or the Purview Compliance Administrator role group; Global Administrator also works but violates least privilege. SharePoint, Teams and Billing administrator roles have no Purview data security scope. Least-privilege role selection recurs throughout AB-900.",
+    },
+    {
+        id: 2081,
+        topic: "Purview risk & discovery tools",
+        tag: "Content search",
+        format: "multiple_choice",
+        q: "Legal asks for all emails and files that mention 'Project Atlas' across the tenant, exported to a file, with no need to preserve anything or run a review. Where is this done in the current Purview portal?",
+        options: [
+            "Content search, which remains a standalone solution on the Purview portal home page, separate from eDiscovery",
+            "Content search inside Microsoft Purview eDiscovery, within the system-generated Content search case",
+            "Data explorer, filtered by the keyword, with the results exported from the explorer",
+            "DSPM for AI activity explorer, filtered by keyword across prompts and responses",
+        ],
+        answer: [1],
+        why: "Since the eDiscovery experiences were unified, Content search is a component within eDiscovery: a default system case named Content search lets authorized users run keyword and condition searches across mailboxes, sites and Teams and export the results. Data explorer filters by classification rather than keywords, and DSPM for AI shows AI activity.",
+    },
+    {
+        id: 2082,
+        topic: "Purview risk & discovery tools",
+        tag: "eDiscovery for Copilot",
+        format: "multiple_choice",
+        q: "For a legal matter, investigators need a specific user's Microsoft 365 Copilot prompts and responses from the past six months. Where is this content stored and how is it collected?",
+        options: [
+            "In the Copilot usage report, which can be exported to CSV with each user's prompts and responses included",
+            "In the user's mailbox; create an eDiscovery case with the mailbox as data source and a Copilot activity condition",
+            "In a separate Copilot database that Microsoft exports on request through a support case",
+            "In the Viva Insights Copilot Dashboard, using the per-user conversation history export",
+        ],
+        answer: [1],
+        why: "Copilot interactions are stored in the user's Exchange mailbox, where retention, hold and eDiscovery apply; an eDiscovery search targeting the mailbox with the Copilot activity type condition returns prompts and responses. Usage reports and the Copilot Dashboard contain aggregate metrics, not content, and there is no separate database requiring support.",
+    },
+    {
+        id: 2083,
+        topic: "Purview risk & discovery tools",
+        tag: "Reporting sources",
+        format: "yes_no",
+        q: "True or False: Microsoft recommends using Purview audit log data as the primary basis for reporting Copilot adoption and usage to leadership.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Microsoft explicitly states that audit log data is not intended for usage reporting and that metrics derived from it may not match the official reports. Use the Microsoft 365 Copilot usage report in the admin center or the Copilot Dashboard in Viva Insights for adoption and impact; use the audit log for compliance investigations.",
+    },
+    {
+        id: 2084,
+        topic: "SharePoint oversharing & SAM",
+        tag: "Data access governance reports",
+        format: "multiple_choice",
+        q: "Before deploying Copilot, an admin must find all SharePoint sites where content was shared with 'Everyone except external users' or via 'Anyone' links in the last 28 days. Which tool provides this?",
+        options: [
+            "Microsoft Purview Data explorer, filtered on the 'Everyone except external users' sharing group",
+            "Data access governance reports in the SharePoint admin center (Reports > Data access governance)",
+            "The Microsoft 365 Copilot usage report, filtered on sites that Copilot has referenced recently",
+            "Microsoft Entra access reviews of the 'Everyone except external users' claim",
+        ],
+        answer: [1],
+        why: "Data access governance reports show sharing link activity (Anyone, People in your organization, Specific people), content shared with Everyone except external users, sensitivity label coverage and site permission snapshots, with a 28-day activity window, and let admins launch remediation such as site access reviews or restricted access control. Data explorer shows sensitive content classification, the usage report covers Copilot adoption, and access reviews recertify group and app access.",
+    },
+    {
+        id: 2085,
+        topic: "SharePoint oversharing & SAM",
+        tag: "RCD vs RAC",
+        format: "multiple_choice",
+        q: "A site's permissions are believed to be correct but are under review. Until the review finishes, its content must not appear in Copilot answers or organization-wide search, while users who already have access must still be able to open the site directly. Which SharePoint Advanced Management control fits?",
+        options: [
+            "Restricted access control (RAC)",
+            "Restricted content discovery (RCD)",
+            "Restricted SharePoint Search",
+            "Break permission inheritance on every library",
+        ],
+        answer: [1],
+        why: "Restricted content discovery hides a site's content from Copilot and org-wide search without changing any permissions, so existing users keep direct access; Microsoft positions it as a temporary governance control during permission reviews. Restricted access control changes who can access the site. Restricted SharePoint Search is a legacy allow-list approach that Microsoft is retiring (new enablement blocked from July 31, 2026), and breaking inheritance everywhere is unmanageable.",
+    },
+    {
+        id: 2086,
+        topic: "SharePoint oversharing & SAM",
+        tag: "Restricted access control",
+        format: "multiple_choice",
+        q: "A site containing merger documents was overshared. Security requires that only members of two named security groups can access the site at all, even users who previously received a sharing link or had direct permissions. Which control enforces this?",
+        options: [
+            "Restricted content discovery, configured on the site with the two security groups as exceptions",
+            "Restricted access control, enabled at the tenant and configured on the site with the allowed groups",
+            "A sensitivity label with a watermark and the two security groups as the only assigned users",
+            "A Teams messaging policy that blocks sharing of links to the merger site outside the two groups",
+        ],
+        answer: [1],
+        why: "Restricted access control restricts access to a SharePoint site (up to ten groups per site) so that users outside the specified groups cannot open the content even with prior permissions or links; a user needs both a site permission and membership in the control group. Restricted content discovery only affects discoverability, watermarks do not restrict access, and Teams policies are unrelated. RAC changes access; RCD changes discoverability.",
+    },
+    {
+        id: 2087,
+        topic: "SharePoint oversharing & SAM",
+        tag: "Restricted SharePoint Search",
+        format: "multiple_choice",
+        q: "Which oversharing control is NO LONGER recommended by Microsoft as a Copilot readiness measure because it is being retired?",
+        options: [
+            "Restricted content discovery on sensitive sites",
+            "Restricted SharePoint Search (the site allow-list)",
+            "Data access governance reports and remediation",
+            "Site access reviews delegated to site owners",
+        ],
+        answer: [1],
+        why: "Restricted SharePoint Search limited organization-wide search and Copilot to an allow-list of sites; Microsoft is retiring it and blocks new enablement starting July 31, 2026, directing customers to restricted content discovery and proper permission remediation instead. Also note that when Restricted SharePoint Search is enabled, SharePoint cannot be used as a knowledge source for declarative agents.",
+    },
+    {
+        id: 2088,
+        topic: "SharePoint oversharing & SAM",
+        tag: "Site access reviews",
+        format: "multiple_choice",
+        q: "The data access governance report lists 400 overshared sites. IT does not know the business context of each site and wants the site owners themselves to review and fix the permissions, with tracking. Which SharePoint Advanced Management feature supports this?",
+        options: [
+            "Site access reviews initiated from the data access governance report",
+            "Microsoft Entra access reviews of the SharePoint Administrator role",
+            "Restricted content discovery on all 400 sites",
+            "Deleting the sites and asking owners to recreate them",
+        ],
+        answer: [0],
+        why: "Site access reviews delegate the remediation to site owners: from the report the admin selects sites and starts reviews, owners receive a task to review sharing links and permissions, and the admin tracks completion. Entra access reviews cover groups, apps and roles rather than site sharing. Applying RCD everywhere only hides content, and deleting sites destroys data.",
+    },
+    {
+        id: 2089,
+        topic: "SharePoint oversharing & SAM",
+        tag: "SAM licensing",
+        format: "multiple_choice",
+        q: "Which statement about licensing for SharePoint Advanced Management (SAM) is correct?",
+        options: [
+            "SAM is free for every Microsoft 365 tenant with no prerequisites, so all of its features are available immediately",
+            "The Copilot-readiness subset of SAM is unlocked by one Copilot license; the full feature set needs the Plan 1 add-on or E7",
+            "SAM requires Microsoft Entra ID P2 for every user, because its reports are built on access reviews",
+            "SAM is included with every Microsoft 365 E3 license, and E5 adds only the restricted access control feature",
+        ],
+        answer: [1],
+        why: "Microsoft unlocks the Copilot-readiness subset of SAM for any tenant with at least one Copilot license; other SAM features (for example restricted site creation) still need the paid Plan 1 add-on, which E7 bundles. It is neither free without prerequisites nor included in plain E3, and Entra P2 is unrelated.",
+    },
+    {
+        id: 2090,
+        topic: "SharePoint oversharing & SAM",
+        tag: "Sharing settings",
+        format: "multiple_choice",
+        q: "To reduce future oversharing, an admin wants newly created sharing links to default to 'Specific people' instead of 'People in your organization' across the tenant. Where is this configured?",
+        options: [
+            "Microsoft Purview portal > Information Protection > Sharing defaults",
+            "SharePoint admin center > Policies > Sharing (default sharing link type)",
+            "Teams admin center > Meeting policies > File sharing defaults",
+            "Microsoft Entra admin center > External collaboration settings > Guest invites",
+        ],
+        answer: [1],
+        why: "Tenant-wide sharing defaults, including the external sharing level and the default link type and permission, are set in the SharePoint admin center under Policies > Sharing (with per-site overrides in Active sites). Purview Information Protection defines labels, Teams meeting policies cover meetings, and Entra external collaboration settings govern guest invitations rather than SharePoint link defaults.",
+    },
+    {
+        id: 2091,
+        topic: "SharePoint oversharing & SAM",
+        tag: "RCD behavior",
+        format: "yes_no",
+        q: "True or False: Enabling restricted content discovery on a SharePoint site removes users' permissions so they can no longer open the site.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Restricted content discovery does not change permissions at all; it prevents the site's content from surfacing in organization-wide search and Copilot (unless a user recently interacted with the content), while users with permissions can still navigate to the site directly. To change who can access a site, use restricted access control.",
+    },
+    {
+        id: 2092,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Copilot vs agents",
+        format: "multiple_choice",
+        q: "Finance wants two things: (1) help drafting an email in Outlook based on a meeting that just ended, and (2) a nightly, unattended process that reads invoices from an ERP system, checks approvals and posts results to Teams. Which tools map to these needs?",
+        options: [
+            "Both are Microsoft 365 Copilot tasks, because Copilot in Outlook can also be scheduled to run overnight",
+            "(1) Microsoft 365 Copilot in Outlook for real-time assistance; (2) an agent for the scheduled multi-step automation",
+            "(1) A SharePoint agent scoped to the meeting notes; (2) Researcher, scheduled through a saved prompt",
+            "Both require a custom engine agent, because Copilot cannot read meeting content or connect to an ERP system",
+        ],
+        answer: [1],
+        why: "Copilot is reactive and assistive inside the apps, working in the user's context and permissions. Agents can run on schedules or triggers, chain steps across systems and act with their own identity and connectors, which fits the invoice workflow. Researcher and SharePoint agents are grounded assistants, not scheduled automations, and a custom engine agent is unnecessary for the Outlook drafting task.",
+    },
+    {
+        id: 2093,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Copilot Chat",
+        format: "multiple_choice",
+        q: "An employee without a Microsoft 365 Copilot license opens Microsoft 365 Copilot Chat with their work account. Which statement describes what they can and cannot do?",
+        options: [
+            "They can do nothing in Copilot Chat until a Microsoft 365 Copilot license has been assigned to them",
+            "They can use web-grounded chat at no extra cost, but work-grounded chat over Microsoft 365 data needs a Copilot license",
+            "They get the full Copilot experience in Word, Excel and Teams for free because the tenant already owns licenses",
+            "They can use work-grounded chat over their own mailbox and files, but web-grounded chat requires a license",
+        ],
+        answer: [1],
+        why: "Copilot Chat is included with eligible Microsoft 365 subscriptions: the web-grounded mode is free with enterprise data protection, while the work-grounded mode (Microsoft Graph data) and Copilot inside the Office apps, plus Researcher and Analyst, require the Copilot license. Agents that use organizational data can be made available to unlicensed users through pay-as-you-go billing.",
+    },
+    {
+        id: 2094,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Licensing model choice",
+        format: "multiple_choice",
+        q: "Woodgrove has 5,000 employees. One hundred analysts will use Copilot heavily every day; 600 other employees will use Copilot Chat over organizational data a few times a month. Which approach is the MOST cost-effective while giving everyone access?",
+        options: [
+            "Buy 700 Microsoft 365 Copilot licenses so that every analyst and occasional user has the same experience",
+            "Buy 100 Copilot licenses for the analysts and enable a pay-as-you-go billing policy for the occasional users",
+            "Buy 700 pay-as-you-go licenses and assign them individually to the analysts and the occasional users",
+            "Upgrade all 5,000 users to Microsoft 365 E5, which includes Microsoft 365 Copilot in the base subscription",
+        ],
+        answer: [1],
+        why: "The flat per-user license suits heavy daily users, while pay-as-you-go is a billing model (not a license) that charges consumption at 0.01 USD per Copilot Credit for unlicensed users, ideal for occasional use. There is no such thing as an individual pay-as-you-go license. Microsoft 365 E5 does not include Copilot; the E7 SKU is the one that bundles it.",
+    },
+    {
+        id: 2095,
+        topic: "Copilot & agents — features & licensing",
+        tag: "SharePoint agents billing",
+        format: "multiple_choice",
+        q: "A department wants to use agents in SharePoint. Some users have Microsoft 365 Copilot licenses and others do not. How is usage billed?",
+        options: [
+            "SharePoint agents are free for everyone who holds a SharePoint license, regardless of Copilot licensing",
+            "Licensed Copilot users pay nothing extra; unlicensed users need pay-as-you-go billing and consume Copilot Credits",
+            "Every user of a SharePoint agent needs a Copilot Studio license assigned in the Microsoft 365 admin center",
+            "Unlicensed users are blocked from SharePoint agents entirely, with no billing alternative available",
+        ],
+        answer: [1],
+        why: "The objective specifically compares the monthly license with pay-as-you-go 'including SharePoint'. Copilot-licensed users are covered; for others, a pay-as-you-go billing policy (linked to an Azure subscription) meters Copilot Credits, and because SharePoint agents ground on the tenant graph a single complex prompt consumes more than one credit. No Copilot Studio license is required to use a SharePoint agent.",
+    },
+    {
+        id: 2096,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Seat limits",
+        format: "multiple_choice",
+        q: "Which statement about Microsoft 365 Copilot seat requirements is correct in 2026?",
+        options: [
+            "The enterprise Microsoft 365 Copilot add-on has a 300-seat minimum purchase requirement",
+            "There is no minimum; the only 300 figure is a maximum on Copilot Business and the bundled SMB SKUs",
+            "Copilot can only be bought in blocks of 100 seats through a volume licensing agreement",
+            "Microsoft 365 Copilot Business has no seat maximum and is sold to enterprises of any size",
+        ],
+        answer: [1],
+        why: "Microsoft removed the original 300-seat minimum in January 2024 (and broadened eligibility to Office 365 E1/E3/E5). Today the 300 number appears only as a cap on the SMB SKUs (Copilot Business and the bundled Business Standard/Premium with Copilot). Stale study material still teaches the minimum, which is exactly why this is a trap.",
+    },
+    {
+        id: 2097,
+        topic: "Copilot & agents — features & licensing",
+        tag: "SKUs",
+        format: "multiple_choice",
+        q: "A CFO asks which Microsoft 365 enterprise subscription includes Microsoft 365 Copilot in the base SKU without buying an add-on. What is the correct answer?",
+        options: [
+            "Microsoft 365 E5, the top enterprise suite",
+            "Microsoft 365 E7, which bundles E5 with Copilot",
+            "Office 365 E3 with the Entra Suite add-on",
+            "Microsoft 365 F3 for frontline workers",
+        ],
+        answer: [1],
+        why: "Microsoft 365 E7 (generally available May 2026) is a strict superset of E5 that adds Copilot, the Entra Suite and Agent 365. E5, Office 365 E3 and F3 are eligible base plans for the Copilot add-on but do not include it. Any licensing answer that treats E5 as the top SKU is now incomplete.",
+    },
+    {
+        id: 2098,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Researcher vs Analyst",
+        format: "multiple_choice",
+        q: "Two requests arrive: (A) a market analyst needs a structured report that synthesizes internal Teams discussions, SharePoint documents and current web sources with citations; (B) an operations lead has a messy Excel export and wants anomalies found and a forecast built with generated code. Which built-in agents fit?",
+        options: [
+            "(A) Analyst; (B) Researcher",
+            "(A) Researcher; (B) Analyst",
+            "Both are Researcher tasks",
+            "Both require a SharePoint agent",
+        ],
+        answer: [1],
+        why: "Researcher performs deep, multi-step research across Microsoft Graph work data, Copilot connectors and the Bing web index, producing cited reports. Analyst applies chain-of-thought reasoning and Python to structured data, and Microsoft names it as better suited than Researcher for Excel tasks. Both are GA since June 2025, require a Microsoft 365 Copilot license, and are preinstalled for licensed users.",
+    },
+    {
+        id: 2099,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Governing Researcher and Analyst",
+        format: "multiple_choice",
+        q: "An admin turns off agents for all users in the agent settings, yet Researcher and Analyst are still available in Copilot Chat under Tools. The admin also wants Researcher limited to a pilot group. What is correct?",
+        options: [
+            "They are core Copilot Chat Tools outside agent settings; block each tenant-wide, and per-group scoping is not possible",
+            "The agent settings take up to 24 hours to apply, after which Researcher disappears for the users who were turned off",
+            "Remove the non-pilot users' Copilot licenses, which hides Researcher while leaving the rest of Copilot available",
+            "Researcher can be scoped to the pilot group with a Conditional Access policy that targets the Researcher resource",
+        ],
+        answer: [0],
+        why: "Microsoft states that Researcher and Analyst are core chat Tools outside any agent setting, so the agent toggle never affects them. The only control is a tenant-wide Block on each one; granular assignment is unavailable. Removing licenses removes all Copilot capabilities, not just Researcher, and Conditional Access does not scope individual Copilot features.",
+    },
+    {
+        id: 2100,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Declarative vs custom engine",
+        format: "multiple_choice",
+        q: "A developer must build an agent that uses a specialized third-party model, runs its own orchestration, and proactively sends notifications without a user prompting it. Which agent type is required and what does it imply?",
+        options: [
+            "A declarative agent, because it uses Copilot's orchestrator, needs no hosting and can be scheduled to run proactively",
+            "A custom engine agent, hosted outside Microsoft 365 with its own model and orchestration; the builder owns compliance",
+            "A SharePoint agent, because SharePoint agents can call third-party models through Copilot connectors",
+            "A Researcher instance connected to the third-party model through the Connected Agents tab",
+        ],
+        answer: [1],
+        why: "Declarative agents run on Copilot's models and orchestrator, inherit Microsoft 365 compliance, need no hosting and only respond to user-initiated prompts. Custom engine agents give full control over model and orchestration, can run proactively and work in and beyond Microsoft 365, at the cost of the builder owning hosting and compliance. SharePoint agents and Researcher are declarative-style grounded assistants.",
+    },
+    {
+        id: 2101,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Which builder",
+        format: "multiple_choice",
+        q: "A site owner wants, within minutes and without leaving SharePoint, an assistant scoped to one document library that answers questions about its policies. Which creation option is the best fit?",
+        options: [
+            "A SharePoint agent created from the library, stored as an .agent file whose permissions govern access",
+            "A custom engine agent built with the Microsoft 365 Agents SDK and hosted in Azure",
+            "An agent built in Copilot Studio with a Dataverse connection to the document library's metadata",
+            "A Researcher connected agent, scoped to the library through the Connected Agents tab",
+        ],
+        answer: [0],
+        why: "SharePoint agents are created directly in a site or library, scoped to up to 20 sources, and are available to users with a Copilot license or when pay-as-you-go billing is configured; access follows the .agent file permissions. Pro-code SDK agents and Copilot Studio are heavier tools for makers and developers, and Researcher is a Microsoft-installed agent rather than something a site owner scopes.",
+    },
+    {
+        id: 2102,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Feature controls",
+        format: "multiple_choice",
+        q: "A tenant wants a small pilot group to try pre-release Copilot features and agents through the Copilot Frontier program while everyone else stays on the standard release. Where is this configured and what is the default?",
+        options: [
+            "Microsoft 365 admin center > Copilot > Settings > Copilot Frontier; the default is No access",
+            "Microsoft Entra admin center > Conditional Access > a policy targeting the Frontier resource",
+            "Teams admin center > Teams update policies, with the Public preview option enabled",
+            "Power Platform admin center > Environments > Early release cycle for the environment",
+        ],
+        answer: [0],
+        why: "Copilot Frontier is the opt-in early-access channel configured under Copilot settings in the Microsoft 365 admin center, defaulting to No access; enabled users see Frontier-tagged agents in the Agent Store. Note that the Frontier control never overrides agent settings: an agent blocked in the Agents view stays blocked. The other admin centers do not manage Copilot release channels.",
+    },
+    {
+        id: 2103,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Copilot Credits",
+        format: "multiple_choice",
+        q: "An organization buys prepaid Copilot Studio capacity packs and also configures pay-as-you-go. Which statement about how consumption is charged is correct?",
+        options: [
+            "Pay-as-you-go is charged first; prepaid credits are used only once the monthly pay-as-you-go bill exceeds a threshold",
+            "Prepaid capacity pack credits are consumed first and replenish monthly; pay-as-you-go covers overage per credit",
+            "Prepaid and pay-as-you-go credits are charged simultaneously for every interaction, halving the cost of each",
+            "Capacity packs apply only to Microsoft 365 Copilot licenses, so agent usage is always billed pay-as-you-go",
+        ],
+        answer: [1],
+        why: "Copilot Credits are the unit of consumption for agents and Copilot Chat interactions by unlicensed users. Prepaid capacity packs (25,000 credits per pack per month) are drawn down first, then pay-as-you-go billing to the linked Azure subscription covers overage at one cent per credit; the Azure meter is still named Copilot Studio. Different features consume different numbers of credits.",
+    },
+    {
+        id: 2104,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Copilot Business",
+        format: "yes_no",
+        q: "True or False: Microsoft 365 Copilot Business delivers a reduced set of Copilot capabilities compared with the enterprise Microsoft 365 Copilot add-on.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Microsoft states that Copilot Business delivers the same capabilities as the enterprise offering; the differences are price, eligibility (Business Basic, Standard, Premium or Apps for business), the 300-seat maximum and annual-commitment terms. Assuming the SMB SKU is feature-limited is a common wrong answer.",
+    },
+    {
+        id: 2105,
+        topic: "Copilot & agents — features & licensing",
+        tag: "Knowledge source licensing",
+        format: "multiple_choice",
+        q: "A maker builds an agent in Agent Builder that uses public websites, uploaded files, SharePoint content and the user's email and Teams messages as knowledge. Which statement about licensing for these knowledge sources is correct?",
+        options: [
+            "All knowledge sources are free to use with Copilot Chat, because Agent Builder itself requires no license",
+            "Web and uploaded content need no license; SharePoint and connectors need a license or metering; email and Teams messages need the Copilot license",
+            "Every knowledge source requires a Copilot Studio license, because Agent Builder is a Copilot Studio experience under the hood",
+            "Only Copilot Studio agents can use SharePoint as knowledge; Agent Builder agents are limited to uploaded files and public websites",
+        ],
+        answer: [1],
+        why: "Agent Builder capabilities such as web search, scoped web search, code interpreter and image generator need no license or metering; organizational content sources (SharePoint, OneDrive, Copilot connectors, embedded files, Dataverse) need a Copilot license OR metered usage; and personal Microsoft Graph sources (email, people, Teams messages and meetings) require the Copilot license itself. Copilot Studio is not required for Agent Builder agents to use SharePoint.",
+    },
+    {
+        id: 2124,
+        topic: "Copilot & agents — features & licensing",
+        tag: "License-gated features",
+        format: "multi_select",
+        q: "Which TWO of the following require a Microsoft 365 Copilot license per user and cannot be made available through pay-as-you-go billing? (Select two.)",
+        options: [
+            "Researcher",
+            "Analyst",
+            "Web-grounded Microsoft 365 Copilot Chat",
+            "SharePoint agents used by occasional users",
+            "Agent Store agents that use only public web content",
+        ],
+        answer: [0, 1],
+        why: "Researcher and Analyst are advanced agents that require a Microsoft 365 Copilot license, with no separate add-on and no metered alternative. Web-grounded Copilot Chat is included free with eligible subscriptions, SharePoint agents can be consumed by unlicensed users through a pay-as-you-go billing policy, and agents that rely only on public web content are available to Copilot Chat users when the admin enables them.",
+    },
+    {
+        id: 2106,
+        topic: "Copilot & agent admin tasks",
+        tag: "Assigning licenses",
+        format: "multiple_choice",
+        q: "An admin assigns a Microsoft 365 Copilot license to a user at 9:00. At 9:30 the user still sees no Copilot in Teams. Which statement is correct?",
+        options: [
+            "The assignment failed silently; the admin must remove and reassign the license to trigger provisioning",
+            "Copilot can take up to 24 hours to appear after assignment, and the user may need to restart the app",
+            "The user must also be assigned the AI Administrator role before Copilot features become visible",
+            "Copilot requires a license reassignment every 30 days, so the first assignment is only a reservation",
+        ],
+        answer: [1],
+        why: "License propagation to the Copilot experiences can take up to 24 hours, so a 30-minute gap is expected. Licenses are assigned per user in the admin center, through Entra groups, or with the Microsoft Graph PowerShell SDK for scale; Copilot licenses cannot be assigned to guest or cross-tenant users. No admin role is needed for a user to consume Copilot.",
+    },
+    {
+        id: 2107,
+        topic: "Copilot & agent admin tasks",
+        tag: "Pay-as-you-go prerequisites",
+        format: "multiple_choice",
+        q: "An admin tries to create a Copilot pay-as-you-go billing policy but cannot complete the wizard. Which set of prerequisites must be in place?",
+        options: [
+            "A Microsoft 365 E5 license for every user in scope of the billing policy, plus the Global Administrator role for the admin",
+            "An Azure subscription and resource group in the same tenant, Owner or Contributor rights on both, and an eligible admin role",
+            "A Power BI Pro license and a Dataverse environment in which the billing policy's consumption data is stored",
+            "A Microsoft Sentinel workspace to receive the billing logs and a Log Analytics contributor role",
+        ],
+        answer: [1],
+        why: "Pay-as-you-go bills consumption to Azure, so the policy needs an Azure subscription and resource group in the same tenant, appropriate Azure rights, and an eligible Microsoft 365 admin role. E5 licenses, Power BI, Dataverse and Sentinel play no part. This prerequisite list is a frequent exam item because it crosses the Microsoft 365 and Azure boundary.",
+    },
+    {
+        id: 2108,
+        topic: "Copilot & agent admin tasks",
+        tag: "Two-step setup",
+        format: "multiple_choice",
+        q: "An admin creates a pay-as-you-go billing policy for the Legal group, but unlicensed Legal users still cannot use work-grounded Copilot Chat. What was most likely missed?",
+        options: [
+            "The Azure subscription must be moved to the same region as the Microsoft 365 tenant before billing starts",
+            "The policy must also be connected to a Copilot service on the Pay-as-you-go services tab",
+            "The users must be added to the Copilot Frontier program before pay-as-you-go applies to them",
+            "The users need the AI Administrator role to consume Copilot Chat under a billing policy",
+        ],
+        answer: [1],
+        why: "Enabling pay-as-you-go is a two-step process: create the billing policy (Azure subscription, resource group, scope, optional budget), then connect it to a Copilot service such as Microsoft 365 Copilot Chat or SharePoint agents. If the second step is skipped, pay-as-you-go stays disabled. Regions, Frontier and admin roles are unrelated to enabling metered access.",
+    },
+    {
+        id: 2109,
+        topic: "Copilot & agent admin tasks",
+        tag: "Budgets",
+        format: "multiple_choice",
+        q: "A budget of 2,000 USD per month is set on a Copilot pay-as-you-go billing policy. Consumption reaches 2,000 USD on the 20th of the month. What happens next?",
+        options: [
+            "Copilot Chat is automatically disabled for the policy's users until the next billing month begins and the budget resets",
+            "Email notifications are sent to the configured recipients, but the budget is not enforced and usage continues",
+            "The Azure subscription is suspended until an administrator raises the budget in Cost Management",
+            "The excess is charged to the users' personal Microsoft accounts until the budget is increased",
+        ],
+        answer: [1],
+        why: "Budgets on pay-as-you-go billing policies are for visibility only: they trigger alerts (which can take up to 24 hours) and never stop consumption. Organizations that want a hard cap must monitor usage and adjust policies or switch heavy users to licenses. Subscriptions are not suspended and users are never personally charged.",
+    },
+    {
+        id: 2110,
+        topic: "Copilot & agent admin tasks",
+        tag: "Billing location",
+        format: "multiple_choice",
+        q: "Where does an administrator create and manage Copilot pay-as-you-go billing policies?",
+        options: [
+            "Microsoft 365 admin center > Billing > Bills & payments > Pay-as-you-go",
+            "Microsoft 365 admin center > Copilot > Billing & usage (Billing policies tab)",
+            "Azure portal > Cost Management > Budgets > Copilot billing policies",
+            "Power Platform admin center > Billing > Copilot Studio capacity",
+        ],
+        answer: [1],
+        why: "Copilot billing policies live under the Copilot node of the Microsoft 365 admin center, not under the general Billing node (whose pay-as-you-go page covers services such as Microsoft 365 Backup and only links onward for Copilot). Azure Cost Management shows the resulting charges and can hold Azure budgets, and the Power Platform admin center manages Copilot Studio capacity rather than the Microsoft 365 Copilot billing policy.",
+    },
+    {
+        id: 2111,
+        topic: "Copilot & agent admin tasks",
+        tag: "Usage reports",
+        format: "multiple_choice",
+        q: "Leadership asks how many licensed users are actually active in Copilot, in which apps, and when each user last used it, exported to CSV. Which report should the admin use?",
+        options: [
+            "Microsoft 365 admin center > Reports > Usage > Microsoft 365 Copilot (Readiness and Usage tabs)",
+            "Microsoft Purview portal > Audit, searching for CopilotInteraction events and exporting the results",
+            "Microsoft Entra admin center > Sign-in logs, filtered on the Microsoft 365 Copilot application",
+            "Exchange admin center > Reports > Mail flow, filtered on messages generated by Copilot",
+        ],
+        answer: [0],
+        why: "The Copilot usage report shows enabled versus active users, per-app usage and last activity date with CSV export, alongside Readiness, Credits and Agents views. Audit logs are explicitly not intended for usage reporting, sign-in logs show authentication events, and Exchange reports cover mailbox activity.",
+    },
+    {
+        id: 2112,
+        topic: "Copilot & agent admin tasks",
+        tag: "Copilot Dashboard",
+        format: "multiple_choice",
+        q: "Beyond raw adoption counts, executives want impact metrics such as Copilot-assisted hours, usage trends by department and sentiment, in a dashboard they can open themselves. Which tool and role apply?",
+        options: [
+            "The Copilot Dashboard in Viva Insights, with access enabled and delegated by an AI Administrator",
+            "Microsoft Secure Score in the Defender portal, filtered to the Copilot improvement actions",
+            "The DSPM for AI dashboard in Purview, opened by a Compliance Administrator",
+            "The Teams admin center analytics dashboard, filtered to Copilot in Teams meetings",
+        ],
+        answer: [0],
+        why: "Copilot Analytics spans the admin center reports, the Copilot Dashboard and Agent Dashboard in Viva Insights, ready-to-use reports and advanced Power BI reporting; the Copilot Dashboard is where impact and sentiment metrics live, and the AI Administrator role manages Copilot reporting access. Secure Score is security posture, DSPM for AI is data risk, and Teams analytics covers Teams usage only.",
+    },
+    {
+        id: 2113,
+        topic: "Copilot & agent admin tasks",
+        tag: "Credits report",
+        format: "multiple_choice",
+        q: "Finance wants to see how many Copilot Credits were consumed by each user, agent and billing policy over the last 30 days. Where is this available?",
+        options: [
+            "Microsoft 365 admin center > Reports > Usage > Microsoft 365 Copilot > Credits",
+            "Microsoft Purview portal > Activity explorer, filtered on Copilot activities",
+            "Microsoft Entra admin center > Billing > Licenses > Copilot consumption",
+            "SharePoint admin center > Reports > Data access governance > Agents",
+        ],
+        answer: [0],
+        why: "The Credits report breaks consumption down by user, agent, billing policy and agent-user pair, with daily and cumulative views, and alerts when a user exceeds a high credit threshold. Activity explorer covers label and DLP events, Entra licensing shows license counts, and data access governance reports cover SharePoint sharing.",
+    },
+    {
+        id: 2114,
+        topic: "Copilot & agent admin tasks",
+        tag: "Prompt management",
+        format: "multiple_choice",
+        q: "A finance analyst runs the same Copilot prompt every Monday at 08:00 to produce a weekly KPI summary and wants it to run automatically. Which prompt management capability is this?",
+        options: [
+            "Saving the prompt",
+            "Sharing the prompt with the team",
+            "Scheduling the prompt",
+            "Deleting and recreating the prompt each week",
+        ],
+        answer: [2],
+        why: "Copilot prompt management covers saving prompts for reuse, sharing them with colleagues or groups, scheduling them to run at defined times (with outputs delivered to the user), and deleting stale prompts. Scheduling is the automation piece. Saved prompts still need manual invocation, and sharing is about distribution.",
+    },
+    {
+        id: 2115,
+        topic: "Copilot & agent admin tasks",
+        tag: "Agent access",
+        format: "multiple_choice",
+        q: "Only the Finance department should be able to use agents in Microsoft 365 Copilot during a pilot; everyone else should have no agent access. Where is this configured?",
+        options: [
+            "Microsoft Purview portal > Data Loss Prevention, with a policy that blocks agents for non-Finance users",
+            "Microsoft 365 admin center > Agents > Settings > User access, choosing Specific users/groups (Finance)",
+            "Teams admin center > Meeting policies, with a custom policy that enables agents for the Finance group",
+            "Microsoft Entra admin center > Administrative units, with an agent unit containing the Finance users",
+        ],
+        answer: [1],
+        why: "The Agents node in the Microsoft 365 admin center contains Settings with User access (All users, No users, Specific users/groups), allowed agent types, sharing controls, security templates and management rules. Purview DLP, Teams meeting policies and administrative units do not control agent availability.",
+    },
+    {
+        id: 2116,
+        topic: "Copilot & agent admin tasks",
+        tag: "Creating agents",
+        format: "multiple_choice",
+        q: "A business user creates an agent in Agent Builder. On which tab are knowledge sources such as SharePoint sites and uploaded files added, and what is the difference from the other tab?",
+        options: [
+            "The Describe tab, which is the only place to add knowledge; the Configure tab just previews the result",
+            "The Configure tab, where knowledge, capabilities and starter prompts are set; the Describe tab uses natural language and stays in sync",
+            "The Publish tab in the Power Platform admin center, where knowledge sources are approved and attached",
+            "Knowledge sources can only be added in SharePoint; Agent Builder agents ground on the semantic index alone and cannot be scoped",
+        ],
+        answer: [1],
+        why: "Agent Builder offers a conversational Describe tab and a structured Configure tab that are kept in sync; knowledge (SharePoint, OneDrive, embedded files, websites, Teams chats, connectors), capabilities such as code interpreter and image generation, and starter prompts are managed on Configure. Publishing to the organization then goes through the admin approval process.",
+    },
+    {
+        id: 2117,
+        topic: "Copilot & agent admin tasks",
+        tag: "Approval process",
+        format: "multiple_choice",
+        q: "A maker submits a Copilot Studio agent for organization-wide availability in Microsoft 365 Copilot. Where does the request appear for approval, and which roles can approve it?",
+        options: [
+            "In the Power Platform admin center only, where any Environment Admin can approve it for the whole tenant without further review",
+            "In the Microsoft 365 admin center under Agents > All agents > Requests, approved by an AI Administrator or Global Administrator",
+            "In the Teams admin center under Manage apps, approved by a Teams Administrator for all channels",
+            "In the Microsoft Purview portal, approved by a Compliance Administrator after a DSPM for AI review",
+        ],
+        answer: [1],
+        why: "Agent publication to the tenant catalog is governed by the Requests queue in the Microsoft 365 admin center, with states such as Pending review, Pending update and Pending activate; only the AI Administrator and Global Administrator roles can approve or reject. Copilot Studio agents are additionally governed by Power Platform admin center policies (DLP, sharing limits) but still need Microsoft 365 admin center approval to reach the Copilot or Teams catalog.",
+    },
+    {
+        id: 2118,
+        topic: "Copilot & agent admin tasks",
+        tag: "Block vs remove",
+        format: "multiple_choice",
+        q: "An agent must be made unusable immediately for everyone in the tenant, including the users who have already installed it. Which action should the admin take in Agents > All agents, and how does it differ from the alternative?",
+        options: [
+            "Uninstall/Remove, which prevents all access permanently because the agent cannot be reacquired",
+            "Block, which stops all access and removes the agent from existing installs; Remove only takes it out of the inventory",
+            "Delete the maker's account, which removes every agent the maker created from the tenant",
+            "Change the agent's availability to 'Specific users' with an empty list, which hides it from everyone without an audit entry",
+        ],
+        answer: [1],
+        why: "Block is the enforcement action that stops all use and strips it from existing installs. Uninstall or Remove only removes the agent from the inventory (for first-party or external agents) and it can be added back from the store. Note the scope nuance: blocking Agent Builder or Copilot Studio agents affects Copilot plus Outlook and Teams, while blocking SharePoint or Foundry agents affects Copilot Chat only.",
+    },
+    {
+        id: 2119,
+        topic: "Copilot & agent admin tasks",
+        tag: "Monitoring across admin centers",
+        format: "multiple_choice",
+        q: "Which statement correctly describes the division of monitoring between the Microsoft 365 admin center and the Power Platform admin center for agents?",
+        options: [
+            "All agent monitoring happens in the Power Platform admin center, which is the only place with agent usage reports and the agent registry",
+            "Tenant-wide agent usage and the Agents overview live in the Microsoft 365 admin center; the Power Platform admin center adds performance detail for Copilot Studio agents",
+            "The Microsoft Purview portal is the only place to monitor agents, through the DSPM for AI apps and agents view",
+            "Agents cannot be monitored directly; only overall Copilot usage is reported in the Microsoft 365 admin center and Viva Insights",
+        ],
+        answer: [1],
+        why: "Agents built with Agent Builder and SharePoint are managed and monitored primarily in the Microsoft 365 admin center; Copilot Studio agents are monitored and governed in the Power Platform admin center (Copilot hub, Power Platform inventory, environment policies) while still appearing in the Microsoft 365 admin center registry and reports. Purview provides audit and compliance monitoring, not operational agent metrics.",
+    },
+    {
+        id: 2120,
+        topic: "Copilot & agent admin tasks",
+        tag: "Agent lifecycle",
+        format: "multiple_choice",
+        q: "An approved agent receives an update that now requests full CRM access instead of read-only contact data. What should the administrator do, and what do users see meanwhile?",
+        options: [
+            "Approve the update automatically, because the agent already passed review when it was first published",
+            "Review the Pending update request and its new permissions before approving; users keep the previous version until then",
+            "Block the agent permanently, because any request for expanded permissions indicates that the maker's account is compromised",
+            "Nothing; updates to already-approved agents bypass the approval queue and roll out to users immediately",
+        ],
+        answer: [1],
+        why: "Agent lifecycle management treats updates as new approval events: a Pending update request shows the changed capabilities, data sources and permissions, the admin decides whether the expanded access is acceptable, and users keep the prior version until approval. Automatic approval or ignoring updates would let permission creep bypass governance, and a permanent block is disproportionate.",
+    },
+    {
+        id: 2121,
+        topic: "Copilot & agent admin tasks",
+        tag: "Consumer licensing",
+        format: "yes_no",
+        q: "True or False: A user who only interacts with a published Copilot Studio agent in Microsoft Teams must hold a Copilot Studio license and an Environment Maker role.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. End users of a published agent need only access to the published endpoint (Teams, SharePoint, Copilot); Copilot Studio licensing and Power Platform environment roles such as Environment Maker or Environment Admin apply to people who create, edit or publish agents. Consumption may still be metered in Copilot Credits depending on the agent's grounding and the user's licenses.",
+    },
+    {
+        id: 2122,
+        topic: "Copilot & agent admin tasks",
+        tag: "Environment roles",
+        format: "multiple_choice",
+        q: "An HR power user has a Copilot Studio license but cannot create or edit agents in the HR Power Platform environment. What is missing?",
+        options: [
+            "A Microsoft 365 Copilot license, which is required in addition to the Copilot Studio license",
+            "An environment security role such as Environment Maker, assigned in the Power Platform admin center",
+            "The AI Administrator role in Microsoft Entra ID, which grants maker rights in every environment",
+            "A SharePoint site collection administrator permission on the site that stores the agent files",
+        ],
+        answer: [1],
+        why: "Building agents in Copilot Studio requires both the license and an environment role: Environment Maker allows creating and editing agents, Environment Admin gives full control, and Basic User only allows interacting with shared agents. Roles can be assigned through Entra security groups for scale. The AI Administrator role governs tenant-level Copilot administration, not environment maker rights.",
+    },
+    {
+        id: 2123,
+        topic: "Copilot & agent admin tasks",
+        tag: "Agent actions",
+        format: "multi_select",
+        q: "In the Microsoft 365 admin center, an administrator selects an agent under Agents > All agents. Which THREE of the following are actions available for the agent? (Select three.)",
+        options: [
+            "Install the agent for specific users or the entire organization",
+            "Block the agent for the whole tenant",
+            "Pin the agent for end users (up to three admin pins)",
+            "Apply a sensitivity label to the agent",
+            "Reset the password of the agent's maker",
+        ],
+        answer: [0, 1, 2],
+        why: "The agent details pane offers Install, Uninstall, Block, Update in store and Pin for users; admins can pin at most three agents, and a pinned agent must be deployed and not blocked. Sensitivity labels apply to content, not to agents, and password resets are user administration in Entra, not an agent action. Multi-select items like this require every correct option and no incorrect one.",
+    },
+    {
+        id: 2125,
+        topic: "Copilot & agent admin tasks",
+        tag: "Request states",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn the Microsoft 365 admin center Requests queue, an agent request in the [answer] state means an updated version of an already published agent is waiting for approval, and users keep the previous version until an admin approves it.",
+        options: [
+            "Pending review",
+            "Pending update",
+            "Pending activate",
+            "Allow user to install",
+        ],
+        answer: [1],
+        why: "Pending review is a brand-new agent submitted for publication (Publish to store). Pending update is a new version of an agent that is already in the store (Update in store), and users continue on the prior version until approval. Pending activate is a request to activate a template agent so that agent instances can be created. 'Allow user to install' appears when a user requests a blocked Microsoft-built agent, which the admin must first unblock.",
+    },
+    {
+        id: 2126,
+        topic: "Copilot & agent admin tasks",
+        tag: "License scope",
+        format: "yes_no",
+        q: "True or False: A Microsoft 365 Copilot license can be assigned to a guest (B2B) user from a partner organization so that the guest can use Copilot in your tenant.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Copilot licenses cannot be assigned to cross-tenant or guest users; guests would need a Copilot license from their own organization, and even then Copilot grounds on their home tenant. Licenses are assigned to member users directly, through group-based licensing, or in bulk with PowerShell.",
+    },
 ];

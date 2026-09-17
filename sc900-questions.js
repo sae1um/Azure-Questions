@@ -1,2187 +1,1873 @@
 window.__SC900_QUESTIONS__ = [
- {
-  "id": 1001,
-  "topic": "Security & identity concepts",
-  "tag": "Shared responsibility",
-  "format": "multiple_choice",
-  "q": "Contoso migrates an on-premises line-of-business app to Azure. The web tier moves to Azure App Service (PaaS) and the database to Azure SQL Database (PaaS). The CIO asks which responsibilities Contoso keeps REGARDLESS of the cloud service model it chooses. Which answer is correct?",
-  "options": [
-   "Physical datacenter, physical network and physical hosts",
-   "Operating system patching and network controls",
-   "Information and data, devices (endpoints), and accounts and identities",
-   "The application code and the identity and directory infrastructure"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "In the shared responsibility model some responsibilities always stay with the customer: the data, the endpoints, and the accounts and identities. Physical infrastructure is always Microsoft's in the cloud. OS patching and network controls shift to the provider for PaaS and SaaS. Application and identity infrastructure are shared or provider-managed in PaaS. The trap is picking something that moves with the model instead of the three items that never move."
- },
- {
-  "id": 1002,
-  "topic": "Security & identity concepts",
-  "tag": "Defense in depth",
-  "format": "multiple_choice",
-  "q": "A security architect maps four existing controls to the defense-in-depth layers: (1) MFA on every sign-in, (2) DDoS mitigation in front of the public entry point, (3) network security groups limiting east-west traffic between subnets, (4) encryption of storage volumes. Which control belongs to the PERIMETER layer?",
-  "options": [
-   "The DDoS mitigation in front of the public entry point",
-   "The MFA requirement on every sign-in",
-   "The network security groups limiting east-west traffic",
-   "The encryption of storage volumes"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Defense in depth uses layers: physical, identity and access, perimeter, network, compute, application, data. The perimeter layer is about protecting the edge from large-scale network attacks, which is exactly DDoS protection. MFA belongs to identity and access, NSG segmentation to the network layer, and volume encryption to the data layer. The exam likes to test whether you can place a concrete control on the right layer rather than recite the list."
- },
- {
-  "id": 1003,
-  "topic": "Security & identity concepts",
-  "tag": "Zero Trust principles",
-  "format": "multiple_choice",
-  "q": "A proposal says: once a laptop passes a compliance check at onboarding, it is trusted for all subsequent access requests for twelve months without re-evaluation. Which Zero Trust guiding principle does this proposal MOST directly violate?",
-  "options": [
-   "Assume breach",
-   "Use least privilege access",
-   "Verify explicitly",
-   "Defense in depth"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "'Verify explicitly' means every access request is authenticated and authorized using all available signals at the time of the request, not a one-time check that grants long-lived trust. Least privilege is about how much access is granted, and assume breach is about designing as if attackers are already inside. Defense in depth is a related strategy but not one of the three Zero Trust guiding principles, so it is a deliberate distractor."
- },
- {
-  "id": 1004,
-  "topic": "Security & identity concepts",
-  "tag": "Zero Trust pillars",
-  "format": "multiple_choice",
-  "q": "In Microsoft's Zero Trust model, micro-segmentation and real-time threat protection for traffic flows are controls that primarily belong to which of the six foundational pillars?",
-  "options": [
-   "Infrastructure",
-   "Networks",
-   "Applications",
-   "Data"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The six pillars are identities, devices (endpoints), applications, data, infrastructure and networks. Segmentation, encryption in transit and real-time threat protection of traffic are the network pillar's job. Infrastructure covers servers, VMs and containers, applications covers in-app permissions and shadow IT discovery, and data covers classification, labeling and encryption of the data itself. A common error is to file segmentation under infrastructure."
- },
- {
-  "id": 1005,
-  "topic": "Security & identity concepts",
-  "tag": "Hashing vs encryption",
-  "format": "multiple_choice",
-  "q": "A developer must store user passwords so the system can check a supplied password but can NEVER recover the original value, even by an administrator with full database access. Which technique should be used?",
-  "options": [
-   "Symmetric encryption with a key stored in a key vault",
-   "Asymmetric encryption using the server's public key",
-   "Salted hashing with a strong one-way algorithm",
-   "A digital signature computed over the password"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Hashing is one-way: the same input always gives the same fixed-length output, and the original cannot be recovered. Adding a salt defeats precomputed rainbow-table attacks. Both symmetric and asymmetric encryption are reversible by design, which is exactly the property you do not want for stored passwords. A digital signature proves origin and integrity of data; it is not a way to store secrets."
- },
- {
-  "id": 1006,
-  "topic": "Security & identity concepts",
-  "tag": "Asymmetric encryption",
-  "format": "multiple_choice",
-  "q": "A partner must send you a confidential file that only you can decrypt. You have never exchanged a secret with the partner and you do not want to. Using asymmetric encryption, which keys are used?",
-  "options": [
-   "The partner encrypts with your private key; you decrypt with your public key",
-   "The partner encrypts with your public key; you decrypt with your private key",
-   "The partner encrypts with their private key; you decrypt with their public key",
-   "Both parties derive the same symmetric key from a shared passphrase"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "In asymmetric encryption anything encrypted with a public key can be decrypted only with the matching private key. So the sender uses the recipient's freely shareable public key and only the recipient's private key can open it, which is why no prior secret exchange is needed. Encrypting with a private key and decrypting with the public key is the pattern for digital signatures (proving origin), not confidentiality. A shared passphrase is symmetric encryption and needs a secret exchanged in advance."
- },
- {
-  "id": 1007,
-  "topic": "Security & identity concepts",
-  "tag": "Encryption states",
-  "format": "yes_no",
-  "q": "True or False: Encryption in transit (for example, TLS on an HTTPS connection) also protects data stored on a server's disk if that physical disk is stolen.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Encryption in transit protects data only while it moves across a network. Data sitting on a disk is protected by encryption at rest (for example disk or database encryption). The three states are distinct: at rest, in transit, and in use, and each needs its own control. Mixing them up is a frequent exam error."
- },
- {
-  "id": 1008,
-  "topic": "Security & identity concepts",
-  "tag": "Digital signatures",
-  "format": "multiple_choice",
-  "q": "A firmware vendor digitally signs every update. Your devices must confirm each update really came from the vendor and was not modified. What do the devices need in order to verify the signature?",
-  "options": [
-   "The vendor's private key",
-   "The vendor's public key",
-   "A symmetric key shared with the vendor",
-   "A hash of the device's own firmware"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "A signature is created with the signer's private key and verified with the signer's public key. The verifier recomputes the hash of the content and checks it against the decrypted signature, proving both authenticity (only the private key holder could sign) and integrity (any change alters the hash). The private key must never leave the vendor, so option A would be a serious security failure. No shared symmetric key is involved."
- },
- {
-  "id": 1009,
-  "topic": "Security & identity concepts",
-  "tag": "Compliance concepts",
-  "format": "multiple_choice",
-  "q": "A contract clause requires that all customer records be stored and processed only in datacenters physically located within the European Union. Which compliance concept does this clause address?",
-  "options": [
-   "Data residency",
-   "Data sovereignty",
-   "Data privacy",
-   "Data minimization"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Data residency concerns the physical or geographic location where data can be stored and processed. Data sovereignty is the related but different idea that data is subject to the laws of the country in which it is collected, held or processed. Data privacy is about notice, transparency and consent regarding personal data. The exam separates residency (where it may sit) from sovereignty (whose laws apply), so read the clause carefully."
- },
- {
-  "id": 1010,
-  "topic": "Security & identity concepts",
-  "tag": "GRC",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn a Governance, Risk and Compliance (GRC) framework, [answer] is the process of identifying, assessing and responding to threats or events that can affect an organization's objectives.",
-  "options": [
-   "governance",
-   "risk management",
-   "compliance",
-   "audit and assurance"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Risk management identifies, assesses and treats threats to objectives. Governance is the system of rules, practices and processes an organization uses to direct and control its activities. Compliance is adherence to laws, regulations and standards, and auditing is the independent verification of that adherence. Sentence-completion items like this appear on the real exam, so learn the definitions precisely."
- },
- {
-  "id": 1011,
-  "topic": "Security & identity concepts",
-  "tag": "Identity as perimeter",
-  "format": "multiple_choice",
-  "q": "Employees now work from personal devices on home networks against SaaS applications the company does not host. Which statement BEST explains why identity is described as the primary security perimeter in this environment?",
-  "options": [
-   "Network firewalls and perimeter controls become unnecessary once every identity is protected with MFA",
-   "Users, devices, apps and data now sit outside the network edge, so verified identity signals must drive access decisions",
-   "Identities are cheaper to manage centrally than the network appliances that used to define the corporate perimeter",
-   "Passwords and identity-based controls are inherently stronger than any control that operates at the network layer"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "When users, apps and data live outside the corporate network, the network edge cannot be the control point, so the identity (user, device, workload) and the signals around it become what you verify and enforce policy on. Network controls still matter as a layer; identity does not replace them. Cost and password strength are irrelevant to the concept and are there to distract."
- },
- {
-  "id": 1012,
-  "topic": "Security & identity concepts",
-  "tag": "Tokens",
-  "format": "multiple_choice",
-  "q": "In the OpenID Connect and OAuth 2.0 flows used by Microsoft Entra ID, which token proves WHO the user is (authentication), and which token is presented to an API to prove WHAT the caller is allowed to access (authorization)?",
-  "options": [
-   "Access token proves identity; ID token is presented to the API",
-   "ID token proves identity; access token is presented to the API",
-   "Refresh token proves identity; ID token is presented to the API",
-   "SAML assertion proves identity; refresh token is presented to the API"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Authentication information is carried in the ID token (OpenID Connect), while authorization is expressed in the access token that the client sends to the resource API. Refresh tokens only obtain new tokens and prove nothing to an API. A SAML assertion is a federation artifact used by SAML-based apps, not part of the OIDC/OAuth token pair. Knowing that authentication happens first and yields an ID token, then authorization uses an access token, is the point being tested."
- },
- {
-  "id": 1013,
-  "topic": "Security & identity concepts",
-  "tag": "Federation",
-  "format": "multiple_choice",
-  "q": "Fabrikam users must access a Contoso application by signing in with the credentials they already have at Fabrikam, and Contoso does not want to create or synchronize Fabrikam accounts into its own directory. Which concept enables this?",
-  "options": [
-   "Directory synchronization, so that Fabrikam's user objects are replicated into Contoso's directory every hour",
-   "Federation: a trust relationship in which Contoso accepts tokens issued by Fabrikam's identity provider",
-   "Password hash synchronization of Fabrikam passwords into Contoso's tenant through Microsoft Entra Connect",
-   "A shared administrator account that Fabrikam users borrow to authenticate to the Contoso application"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Federation establishes trust between identity providers so that one organization accepts authentication performed by the other, typically via SAML, WS-Fed or OpenID Connect tokens. No accounts need to be synchronized or duplicated. Directory sync and password hash sync are hybrid identity techniques inside one organization, not a trust between two. Shared accounts break accountability and are not a federation concept."
- },
- {
-  "id": 1014,
-  "topic": "Security & identity concepts",
-  "tag": "AD DS vs Entra ID",
-  "format": "multiple_choice",
-  "q": "Which statement correctly contrasts on-premises Active Directory Domain Services (AD DS) with Microsoft Entra ID?",
-  "options": [
-   "AD DS natively uses SAML and OpenID Connect for on-premises apps, while Entra ID relies on Kerberos and LDAP to authenticate cloud applications",
-   "AD DS uses organizational units and Group Policy with Kerberos and LDAP; Entra ID is a cloud service built on SAML, OAuth 2.0 and OpenID Connect with no OUs or GPOs",
-   "Both are cloud services; AD DS is simply the older name for Entra ID, adopted when Azure Active Directory was renamed to Microsoft Entra ID",
-   "Entra ID can only manage identities that were first created in AD DS and then synchronized, so cloud-only accounts are not possible"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "AD DS is the on-premises directory built around Kerberos, NTLM and LDAP with organizational units and Group Policy. Entra ID is a cloud-based identity and access management service that speaks modern web protocols (SAML, WS-Fed, OAuth 2.0, OpenID Connect) and does not use OUs or GPOs. Entra ID is not a rename of AD DS (the rename was from Azure Active Directory), and cloud-only identities can be created directly in Entra ID without AD DS."
- },
- {
-  "id": 1015,
-  "topic": "Security & identity concepts",
-  "tag": "Federation",
-  "format": "yes_no",
-  "q": "True or False: Federation between two organizations requires both organizations to synchronize their user accounts into a single shared directory.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Federation is precisely the alternative to synchronization: each organization keeps its own directory and identity provider, and a trust relationship lets one side accept the other's authentication tokens. Synchronization (for example with Microsoft Entra Connect) is a hybrid identity technique within one organization between its on-premises AD DS and its own Entra tenant."
- },
- {
-  "id": 1016,
-  "topic": "Security & identity concepts",
-  "tag": "Four pillars of identity",
-  "format": "multiple_choice",
-  "q": "Your compliance team needs regular reports showing when each user signed in, which systems they accessed and what authentication type was used. Which of the four pillars of an identity infrastructure does this requirement map to?",
-  "options": [
-   "Administration",
-   "Authentication",
-   "Authorization",
-   "Auditing"
-  ],
-  "answer": [
-   3
-  ],
-  "why": "The four pillars are administration (creating and managing identities), authentication (proving who you are), authorization (what you may access) and auditing (tracking and reporting who did what, when). Reporting on sign-in times and systems accessed is auditing. Candidates often forget the fourth pillar because the first three get most of the attention."
- },
- {
-  "id": 1017,
-  "topic": "Entra — identities & authentication",
-  "tag": "Managed identities",
-  "format": "multiple_choice",
-  "q": "A nightly job on an Azure virtual machine must read secrets from Azure Key Vault. The security team forbids storing ANY credential (password, secret or certificate) in the job's code or configuration. Which identity type should the job use?",
-  "options": [
-   "A dedicated user account with a long, complex password",
-   "A service principal that authenticates with a client secret",
-   "A managed identity assigned to the virtual machine",
-   "A guest (B2B) account invited from the vendor's tenant"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "A managed identity is a special service principal whose credentials are managed and rotated by the platform; the code never sees or stores a secret. A service principal with a client secret still requires that secret to be stored somewhere, which violates the requirement. User and guest accounts are human identity types and are the wrong tool for a workload. Managed identities are the exam's canonical answer for 'no credentials in code'."
- },
- {
-  "id": 1018,
-  "topic": "Entra — identities & authentication",
-  "tag": "Applications & service principals",
-  "format": "multiple_choice",
-  "q": "A developer registers a new application in Microsoft Entra ID. Which object represents the app's instance in your tenant, is what users and groups are assigned to, and is what receives permission grants and role assignments?",
-  "options": [
-   "The application object created by the registration",
-   "The service principal (shown under Enterprise applications)",
-   "A system-assigned managed identity",
-   "The tenant's default directory object"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Registering an app creates a global application object (the template) and, in the home tenant, a service principal, which is the local instance that holds assignments, permission consents and sign-in policy. Enterprise applications in the portal is the service principal view. A managed identity is a special kind of service principal used by Azure resources, not what a registration produces. The application object versus service principal distinction is a classic exam item."
- },
- {
-  "id": 1019,
-  "topic": "Entra — identities & authentication",
-  "tag": "Hybrid identity",
-  "format": "multiple_choice",
-  "q": "An organization synchronizes its on-premises AD DS to Microsoft Entra ID. Security policy states that user passwords, even as hashes, must never be stored in the cloud, and the company wants to avoid deploying and maintaining AD FS. Which authentication option meets these requirements?",
-  "options": [
-   "Password hash synchronization",
-   "Pass-through authentication",
-   "Federation with Active Directory Federation Services",
-   "Microsoft Entra Domain Services"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Pass-through authentication validates the password against on-premises AD DS in real time through lightweight agents, so no password or hash is stored in Entra ID and no AD FS farm is needed. Password hash synchronization stores a hash of the hash in the cloud, which the policy forbids. Federation with AD FS keeps passwords on-premises but requires the AD FS infrastructure the company wants to avoid. Entra Domain Services is a managed domain for legacy apps, not a sign-in method for the cloud."
- },
- {
-  "id": 1020,
-  "topic": "Entra — identities & authentication",
-  "tag": "Hybrid sync options",
-  "format": "multiple_choice",
-  "q": "A company acquires a subsidiary with a disconnected AD DS forest and wants to provision its users into the single Entra tenant using lightweight agents that are configured from the cloud, without deploying a full synchronization server. Which option fits?",
-  "options": [
-   "Microsoft Entra Connect Sync",
-   "Microsoft Entra Cloud Sync",
-   "Active Directory Federation Services",
-   "Microsoft Entra Verified ID"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Entra Cloud Sync uses lightweight provisioning agents on-premises with configuration held in the cloud, and it supports disconnected forests, which makes it the fit for mergers and acquisitions. Entra Connect Sync is the traditional on-premises server with the full feature set (device writeback, more complex topologies). AD FS is a federation service, not a synchronization tool. Verified ID issues verifiable credentials and is unrelated to directory sync."
- },
- {
-  "id": 1021,
-  "topic": "Entra — identities & authentication",
-  "tag": "External identities",
-  "format": "multiple_choice",
-  "q": "Partner engineers from another Microsoft Entra organization must collaborate in Teams shared channels in your tenant. Your security team does not want any guest user objects created in your directory. Which External ID capability meets this?",
-  "options": [
-   "B2B collaboration",
-   "B2B direct connect",
-   "External ID for customers (CIAM) in an external tenant",
-   "Microsoft Entra Domain Services"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "B2B direct connect establishes a mutual trust between two Entra organizations so external users can access Teams shared channels with their home identity and NO guest object is created in your directory. B2B collaboration is the invitation model that does create a guest user object. External ID for customers is the CIAM solution for consumer or business-customer apps in a separate external tenant. Domain Services is a managed AD domain, unrelated to collaboration."
- },
- {
-  "id": 1022,
-  "topic": "Entra — identities & authentication",
-  "tag": "External ID for customers",
-  "format": "multiple_choice",
-  "q": "A retailer builds a consumer-facing mobile app. Shoppers should sign up with an email address or a Google account, see the retailer's branding, and be kept completely separate from the retailer's employees and internal apps. Where should these customer identities live?",
-  "options": [
-   "As guest users invited into the workforce tenant through B2B collaboration, with one invitation sent per shopper",
-   "In a separate Microsoft Entra tenant in the external configuration, using External ID for customers",
-   "In the on-premises AD DS forest, synchronized into the workforce tenant with Microsoft Entra Connect",
-   "As service principals in the workforce tenant, with one application registration created per customer"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "External ID for customers (customer identity and access management) uses a separate tenant in the external configuration, with self-service sign-up flows, social identity providers such as Google, and custom branding, keeping consumers isolated from the workforce tenant. B2B collaboration is for business partners who need access to your organizational resources. AD DS and service principals are wrong identity types for consumers."
- },
- {
-  "id": 1023,
-  "topic": "Entra — identities & authentication",
-  "tag": "Device identities",
-  "format": "multi_select",
-  "q": "Which TWO statements about device identities in Microsoft Entra ID are correct? (Select two.)",
-  "options": [
-   "Microsoft Entra joined devices are typically organization-owned and users sign in with their work or school account",
-   "Microsoft Entra registered devices are typically personally owned (BYOD) devices that are registered rather than joined",
-   "Microsoft Entra hybrid joined devices are joined to Entra ID only and have no relationship with on-premises AD DS",
-   "Device identities cannot be used as a signal in Conditional Access policies",
-   "Registering a device in Entra ID requires a Microsoft Entra ID P2 license"
-  ],
-  "answer": [
-   0,
-   1
-  ],
-  "why": "Entra joined devices are org-owned and signed into with an organizational account; Entra registered devices support the bring-your-own-device scenario. Hybrid joined devices are joined to BOTH on-premises AD DS and Entra ID, so the third statement is wrong. Device state and compliance are core Conditional Access signals, and device registration is a free capability, so the last two statements are also false."
- },
- {
-  "id": 1024,
-  "topic": "Entra — identities & authentication",
-  "tag": "Agent identities",
-  "format": "multiple_choice",
-  "q": "An organization deploys forty instances of a 'Sales Assistant' AI agent from one publisher, each acting for a different sales region. Identity admins want to apply ONE Conditional Access policy to all forty and be able to disable all of them at once. Which Microsoft Entra Agent ID construct makes this possible?",
-  "options": [
-   "A security group that contains the forty service principals as members",
-   "An agent identity blueprint from which all forty agent identities are created",
-   "A single managed identity that all forty instances share for authentication",
-   "An administrative unit that contains the forty agents and scopes the policy"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "In Microsoft Entra Agent ID every agent identity is created from a reusable agent identity blueprint that records the kind of agent, its publisher, roles and permissions. Admins can target policies such as Conditional Access at the blueprint, disable the blueprint to stop all its agents from authenticating, or revoke a permission for all of them at once. A shared managed identity would destroy per-agent accountability, and groups or administrative units do not provide the credential and permission inheritance the blueprint gives."
- },
- {
-  "id": 1025,
-  "topic": "Entra — identities & authentication",
-  "tag": "Agent identities",
-  "format": "yes_no",
-  "q": "True or False: In Microsoft Entra Agent ID, each agent identity stores its own client secret or certificate, which the AI agent uses to authenticate.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Agent identities have no credentials of their own. The credentials (federated identity credentials, certificates or client secrets) are configured on the agent identity blueprint, which acquires tokens on behalf of the agent identities created from it. This is why administrators can secure large fleets of agents consistently: the credential and permission configuration lives in one place."
- },
- {
-  "id": 1026,
-  "topic": "Entra — identities & authentication",
-  "tag": "Phishing-resistant MFA",
-  "format": "multiple_choice",
-  "q": "A regulator requires that all privileged administrators use a phishing-resistant authentication method. Which of the following methods satisfies this requirement?",
-  "options": [
-   "A one-time code sent by SMS",
-   "Microsoft Authenticator push notification with number matching",
-   "A FIDO2 security key or passkey",
-   "An automated voice call with a verification prompt"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "FIDO2 security keys and passkeys (including passkeys in Microsoft Authenticator), Windows Hello for Business and certificate-based authentication are the phishing-resistant methods because the credential is cryptographically bound to the site and cannot be relayed to a fake sign-in page. SMS and voice can be intercepted or socially engineered. Number matching hardens Authenticator push notifications against MFA fatigue but a classic push approval is still not classed as phishing-resistant."
- },
- {
-  "id": 1027,
-  "topic": "Entra — identities & authentication",
-  "tag": "Temporary Access Pass",
-  "format": "multiple_choice",
-  "q": "A new employee starts on Monday with no registered authentication methods and no company phone yet. The organization is passwordless-first and wants the employee to register a passkey on day one without ever receiving a password. What should the help desk issue?",
-  "options": [
-   "A Temporary Access Pass",
-   "A legacy app password",
-   "A self-service password reset link",
-   "A security defaults exemption"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "A Temporary Access Pass is a time-limited passcode issued by an admin that lets a user sign in and register strong methods such as passkeys or Microsoft Authenticator without a password. App passwords exist only for legacy clients that cannot do MFA. SSPR resets a password, which contradicts the passwordless goal. Security defaults cannot be exempted per user, and doing so would weaken security rather than onboard the user."
- },
- {
-  "id": 1028,
-  "topic": "Entra — identities & authentication",
-  "tag": "Windows Hello for Business",
-  "format": "multiple_choice",
-  "q": "Which statement about Windows Hello for Business is correct?",
-  "options": [
-   "The user's biometric template is uploaded to Microsoft Entra ID so it can authenticate the user on any device",
-   "A PIN or biometric gesture unlocks a private key bound to that specific device; the biometric never leaves the device",
-   "It is a form of SMS-based multifactor authentication that sends a code to the phone number registered in Windows",
-   "The PIN is synchronized to every device the user owns through Microsoft Entra ID, so it only has to be set once"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Windows Hello for Business uses asymmetric key pairs: the private key is protected by the device (ideally a TPM) and released by a local gesture, either a PIN or a biometric. The biometric data and the PIN are device-local and are not synced or stored in Entra ID, which is why the same user must enrol on each device. It is a passwordless, phishing-resistant method, not SMS."
- },
- {
-  "id": 1029,
-  "topic": "Entra — identities & authentication",
-  "tag": "MFA factors",
-  "format": "multiple_choice",
-  "q": "Which of the following combinations does NOT constitute true multifactor authentication?",
-  "options": [
-   "A password plus a Microsoft Authenticator push approval",
-   "A fingerprint plus a PIN on a Windows Hello for Business device",
-   "A password plus the answers to two security questions",
-   "A FIDO2 security key plus its PIN"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "MFA needs at least two DIFFERENT factor categories: something you know, something you have, something you are. A password and security questions are both 'something you know', so the combination is single-factor even though there are two steps. Password plus Authenticator is know plus have; fingerprint plus PIN is are plus know; FIDO2 key plus PIN is have plus know."
- },
- {
-  "id": 1030,
-  "topic": "Entra — identities & authentication",
-  "tag": "SSPR & writeback",
-  "format": "multiple_choice",
-  "q": "Users synchronized from on-premises AD DS reset their passwords through Microsoft Entra self-service password reset, but the new password does not work when they sign in to on-premises resources. What is missing?",
-  "options": [
-   "Password writeback via Microsoft Entra Connect, a Microsoft Entra ID P1 (or equivalent) capability",
-   "A Conditional Access policy that targets the on-premises applications and requires a password change",
-   "Microsoft Entra ID Protection, so that the users' elevated user risk is remediated automatically",
-   "A second Microsoft Entra Connect server so that password changes are synchronized with redundancy"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "By default SSPR changes the cloud password only. Password writeback, enabled in Microsoft Entra Connect or Cloud Sync, writes the new password back to on-premises AD DS in real time so both environments stay in sync; it is a P1-tier capability. Conditional Access, ID Protection and a second sync server do not move passwords anywhere. This distinction between cloud-only SSPR and hybrid writeback is routinely tested."
- },
- {
-  "id": 1031,
-  "topic": "Entra — identities & authentication",
-  "tag": "Password protection",
-  "format": "multiple_choice",
-  "q": "The security team wants to prevent users from choosing passwords that contain the company name or its product names, including obvious variants such as 'C0ntoso2026!' and 'Widget@London'. What is the MOST effective configuration?",
-  "options": [
-   "Enforce a stricter password complexity policy through on-premises Group Policy and synchronize it to the cloud",
-   "Add the base terms (Contoso, Widget, London) to the custom banned password list in Entra Password Protection",
-   "Enable smart lockout with a lower lockout threshold so that weak company-themed passwords trigger lockouts",
-   "Force all users to change their password every 30 days so that any weak password is only briefly usable"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Entra Password Protection combines Microsoft's global banned password list (always on) with a custom banned password list of organization-specific base terms. Its algorithm normalizes character substitutions and scores the password, so blocking the base term 'Contoso' also blocks variants like 'C0ntoso2026!'. Complexity rules do not catch company terms, smart lockout addresses brute force attempts rather than weak choices, and frequent forced rotation is no longer recommended."
- },
- {
-  "id": 1032,
-  "topic": "Entra — identities & authentication",
-  "tag": "Smart lockout",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn Microsoft Entra ID, [answer] locks out an attacker who repeatedly guesses a user's password while still allowing the genuine user to sign in from a familiar location.",
-  "options": [
-   "smart lockout",
-   "password writeback",
-   "security defaults",
-   "Privileged Identity Management"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Smart lockout recognizes sign-ins from valid users and treats them differently from attackers or unknown sources, so the real user is far less likely to be locked out during an attack. Password writeback syncs passwords to on-premises AD, security defaults are a set of baseline protections, and PIM governs privileged role activation. This is a definitional sentence-completion item of the kind the exam uses."
- },
- {
-  "id": 1033,
-  "topic": "Entra — identities & authentication",
-  "tag": "Banned password lists",
-  "format": "yes_no",
-  "q": "True or False: A Global Administrator can turn off the Microsoft Entra global banned password list for a tenant that prefers to rely on its own on-premises password policy.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. The global banned password list is built from Microsoft's security telemetry, is applied automatically to every tenant, and cannot be disabled. Organizations can only extend it with a custom banned password list (up to 1,000 base terms, a P1 feature) and optionally extend the checks to on-premises AD DS with the Password Protection agents."
- },
- {
-  "id": 1034,
-  "topic": "Entra — identities & authentication",
-  "tag": "Security defaults",
-  "format": "multiple_choice",
-  "q": "A 40-person company uses Microsoft Entra ID Free. It wants all users to register for MFA, administrators to always use MFA and legacy authentication protocols to be blocked, without building any per-policy configuration. What should it enable?",
-  "options": [
-   "Conditional Access policies",
-   "Security defaults",
-   "Microsoft Entra ID Protection",
-   "Privileged Identity Management"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Security defaults are a free, preconfigured set of protections: MFA registration for everyone, MFA for administrators, MFA for users when needed, blocking legacy authentication and device code flow, and protecting privileged actions such as Azure portal access. Conditional Access gives granular control but needs Entra ID P1 and per-policy design. ID Protection and PIM are P2 features that solve different problems. Note that security defaults and Conditional Access cannot be used together."
- },
- {
-  "id": 1035,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Conditional Access timing",
-  "format": "multiple_choice",
-  "q": "A Conditional Access policy blocks all access from a specific country. An attacker located in that country runs a password-spray attack against your users. A junior admin expects the policy to stop the attack. What is the correct expectation?",
-  "options": [
-   "The policy blocks each attempt before the password is checked, so the password spray is fully stopped at the network edge by Entra ID",
-   "Conditional Access is enforced only after first-factor authentication, so it cannot stop password guessing; smart lockout and Password Protection can",
-   "The policy stops the attack only if the same policy also requires MFA, because block decisions on their own are advisory",
-   "Conditional Access cannot use location as a signal for non-interactive sign-ins, so the country block has no effect on the attack at all"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Conditional Access policies are enforced after first-factor authentication completes; they decide what happens to a successfully authenticated request. They are not a front-line defense against password spray or denial-of-service attempts. Smart lockout, Password Protection and ID Protection detections are the controls for guessing attacks. Location is a valid signal, and MFA is not needed for a block decision, so the other options are wrong."
- },
- {
-  "id": 1036,
-  "topic": "Entra — access, protection & governance",
-  "tag": "CA controls",
-  "format": "multiple_choice",
-  "q": "In a Conditional Access policy, which of the following is a SESSION control rather than a grant control?",
-  "options": [
-   "Require multifactor authentication",
-   "Require the device to be marked as compliant",
-   "Sign-in frequency",
-   "Block access"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Grant controls decide whether access is allowed and what must be satisfied first (MFA, compliant device, hybrid joined device, approved client app, app protection policy, password change, terms of use), and Block is the most restrictive decision. Session controls shape the experience AFTER access is granted: sign-in frequency, persistent browser session, app-enforced restrictions and Conditional Access App Control via Defender for Cloud Apps. Mixing the two categories is a common slip."
- },
- {
-  "id": 1037,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Report-only mode",
-  "format": "multiple_choice",
-  "q": "An admin wants to understand how a new Conditional Access policy would affect real sign-ins for a week before it is enforced, without impacting any user. Which approach is designed for this?",
-  "options": [
-   "Enable the policy but exclude all users from it so that only the sign-in logs are populated",
-   "Create the policy in report-only mode and review the sign-in logs and insights workbook",
-   "Turn on security defaults instead of the policy and read the security defaults report",
-   "Enable the policy and rely on ID Protection to undo any incorrect blocks automatically"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Report-only mode evaluates the policy against every sign-in and records the result (success, failure, user action required) without enforcing it, so the admin can review the impact in the sign-in logs and insights workbook; the What If tool complements this for individual scenarios. Excluding all users produces no data, security defaults are a different, non-granular mechanism, and ID Protection does not roll back Conditional Access decisions."
- },
- {
-  "id": 1038,
-  "topic": "Entra — access, protection & governance",
-  "tag": "CA signals",
-  "format": "multi_select",
-  "q": "Which TWO of the following can Microsoft Entra Conditional Access evaluate as signals when deciding whether to allow, block or challenge an access attempt? (Select two.)",
-  "options": [
-   "Whether the device is marked compliant by Microsoft Intune",
-   "The real-time sign-in risk level calculated by Microsoft Entra ID Protection",
-   "The age of the user's current password",
-   "The sensitivity label applied to the SharePoint site being opened",
-   "The size of the user's mailbox"
-  ],
-  "answer": [
-   0,
-   1
-  ],
-  "why": "Conditional Access signals include user or group membership, IP location, device platform and compliance state, the application (resource) being accessed, and real-time or calculated risk from ID Protection, plus agent identities in newer releases. Password age, content sensitivity labels and mailbox size are not sign-in signals: labels are enforced by Purview, and password policy is handled separately."
- },
- {
-  "id": 1039,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Entra roles vs Azure RBAC",
-  "format": "multiple_choice",
-  "q": "A user holds the Global Administrator role in Microsoft Entra ID but cannot see or manage any virtual machines in the company's Azure subscription. What explains this?",
-  "options": [
-   "Global Administrator is a read-only role for Azure resources, so the VMs become visible only after the user switches to the Contributor role",
-   "Entra roles and Azure RBAC are separate systems; a Global Administrator gets no Azure resource access unless assigned an Azure role or elevating access",
-   "The user must also hold the Exchange Administrator role, which is required to view infrastructure resources in Azure",
-   "Virtual machines are managed only through on-premises AD DS roles that are synchronized to Azure with Entra Connect"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Entra roles (Global Administrator, User Administrator, and about 60 others) govern the directory and Microsoft 365 services, while Azure RBAC roles (Owner, Contributor, Reader and custom roles) govern Azure resources at management group, subscription, resource group or resource scope. The two have separate role stores and decision points. A Global Administrator can temporarily elevate to User Access Administrator at root scope, but that is an explicit action, not a default."
- },
- {
-  "id": 1040,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Least privilege roles",
-  "format": "multiple_choice",
-  "q": "Help desk staff must be able to reset passwords for ordinary users and invalidate their refresh tokens, but must not manage licenses, groups or any administrator accounts. Following least privilege, which Microsoft Entra built-in role should they receive?",
-  "options": [
-   "Global Administrator",
-   "User Administrator",
-   "Helpdesk Administrator",
-   "Security Administrator"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Helpdesk Administrator can reset passwords and invalidate refresh tokens for non-administrators and limited admin roles, which matches the need exactly. User Administrator adds creating users, managing groups and licenses, which exceeds the requirement. Global Administrator is the most privileged role and should be reserved for emergencies, and Security Administrator manages security features, not password resets. Least-privilege role selection is a core exam theme."
- },
- {
-  "id": 1041,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Administrative units",
-  "format": "multiple_choice",
-  "q": "Regional IT staff in Germany must manage only the user accounts of the Germany office, not the whole tenant. Which Microsoft Entra feature lets you scope an administrator role to just those users?",
-  "options": [
-   "A custom role assigned at tenant scope with permissions limited to user management",
-   "An administrative unit for the Germany users, with the role assigned at that unit's scope",
-   "A separate Microsoft Entra tenant for Germany, connected through cross-tenant synchronization",
-   "A dynamic group of the Germany users with the User Administrator role assigned to the group"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Administrative units restrict the scope of a role assignment to a subset of users, groups or devices, so a User Administrator over the Germany unit cannot touch other users. A custom role at tenant scope still applies tenant-wide. A separate tenant fragments identity and licensing unnecessarily. Assigning a role to a group makes the group members administrators of everything; it does not restrict what they administer."
- },
- {
-  "id": 1042,
-  "topic": "Entra — access, protection & governance",
-  "tag": "PIM",
-  "format": "multiple_choice",
-  "q": "Security policy says nobody should hold the Global Administrator role permanently. Admins should request the role when they need it, complete MFA and give a justification, and the role should expire automatically after four hours. Which configuration achieves this?",
-  "options": [
-   "A permanent active assignment combined with a Conditional Access policy that requires MFA on every sign-in",
-   "An eligible PIM assignment whose activation requires MFA and justification, with a four-hour maximum duration",
-   "A quarterly access review of the Global Administrator role with automatic removal of any denied users",
-   "A time-bound active assignment that a script re-creates every four hours during business hours"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "PIM's eligible assignments give just-in-time privilege: the user activates the role when needed, satisfying whatever activation requirements are configured (MFA, justification, approval, ticket), and the activation expires after the configured duration. A permanent active assignment is exactly the standing access the policy forbids. Access reviews recertify who should be eligible but do not remove standing access by themselves, and a scripted active assignment is standing access in disguise."
- },
- {
-  "id": 1043,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Access reviews",
-  "format": "multiple_choice",
-  "q": "Guest users are members of a group that grants access to sensitive project files. The compliance team wants the group owner to recertify every guest quarterly, with guests automatically removed if the owner does not approve them. Which Microsoft Entra ID Governance feature should you use?",
-  "options": [
-   "Entitlement management",
-   "Access reviews",
-   "Privileged Identity Management",
-   "Lifecycle workflows"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Access reviews let designated reviewers such as group owners recertify group memberships, application assignments and role assignments on a schedule, with auto-apply to remove users who are denied or not reviewed. Entitlement management packages resources for request and approval, PIM governs privileged role activation, and lifecycle workflows automate joiner, mover and leaver tasks. Each ID Governance component answers a different question."
- },
- {
-  "id": 1044,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Entitlement management",
-  "format": "multiple_choice",
-  "q": "Contoso wants partner employees to request a bundle consisting of a Teams team, a SharePoint site and a SaaS app from a self-service catalog. Requests need manager approval, access must expire after 90 days, and partners who are not yet in the directory should be invited automatically when approved. Which capability provides this?",
-  "options": [
-   "Access reviews scoped to the partner group",
-   "Access packages in entitlement management",
-   "Dynamic group membership rules for partners",
-   "B2B direct connect with the partner tenant"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Entitlement management bundles groups, Teams, SharePoint sites and applications into access packages with policies defining who can request, who approves, and when access expires; connected organizations allow external users to request and be invited automatically. Access reviews recertify existing access rather than grant it. Dynamic groups assign membership from attributes with no request or approval workflow, and B2B direct connect is a Teams shared-channel trust, not a request catalog."
- },
- {
-  "id": 1045,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Lifecycle workflows",
-  "format": "multiple_choice",
-  "q": "HR wants the following automated: when a hire date is set, generate a Temporary Access Pass and email the manager before the start date; on the employee's last day, remove all group memberships and licenses and disable the account. Which Microsoft Entra ID Governance feature is designed for this?",
-  "options": [
-   "Privileged Identity Management",
-   "Lifecycle workflows",
-   "Access reviews",
-   "Microsoft Entra Connect"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Lifecycle workflows automate joiner, mover and leaver processes with triggers based on attributes such as employeeHireDate and employeeLeaveDateTime and built-in tasks like generating a TAP, sending email, removing group membership and disabling the account. PIM and access reviews govern privileges and recertification, and Entra Connect synchronizes directory objects but does not orchestrate onboarding or offboarding tasks."
- },
- {
-  "id": 1046,
-  "topic": "Entra — access, protection & governance",
-  "tag": "ID Protection risk types",
-  "format": "multiple_choice",
-  "q": "Microsoft Entra ID Protection reports that a user's credentials were found in a leaked credential dump. Which risk type is this, and which automated remediation is the recommended response?",
-  "options": [
-   "Sign-in risk; require multifactor authentication on the next sign-in attempt",
-   "User risk; require a secure password change through risk-based Conditional Access",
-   "Sign-in risk; block the sign-in permanently until an administrator intervenes",
-   "User risk; require the device to be marked compliant before any further access"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Leaked credentials indicate that the identity itself may be compromised, so it is a USER risk, evaluated offline. The recommended automated remediation is a Conditional Access policy that requires a secure password change (with MFA) when user risk is high; completing it remediates the risk. Sign-in risk describes the probability that a particular authentication was not performed by the owner (anonymous IP, atypical travel) and is typically remediated by requiring MFA. Device compliance does not fix a stolen password."
- },
- {
-  "id": 1047,
-  "topic": "Entra — access, protection & governance",
-  "tag": "ID Protection licensing",
-  "format": "multiple_choice",
-  "q": "A tenant with Microsoft Entra ID P1 sees several risk detections labeled only 'Additional risk detected' with no details. Why?",
-  "options": [
-   "The detections are false positives that Microsoft hides by default until an admin confirms them",
-   "Premium detections need Entra ID P2; without it they appear only as 'Additional risk detected'",
-   "The admin viewing the report lacks the Security Reader role needed to see detection details",
-   "Risk detections show details only for hybrid users synchronized from on-premises AD DS"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Most ID Protection detections are premium: their names and details are visible only with Entra ID P2 (or Entra Suite). P1 and Free tenants still see that something risky happened but the detection is masked as 'Additional risk detected', and risk-based policies are unavailable. This licensing boundary, together with PIM also being P2, is one of the most reliable exam facts."
- },
- {
-  "id": 1048,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Global Secure Access",
-  "format": "multiple_choice",
-  "q": "Remote employees use a legacy VPN to reach on-premises applications. The company wants to replace it with identity-centric, per-app access that is evaluated by Conditional Access and supports any TCP or UDP application, without exposing the internal network. Which Microsoft Entra product is designed for this?",
-  "options": [
-   "Microsoft Entra Internet Access",
-   "Microsoft Entra Private Access",
-   "Azure Bastion",
-   "Microsoft Defender for Cloud Apps"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Entra Private Access is Microsoft's Zero Trust Network Access solution within Global Secure Access. It replaces legacy VPNs with per-app or Quick Access to private resources, integrates deeply with Conditional Access and supports TCP and UDP apps. Entra Internet Access is the identity-aware Secure Web Gateway for internet and SaaS traffic. Bastion provides browser-based RDP and SSH to Azure VMs only, and Defender for Cloud Apps is a CASB for SaaS apps."
- },
- {
-  "id": 1049,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Global Secure Access",
-  "format": "multiple_choice",
-  "q": "The company wants to block employees' access to gambling and adult websites by content category on any network, and apply Conditional Access to all internet destinations, even sites not federated with Microsoft Entra ID. Which product provides this?",
-  "options": [
-   "Microsoft Entra Private Access",
-   "Microsoft Entra Internet Access",
-   "Azure Web Application Firewall",
-   "Azure Firewall"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Entra Internet Access is an identity-based Secure Web Gateway with web content filtering by category or FQDN, threat intelligence, TLS inspection and universal Conditional Access for all internet destinations. Private Access is for private corporate apps. Azure WAF protects your own web apps from inbound attacks, and Azure Firewall filters traffic in Azure virtual networks, not user browsing from any location."
- },
- {
-  "id": 1050,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Verified ID",
-  "format": "multiple_choice",
-  "q": "A university issues digital diplomas that graduates store in the Microsoft Authenticator app. Employers must verify a diploma cryptographically without contacting the university for each check, and the graduate decides what to share. Which Microsoft Entra capability implements this?",
-  "options": [
-   "Microsoft Entra Verified ID",
-   "B2B collaboration",
-   "Certificate-based authentication",
-   "Microsoft Entra ID Governance"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Verified ID implements W3C verifiable credentials and decentralized identifiers: an issuer (the university) signs a credential, the holder keeps it in a wallet such as Authenticator and presents only what is needed, and a verifier checks the signature against the issuer's public DID without a callback. B2B collaboration is guest access, certificate-based authentication is a sign-in method, and ID Governance manages access lifecycle."
- },
- {
-  "id": 1051,
-  "topic": "Entra — access, protection & governance",
-  "tag": "ID Governance licensing",
-  "format": "yes_no",
-  "q": "True or False: Microsoft Entra ID Governance capabilities such as entitlement management and lifecycle workflows require licensing beyond Microsoft Entra ID P1.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "True. P1 does not include ID Governance features. Entitlement management, access reviews and PIM are included in Entra ID P2 and the Entra ID Governance add-on, while lifecycle workflows and other advanced governance features require the Microsoft Entra ID Governance license (also included in the Microsoft Entra Suite). Remembering which tier unlocks Conditional Access (P1) versus governance and protection (P2 or Governance) matters on the exam."
- },
- {
-  "id": 1052,
-  "topic": "Entra — access, protection & governance",
-  "tag": "Authentication strengths",
-  "format": "multiple_choice",
-  "q": "For one high-value finance application only, you must require that users authenticate with a phishing-resistant method such as a passkey, while other apps continue to accept any MFA method. Which feature do you configure?",
-  "options": [
-   "Per-user MFA in the legacy MFA portal, with the finance users' default method set to a FIDO2 security key",
-   "Security defaults, which require phishing-resistant methods for all users whenever a sensitive app is opened",
-   "A Conditional Access policy for that app with the 'Require authentication strength' control set to phishing-resistant MFA",
-   "A Microsoft Entra ID Protection sign-in risk policy configured to require a passkey for medium and high risk sign-ins"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Authentication strengths are a Conditional Access grant control that specifies which combinations of methods satisfy the policy, including the built-in 'Phishing-resistant MFA' strength. Scoping the policy to one application gives the granularity required. Per-user MFA and security defaults are tenant-wide and cannot distinguish methods per app, and ID Protection risk policies respond to risk, not to application sensitivity."
- },
- {
-  "id": 1053,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "NSG rule priority",
-  "format": "multiple_choice",
-  "q": "A network security group attached to a subnet has two inbound rules: priority 100, Deny TCP 3389 from Internet; priority 200, Allow TCP 3389 from Any. An administrator on the internet tries to RDP to a VM in the subnet. What happens?",
-  "options": [
-   "Allowed: the Allow rule is more permissive, and NSGs resolve conflicts in favor of the permissive rule",
-   "Denied: rules are processed by priority (lowest number first) and evaluation stops at the first match",
-   "Allowed: Allow rules always take precedence over Deny rules regardless of their priority numbers",
-   "Undefined: two rules covering the same port cause the NSG to fall back to the default rules only"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "NSG rules are processed from the lowest priority number to the highest and evaluation stops at the first rule that matches, so the priority-100 Deny wins and RDP from the internet is blocked. Permissiveness and rule type do not change the ordering. Remember also the default rules (allow VNet and load balancer inbound, deny all other inbound; allow outbound to VNet and internet) sit at the highest priority numbers."
- },
- {
-  "id": 1054,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "NSG associations",
-  "format": "multi_select",
-  "q": "To which TWO resources can a network security group be associated? (Select two.)",
-  "options": [
-   "A subnet in a virtual network",
-   "A network interface of a virtual machine",
-   "A whole virtual network",
-   "A resource group",
-   "An Azure Key Vault"
-  ],
-  "answer": [
-   0,
-   1
-  ],
-  "why": "NSGs are associated with subnets and with network interfaces; traffic to a VM is evaluated by the subnet NSG first and then the NIC NSG for inbound (the reverse for outbound). You cannot attach an NSG to a virtual network, a resource group or a PaaS service such as Key Vault. Application security groups group NICs for use in rules but are not an association target either."
- },
- {
-  "id": 1055,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Azure Firewall",
-  "format": "multiple_choice",
-  "q": "You need centrally managed outbound filtering for several virtual networks that allows traffic only to approved fully qualified domain names such as *.windowsupdate.com, blocks known malicious IP addresses using Microsoft threat intelligence, and provides stateful inspection with built-in high availability. Which service should you deploy?",
-  "options": [
-   "Network security groups",
-   "Application security groups",
-   "Azure Firewall",
-   "Azure Bastion"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Azure Firewall is a managed, stateful, cloud-native firewall with application rules based on FQDNs, network rules, threat-intelligence-based filtering, built-in high availability and central policy management through Firewall Manager (Premium adds IDPS and TLS inspection). NSGs filter on IP, port and protocol only and cannot filter by FQDN or threat intelligence. ASGs merely group NICs for NSG rules, and Bastion is a jump-host service."
- },
- {
-  "id": 1056,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Web Application Firewall",
-  "format": "multiple_choice",
-  "q": "A public web application must be protected against SQL injection, cross-site scripting and other OWASP Top 10 attacks at the application layer. Which Azure service provides this?",
-  "options": [
-   "Azure DDoS Network Protection enabled on the virtual network",
-   "A network security group with a deny rule for ports 80 and 443",
-   "Azure Web Application Firewall on Application Gateway or Front Door",
-   "Azure Firewall Basic with threat-intelligence-based filtering"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Azure WAF inspects HTTP(S) requests at layer 7 using managed rule sets based on the OWASP Core Rule Set, plus bot protection, and is deployed with Application Gateway or Azure Front Door. DDoS Protection works at layers 3 and 4 against volumetric attacks. An NSG cannot inspect request content, and Azure Firewall Basic is a network firewall without web application rule sets."
- },
- {
-  "id": 1057,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "DDoS Protection tiers",
-  "format": "multiple_choice",
-  "q": "A company runs a handful of internet-facing workloads spread across several subscriptions and wants enhanced DDoS mitigation only for five specific public IP addresses, paying per protected IP rather than per virtual network. Which option fits?",
-  "options": [
-   "Azure DDoS IP Protection",
-   "Azure DDoS Network Protection",
-   "The default infrastructure-level DDoS protection that every Azure customer receives",
-   "Azure Web Application Firewall"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "DDoS IP Protection is the pay-per-protected-IP tier with the same core mitigation engine as Network Protection but without extras such as DDoS Rapid Response support, cost protection and WAF discounts. Network Protection is enabled per virtual network and suits organizations with many resources. The free platform-level protection is always on but offers no tuning, telemetry or alerting for your resources, and WAF is a layer-7 control."
- },
- {
-  "id": 1058,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Azure Bastion",
-  "format": "multiple_choice",
-  "q": "Administrators need RDP and SSH access to Azure virtual machines. Security requires that the VMs have NO public IP addresses and that ports 3389 and 22 are never exposed to the internet; admins should connect through the Azure portal over TLS on port 443. Which service meets this?",
-  "options": [
-   "Just-in-time VM access in Microsoft Defender for Cloud",
-   "Azure Bastion",
-   "A network security group allowing 3389 only from the office IP range",
-   "Azure VPN Gateway with point-to-site connections"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Azure Bastion is a managed PaaS jump service deployed in the virtual network that brokers RDP/SSH sessions over TLS (443) from the portal or native clients, so VMs need only private IPs and management ports are never exposed. Just-in-time access still opens the management port on demand, an NSG rule still requires a reachable public endpoint, and a VPN gateway provides network connectivity rather than a hardened browser-based session broker. Bastion versus JIT is a frequent distractor pair."
- },
- {
-  "id": 1059,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Azure Key Vault",
-  "format": "multiple_choice",
-  "q": "An application needs its TLS certificates, API keys and encryption keys stored centrally and out of source code, with access logged. A compliance requirement adds that the encryption keys must be protected by FIPS 140 validated hardware security modules. Which service and tier should you use?",
-  "options": [
-   "Azure Key Vault Standard tier",
-   "Azure Key Vault Premium tier",
-   "An Azure Storage account with encryption at rest enabled",
-   "A system-assigned managed identity"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Key Vault stores secrets, keys and certificates with access policies or RBAC and full logging. The Premium tier adds HSM-protected keys, which is what the hardware security module requirement demands; Standard keeps keys software-protected. A storage account is not a secrets manager, and a managed identity is how an app authenticates to Key Vault, not where secrets are stored."
- },
- {
-  "id": 1060,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Network segmentation",
-  "format": "multiple_choice",
-  "q": "Production and development workloads must be isolated so they cannot communicate with each other by default, but the team wants to be able to allow specific, controlled traffic between them later. Which design applies network segmentation correctly?",
-  "options": [
-   "One virtual network and one subnet for both workloads, relying on Azure's default isolation between VMs",
-   "Separate virtual networks (isolated by default), later connected with peering and controlled by NSGs or Azure Firewall",
-   "Different resource groups for the two workloads, which prevents network traffic between the resources in them",
-   "Different availability zones of the same subnet, because traffic between zones is blocked by default"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "A virtual network is the fundamental isolation boundary in Azure: resources in different VNets cannot talk unless you connect them (peering, VPN), and once connected NSGs or a firewall control what is allowed. Resources in the same subnet can communicate freely by default. Resource groups and availability zones are management and resiliency constructs and provide no network isolation at all."
- },
- {
-  "id": 1061,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "CSPM tiers",
-  "format": "multiple_choice",
-  "q": "A security team already uses the free capabilities of Microsoft Defender for Cloud across Azure and AWS. They now want attack path analysis, the cloud security explorer for graph-based queries, and agentless scanning of machines. What must they enable?",
-  "options": [
-   "Nothing; these features are part of foundational CSPM at no cost",
-   "The Defender CSPM plan",
-   "Microsoft Sentinel",
-   "Microsoft Defender for Endpoint Plan 2"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Foundational CSPM is free and provides secure score, recommendations from the Microsoft cloud security benchmark, asset inventory and basic compliance visibility. Attack path analysis, cloud security explorer, agentless scanning, governance and expanded regulatory compliance are features of the paid Defender CSPM plan. Sentinel is a SIEM and Defender for Endpoint is endpoint protection; neither provides cloud posture graphs."
- },
- {
-  "id": 1062,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Secure score types",
-  "format": "multiple_choice",
-  "q": "Which score measures the security posture of your Azure, AWS and GCP resources based on recommendations from the Microsoft cloud security benchmark?",
-  "options": [
-   "Microsoft Secure Score in the Microsoft Defender portal",
-   "Secure score in Microsoft Defender for Cloud",
-   "Identity Secure Score in Microsoft Entra ID",
-   "Compliance score in Microsoft Purview Compliance Manager"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender for Cloud's secure score aggregates the state of MCSB-based recommendations across your cloud subscriptions and connected accounts. Microsoft Secure Score in the Defender portal covers Microsoft 365 identities, apps, devices and data; Identity Secure Score is its identity subset; and compliance score measures progress on regulatory improvement actions. Four different scores, four different scopes, and the exam checks that you can tell them apart."
- },
- {
-  "id": 1063,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Security policies & initiatives",
-  "format": "multiple_choice",
-  "q": "Every new storage account must require secure transfer (HTTPS), and non-compliant resources must be surfaced as recommendations in Defender for Cloud. Which mechanism underlies this?",
-  "options": [
-   "Azure resource locks applied to each storage account to prevent insecure configuration changes",
-   "Azure Policy definitions grouped into initiatives such as the Microsoft cloud security benchmark",
-   "Azure Blueprints artifacts that redeploy storage accounts whenever a non-compliant setting is detected",
-   "Role-based access control deny assignments that stop users from disabling secure transfer"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender for Cloud security policies are built on Azure Policy: individual policy definitions are grouped into initiatives (the Microsoft cloud security benchmark is the default one), assigned to subscriptions, and each non-compliant evaluation becomes a recommendation that feeds secure score. Resource locks prevent deletion or modification, Blueprints package deployments, and RBAC controls who can act, none of which continuously evaluate configuration."
- },
- {
-  "id": 1064,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Cloud workload protection",
-  "format": "multiple_choice",
-  "q": "You need threat detection that alerts when malware is uploaded to an Azure storage account and when anomalous queries or brute-force attempts hit Azure SQL databases. Which Defender for Cloud capability provides this?",
-  "options": [
-   "Foundational cloud security posture management, which is free for every subscription",
-   "Defender CSPM, the paid posture plan with attack path analysis and agentless scanning",
-   "Workload protection plans such as Defender for Storage and Defender for Databases",
-   "Microsoft Sentinel workbooks connected to the storage and SQL diagnostic logs"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Cloud workload protection is delivered through per-resource-type Defender plans (Servers, Storage, Databases, Containers, App Service, Key Vault, Resource Manager, APIs and others) that add runtime threat detection and alerts. Both CSPM tiers are about posture (misconfigurations and recommendations), not runtime threats. Sentinel workbooks visualize data but do not detect threats in storage or SQL."
- },
- {
-  "id": 1065,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Multicloud & hybrid",
-  "format": "yes_no",
-  "q": "True or False: Microsoft Defender for Cloud can assess and protect servers running in AWS and GCP, as well as on-premises machines connected through Azure Arc.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "True. Defender for Cloud connects to AWS and GCP accounts through native connectors and extends to on-premises and other-cloud machines through Azure Arc, giving posture management and workload protection across the hybrid, multicloud estate. Assuming it is Azure-only is a common misconception the exam probes."
- },
- {
-  "id": 1066,
-  "topic": "Azure security & Defender for Cloud",
-  "tag": "Just-in-time VM access",
-  "format": "multiple_choice",
-  "q": "Management ports 22 and 3389 on several VMs must stay closed by default and open only for an approved requester's IP for a limited time window. Which capability provides exactly this?",
-  "options": [
-   "Azure Bastion deployed in the virtual network",
-   "Just-in-time VM access in Microsoft Defender for Servers",
-   "The default NSG rule 'DenyAllInbound' at the subnet",
-   "Azure Firewall DNAT rules for the management ports"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Just-in-time VM access (part of Defender for Servers) locks down management ports in the NSG and opens them only on request for a specified source IP and duration, then closes them again. Bastion avoids exposing ports altogether by brokering sessions over TLS, which is a different approach. The default deny rule alone gives no way to open access on demand, and DNAT rules permanently publish a port."
- },
- {
-  "id": 1067,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Playbooks",
-  "format": "multiple_choice",
-  "q": "When Microsoft Sentinel creates a high-severity incident involving a compromised account, the SOC wants the user's sessions revoked and a ticket opened in ServiceNow automatically, with no analyst action. Which Sentinel component performs the automated response?",
-  "options": [
-   "A workbook bound to the incident queue",
-   "A near-real-time analytics rule",
-   "A playbook run by an automation rule",
-   "A saved hunting query with a bookmark"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Playbooks are Logic Apps workflows that carry out response actions such as disabling users, revoking sessions or opening tickets; automation rules decide when to run them (for example on incident creation). Analytics rules detect and create incidents but do not respond. Workbooks visualize data, and hunting queries are for proactive searching by analysts. This is the SOAR half of Sentinel."
- },
- {
-  "id": 1068,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Analytics rules",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn Microsoft Sentinel, [answer] run Kusto Query Language (KQL) logic on a schedule or in near real time against ingested data to generate alerts and incidents.",
-  "options": [
-   "workbooks",
-   "playbooks",
-   "analytics rules",
-   "data connectors"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Analytics rules are the detection logic of Sentinel: scheduled, near-real-time, Microsoft security, fusion and anomaly rules produce alerts that are grouped into incidents. Data connectors bring data in, workbooks visualize it, and playbooks automate the response. Keep the pipeline in mind: collect (connectors), detect (analytics), investigate (incidents, hunting), respond (playbooks)."
- },
- {
-  "id": 1069,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Data connectors",
-  "format": "multiple_choice",
-  "q": "A SOC must ingest logs from a Palo Alto firewall, AWS CloudTrail and Microsoft Entra ID sign-ins into a single SIEM with cloud scale. Which Microsoft Sentinel feature is used to bring these sources in?",
-  "options": [
-   "Workbook templates from the Content hub",
-   "Data connectors from the Content hub",
-   "Incidents synchronized from Defender XDR",
-   "Threat intelligence indicator feeds"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Sentinel's data connectors (hundreds, including non-Microsoft, multicloud and on-premises sources) ingest data into the Log Analytics workspace and the Sentinel data lake; solutions in the Content hub package connectors with rules and workbooks. Workbooks only display data that is already ingested. Defender XDR incidents are one source, not the ingestion mechanism, and threat intelligence enriches detections rather than collecting logs."
- },
- {
-  "id": 1070,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "SIEM vs XDR",
-  "format": "multiple_choice",
-  "q": "An organization already uses Microsoft Defender XDR across endpoints, identities, email and cloud apps. Which statement BEST describes why it might still add Microsoft Sentinel?",
-  "options": [
-   "Defender XDR cannot create incidents on its own, so Sentinel is needed to provide incident management and a queue for the Defender alerts",
-   "Sentinel adds SIEM and SOAR: ingesting non-Microsoft and on-premises sources, cloud-scale retention and correlation, and automation across all of them",
-   "Sentinel replaces the individual Defender products and provides endpoint, identity and email protection from one service",
-   "Sentinel is required to enable multifactor authentication and Conditional Access for the security operations team"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender XDR provides deep, native detection and response for Microsoft workloads and does create correlated incidents. Sentinel adds the SIEM layer (collect from any source, long-term retention, custom analytics) and SOAR automation across all sources, and its incidents are now unified with Defender XDR in the Defender portal. Sentinel does not perform endpoint protection and is unrelated to MFA."
- },
- {
-  "id": 1071,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Unified SecOps",
-  "format": "multiple_choice",
-  "q": "Which statement about where Microsoft Sentinel is operated today is correct?",
-  "options": [
-   "Sentinel can only be used from the Azure portal, because the Defender portal is limited to the Defender XDR products",
-   "Sentinel is onboarded to the Defender portal as part of unified security operations; the Azure portal experience is being retired in 2027",
-   "Sentinel has been merged into Microsoft Purview so that security and compliance investigations share one portal",
-   "Sentinel moved to the Microsoft Entra admin center to sit alongside ID Protection and Conditional Access"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Since 2024 Sentinel workspaces can be connected to the Microsoft Defender portal, which unifies SIEM, SOAR, XDR, posture and exposure management and Security Copilot in one place with a single incident queue; new customers are onboarded there by default and Microsoft announced the retirement of the Azure portal Sentinel experience for March 31, 2027. Purview is compliance, and the Entra admin center is identity, so neither hosts Sentinel."
- },
- {
-  "id": 1072,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Hunting",
-  "format": "multiple_choice",
-  "q": "An analyst suspects a new attacker technique is being used but no alert has fired. They want to proactively query ingested data for indicators before any detection rule exists. Which Sentinel capability is designed for this?",
-  "options": [
-   "Incident queue and alerts",
-   "Hunting queries and notebooks",
-   "Playbooks and automation rules",
-   "Workbooks and dashboards"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Hunting lets analysts run and save KQL queries, bookmark findings and use Jupyter notebooks to look for threats before alerts exist, closing the gap left by detections. Incidents are the reactive queue produced by analytics rules. Playbooks automate response, and workbooks are dashboards. Proactive versus reactive is the distinction the exam draws."
- },
- {
-  "id": 1073,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Security Copilot in Defender",
-  "format": "multiple_choice",
-  "q": "A SOC wants, inside the Microsoft Defender portal, AI-generated incident summaries, guided response recommendations, analysis of obfuscated PowerShell scripts and natural-language generation of KQL queries. Which product delivers this?",
-  "options": [
-   "Microsoft 365 Copilot in the Teams client",
-   "Microsoft Security Copilot embedded in Defender",
-   "Microsoft Defender Threat Intelligence",
-   "Microsoft Sentinel notebooks with KQL"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Security Copilot is the generative AI assistant for security teams; its embedded experience in the Defender portal provides incident summaries, guided responses, script and file analysis, device summaries and KQL query assistance, and it also has a standalone portal with promptbooks and agents. Microsoft 365 Copilot is the productivity assistant, Defender TI supplies threat intelligence data, and notebooks are manual analysis tools."
- },
- {
-  "id": 1074,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Security Copilot facts",
-  "format": "multiple_choice",
-  "q": "Which statement about Microsoft Security Copilot is correct?",
-  "options": [
-   "It is licensed per user like Microsoft 365 Copilot and cannot be provisioned in a tenant without Microsoft 365 E5 licenses for every analyst",
-   "It is consumed via Security Compute Units, works standalone and embedded in Defender, Entra, Intune and Purview, and supports promptbooks and agents",
-   "It is available only as a plugin inside Microsoft Sentinel workbooks and cannot be used from the Defender portal",
-   "It replaces Microsoft Defender XDR incident management, so incidents are triaged only in the Copilot portal"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Security Copilot is provisioned with Security Compute Units (SCUs), with a capacity model rather than a per-user seat, and it appears both as a standalone experience and embedded in Microsoft security products; promptbooks are multi-step reusable workflows and agents such as the phishing triage or Conditional Access optimization agents run tasks autonomously. It complements rather than replaces Defender XDR, and it is not a Sentinel workbook plugin."
- },
- {
-  "id": 1075,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "Playbooks",
-  "format": "yes_no",
-  "q": "True or False: Microsoft Sentinel playbooks are built on Azure Logic Apps.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "True. A playbook is a Logic Apps workflow with a Sentinel trigger (incident or alert) that can call hundreds of connectors to enrich, notify or remediate. Automation rules orchestrate when playbooks run and can also change incident properties without a playbook. Knowing the underlying technology is a favourite quick-fire item."
- },
- {
-  "id": 1076,
-  "topic": "Sentinel & Security Copilot",
-  "tag": "UEBA",
-  "format": "multiple_choice",
-  "q": "Which Microsoft Sentinel capability builds behavioral baselines for users, hosts and other entities and then flags anomalous deviations such as a first-time bulk download by an account that normally reads a few files a day?",
-  "options": [
-   "User and Entity Behavior Analytics",
-   "Content hub solution packages",
-   "Watchlists of high-value assets",
-   "Automation rules for incidents"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "UEBA uses machine learning to profile normal behavior per entity and surfaces anomalies with investigation priority, enriching incidents. The Content hub distributes solutions (connectors, rules, workbooks). Watchlists are reference lists (for example VIP users or known-bad IPs) used in queries, and automation rules handle incident triage and playbook triggering."
- },
- {
-  "id": 1077,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender for Identity",
-  "format": "multiple_choice",
-  "q": "A SOC needs to detect attacks against the on-premises Active Directory domain, such as pass-the-hash, Golden Ticket and reconnaissance by enumeration of privileged group membership, using sensors deployed on domain controllers. Which service is designed for this?",
-  "options": [
-   "Microsoft Defender for Endpoint",
-   "Microsoft Defender for Identity",
-   "Microsoft Entra ID Protection",
-   "Microsoft Defender for Cloud Apps"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender for Identity uses sensors on domain controllers (and AD FS, AD CS and Entra Connect servers) to analyze on-premises AD signals and detect the identity attack lifecycle: reconnaissance, compromised credentials, lateral movement and domain dominance. Entra ID Protection detects risk on cloud identities (leaked credentials, anomalous sign-ins), which is the classic confusion. Defender for Endpoint is about devices and Defender for Cloud Apps about SaaS."
- },
- {
-  "id": 1078,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender for Cloud Apps",
-  "format": "multiple_choice",
-  "q": "The security team wants to discover which SaaS applications employees use (shadow IT), score their risk, unsanction risky ones, and prevent downloads from sanctioned apps when the user is on an unmanaged device. Which service provides all of this?",
-  "options": [
-   "Microsoft Defender for Office 365",
-   "Microsoft Defender for Cloud Apps",
-   "Microsoft Defender for Endpoint",
-   "Microsoft Intune"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender for Cloud Apps is Microsoft's cloud access security broker: Cloud Discovery surfaces shadow IT with risk scores, app connectors and governance sanction or unsanction apps, and Conditional Access App Control applies session controls such as blocking downloads in real time. Defender for Office 365 protects email and collaboration, Defender for Endpoint protects devices (it does feed discovery data to Cloud Apps), and Intune manages devices."
- },
- {
-  "id": 1079,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender for Office 365 plans",
-  "format": "multiple_choice",
-  "q": "An organization wants to run simulated phishing campaigns to train users and wants automated investigation and response for email threats. Which licensing level is the minimum that includes both?",
-  "options": [
-   "The built-in security features included with all cloud mailboxes (Exchange Online Protection)",
-   "Microsoft Defender for Office 365 Plan 1",
-   "Microsoft Defender for Office 365 Plan 2",
-   "Microsoft Defender for Endpoint Plan 2"
-  ],
-  "answer": [
-   2
-  ],
-  "why": "Attack simulation training, Threat Explorer, automated investigation and response, campaign views and threat trackers are Plan 2 capabilities. Plan 1 adds Safe Attachments, Safe Links and impersonation protection on top of the built-in anti-spam, anti-malware and anti-phishing features every cloud mailbox gets. Defender for Endpoint Plan 2 is for devices and does not include email simulations."
- },
- {
-  "id": 1080,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Safe Links",
-  "format": "multiple_choice",
-  "q": "A phishing email is delivered with a link that is harmless at delivery time but is weaponized two days later, when users click it. Which Defender for Office 365 feature is designed to protect users at the moment they click?",
-  "options": [
-   "Safe Attachments",
-   "Safe Links",
-   "Zero-hour auto purge (ZAP)",
-   "Anti-spam connection filtering"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Safe Links rewrites or checks URLs at time of click, so a link that becomes malicious after delivery is still blocked. Safe Attachments detonates attachments in a sandbox before delivery. ZAP retroactively removes or quarantines messages already in mailboxes once they are identified as malicious, and connection filtering evaluates sender IP reputation at delivery. Time-of-click protection is the distinguishing phrase."
- },
- {
-  "id": 1081,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender for Endpoint",
-  "format": "multiple_choice",
-  "q": "When a laptop shows signs of ransomware behavior, the SOC wants it automatically isolated from the network while keeping a connection to the security service, and wants an automated investigation to determine the verdict of related alerts. Which product provides these capabilities?",
-  "options": [
-   "Microsoft Defender for Identity",
-   "Microsoft Defender for Endpoint",
-   "Microsoft Defender for Cloud Apps",
-   "Microsoft Intune compliance policies"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender for Endpoint combines next-generation protection, attack surface reduction, endpoint detection and response with device isolation and live response, automated investigation and remediation, and integrated vulnerability management, across Windows, macOS, Linux, iOS and Android. Defender for Identity covers directory attacks, Defender for Cloud Apps covers SaaS, and Intune compliance policies report device state rather than respond to attacks."
- },
- {
-  "id": 1082,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender Vulnerability Management",
-  "format": "multiple_choice",
-  "q": "Which Defender service provides a continuous inventory of installed software, browser extensions and digital certificates across Windows, macOS and Linux devices, and prioritizes vulnerabilities based on threat intelligence and the likelihood of breach?",
-  "options": [
-   "Microsoft Defender Antivirus",
-   "Microsoft Defender Vulnerability Management",
-   "Microsoft Defender for Cloud (foundational CSPM)",
-   "Microsoft Defender Threat Intelligence"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender Vulnerability Management delivers asset discovery, software and firmware inventories, browser extension and certificate assessments, security baselines assessment and risk-based prioritization with remediation tracking; it is included in Defender for Endpoint Plan 2 with an add-on for the premium capabilities. Antivirus blocks malware, foundational CSPM assesses cloud resource configuration, and Defender TI provides adversary and infrastructure intelligence."
- },
- {
-  "id": 1083,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender Threat Intelligence",
-  "format": "multiple_choice",
-  "q": "Analysts investigating an incident want curated intelligence profiles about the threat actor involved, its known infrastructure, indicators of compromise and tooling, to enrich the investigation. Which Microsoft service provides this content?",
-  "options": [
-   "Microsoft Defender Threat Intelligence",
-   "Microsoft Defender Vulnerability Management",
-   "Microsoft Secure Score",
-   "Attack simulation training"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Defender Threat Intelligence (Defender TI) aggregates Microsoft's threat research into intel profiles, articles and indicator data sets that are surfaced in the Defender portal and used to enrich incidents and hunting. Vulnerability Management is about weaknesses in your own assets, Secure Score measures your configuration posture, and attack simulation training tests users with simulated phishing."
- },
- {
-  "id": 1084,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Incidents",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn the Microsoft Defender portal, an incident is a collection of correlated [answer] that together describe a single attack story across email, identities, endpoints and apps.",
-  "options": [
-   "alerts",
-   "vulnerabilities",
-   "devices",
-   "secure score recommendations"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Defender XDR correlates related alerts from its services into one incident with an attack story and timeline, so analysts triage a single case instead of dozens of isolated alerts. Devices and other entities are evidence within the incident, vulnerabilities are tracked in Vulnerability Management, and Secure Score recommendations relate to posture rather than active attacks."
- },
- {
-  "id": 1085,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Microsoft Secure Score",
-  "format": "multiple_choice",
-  "q": "Your Microsoft Secure Score percentage dropped overnight although nobody changed any configuration. What is the MOST likely explanation?",
-  "options": [
-   "Points expire after 30 days unless the recommended action is confirmed again by an administrator",
-   "Microsoft added new recommended actions or your environment grew, changing the points available",
-   "An attacker disabled security controls overnight and Secure Score detected the resulting breach",
-   "Secure Score only updates when an administrator manually refreshes it, so the drop is a stale value"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Secure Score is a fraction of achieved points over possible points; when Microsoft adds recommendations or when the number of in-scope users or devices changes, the denominator or partial scoring shifts even if you did nothing. Points do not expire. Secure Score measures posture, not attacks, and it updates automatically (in near real time for many actions, with daily syncs)."
- },
- {
-  "id": 1086,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Automatic attack disruption",
-  "format": "multiple_choice",
-  "q": "During a human-operated ransomware attack in progress, Microsoft Defender XDR automatically contains the compromised device and disables the compromised user account before analysts have looked at the incident. Which capability is this?",
-  "options": [
-   "Automated investigation and response (AIR) verdicts",
-   "Automatic attack disruption",
-   "A Microsoft Sentinel playbook",
-   "Zero-hour auto purge"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Automatic attack disruption uses high-confidence cross-signal correlation to take containment actions such as isolating devices and disabling or containing users in real time to stop lateral movement. AIR investigates alerts and proposes or applies remediation for individual entities (for example quarantining a file). A Sentinel playbook is a configured Logic App, not a built-in XDR action, and ZAP removes malicious email."
- },
- {
-  "id": 1087,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Exposure Management",
-  "format": "multiple_choice",
-  "q": "The CISO wants a single exposure score across endpoints, identities and cloud assets, security initiatives with metrics, identification of critical assets, and attack paths that show how an attacker could reach those assets, all inside the Defender portal. Which capability provides this?",
-  "options": [
-   "Microsoft Secure Score",
-   "Microsoft Security Exposure Management",
-   "Microsoft Defender Vulnerability Management",
-   "Microsoft Purview Compliance Manager"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Security Exposure Management provides an enterprise exposure graph, attack surface map, critical asset management, initiatives with an exposure score and attack path analysis spanning on-premises, hybrid and multicloud (using Defender for Cloud data). Secure Score measures configuration posture with recommended actions, Vulnerability Management focuses on device vulnerabilities and feeds into Exposure Management, and Compliance Manager is a regulatory compliance tool."
- },
- {
-  "id": 1088,
-  "topic": "Microsoft Defender XDR",
-  "tag": "XDR suite membership",
-  "format": "multi_select",
-  "q": "Which THREE of the following services are members of the Microsoft Defender XDR suite? (Select three.)",
-  "options": [
-   "Microsoft Defender for Endpoint",
-   "Microsoft Defender for Office 365",
-   "Microsoft Defender for Identity",
-   "Microsoft Sentinel",
-   "Azure Firewall"
-  ],
-  "answer": [
-   0,
-   1,
-   2
-  ],
-  "why": "Defender XDR natively coordinates Defender for Endpoint, Defender for Office 365, Defender for Identity, Defender for Cloud Apps and Defender Vulnerability Management (and integrates signals from Entra ID Protection, Defender for Cloud and Purview). Sentinel is the SIEM and SOAR that is now unified with XDR in the same portal but is a separate product, and Azure Firewall is a network security service in Azure."
- },
- {
-  "id": 1089,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Action center",
-  "format": "multiple_choice",
-  "q": "An automated investigation in Defender XDR proposes quarantining a suspicious file and removing an email from 200 mailboxes, but the organization requires a human to approve such remediation. Where does the analyst review and approve these pending actions?",
-  "options": [
-   "The Incidents queue",
-   "The Action center",
-   "Threat analytics",
-   "Microsoft Secure Score"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The Action center is the unified place in the Defender portal for pending remediation actions awaiting approval and the history of actions already taken across the Defender products. The incident queue lists incidents, threat analytics provides intelligence reports, and Secure Score handles posture recommendations. Whether actions are automatic or require approval depends on the configured automation level."
- },
- {
-  "id": 1090,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Defender for Identity sensors",
-  "format": "multiple_choice",
-  "q": "Where are Microsoft Defender for Identity sensors typically installed to capture the signals it analyzes?",
-  "options": [
-   "On every user workstation",
-   "On domain controllers (and optionally AD FS, AD CS and Microsoft Entra Connect servers)",
-   "Only in Azure, as a cloud-only service with nothing installed on-premises",
-   "On Exchange mailbox servers"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Defender for Identity is cloud-based but its sensors run on domain controllers and related identity servers to read network traffic, Windows events and directory data locally, which is how it sees Kerberos, NTLM, LDAP and replication activity. Workstations are covered by Defender for Endpoint, whose signals are correlated with Defender for Identity in the Defender portal."
- },
- {
-  "id": 1091,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Session controls",
-  "format": "yes_no",
-  "q": "True or False: Microsoft Defender for Cloud Apps can enforce real-time session controls, such as blocking downloads of sensitive files, through its integration with Microsoft Entra Conditional Access.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "True. Conditional Access App Control routes the session through Defender for Cloud Apps' reverse proxy so policies can monitor, block downloads, apply labels or block uploads in real time based on conditions such as unmanaged device. This is the 'use Conditional Access App Control' session control in a Conditional Access policy."
- },
- {
-  "id": 1092,
-  "topic": "Microsoft Defender XDR",
-  "tag": "Threat analytics",
-  "format": "multiple_choice",
-  "q": "In the Microsoft Defender portal, which feature provides reports written by Microsoft security researchers about emerging threats and campaigns, including which of YOUR assets are impacted and recommended mitigations?",
-  "options": [
-   "Threat analytics",
-   "Advanced hunting",
-   "Attack simulation training",
-   "Microsoft Secure Score"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Threat analytics combines expert threat reports with your organization's telemetry to show exposure, impacted assets, related incidents and mitigation status. Advanced hunting is the KQL query tool over raw data, attack simulation training educates users, and Secure Score tracks configuration recommendations."
- },
- {
-  "id": 1093,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Service Trust Portal",
-  "format": "multiple_choice",
-  "q": "An external auditor asks for Microsoft's latest SOC 2 Type II report and ISO/IEC 27001 certificate covering Azure and Microsoft 365, as evidence for your own audit. Where do you obtain these documents?",
-  "options": [
-   "Microsoft Purview Compliance Manager",
-   "The Microsoft Service Trust Portal",
-   "The Microsoft Trust Center home page",
-   "The Microsoft 365 admin center Service health page"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The Service Trust Portal publishes independent audit reports (SOC, ISO, FedRAMP, PCI and more), penetration test summaries and compliance guides that customers download for their own assurance work. The Trust Center is the public marketing and policy site about privacy and compliance, without the downloadable audit evidence. Compliance Manager measures YOUR controls, and Service health reports outages."
- },
- {
-  "id": 1094,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Privacy principles",
-  "format": "multi_select",
-  "q": "Which TWO of the following are among Microsoft's six privacy principles? (Select two.)",
-  "options": [
-   "Control",
-   "No content-based targeting",
-   "Shared responsibility",
-   "Least privilege",
-   "Data residency"
-  ],
-  "answer": [
-   0,
-   1
-  ],
-  "why": "Microsoft's six privacy principles are Control, Transparency, Security, Strong legal protections, No content-based targeting and Benefits to you. Shared responsibility and least privilege are security concepts, and data residency is a compliance concept; they are placed here precisely because they sound plausible. Expect the exam to hide a non-principle among real ones."
- },
- {
-  "id": 1095,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Priva Subject Rights Requests",
-  "format": "multiple_choice",
-  "q": "Under GDPR a customer asks for a copy of all personal data your company holds about them in Microsoft 365. The privacy team needs to find the data, review and redact it, and track the request to completion within the legal deadline. Which solution is designed for this?",
-  "options": [
-   "Microsoft Priva Privacy Risk Management",
-   "Microsoft Priva Subject Rights Requests",
-   "Microsoft Purview eDiscovery",
-   "Microsoft Purview Compliance Manager"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Priva Subject Rights Requests automates discovery of a data subject's personal data across Microsoft 365, supports review, redaction and collaboration, and tracks due dates. Privacy Risk Management detects privacy risks such as overexposure and data transfers. eDiscovery is a legal investigation tool that could technically search, but it lacks the DSR workflow, and Compliance Manager measures compliance posture."
- },
- {
-  "id": 1096,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Priva Privacy Risk Management",
-  "format": "multiple_choice",
-  "q": "The privacy office wants to detect when personal data is being over-shared or hoarded in SharePoint and OneDrive, or transferred between regions, and to send employees automated reminders about proper handling. Which solution fits?",
-  "options": [
-   "Microsoft Purview Insider Risk Management",
-   "Microsoft Priva Privacy Risk Management",
-   "Microsoft Purview Data Loss Prevention",
-   "Microsoft Purview Communication Compliance"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Priva Privacy Risk Management provides policy templates for data overexposure, data transfer and data minimization, evaluates personal data across Microsoft 365, and can notify users with remediation prompts. Insider Risk Management focuses on risky user behavior such as data theft rather than privacy-specific risk, DLP prevents sharing of sensitive information through policy actions, and Communication Compliance monitors messages for inappropriate content."
- },
- {
-  "id": 1097,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Purview portal",
-  "format": "multiple_choice",
-  "q": "Which statement about the administrative portal for Microsoft Purview compliance solutions is correct?",
-  "options": [
-   "compliance.microsoft.com, the Microsoft Purview compliance portal, remains the home for compliance solutions",
-   "purview.microsoft.com is the single Purview portal; the older Purview compliance portal has been retired",
-   "Sensitivity labels are managed in the Microsoft Defender portal and all other solutions in the Azure portal",
-   "Purview solutions are configured only through PowerShell and have no browser-based administration portal"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft consolidated the compliance portal and the Azure Purview governance portal into the unified Microsoft Purview portal (purview.microsoft.com), where each solution is reached under Solutions; the compliance portal was retired in 2025. The Defender portal is for security operations (it does share the Audit search), and the Azure portal is not the home for Purview solutions."
- },
- {
-  "id": 1098,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Compliance Manager",
-  "format": "multiple_choice",
-  "q": "The compliance team must demonstrate progress toward ISO/IEC 27001 and NIST CSF, with a numeric score, a list of controls, step-by-step implementation guidance and the ability to assign remediation work to owners. Which tool provides this?",
-  "options": [
-   "Microsoft Secure Score",
-   "Microsoft Purview Compliance Manager",
-   "The regulatory compliance dashboard in Microsoft Defender for Cloud",
-   "The Service Trust Portal"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Compliance Manager provides assessments built from regulatory templates (hundreds, covering ISO, NIST, GDPR, HIPAA and more), a compliance score, controls mapped to improvement actions with implementation and testing guidance, and assignment of actions. Secure Score is a security posture score, not a regulatory framework. Defender for Cloud's regulatory compliance dashboard evaluates cloud resources against standards but does not manage organization-wide actions, and the Service Trust Portal is Microsoft's evidence library."
- },
- {
-  "id": 1099,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Compliance score action types",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn Compliance Manager, an improvement action such as 'Use encryption to protect data at rest' is classified as a [answer] action, because it is intended to stop an incident from happening.",
-  "options": [
-   "preventative",
-   "detective",
-   "corrective",
-   "discretionary"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Compliance Manager classifies actions as preventative (stop incidents, for example encryption or access control), detective (find incidents, for example monitoring and audit), or corrective (respond after an incident, for example configuration changes to limit damage). Separately, actions are mandatory or discretionary, which describes whether they must be done, not how they work. The exam uses matching items on this taxonomy."
- },
- {
-  "id": 1100,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Compliance score",
-  "format": "multiple_choice",
-  "q": "Which statement about the compliance score in Microsoft Purview Compliance Manager is correct?",
-  "options": [
-   "It includes points for Microsoft-managed controls as well as for actions your organization completes",
-   "Only actions completed and tested by your own organization contribute points toward the score",
-   "The compliance score and Microsoft Secure Score are the same number displayed in two different portals",
-   "The score measures the security configuration of Azure virtual machines against the security benchmark"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Compliance score is based on improvement actions of two kinds: Microsoft-managed actions (credited automatically based on Microsoft's implementation and audits) and your improvement actions (technical actions, some tested automatically from signals in other solutions, and non-technical actions you attest). It is a different measurement from Secure Score, and it has nothing to do with VM configuration."
- },
- {
-  "id": 1101,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Assessment templates",
-  "format": "yes_no",
-  "q": "True or False: Compliance Manager provides assessment templates only for Microsoft 365 data protection baselines and cannot be used to assess against external regulations such as GDPR or ISO/IEC 27001.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Beyond the default Microsoft data protection baseline, Compliance Manager includes hundreds of premium regulatory templates (GDPR, ISO/IEC 27001, NIST, HIPAA, PCI DSS, plus AI regulations such as the EU AI Act) and supports custom assessments, with templates available for Microsoft 365, other Microsoft services and even non-Microsoft assets."
- },
- {
-  "id": 1102,
-  "topic": "Purview — compliance, privacy & Priva",
-  "tag": "Priva Tracker Scanning",
-  "format": "multiple_choice",
-  "q": "The marketing team must inventory the cookies, beacons and pixels used across the company's public websites to verify they match the published privacy notice. Which Microsoft Priva solution addresses this?",
-  "options": [
-   "Priva Consent Management",
-   "Priva Tracker Scanning",
-   "Priva Privacy Assessments",
-   "Priva Subject Rights Requests"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Priva Tracker Scanning discovers and categorizes tracking technologies on your websites to monitor non-compliance. Consent Management builds and publishes consent models for collecting user consent, Privacy Assessments automates tracking of personal data usage and risk assessments, and Subject Rights Requests handles data subject requests. Priva's five solutions each answer a different privacy need."
- },
- {
-  "id": 1103,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Sensitivity vs retention labels",
-  "format": "multiple_choice",
-  "q": "A finance document must (1) be encrypted so only the Finance group can open it and (2) be kept for seven years and then deleted. Which combination of Purview labels achieves both?",
-  "options": [
-   "A single sensitivity label configured with encryption and a seven-year retention period",
-   "A sensitivity label for the encryption and a retention label for the seven-year retention",
-   "A single retention label configured with encryption",
-   "A data loss prevention policy that both encrypts and retains the file"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Sensitivity labels classify and protect content (encryption, markings, access restrictions); retention labels govern how long content is kept and what happens afterwards. Neither label type does the other's job, and an item can carry one of each. DLP detects and prevents inappropriate sharing; it does not apply retention. The two label families are the single most tested distinction in the Purview domain."
- },
- {
-  "id": 1104,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Label policies",
-  "format": "multiple_choice",
-  "q": "An admin creates three sensitivity labels, but users report that the Sensitivity button in Word and Outlook shows no labels. What step was missed?",
-  "options": [
-   "Enabling an auto-labeling policy so the labels are pushed to the Office apps",
-   "Publishing the labels to users or groups with a sensitivity label policy",
-   "Creating a DLP policy that references the labels as a rule condition",
-   "Assigning the Compliance Administrator role to the affected users"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Creating a label defines what it does; a sensitivity label policy publishes it to specific users and groups and sets policy settings such as a default label or mandatory labeling. Without publishing, no one sees the labels in Office apps. Auto-labeling applies labels automatically by condition but also depends on the label existing and, for client-side recommendations, being published. DLP and admin roles are unrelated to label visibility."
- },
- {
-  "id": 1105,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Container labels",
-  "format": "multiple_choice",
-  "q": "Whenever a project team labels its Microsoft Teams team as 'Highly Confidential', the team must automatically become private, block guest access and prevent access from unmanaged devices. Which capability configures this?",
-  "options": [
-   "A sensitivity label scoped to groups and sites with container settings for privacy, guests and unmanaged devices",
-   "A retention label applied to the Teams channel messages with a setting that converts the team to private",
-   "A DLP policy scoped to Teams that blocks guests and unmanaged devices whenever the label is detected",
-   "A Conditional Access policy targeting Microsoft Teams that requires a compliant device and blocks guests"
-  ],
-  "answer": [
-   0
-  ],
-  "why": "Sensitivity labels can be scoped to groups and sites (container labels) and then carry settings such as privacy (public or private), whether guests can be added, external sharing for SharePoint, and access from unmanaged devices. Retention labels only control lifespan, DLP inspects content, and while Conditional Access can restrict unmanaged devices, it cannot make a team private or block guests based on the team's classification."
- },
- {
-  "id": 1106,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Auto-labeling",
-  "format": "multiple_choice",
-  "q": "Thousands of existing documents in SharePoint contain customer credit card numbers. You want the 'Confidential' sensitivity label applied to any file with five or more credit card numbers, without any user action and including files nobody has opened for years. Which mechanism does this?",
-  "options": [
-   "Client-side recommended labeling in the Office apps for files with card numbers",
-   "A service-side auto-labeling policy for SharePoint, OneDrive and Exchange",
-   "A DLP policy with a policy tip that suggests the Confidential label",
-   "A retention label with a disposition review triggered by card numbers"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Service-side auto-labeling policies scan content at rest in SharePoint, OneDrive and Exchange and apply a sensitivity label when conditions such as sensitive information types match, with no user involvement, including for files that are never opened. Client-side auto-labeling (automatic or recommended) only fires when a user edits content in an Office app. DLP policy tips warn users during sharing, and retention labels govern lifespan."
- },
- {
-  "id": 1107,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Classification methods",
-  "format": "multi_select",
-  "q": "Which THREE of the following are data classification methods available in Microsoft Purview? (Select three.)",
-  "options": [
-   "Built-in and custom sensitive information types based on patterns, keywords and checksums",
-   "Trainable classifiers that learn to recognize categories of content such as resumes or source code from examples",
-   "Exact data match sensitive information types that match against your own database of actual values",
-   "Azure Policy definitions assigned to the tenant",
-   "Network security group tags"
-  ],
-  "answer": [
-   0,
-   1,
-   2
-  ],
-  "why": "Purview classifies content with sensitive information types (pattern-based, built-in or custom), trainable classifiers (machine learning models trained on samples, pre-trained or custom) and exact data match, which matches actual values from a data source rather than any value matching a pattern; document fingerprinting is a fourth technique. Azure Policy and NSG tags are Azure governance and networking constructs, not content classification."
- },
- {
-  "id": 1108,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Explorers",
-  "format": "multiple_choice",
-  "q": "A compliance analyst must find out who downgraded a document's sensitivity label from 'Confidential' to 'General' last week and whether any DLP policy matched on that file. Which Purview tool shows this?",
-  "options": [
-   "Data explorer (Content explorer)",
-   "Activity explorer",
-   "Compliance Manager",
-   "Content search"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Activity explorer shows label and DLP-related activities over time (label applied, changed, removed, DLP rule matches, file activities) with dozens of filters. Data explorer (the successor of Content explorer) shows WHAT sensitive content exists and WHERE it lives, not who changed a label. Compliance Manager measures compliance posture, and Content search is an eDiscovery capability to find and export content."
- },
- {
-  "id": 1109,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "DLP",
-  "format": "multiple_choice",
-  "q": "Employees must be prevented from sending credit card numbers to external recipients in Teams chats and email. Internally, they should see a warning but be able to proceed after entering a business justification, and every override must be recorded. Which Purview capability implements this?",
-  "options": [
-   "A sensitivity label with encryption restricted to internal recipients",
-   "A DLP policy with policy tips and override with business justification",
-   "An insider risk management policy using a data leak template",
-   "A communication compliance policy with a sensitive information condition"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "DLP policies detect sensitive information across locations such as Exchange, SharePoint, OneDrive, Teams and devices and enforce actions: block, block with override and justification, notify, and generate alerts and audit records. Sensitivity labels protect content but do not inspect messages for card numbers at send time. Insider Risk Management scores user behavior, and Communication Compliance reviews messages for inappropriate content rather than blocking data exfiltration."
- },
- {
-  "id": 1110,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Endpoint DLP",
-  "format": "multiple_choice",
-  "q": "You must prevent users from copying files that contain personal data to USB drives or uploading them to unapproved cloud storage sites from their Windows laptops. Which capability is required?",
-  "options": [
-   "Sensitivity labels with content markings",
-   "Endpoint data loss prevention, with the devices onboarded",
-   "Microsoft Intune device compliance policies",
-   "Microsoft Defender for Cloud Apps Cloud Discovery"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Endpoint DLP extends DLP policies to Windows and macOS devices that are onboarded to Purview or Defender for Endpoint, monitoring and restricting actions such as copying to removable media, printing and uploading to restricted service domains. Markings only label content, Intune compliance evaluates device health, and Cloud Discovery reports on app usage rather than blocking file copies."
- },
- {
-  "id": 1111,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Retention policy vs label",
-  "format": "multiple_choice",
-  "q": "Legal requires that ALL Microsoft Teams chat messages in the organization be kept for three years and then deleted. Which Purview mechanism is the correct fit?",
-  "options": [
-   "A retention label published to users",
-   "A retention policy scoped to the Teams chats location",
-   "A sensitivity label with a three-year setting",
-   "A records management file plan"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Retention policies apply retention settings at the location level (Exchange mailboxes, SharePoint sites, OneDrive, Microsoft 365 Groups, Teams chats and channel messages, Copilot interactions), which fits an organization-wide rule. Retention labels apply to individual items, typically for exceptions or records. Sensitivity labels have no retention settings, and a file plan is a records management construct for labels and records."
- },
- {
-  "id": 1112,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Principles of retention",
-  "format": "multiple_choice",
-  "q": "A document in a SharePoint site has a retention label that says 'delete after 3 years'. The site is also in scope of a retention policy that says 'retain for 7 years, then delete'. What happens to the document?",
-  "options": [
-   "Deleted after 3 years, because the label is explicit and explicit settings win over implicit ones",
-   "Retained for 7 years, then deleted: retention wins over deletion and the longest period wins",
-   "Retained for 10 years, because the retention periods from the label and the policy are added together",
-   "Retained indefinitely, because Purview never deletes content while two settings conflict"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Purview's principles of retention resolve conflicts in order: retention wins over deletion; the longest retention period wins; explicit inclusion wins over implicit inclusion; and the shortest deletion period wins. Here a retain-7-years setting beats delete-after-3, so the document is kept for seven years, after which the deletion applies. Periods are never summed, and conflicts never cause indefinite retention."
- },
- {
-  "id": 1113,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Records management",
-  "format": "multiple_choice",
-  "q": "A financial regulator requires that certain trade confirmations, once declared, can NEVER be edited, have their label removed or be deleted before the retention period ends, even by a Global Administrator. Which Purview capability satisfies this?",
-  "options": [
-   "A retention label that marks the item as a record (non-regulatory)",
-   "A retention label that marks the item as a regulatory record",
-   "A sensitivity label with encryption and a do-not-forward restriction",
-   "A retention policy with preservation lock on the confirmations site"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Regulatory records impose the strictest restrictions: no edits, no label removal or change, and no deletion until retention expires, and the label cannot be removed even by administrators. A standard record still allows some edits (for example editing a SharePoint file while it is unlocked) and its label can be changed by admins. Encryption controls access, not immutability, and preservation lock protects a policy from being changed, not individual items."
- },
- {
-  "id": 1114,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Disposition review",
-  "format": "multiple_choice",
-  "q": "Contracts must be retained for ten years. When the period ends, the legal team must inspect each contract and decide whether to delete it, extend retention or relabel it, with an audit trail of the decision. Which configuration provides this?",
-  "options": [
-   "A retention policy that deletes the contracts automatically at the end of the ten-year period",
-   "A retention label configured to trigger a disposition review at the end of the retention period",
-   "An eDiscovery hold on the contracts library that the legal team lifts after ten years",
-   "A DLP policy that blocks deletion of contracts and alerts the legal team"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Disposition review is a retention label setting: when the period ends, designated reviewers are notified and decide to delete, extend, relabel or add another review stage, and every decision is logged. Retention policies delete automatically without review. eDiscovery holds preserve content for legal cases but have no lifecycle decision workflow, and DLP does not govern deletion."
- },
- {
-  "id": 1115,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Unified data governance",
-  "format": "multiple_choice",
-  "q": "A data platform team needs to scan and catalog data assets across Azure SQL, an on-premises SQL Server, Amazon S3 and Power BI, add a business glossary, organize data into governance domains and data products, and measure data quality. Which Microsoft Purview capabilities are designed for this?",
-  "options": [
-   "Compliance Manager and the Service Trust Portal",
-   "Microsoft Purview Data Map and Unified Catalog",
-   "Content explorer and Activity explorer in Purview",
-   "Microsoft Sentinel data connectors and workbooks"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Purview's data governance solutions are the Data Map, which scans multicloud and on-premises sources to collect technical metadata and lineage, and the Unified Catalog, where data stewards curate governance domains, data products, glossary terms and data quality rules. The explorers show sensitive content in Microsoft 365, Compliance Manager measures regulatory posture, and Sentinel connectors ingest security logs."
- },
- {
-  "id": 1116,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Label rules",
-  "format": "yes_no",
-  "q": "True or False: A single file can carry two different sensitivity labels at the same time, for example both 'Confidential' and 'Internal'.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. An item can have only ONE sensitivity label at a time (a sub-label such as Confidential/Finance counts as that one label). By contrast, an item can have one sensitivity label AND one retention label, because they serve different purposes. Multiple DLP policies, however, can apply to the same item."
- },
- {
-  "id": 1117,
-  "topic": "Purview — information protection & lifecycle",
-  "tag": "Sensitive information types",
-  "format": "dropdown",
-  "q": "Select the answer that correctly completes the sentence.\n\nIn Microsoft Purview, a [answer] identifies content such as credit card numbers by using a regular expression pattern, checksum validation and supporting keywords, with configurable confidence levels.",
-  "options": [
-   "trainable classifier",
-   "sensitive information type",
-   "retention label policy",
-   "document fingerprint"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Sensitive information types are the pattern-based classifiers; Microsoft ships hundreds of built-in ones and you can create custom types. Trainable classifiers recognize categories of documents from examples rather than patterns, document fingerprints match content derived from a template form, and retention labels govern lifecycle, not detection."
- },
- {
-  "id": 1118,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Insider Risk Management",
-  "format": "multiple_choice",
-  "q": "HR notifies IT that an employee has resigned. The security team wants automated detection of unusual file downloads, USB copies and uploads to personal cloud storage by that employee during the notice period, with alerts scored by risk. Which Purview solution and template fit?",
-  "options": [
-   "Data loss prevention with an Endpoint DLP policy for removable media",
-   "Insider Risk Management with the 'Data theft by departing users' template",
-   "Communication Compliance with a data leak detection template",
-   "eDiscovery with a custodian hold on the employee's mailbox and OneDrive"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Insider Risk Management correlates signals such as downloads, exfiltration to USB, cloud uploads and printing, uses triggering events (an HR connector resignation date or an account deletion) to activate the policy, and produces risk-scored alerts. DLP can block individual actions but does not score user risk over time. Communication Compliance monitors messages, and eDiscovery preserves content for investigations rather than detecting behavior."
- },
- {
-  "id": 1119,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Pseudonymization",
-  "format": "multiple_choice",
-  "q": "An Insider Risk Management reviewer opens an alert and sees the user displayed as 'AnonIS8-988' instead of a name. Why?",
-  "options": [
-   "The alert is a test alert generated by Microsoft to validate the policy configuration",
-   "IRM pseudonymizes users by default; revealing the identity is a separate, audited step",
-   "The user was deleted from the directory, so the alert shows a placeholder identifier",
-   "The reviewer's Purview license does not include the permission to view user names"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Privacy by design is a core principle of Insider Risk Management: users are pseudonymized by default, role-based access controls limit who can see real names, and all reviewer actions are audited. Admins can turn anonymization off in settings, but the default is pseudonymized display. This is a frequently tested characteristic that distinguishes IRM from other Purview solutions."
- },
- {
-  "id": 1120,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "IRM workflow",
-  "format": "multiple_choice",
-  "q": "In the Insider Risk Management workflow, a reviewer evaluates a newly generated alert, decides it needs deeper review and creates a case for investigators. Which stage is the reviewer performing when evaluating the alert and deciding whether it needs review?",
-  "options": [
-   "Policies",
-   "Triage",
-   "Investigate",
-   "Action"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "The workflow runs policies (define what to detect), alerts (generated by matched activity), triage (reviewers evaluate alerts and mark them needs review, resolved or dismissed), investigate (cases, activity explorer, content explorer) and action (notices, escalation to eDiscovery, or ServiceNow tickets). Evaluating an alert before a case exists is triage; creating and working the case is the investigate stage."
- },
- {
-  "id": 1121,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Adaptive Protection",
-  "format": "multiple_choice",
-  "q": "The security team wants DLP to automatically become stricter for a user whose insider risk level has just been elevated to high, blocking sharing that is merely audited for other users, and relaxing again when the risk level drops. Which capability does this?",
-  "options": [
-   "Conditional Access risk-based policies",
-   "Adaptive Protection in Microsoft Purview",
-   "Communication Compliance",
-   "Retention lock"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Adaptive Protection uses Insider Risk Management risk levels as a dynamic condition in DLP (and Conditional Access and Data Lifecycle Management) so that controls tighten for elevated-risk users and loosen when risk subsides. Conditional Access risk policies react to Entra ID Protection sign-in and user risk, a different signal. Communication Compliance and retention lock are unrelated to dynamic DLP enforcement."
- },
- {
-  "id": 1122,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Communication Compliance",
-  "format": "multiple_choice",
-  "q": "A financial services firm must detect threatening or harassing language and regulatory violations in Teams messages and email, route flagged messages to designated reviewers, and document remediation. Which Purview solution is built for this?",
-  "options": [
-   "Insider Risk Management",
-   "Communication Compliance",
-   "Data loss prevention",
-   "Microsoft Priva"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Communication Compliance uses classifiers (threat, harassment, discrimination, profanity) and custom conditions to detect policy violations in messages across Teams, Exchange, Viva Engage and third-party sources, with a reviewer workflow to resolve, notify, escalate or tag. Insider Risk Management scores user behavior, DLP protects sensitive information, and Priva manages personal data privacy."
- },
- {
-  "id": 1123,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "eDiscovery",
-  "format": "multiple_choice",
-  "q": "For a lawsuit, legal must preserve the mailboxes and OneDrive accounts of specific custodians so nothing can be permanently deleted, collect the relevant content into a set for review with near-duplicate detection and email threading, and export the results. Which Purview capability supports the full workflow?",
-  "options": [
-   "Content search only, exported to PST for the legal team",
-   "An eDiscovery case with holds, searches, review sets and analytics",
-   "A retention policy on the custodians' mailboxes and OneDrive accounts",
-   "Communication Compliance with the custodians in scope"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "eDiscovery cases provide legal holds on custodial data sources, searches, review sets with analytics such as near-duplicate detection, threading and themes (premium features depending on licensing), and export. Content search finds and exports content but is not a preservation or review workflow. A retention policy keeps data generally but is not case-based, and Communication Compliance monitors messages."
- },
- {
-  "id": 1124,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "eDiscovery evolution",
-  "format": "multiple_choice",
-  "q": "Which statement about eDiscovery in Microsoft Purview is correct as of 2026?",
-  "options": [
-   "eDiscovery (Standard) and eDiscovery (Premium) are two separate solutions chosen from the Purview home page",
-   "One unified eDiscovery solution; Content search runs inside it, and premium features depend on licensing",
-   "eDiscovery has been moved into Microsoft Sentinel so that legal and security investigations share tooling",
-   "Content search is a separate solution that can search but cannot place holds or export results"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Microsoft retired the classic Content search, eDiscovery (Standard) and eDiscovery (Premium) experiences in 2025 in favor of one unified eDiscovery solution in the Purview portal. Content search lives inside it as a system-generated case for quick find-and-export, while cases created by users can add holds, review sets and premium analytics based on the organization's licenses. Sentinel is a SIEM and has no eDiscovery."
- },
- {
-  "id": 1125,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Content search",
-  "format": "multiple_choice",
-  "q": "A manager asks how many emails and files across the whole organization mention the code name 'Project Falcon'. Nothing needs to be preserved or reviewed; they only want counts and an export. What is the quickest appropriate tool?",
-  "options": [
-   "An eDiscovery hold on all mailboxes and sites",
-   "Content search within Microsoft Purview eDiscovery",
-   "Activity explorer filtered by the code name",
-   "Audit log search for the code name keyword"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Content search searches mailboxes, sites and Teams for keywords and conditions, returns statistics and allows export without creating holds, which matches a simple find-and-export need. A hold preserves data and is unnecessary here. Activity explorer shows label and DLP activity, and the audit log records user and admin actions rather than the content of messages."
- },
- {
-  "id": 1126,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Audit Standard vs Premium",
-  "format": "multiple_choice",
-  "q": "A regulated organization must retain Microsoft 365 audit records for ten years and wants intelligent insights on events such as when specific mail items were accessed. Which licensing and configuration is required?",
-  "options": [
-   "Audit (Standard), which retains records for 180 days and can be extended to ten years with a retention policy",
-   "Audit (Premium) with E5 (one year by default) plus the 10-Year Audit Log Retention add-on and a retention policy",
-   "Microsoft Sentinel, because Purview audit cannot retain records beyond 90 days under any license",
-   "Microsoft Entra ID P2, which extends unified audit log retention to ten years for all workloads"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Audit (Standard) keeps records for 180 days and is included in most subscriptions. Audit (Premium) extends default retention to one year for Entra ID, Exchange and SharePoint activity, allows retention policies of up to ten years with the 10-Year Audit Log Retention add-on, and adds intelligent insights. Sentinel is an optional long-term destination but not a Purview requirement, and Entra P2 affects Entra sign-in and audit log retention (30 days), not the unified audit log."
- },
- {
-  "id": 1127,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Audit search location",
-  "format": "multiple_choice",
-  "q": "From which portals can an administrator search the Microsoft 365 unified audit log?",
-  "options": [
-   "Only the Microsoft Entra admin center audit logs blade",
-   "The Microsoft Purview portal and the Microsoft Defender portal",
-   "Only the Exchange admin center compliance section",
-   "Only the Azure portal Log Analytics workspace blade"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Unified audit log search is available in the Microsoft Purview portal under Audit and in the Microsoft Defender portal (security.microsoft.com/auditlogsearch), which is convenient for security teams. The Entra admin center exposes Entra's own sign-in and directory audit logs, which are different logs, and Log Analytics only holds audit data if you export it there."
- },
- {
-  "id": 1128,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Audit retention",
-  "format": "yes_no",
-  "q": "True or False: With Microsoft Purview Audit (Standard), audit records are retained for 90 days.",
-  "options": [
-   "True",
-   "False"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "False. Since late 2023, Audit (Standard) retains audit records for 180 days (previously 90). Audit (Premium) retains them for one year by default and up to ten years with the add-on license. Older study materials still quote 90 days, so this is a trap for anyone relying on outdated notes."
- },
- {
-  "id": 1129,
-  "topic": "Purview — insider risk, eDiscovery & audit",
-  "tag": "Information barriers",
-  "format": "multiple_choice",
-  "q": "A bank must prevent its Trading desk and its Research analysts from chatting, calling or sharing files with each other in Microsoft Teams and SharePoint to satisfy a conflict-of-interest regulation. Which Purview capability enforces this?",
-  "options": [
-   "Data loss prevention",
-   "Information barriers",
-   "Communication Compliance",
-   "Sensitivity labels"
-  ],
-  "answer": [
-   1
-  ],
-  "why": "Information barriers define segments of users and block communication and collaboration between them in Teams, SharePoint and OneDrive. DLP controls sensitive content but does not stop two groups from talking, Communication Compliance detects and reviews inappropriate messages after the fact, and sensitivity labels classify and protect content rather than restrict who may communicate with whom."
- }
+    {
+        id: 1001,
+        topic: "Security & identity concepts",
+        tag: "Shared responsibility",
+        format: "multiple_choice",
+        q: "Contoso migrates an on-premises line-of-business app to Azure. The web tier moves to Azure App Service (PaaS) and the database to Azure SQL Database (PaaS). The CIO asks which responsibilities Contoso keeps REGARDLESS of the cloud service model it chooses. Which answer is correct?",
+        options: [
+            "Physical datacenter, physical network and physical hosts",
+            "Operating system patching and network controls",
+            "Information and data, devices (endpoints), and accounts and identities",
+            "The application code and the identity and directory infrastructure",
+        ],
+        answer: [2],
+        why: "In the shared responsibility model some responsibilities always stay with the customer: the data, the endpoints, and the accounts and identities. Physical infrastructure is always Microsoft's in the cloud. OS patching and network controls shift to the provider for PaaS and SaaS. Application and identity infrastructure are shared or provider-managed in PaaS. The trap is picking something that moves with the model instead of the three items that never move.",
+    },
+    {
+        id: 1002,
+        topic: "Security & identity concepts",
+        tag: "Defense in depth",
+        format: "multiple_choice",
+        q: "A security architect maps four existing controls to the defense-in-depth layers: (1) MFA on every sign-in, (2) DDoS mitigation in front of the public entry point, (3) network security groups limiting east-west traffic between subnets, (4) encryption of storage volumes. Which control belongs to the PERIMETER layer?",
+        options: [
+            "The DDoS mitigation in front of the public entry point",
+            "The MFA requirement on every sign-in",
+            "The network security groups limiting east-west traffic",
+            "The encryption of storage volumes",
+        ],
+        answer: [0],
+        why: "Defense in depth uses layers: physical, identity and access, perimeter, network, compute, application, data. The perimeter layer is about protecting the edge from large-scale network attacks, which is exactly DDoS protection. MFA belongs to identity and access, NSG segmentation to the network layer, and volume encryption to the data layer. The exam likes to test whether you can place a concrete control on the right layer rather than recite the list.",
+    },
+    {
+        id: 1003,
+        topic: "Security & identity concepts",
+        tag: "Zero Trust principles",
+        format: "multiple_choice",
+        q: "A proposal says: once a laptop passes a compliance check at onboarding, it is trusted for all subsequent access requests for twelve months without re-evaluation. Which Zero Trust guiding principle does this proposal MOST directly violate?",
+        options: [
+            "Assume breach",
+            "Use least privilege access",
+            "Verify explicitly",
+            "Defense in depth",
+        ],
+        answer: [2],
+        why: "'Verify explicitly' means every access request is authenticated and authorized using all available signals at the time of the request, not a one-time check that grants long-lived trust. Least privilege is about how much access is granted, and assume breach is about designing as if attackers are already inside. Defense in depth is a related strategy but not one of the three Zero Trust guiding principles, so it is a deliberate distractor.",
+    },
+    {
+        id: 1004,
+        topic: "Security & identity concepts",
+        tag: "Zero Trust pillars",
+        format: "multiple_choice",
+        q: "In Microsoft's Zero Trust model, micro-segmentation and real-time threat protection for traffic flows are controls that primarily belong to which of the six foundational pillars?",
+        options: ["Infrastructure", "Networks", "Applications", "Data"],
+        answer: [1],
+        why: "The six pillars are identities, devices (endpoints), applications, data, infrastructure and networks. Segmentation, encryption in transit and real-time threat protection of traffic are the network pillar's job. Infrastructure covers servers, VMs and containers, applications covers in-app permissions and shadow IT discovery, and data covers classification, labeling and encryption of the data itself. A common error is to file segmentation under infrastructure.",
+    },
+    {
+        id: 1005,
+        topic: "Security & identity concepts",
+        tag: "Hashing vs encryption",
+        format: "multiple_choice",
+        q: "A developer must store user passwords so the system can check a supplied password but can NEVER recover the original value, even by an administrator with full database access. Which technique should be used?",
+        options: [
+            "Symmetric encryption with a key stored in a key vault",
+            "Asymmetric encryption using the server's public key",
+            "Salted hashing with a strong one-way algorithm",
+            "A digital signature computed over the password",
+        ],
+        answer: [2],
+        why: "Hashing is one-way: the same input always gives the same fixed-length output, and the original cannot be recovered. Adding a salt defeats precomputed rainbow-table attacks. Both symmetric and asymmetric encryption are reversible by design, which is exactly the property you do not want for stored passwords. A digital signature proves origin and integrity of data; it is not a way to store secrets.",
+    },
+    {
+        id: 1006,
+        topic: "Security & identity concepts",
+        tag: "Asymmetric encryption",
+        format: "multiple_choice",
+        q: "A partner must send you a confidential file that only you can decrypt. You have never exchanged a secret with the partner and you do not want to. Using asymmetric encryption, which keys are used?",
+        options: [
+            "The partner encrypts with your private key; you decrypt with your public key",
+            "The partner encrypts with your public key; you decrypt with your private key",
+            "The partner encrypts with their private key; you decrypt with their public key",
+            "Both parties derive the same symmetric key from a shared passphrase",
+        ],
+        answer: [1],
+        why: "In asymmetric encryption anything encrypted with a public key can be decrypted only with the matching private key. So the sender uses the recipient's freely shareable public key and only the recipient's private key can open it, which is why no prior secret exchange is needed. Encrypting with a private key and decrypting with the public key is the pattern for digital signatures (proving origin), not confidentiality. A shared passphrase is symmetric encryption and needs a secret exchanged in advance.",
+    },
+    {
+        id: 1007,
+        topic: "Security & identity concepts",
+        tag: "Encryption states",
+        format: "yes_no",
+        q: "True or False: Encryption in transit (for example, TLS on an HTTPS connection) also protects data stored on a server's disk if that physical disk is stolen.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Encryption in transit protects data only while it moves across a network. Data sitting on a disk is protected by encryption at rest (for example disk or database encryption). The three states are distinct: at rest, in transit, and in use, and each needs its own control. Mixing them up is a frequent exam error.",
+    },
+    {
+        id: 1008,
+        topic: "Security & identity concepts",
+        tag: "Digital signatures",
+        format: "multiple_choice",
+        q: "A firmware vendor digitally signs every update. Your devices must confirm each update really came from the vendor and was not modified. What do the devices need in order to verify the signature?",
+        options: [
+            "The vendor's private key",
+            "The vendor's public key",
+            "A symmetric key shared with the vendor",
+            "A hash of the device's own firmware",
+        ],
+        answer: [1],
+        why: "A signature is created with the signer's private key and verified with the signer's public key. The verifier recomputes the hash of the content and checks it against the decrypted signature, proving both authenticity (only the private key holder could sign) and integrity (any change alters the hash). The private key must never leave the vendor, so option A would be a serious security failure. No shared symmetric key is involved.",
+    },
+    {
+        id: 1009,
+        topic: "Security & identity concepts",
+        tag: "Compliance concepts",
+        format: "multiple_choice",
+        q: "A contract clause requires that all customer records be stored and processed only in datacenters physically located within the European Union. Which compliance concept does this clause address?",
+        options: [
+            "Data residency",
+            "Data sovereignty",
+            "Data privacy",
+            "Data minimization",
+        ],
+        answer: [0],
+        why: "Data residency concerns the physical or geographic location where data can be stored and processed. Data sovereignty is the related but different idea that data is subject to the laws of the country in which it is collected, held or processed. Data privacy is about notice, transparency and consent regarding personal data. The exam separates residency (where it may sit) from sovereignty (whose laws apply), so read the clause carefully.",
+    },
+    {
+        id: 1010,
+        topic: "Security & identity concepts",
+        tag: "GRC",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn a Governance, Risk and Compliance (GRC) framework, [answer] is the process of identifying, assessing and responding to threats or events that can affect an organization's objectives.",
+        options: [
+            "governance",
+            "risk management",
+            "compliance",
+            "audit and assurance",
+        ],
+        answer: [1],
+        why: "Risk management identifies, assesses and treats threats to objectives. Governance is the system of rules, practices and processes an organization uses to direct and control its activities. Compliance is adherence to laws, regulations and standards, and auditing is the independent verification of that adherence. Sentence-completion items like this appear on the real exam, so learn the definitions precisely.",
+    },
+    {
+        id: 1011,
+        topic: "Security & identity concepts",
+        tag: "Identity as perimeter",
+        format: "multiple_choice",
+        q: "Employees now work from personal devices on home networks against SaaS applications the company does not host. Which statement BEST explains why identity is described as the primary security perimeter in this environment?",
+        options: [
+            "Network firewalls and perimeter controls become unnecessary once every identity is protected with MFA",
+            "Users, devices, apps and data now sit outside the network edge, so verified identity signals must drive access decisions",
+            "Identities are cheaper to manage centrally than the network appliances that used to define the corporate perimeter",
+            "Passwords and identity-based controls are inherently stronger than any control that operates at the network layer",
+        ],
+        answer: [1],
+        why: "When users, apps and data live outside the corporate network, the network edge cannot be the control point, so the identity (user, device, workload) and the signals around it become what you verify and enforce policy on. Network controls still matter as a layer; identity does not replace them. Cost and password strength are irrelevant to the concept and are there to distract.",
+    },
+    {
+        id: 1012,
+        topic: "Security & identity concepts",
+        tag: "Tokens",
+        format: "multiple_choice",
+        q: "In the OpenID Connect and OAuth 2.0 flows used by Microsoft Entra ID, which token proves WHO the user is (authentication), and which token is presented to an API to prove WHAT the caller is allowed to access (authorization)?",
+        options: [
+            "Access token proves identity; ID token is presented to the API",
+            "ID token proves identity; access token is presented to the API",
+            "Refresh token proves identity; ID token is presented to the API",
+            "SAML assertion proves identity; refresh token is presented to the API",
+        ],
+        answer: [1],
+        why: "Authentication information is carried in the ID token (OpenID Connect), while authorization is expressed in the access token that the client sends to the resource API. Refresh tokens only obtain new tokens and prove nothing to an API. A SAML assertion is a federation artifact used by SAML-based apps, not part of the OIDC/OAuth token pair. Knowing that authentication happens first and yields an ID token, then authorization uses an access token, is the point being tested.",
+    },
+    {
+        id: 1013,
+        topic: "Security & identity concepts",
+        tag: "Federation",
+        format: "multiple_choice",
+        q: "Fabrikam users must access a Contoso application by signing in with the credentials they already have at Fabrikam, and Contoso does not want to create or synchronize Fabrikam accounts into its own directory. Which concept enables this?",
+        options: [
+            "Directory synchronization, so that Fabrikam's user objects are replicated into Contoso's directory every hour",
+            "Federation: a trust relationship in which Contoso accepts tokens issued by Fabrikam's identity provider",
+            "Password hash synchronization of Fabrikam passwords into Contoso's tenant through Microsoft Entra Connect",
+            "A shared administrator account that Fabrikam users borrow to authenticate to the Contoso application",
+        ],
+        answer: [1],
+        why: "Federation establishes trust between identity providers so that one organization accepts authentication performed by the other, typically via SAML, WS-Fed or OpenID Connect tokens. No accounts need to be synchronized or duplicated. Directory sync and password hash sync are hybrid identity techniques inside one organization, not a trust between two. Shared accounts break accountability and are not a federation concept.",
+    },
+    {
+        id: 1014,
+        topic: "Security & identity concepts",
+        tag: "AD DS vs Entra ID",
+        format: "multiple_choice",
+        q: "Which statement correctly contrasts on-premises Active Directory Domain Services (AD DS) with Microsoft Entra ID?",
+        options: [
+            "AD DS natively uses SAML and OpenID Connect for on-premises apps, while Entra ID relies on Kerberos and LDAP to authenticate cloud applications",
+            "AD DS uses organizational units and Group Policy with Kerberos and LDAP; Entra ID is a cloud service built on SAML, OAuth 2.0 and OpenID Connect with no OUs or GPOs",
+            "Both are cloud services; AD DS is simply the older name for Entra ID, adopted when Azure Active Directory was renamed to Microsoft Entra ID",
+            "Entra ID can only manage identities that were first created in AD DS and then synchronized, so cloud-only accounts are not possible",
+        ],
+        answer: [1],
+        why: "AD DS is the on-premises directory built around Kerberos, NTLM and LDAP with organizational units and Group Policy. Entra ID is a cloud-based identity and access management service that speaks modern web protocols (SAML, WS-Fed, OAuth 2.0, OpenID Connect) and does not use OUs or GPOs. Entra ID is not a rename of AD DS (the rename was from Azure Active Directory), and cloud-only identities can be created directly in Entra ID without AD DS.",
+    },
+    {
+        id: 1015,
+        topic: "Security & identity concepts",
+        tag: "Federation",
+        format: "yes_no",
+        q: "True or False: Federation between two organizations requires both organizations to synchronize their user accounts into a single shared directory.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Federation is precisely the alternative to synchronization: each organization keeps its own directory and identity provider, and a trust relationship lets one side accept the other's authentication tokens. Synchronization (for example with Microsoft Entra Connect) is a hybrid identity technique within one organization between its on-premises AD DS and its own Entra tenant.",
+    },
+    {
+        id: 1016,
+        topic: "Security & identity concepts",
+        tag: "Four pillars of identity",
+        format: "multiple_choice",
+        q: "Your compliance team needs regular reports showing when each user signed in, which systems they accessed and what authentication type was used. Which of the four pillars of an identity infrastructure does this requirement map to?",
+        options: [
+            "Administration",
+            "Authentication",
+            "Authorization",
+            "Auditing",
+        ],
+        answer: [3],
+        why: "The four pillars are administration (creating and managing identities), authentication (proving who you are), authorization (what you may access) and auditing (tracking and reporting who did what, when). Reporting on sign-in times and systems accessed is auditing. Candidates often forget the fourth pillar because the first three get most of the attention.",
+    },
+    {
+        id: 1017,
+        topic: "Entra — identities & authentication",
+        tag: "Managed identities",
+        format: "multiple_choice",
+        q: "A nightly job on an Azure virtual machine must read secrets from Azure Key Vault. The security team forbids storing ANY credential (password, secret or certificate) in the job's code or configuration. Which identity type should the job use?",
+        options: [
+            "A dedicated user account with a long, complex password",
+            "A service principal that authenticates with a client secret",
+            "A managed identity assigned to the virtual machine",
+            "A guest (B2B) account invited from the vendor's tenant",
+        ],
+        answer: [2],
+        why: "A managed identity is a special service principal whose credentials are managed and rotated by the platform; the code never sees or stores a secret. A service principal with a client secret still requires that secret to be stored somewhere, which violates the requirement. User and guest accounts are human identity types and are the wrong tool for a workload. Managed identities are the exam's canonical answer for 'no credentials in code'.",
+    },
+    {
+        id: 1018,
+        topic: "Entra — identities & authentication",
+        tag: "Applications & service principals",
+        format: "multiple_choice",
+        q: "A developer registers a new application in Microsoft Entra ID. Which object represents the app's instance in your tenant, is what users and groups are assigned to, and is what receives permission grants and role assignments?",
+        options: [
+            "The application object created by the registration",
+            "The service principal (shown under Enterprise applications)",
+            "A system-assigned managed identity",
+            "The tenant's default directory object",
+        ],
+        answer: [1],
+        why: "Registering an app creates a global application object (the template) and, in the home tenant, a service principal, which is the local instance that holds assignments, permission consents and sign-in policy. Enterprise applications in the portal is the service principal view. A managed identity is a special kind of service principal used by Azure resources, not what a registration produces. The application object versus service principal distinction is a classic exam item.",
+    },
+    {
+        id: 1019,
+        topic: "Entra — identities & authentication",
+        tag: "Hybrid identity",
+        format: "multiple_choice",
+        q: "An organization synchronizes its on-premises AD DS to Microsoft Entra ID. Security policy states that user passwords, even as hashes, must never be stored in the cloud, and the company wants to avoid deploying and maintaining AD FS. Which authentication option meets these requirements?",
+        options: [
+            "Password hash synchronization",
+            "Pass-through authentication",
+            "Federation with Active Directory Federation Services",
+            "Microsoft Entra Domain Services",
+        ],
+        answer: [1],
+        why: "Pass-through authentication validates the password against on-premises AD DS in real time through lightweight agents, so no password or hash is stored in Entra ID and no AD FS farm is needed. Password hash synchronization stores a hash of the hash in the cloud, which the policy forbids. Federation with AD FS keeps passwords on-premises but requires the AD FS infrastructure the company wants to avoid. Entra Domain Services is a managed domain for legacy apps, not a sign-in method for the cloud.",
+    },
+    {
+        id: 1020,
+        topic: "Entra — identities & authentication",
+        tag: "Hybrid sync options",
+        format: "multiple_choice",
+        q: "A company acquires a subsidiary with a disconnected AD DS forest and wants to provision its users into the single Entra tenant using lightweight agents that are configured from the cloud, without deploying a full synchronization server. Which option fits?",
+        options: [
+            "Microsoft Entra Connect Sync",
+            "Microsoft Entra Cloud Sync",
+            "Active Directory Federation Services",
+            "Microsoft Entra Verified ID",
+        ],
+        answer: [1],
+        why: "Entra Cloud Sync uses lightweight provisioning agents on-premises with configuration held in the cloud, and it supports disconnected forests, which makes it the fit for mergers and acquisitions. Entra Connect Sync is the traditional on-premises server with the full feature set (device writeback, more complex topologies). AD FS is a federation service, not a synchronization tool. Verified ID issues verifiable credentials and is unrelated to directory sync.",
+    },
+    {
+        id: 1021,
+        topic: "Entra — identities & authentication",
+        tag: "External identities",
+        format: "multiple_choice",
+        q: "Partner engineers from another Microsoft Entra organization must collaborate in Teams shared channels in your tenant. Your security team does not want any guest user objects created in your directory. Which External ID capability meets this?",
+        options: [
+            "B2B collaboration",
+            "B2B direct connect",
+            "External ID for customers (CIAM) in an external tenant",
+            "Microsoft Entra Domain Services",
+        ],
+        answer: [1],
+        why: "B2B direct connect establishes a mutual trust between two Entra organizations so external users can access Teams shared channels with their home identity and NO guest object is created in your directory. B2B collaboration is the invitation model that does create a guest user object. External ID for customers is the CIAM solution for consumer or business-customer apps in a separate external tenant. Domain Services is a managed AD domain, unrelated to collaboration.",
+    },
+    {
+        id: 1022,
+        topic: "Entra — identities & authentication",
+        tag: "External ID for customers",
+        format: "multiple_choice",
+        q: "A retailer builds a consumer-facing mobile app. Shoppers should sign up with an email address or a Google account, see the retailer's branding, and be kept completely separate from the retailer's employees and internal apps. Where should these customer identities live?",
+        options: [
+            "As guest users invited into the workforce tenant through B2B collaboration, with one invitation sent per shopper",
+            "In a separate Microsoft Entra tenant in the external configuration, using External ID for customers",
+            "In the on-premises AD DS forest, synchronized into the workforce tenant with Microsoft Entra Connect",
+            "As service principals in the workforce tenant, with one application registration created per customer",
+        ],
+        answer: [1],
+        why: "External ID for customers (customer identity and access management) uses a separate tenant in the external configuration, with self-service sign-up flows, social identity providers such as Google, and custom branding, keeping consumers isolated from the workforce tenant. B2B collaboration is for business partners who need access to your organizational resources. AD DS and service principals are wrong identity types for consumers.",
+    },
+    {
+        id: 1023,
+        topic: "Entra — identities & authentication",
+        tag: "Device identities",
+        format: "multi_select",
+        q: "Which TWO statements about device identities in Microsoft Entra ID are correct? (Select two.)",
+        options: [
+            "Microsoft Entra joined devices are typically organization-owned and users sign in with their work or school account",
+            "Microsoft Entra registered devices are typically personally owned (BYOD) devices that are registered rather than joined",
+            "Microsoft Entra hybrid joined devices are joined to Entra ID only and have no relationship with on-premises AD DS",
+            "Device identities cannot be used as a signal in Conditional Access policies",
+            "Registering a device in Entra ID requires a Microsoft Entra ID P2 license",
+        ],
+        answer: [0, 1],
+        why: "Entra joined devices are org-owned and signed into with an organizational account; Entra registered devices support the bring-your-own-device scenario. Hybrid joined devices are joined to BOTH on-premises AD DS and Entra ID, so the third statement is wrong. Device state and compliance are core Conditional Access signals, and device registration is a free capability, so the last two statements are also false.",
+    },
+    {
+        id: 1024,
+        topic: "Entra — identities & authentication",
+        tag: "Agent identities",
+        format: "multiple_choice",
+        q: "An organization deploys forty instances of a 'Sales Assistant' AI agent from one publisher, each acting for a different sales region. Identity admins want to apply ONE Conditional Access policy to all forty and be able to disable all of them at once. Which Microsoft Entra Agent ID construct makes this possible?",
+        options: [
+            "A security group that contains the forty service principals as members",
+            "An agent identity blueprint from which all forty agent identities are created",
+            "A single managed identity that all forty instances share for authentication",
+            "An administrative unit that contains the forty agents and scopes the policy",
+        ],
+        answer: [1],
+        why: "In Microsoft Entra Agent ID every agent identity is created from a reusable agent identity blueprint that records the kind of agent, its publisher, roles and permissions. Admins can target policies such as Conditional Access at the blueprint, disable the blueprint to stop all its agents from authenticating, or revoke a permission for all of them at once. A shared managed identity would destroy per-agent accountability, and groups or administrative units do not provide the credential and permission inheritance the blueprint gives.",
+    },
+    {
+        id: 1025,
+        topic: "Entra — identities & authentication",
+        tag: "Agent identities",
+        format: "yes_no",
+        q: "True or False: In Microsoft Entra Agent ID, each agent identity stores its own client secret or certificate, which the AI agent uses to authenticate.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Agent identities have no credentials of their own. The credentials (federated identity credentials, certificates or client secrets) are configured on the agent identity blueprint, which acquires tokens on behalf of the agent identities created from it. This is why administrators can secure large fleets of agents consistently: the credential and permission configuration lives in one place.",
+    },
+    {
+        id: 1026,
+        topic: "Entra — identities & authentication",
+        tag: "Phishing-resistant MFA",
+        format: "multiple_choice",
+        q: "A regulator requires that all privileged administrators use a phishing-resistant authentication method. Which of the following methods satisfies this requirement?",
+        options: [
+            "A one-time code sent by SMS",
+            "Microsoft Authenticator push notification with number matching",
+            "A FIDO2 security key or passkey",
+            "An automated voice call with a verification prompt",
+        ],
+        answer: [2],
+        why: "FIDO2 security keys and passkeys (including passkeys in Microsoft Authenticator), Windows Hello for Business and certificate-based authentication are the phishing-resistant methods because the credential is cryptographically bound to the site and cannot be relayed to a fake sign-in page. SMS and voice can be intercepted or socially engineered. Number matching hardens Authenticator push notifications against MFA fatigue but a classic push approval is still not classed as phishing-resistant.",
+    },
+    {
+        id: 1027,
+        topic: "Entra — identities & authentication",
+        tag: "Temporary Access Pass",
+        format: "multiple_choice",
+        q: "A new employee starts on Monday with no registered authentication methods and no company phone yet. The organization is passwordless-first and wants the employee to register a passkey on day one without ever receiving a password. What should the help desk issue?",
+        options: [
+            "A Temporary Access Pass",
+            "A legacy app password",
+            "A self-service password reset link",
+            "A security defaults exemption",
+        ],
+        answer: [0],
+        why: "A Temporary Access Pass is a time-limited passcode issued by an admin that lets a user sign in and register strong methods such as passkeys or Microsoft Authenticator without a password. App passwords exist only for legacy clients that cannot do MFA. SSPR resets a password, which contradicts the passwordless goal. Security defaults cannot be exempted per user, and doing so would weaken security rather than onboard the user.",
+    },
+    {
+        id: 1028,
+        topic: "Entra — identities & authentication",
+        tag: "Windows Hello for Business",
+        format: "multiple_choice",
+        q: "Which statement about Windows Hello for Business is correct?",
+        options: [
+            "The user's biometric template is uploaded to Microsoft Entra ID so it can authenticate the user on any device",
+            "A PIN or biometric gesture unlocks a private key bound to that specific device; the biometric never leaves the device",
+            "It is a form of SMS-based multifactor authentication that sends a code to the phone number registered in Windows",
+            "The PIN is synchronized to every device the user owns through Microsoft Entra ID, so it only has to be set once",
+        ],
+        answer: [1],
+        why: "Windows Hello for Business uses asymmetric key pairs: the private key is protected by the device (ideally a TPM) and released by a local gesture, either a PIN or a biometric. The biometric data and the PIN are device-local and are not synced or stored in Entra ID, which is why the same user must enrol on each device. It is a passwordless, phishing-resistant method, not SMS.",
+    },
+    {
+        id: 1029,
+        topic: "Entra — identities & authentication",
+        tag: "MFA factors",
+        format: "multiple_choice",
+        q: "Which of the following combinations does NOT constitute true multifactor authentication?",
+        options: [
+            "A password plus a Microsoft Authenticator push approval",
+            "A fingerprint plus a PIN on a Windows Hello for Business device",
+            "A password plus the answers to two security questions",
+            "A FIDO2 security key plus its PIN",
+        ],
+        answer: [2],
+        why: "MFA needs at least two DIFFERENT factor categories: something you know, something you have, something you are. A password and security questions are both 'something you know', so the combination is single-factor even though there are two steps. Password plus Authenticator is know plus have; fingerprint plus PIN is are plus know; FIDO2 key plus PIN is have plus know.",
+    },
+    {
+        id: 1030,
+        topic: "Entra — identities & authentication",
+        tag: "SSPR & writeback",
+        format: "multiple_choice",
+        q: "Users synchronized from on-premises AD DS reset their passwords through Microsoft Entra self-service password reset, but the new password does not work when they sign in to on-premises resources. What is missing?",
+        options: [
+            "Password writeback via Microsoft Entra Connect, a Microsoft Entra ID P1 (or equivalent) capability",
+            "A Conditional Access policy that targets the on-premises applications and requires a password change",
+            "Microsoft Entra ID Protection, so that the users' elevated user risk is remediated automatically",
+            "A second Microsoft Entra Connect server so that password changes are synchronized with redundancy",
+        ],
+        answer: [0],
+        why: "By default SSPR changes the cloud password only. Password writeback, enabled in Microsoft Entra Connect or Cloud Sync, writes the new password back to on-premises AD DS in real time so both environments stay in sync; it is a P1-tier capability. Conditional Access, ID Protection and a second sync server do not move passwords anywhere. This distinction between cloud-only SSPR and hybrid writeback is routinely tested.",
+    },
+    {
+        id: 1031,
+        topic: "Entra — identities & authentication",
+        tag: "Password protection",
+        format: "multiple_choice",
+        q: "The security team wants to prevent users from choosing passwords that contain the company name or its product names, including obvious variants such as 'C0ntoso2026!' and 'Widget@London'. What is the MOST effective configuration?",
+        options: [
+            "Enforce a stricter password complexity policy through on-premises Group Policy and synchronize it to the cloud",
+            "Add the base terms (Contoso, Widget, London) to the custom banned password list in Entra Password Protection",
+            "Enable smart lockout with a lower lockout threshold so that weak company-themed passwords trigger lockouts",
+            "Force all users to change their password every 30 days so that any weak password is only briefly usable",
+        ],
+        answer: [1],
+        why: "Entra Password Protection combines Microsoft's global banned password list (always on) with a custom banned password list of organization-specific base terms. Its algorithm normalizes character substitutions and scores the password, so blocking the base term 'Contoso' also blocks variants like 'C0ntoso2026!'. Complexity rules do not catch company terms, smart lockout addresses brute force attempts rather than weak choices, and frequent forced rotation is no longer recommended.",
+    },
+    {
+        id: 1032,
+        topic: "Entra — identities & authentication",
+        tag: "Smart lockout",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn Microsoft Entra ID, [answer] locks out an attacker who repeatedly guesses a user's password while still allowing the genuine user to sign in from a familiar location.",
+        options: [
+            "smart lockout",
+            "password writeback",
+            "security defaults",
+            "Privileged Identity Management",
+        ],
+        answer: [0],
+        why: "Smart lockout recognizes sign-ins from valid users and treats them differently from attackers or unknown sources, so the real user is far less likely to be locked out during an attack. Password writeback syncs passwords to on-premises AD, security defaults are a set of baseline protections, and PIM governs privileged role activation. This is a definitional sentence-completion item of the kind the exam uses.",
+    },
+    {
+        id: 1033,
+        topic: "Entra — identities & authentication",
+        tag: "Banned password lists",
+        format: "yes_no",
+        q: "True or False: A Global Administrator can turn off the Microsoft Entra global banned password list for a tenant that prefers to rely on its own on-premises password policy.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. The global banned password list is built from Microsoft's security telemetry, is applied automatically to every tenant, and cannot be disabled. Organizations can only extend it with a custom banned password list (up to 1,000 base terms, a P1 feature) and optionally extend the checks to on-premises AD DS with the Password Protection agents.",
+    },
+    {
+        id: 1034,
+        topic: "Entra — identities & authentication",
+        tag: "Security defaults",
+        format: "multiple_choice",
+        q: "A 40-person company uses Microsoft Entra ID Free. It wants all users to register for MFA, administrators to always use MFA and legacy authentication protocols to be blocked, without building any per-policy configuration. What should it enable?",
+        options: [
+            "Conditional Access policies",
+            "Security defaults",
+            "Microsoft Entra ID Protection",
+            "Privileged Identity Management",
+        ],
+        answer: [1],
+        why: "Security defaults are a free, preconfigured set of protections: MFA registration for everyone, MFA for administrators, MFA for users when needed, blocking legacy authentication and device code flow, and protecting privileged actions such as Azure portal access. Conditional Access gives granular control but needs Entra ID P1 and per-policy design. ID Protection and PIM are P2 features that solve different problems. Note that security defaults and Conditional Access cannot be used together.",
+    },
+    {
+        id: 1035,
+        topic: "Entra — access, protection & governance",
+        tag: "Conditional Access timing",
+        format: "multiple_choice",
+        q: "A Conditional Access policy blocks all access from a specific country. An attacker located in that country runs a password-spray attack against your users. A junior admin expects the policy to stop the attack. What is the correct expectation?",
+        options: [
+            "The policy blocks each attempt before the password is checked, so the password spray is fully stopped at the network edge by Entra ID",
+            "Conditional Access is enforced only after first-factor authentication, so it cannot stop password guessing; smart lockout and Password Protection can",
+            "The policy stops the attack only if the same policy also requires MFA, because block decisions on their own are advisory",
+            "Conditional Access cannot use location as a signal for non-interactive sign-ins, so the country block has no effect on the attack at all",
+        ],
+        answer: [1],
+        why: "Conditional Access policies are enforced after first-factor authentication completes; they decide what happens to a successfully authenticated request. They are not a front-line defense against password spray or denial-of-service attempts. Smart lockout, Password Protection and ID Protection detections are the controls for guessing attacks. Location is a valid signal, and MFA is not needed for a block decision, so the other options are wrong.",
+    },
+    {
+        id: 1036,
+        topic: "Entra — access, protection & governance",
+        tag: "CA controls",
+        format: "multiple_choice",
+        q: "In a Conditional Access policy, which of the following is a SESSION control rather than a grant control?",
+        options: [
+            "Require multifactor authentication",
+            "Require the device to be marked as compliant",
+            "Sign-in frequency",
+            "Block access",
+        ],
+        answer: [2],
+        why: "Grant controls decide whether access is allowed and what must be satisfied first (MFA, compliant device, hybrid joined device, approved client app, app protection policy, password change, terms of use), and Block is the most restrictive decision. Session controls shape the experience AFTER access is granted: sign-in frequency, persistent browser session, app-enforced restrictions and Conditional Access App Control via Defender for Cloud Apps. Mixing the two categories is a common slip.",
+    },
+    {
+        id: 1037,
+        topic: "Entra — access, protection & governance",
+        tag: "Report-only mode",
+        format: "multiple_choice",
+        q: "An admin wants to understand how a new Conditional Access policy would affect real sign-ins for a week before it is enforced, without impacting any user. Which approach is designed for this?",
+        options: [
+            "Enable the policy but exclude all users from it so that only the sign-in logs are populated",
+            "Create the policy in report-only mode and review the sign-in logs and insights workbook",
+            "Turn on security defaults instead of the policy and read the security defaults report",
+            "Enable the policy and rely on ID Protection to undo any incorrect blocks automatically",
+        ],
+        answer: [1],
+        why: "Report-only mode evaluates the policy against every sign-in and records the result (success, failure, user action required) without enforcing it, so the admin can review the impact in the sign-in logs and insights workbook; the What If tool complements this for individual scenarios. Excluding all users produces no data, security defaults are a different, non-granular mechanism, and ID Protection does not roll back Conditional Access decisions.",
+    },
+    {
+        id: 1038,
+        topic: "Entra — access, protection & governance",
+        tag: "CA signals",
+        format: "multi_select",
+        q: "Which TWO of the following can Microsoft Entra Conditional Access evaluate as signals when deciding whether to allow, block or challenge an access attempt? (Select two.)",
+        options: [
+            "Whether the device is marked compliant by Microsoft Intune",
+            "The real-time sign-in risk level calculated by Microsoft Entra ID Protection",
+            "The age of the user's current password",
+            "The sensitivity label applied to the SharePoint site being opened",
+            "The size of the user's mailbox",
+        ],
+        answer: [0, 1],
+        why: "Conditional Access signals include user or group membership, IP location, device platform and compliance state, the application (resource) being accessed, and real-time or calculated risk from ID Protection, plus agent identities in newer releases. Password age, content sensitivity labels and mailbox size are not sign-in signals: labels are enforced by Purview, and password policy is handled separately.",
+    },
+    {
+        id: 1039,
+        topic: "Entra — access, protection & governance",
+        tag: "Entra roles vs Azure RBAC",
+        format: "multiple_choice",
+        q: "A user holds the Global Administrator role in Microsoft Entra ID but cannot see or manage any virtual machines in the company's Azure subscription. What explains this?",
+        options: [
+            "Global Administrator is a read-only role for Azure resources, so the VMs become visible only after the user switches to the Contributor role",
+            "Entra roles and Azure RBAC are separate systems; a Global Administrator gets no Azure resource access unless assigned an Azure role or elevating access",
+            "The user must also hold the Exchange Administrator role, which is required to view infrastructure resources in Azure",
+            "Virtual machines are managed only through on-premises AD DS roles that are synchronized to Azure with Entra Connect",
+        ],
+        answer: [1],
+        why: "Entra roles (Global Administrator, User Administrator, and about 60 others) govern the directory and Microsoft 365 services, while Azure RBAC roles (Owner, Contributor, Reader and custom roles) govern Azure resources at management group, subscription, resource group or resource scope. The two have separate role stores and decision points. A Global Administrator can temporarily elevate to User Access Administrator at root scope, but that is an explicit action, not a default.",
+    },
+    {
+        id: 1040,
+        topic: "Entra — access, protection & governance",
+        tag: "Least privilege roles",
+        format: "multiple_choice",
+        q: "Help desk staff must be able to reset passwords for ordinary users and invalidate their refresh tokens, but must not manage licenses, groups or any administrator accounts. Following least privilege, which Microsoft Entra built-in role should they receive?",
+        options: [
+            "Global Administrator",
+            "User Administrator",
+            "Helpdesk Administrator",
+            "Security Administrator",
+        ],
+        answer: [2],
+        why: "Helpdesk Administrator can reset passwords and invalidate refresh tokens for non-administrators and limited admin roles, which matches the need exactly. User Administrator adds creating users, managing groups and licenses, which exceeds the requirement. Global Administrator is the most privileged role and should be reserved for emergencies, and Security Administrator manages security features, not password resets. Least-privilege role selection is a core exam theme.",
+    },
+    {
+        id: 1041,
+        topic: "Entra — access, protection & governance",
+        tag: "Administrative units",
+        format: "multiple_choice",
+        q: "Regional IT staff in Germany must manage only the user accounts of the Germany office, not the whole tenant. Which Microsoft Entra feature lets you scope an administrator role to just those users?",
+        options: [
+            "A custom role assigned at tenant scope with permissions limited to user management",
+            "An administrative unit for the Germany users, with the role assigned at that unit's scope",
+            "A separate Microsoft Entra tenant for Germany, connected through cross-tenant synchronization",
+            "A dynamic group of the Germany users with the User Administrator role assigned to the group",
+        ],
+        answer: [1],
+        why: "Administrative units restrict the scope of a role assignment to a subset of users, groups or devices, so a User Administrator over the Germany unit cannot touch other users. A custom role at tenant scope still applies tenant-wide. A separate tenant fragments identity and licensing unnecessarily. Assigning a role to a group makes the group members administrators of everything; it does not restrict what they administer.",
+    },
+    {
+        id: 1042,
+        topic: "Entra — access, protection & governance",
+        tag: "PIM",
+        format: "multiple_choice",
+        q: "Security policy says nobody should hold the Global Administrator role permanently. Admins should request the role when they need it, complete MFA and give a justification, and the role should expire automatically after four hours. Which configuration achieves this?",
+        options: [
+            "A permanent active assignment combined with a Conditional Access policy that requires MFA on every sign-in",
+            "An eligible PIM assignment whose activation requires MFA and justification, with a four-hour maximum duration",
+            "A quarterly access review of the Global Administrator role with automatic removal of any denied users",
+            "A time-bound active assignment that a script re-creates every four hours during business hours",
+        ],
+        answer: [1],
+        why: "PIM's eligible assignments give just-in-time privilege: the user activates the role when needed, satisfying whatever activation requirements are configured (MFA, justification, approval, ticket), and the activation expires after the configured duration. A permanent active assignment is exactly the standing access the policy forbids. Access reviews recertify who should be eligible but do not remove standing access by themselves, and a scripted active assignment is standing access in disguise.",
+    },
+    {
+        id: 1043,
+        topic: "Entra — access, protection & governance",
+        tag: "Access reviews",
+        format: "multiple_choice",
+        q: "Guest users are members of a group that grants access to sensitive project files. The compliance team wants the group owner to recertify every guest quarterly, with guests automatically removed if the owner does not approve them. Which Microsoft Entra ID Governance feature should you use?",
+        options: [
+            "Entitlement management",
+            "Access reviews",
+            "Privileged Identity Management",
+            "Lifecycle workflows",
+        ],
+        answer: [1],
+        why: "Access reviews let designated reviewers such as group owners recertify group memberships, application assignments and role assignments on a schedule, with auto-apply to remove users who are denied or not reviewed. Entitlement management packages resources for request and approval, PIM governs privileged role activation, and lifecycle workflows automate joiner, mover and leaver tasks. Each ID Governance component answers a different question.",
+    },
+    {
+        id: 1044,
+        topic: "Entra — access, protection & governance",
+        tag: "Entitlement management",
+        format: "multiple_choice",
+        q: "Contoso wants partner employees to request a bundle consisting of a Teams team, a SharePoint site and a SaaS app from a self-service catalog. Requests need manager approval, access must expire after 90 days, and partners who are not yet in the directory should be invited automatically when approved. Which capability provides this?",
+        options: [
+            "Access reviews scoped to the partner group",
+            "Access packages in entitlement management",
+            "Dynamic group membership rules for partners",
+            "B2B direct connect with the partner tenant",
+        ],
+        answer: [1],
+        why: "Entitlement management bundles groups, Teams, SharePoint sites and applications into access packages with policies defining who can request, who approves, and when access expires; connected organizations allow external users to request and be invited automatically. Access reviews recertify existing access rather than grant it. Dynamic groups assign membership from attributes with no request or approval workflow, and B2B direct connect is a Teams shared-channel trust, not a request catalog.",
+    },
+    {
+        id: 1045,
+        topic: "Entra — access, protection & governance",
+        tag: "Lifecycle workflows",
+        format: "multiple_choice",
+        q: "HR wants the following automated: when a hire date is set, generate a Temporary Access Pass and email the manager before the start date; on the employee's last day, remove all group memberships and licenses and disable the account. Which Microsoft Entra ID Governance feature is designed for this?",
+        options: [
+            "Privileged Identity Management",
+            "Lifecycle workflows",
+            "Access reviews",
+            "Microsoft Entra Connect",
+        ],
+        answer: [1],
+        why: "Lifecycle workflows automate joiner, mover and leaver processes with triggers based on attributes such as employeeHireDate and employeeLeaveDateTime and built-in tasks like generating a TAP, sending email, removing group membership and disabling the account. PIM and access reviews govern privileges and recertification, and Entra Connect synchronizes directory objects but does not orchestrate onboarding or offboarding tasks.",
+    },
+    {
+        id: 1046,
+        topic: "Entra — access, protection & governance",
+        tag: "ID Protection risk types",
+        format: "multiple_choice",
+        q: "Microsoft Entra ID Protection reports that a user's credentials were found in a leaked credential dump. Which risk type is this, and which automated remediation is the recommended response?",
+        options: [
+            "Sign-in risk; require multifactor authentication on the next sign-in attempt",
+            "User risk; require a secure password change through risk-based Conditional Access",
+            "Sign-in risk; block the sign-in permanently until an administrator intervenes",
+            "User risk; require the device to be marked compliant before any further access",
+        ],
+        answer: [1],
+        why: "Leaked credentials indicate that the identity itself may be compromised, so it is a USER risk, evaluated offline. The recommended automated remediation is a Conditional Access policy that requires a secure password change (with MFA) when user risk is high; completing it remediates the risk. Sign-in risk describes the probability that a particular authentication was not performed by the owner (anonymous IP, atypical travel) and is typically remediated by requiring MFA. Device compliance does not fix a stolen password.",
+    },
+    {
+        id: 1047,
+        topic: "Entra — access, protection & governance",
+        tag: "ID Protection licensing",
+        format: "multiple_choice",
+        q: "A tenant with Microsoft Entra ID P1 sees several risk detections labeled only 'Additional risk detected' with no details. Why?",
+        options: [
+            "The detections are false positives that Microsoft hides by default until an admin confirms them",
+            "Premium detections need Entra ID P2; without it they appear only as 'Additional risk detected'",
+            "The admin viewing the report lacks the Security Reader role needed to see detection details",
+            "Risk detections show details only for hybrid users synchronized from on-premises AD DS",
+        ],
+        answer: [1],
+        why: "Most ID Protection detections are premium: their names and details are visible only with Entra ID P2 (or Entra Suite). P1 and Free tenants still see that something risky happened but the detection is masked as 'Additional risk detected', and risk-based policies are unavailable. This licensing boundary, together with PIM also being P2, is one of the most reliable exam facts.",
+    },
+    {
+        id: 1048,
+        topic: "Entra — access, protection & governance",
+        tag: "Global Secure Access",
+        format: "multiple_choice",
+        q: "Remote employees use a legacy VPN to reach on-premises applications. The company wants to replace it with identity-centric, per-app access that is evaluated by Conditional Access and supports any TCP or UDP application, without exposing the internal network. Which Microsoft Entra product is designed for this?",
+        options: [
+            "Microsoft Entra Internet Access",
+            "Microsoft Entra Private Access",
+            "Azure Bastion",
+            "Microsoft Defender for Cloud Apps",
+        ],
+        answer: [1],
+        why: "Entra Private Access is Microsoft's Zero Trust Network Access solution within Global Secure Access. It replaces legacy VPNs with per-app or Quick Access to private resources, integrates deeply with Conditional Access and supports TCP and UDP apps. Entra Internet Access is the identity-aware Secure Web Gateway for internet and SaaS traffic. Bastion provides browser-based RDP and SSH to Azure VMs only, and Defender for Cloud Apps is a CASB for SaaS apps.",
+    },
+    {
+        id: 1049,
+        topic: "Entra — access, protection & governance",
+        tag: "Global Secure Access",
+        format: "multiple_choice",
+        q: "The company wants to block employees' access to gambling and adult websites by content category on any network, and apply Conditional Access to all internet destinations, even sites not federated with Microsoft Entra ID. Which product provides this?",
+        options: [
+            "Microsoft Entra Private Access",
+            "Microsoft Entra Internet Access",
+            "Azure Web Application Firewall",
+            "Azure Firewall",
+        ],
+        answer: [1],
+        why: "Entra Internet Access is an identity-based Secure Web Gateway with web content filtering by category or FQDN, threat intelligence, TLS inspection and universal Conditional Access for all internet destinations. Private Access is for private corporate apps. Azure WAF protects your own web apps from inbound attacks, and Azure Firewall filters traffic in Azure virtual networks, not user browsing from any location.",
+    },
+    {
+        id: 1050,
+        topic: "Entra — access, protection & governance",
+        tag: "Verified ID",
+        format: "multiple_choice",
+        q: "A university issues digital diplomas that graduates store in the Microsoft Authenticator app. Employers must verify a diploma cryptographically without contacting the university for each check, and the graduate decides what to share. Which Microsoft Entra capability implements this?",
+        options: [
+            "Microsoft Entra Verified ID",
+            "B2B collaboration",
+            "Certificate-based authentication",
+            "Microsoft Entra ID Governance",
+        ],
+        answer: [0],
+        why: "Verified ID implements W3C verifiable credentials and decentralized identifiers: an issuer (the university) signs a credential, the holder keeps it in a wallet such as Authenticator and presents only what is needed, and a verifier checks the signature against the issuer's public DID without a callback. B2B collaboration is guest access, certificate-based authentication is a sign-in method, and ID Governance manages access lifecycle.",
+    },
+    {
+        id: 1051,
+        topic: "Entra — access, protection & governance",
+        tag: "ID Governance licensing",
+        format: "yes_no",
+        q: "True or False: Microsoft Entra ID Governance capabilities such as entitlement management and lifecycle workflows require licensing beyond Microsoft Entra ID P1.",
+        options: ["True", "False"],
+        answer: [0],
+        why: "True. P1 does not include ID Governance features. Entitlement management, access reviews and PIM are included in Entra ID P2 and the Entra ID Governance add-on, while lifecycle workflows and other advanced governance features require the Microsoft Entra ID Governance license (also included in the Microsoft Entra Suite). Remembering which tier unlocks Conditional Access (P1) versus governance and protection (P2 or Governance) matters on the exam.",
+    },
+    {
+        id: 1052,
+        topic: "Entra — access, protection & governance",
+        tag: "Authentication strengths",
+        format: "multiple_choice",
+        q: "For one high-value finance application only, you must require that users authenticate with a phishing-resistant method such as a passkey, while other apps continue to accept any MFA method. Which feature do you configure?",
+        options: [
+            "Per-user MFA in the legacy MFA portal, with the finance users' default method set to a FIDO2 security key",
+            "Security defaults, which require phishing-resistant methods for all users whenever a sensitive app is opened",
+            "A Conditional Access policy for that app with the 'Require authentication strength' control set to phishing-resistant MFA",
+            "A Microsoft Entra ID Protection sign-in risk policy configured to require a passkey for medium and high risk sign-ins",
+        ],
+        answer: [2],
+        why: "Authentication strengths are a Conditional Access grant control that specifies which combinations of methods satisfy the policy, including the built-in 'Phishing-resistant MFA' strength. Scoping the policy to one application gives the granularity required. Per-user MFA and security defaults are tenant-wide and cannot distinguish methods per app, and ID Protection risk policies respond to risk, not to application sensitivity.",
+    },
+    {
+        id: 1053,
+        topic: "Azure security & Defender for Cloud",
+        tag: "NSG rule priority",
+        format: "multiple_choice",
+        q: "A network security group attached to a subnet has two inbound rules: priority 100, Deny TCP 3389 from Internet; priority 200, Allow TCP 3389 from Any. An administrator on the internet tries to RDP to a VM in the subnet. What happens?",
+        options: [
+            "Allowed: the Allow rule is more permissive, and NSGs resolve conflicts in favor of the permissive rule",
+            "Denied: rules are processed by priority (lowest number first) and evaluation stops at the first match",
+            "Allowed: Allow rules always take precedence over Deny rules regardless of their priority numbers",
+            "Undefined: two rules covering the same port cause the NSG to fall back to the default rules only",
+        ],
+        answer: [1],
+        why: "NSG rules are processed from the lowest priority number to the highest and evaluation stops at the first rule that matches, so the priority-100 Deny wins and RDP from the internet is blocked. Permissiveness and rule type do not change the ordering. Remember also the default rules (allow VNet and load balancer inbound, deny all other inbound; allow outbound to VNet and internet) sit at the highest priority numbers.",
+    },
+    {
+        id: 1054,
+        topic: "Azure security & Defender for Cloud",
+        tag: "NSG associations",
+        format: "multi_select",
+        q: "To which TWO resources can a network security group be associated? (Select two.)",
+        options: [
+            "A subnet in a virtual network",
+            "A network interface of a virtual machine",
+            "A whole virtual network",
+            "A resource group",
+            "An Azure Key Vault",
+        ],
+        answer: [0, 1],
+        why: "NSGs are associated with subnets and with network interfaces; traffic to a VM is evaluated by the subnet NSG first and then the NIC NSG for inbound (the reverse for outbound). You cannot attach an NSG to a virtual network, a resource group or a PaaS service such as Key Vault. Application security groups group NICs for use in rules but are not an association target either.",
+    },
+    {
+        id: 1055,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Azure Firewall",
+        format: "multiple_choice",
+        q: "You need centrally managed outbound filtering for several virtual networks that allows traffic only to approved fully qualified domain names such as *.windowsupdate.com, blocks known malicious IP addresses using Microsoft threat intelligence, and provides stateful inspection with built-in high availability. Which service should you deploy?",
+        options: [
+            "Network security groups",
+            "Application security groups",
+            "Azure Firewall",
+            "Azure Bastion",
+        ],
+        answer: [2],
+        why: "Azure Firewall is a managed, stateful, cloud-native firewall with application rules based on FQDNs, network rules, threat-intelligence-based filtering, built-in high availability and central policy management through Firewall Manager (Premium adds IDPS and TLS inspection). NSGs filter on IP, port and protocol only and cannot filter by FQDN or threat intelligence. ASGs merely group NICs for NSG rules, and Bastion is a jump-host service.",
+    },
+    {
+        id: 1056,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Web Application Firewall",
+        format: "multiple_choice",
+        q: "A public web application must be protected against SQL injection, cross-site scripting and other OWASP Top 10 attacks at the application layer. Which Azure service provides this?",
+        options: [
+            "Azure DDoS Network Protection enabled on the virtual network",
+            "A network security group with a deny rule for ports 80 and 443",
+            "Azure Web Application Firewall on Application Gateway or Front Door",
+            "Azure Firewall Basic with threat-intelligence-based filtering",
+        ],
+        answer: [2],
+        why: "Azure WAF inspects HTTP(S) requests at layer 7 using managed rule sets based on the OWASP Core Rule Set, plus bot protection, and is deployed with Application Gateway or Azure Front Door. DDoS Protection works at layers 3 and 4 against volumetric attacks. An NSG cannot inspect request content, and Azure Firewall Basic is a network firewall without web application rule sets.",
+    },
+    {
+        id: 1057,
+        topic: "Azure security & Defender for Cloud",
+        tag: "DDoS Protection tiers",
+        format: "multiple_choice",
+        q: "A company runs a handful of internet-facing workloads spread across several subscriptions and wants enhanced DDoS mitigation only for five specific public IP addresses, paying per protected IP rather than per virtual network. Which option fits?",
+        options: [
+            "Azure DDoS IP Protection",
+            "Azure DDoS Network Protection",
+            "The default infrastructure-level DDoS protection that every Azure customer receives",
+            "Azure Web Application Firewall",
+        ],
+        answer: [0],
+        why: "DDoS IP Protection is the pay-per-protected-IP tier with the same core mitigation engine as Network Protection but without extras such as DDoS Rapid Response support, cost protection and WAF discounts. Network Protection is enabled per virtual network and suits organizations with many resources. The free platform-level protection is always on but offers no tuning, telemetry or alerting for your resources, and WAF is a layer-7 control.",
+    },
+    {
+        id: 1058,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Azure Bastion",
+        format: "multiple_choice",
+        q: "Administrators need RDP and SSH access to Azure virtual machines. Security requires that the VMs have NO public IP addresses and that ports 3389 and 22 are never exposed to the internet; admins should connect through the Azure portal over TLS on port 443. Which service meets this?",
+        options: [
+            "Just-in-time VM access in Microsoft Defender for Cloud",
+            "Azure Bastion",
+            "A network security group allowing 3389 only from the office IP range",
+            "Azure VPN Gateway with point-to-site connections",
+        ],
+        answer: [1],
+        why: "Azure Bastion is a managed PaaS jump service deployed in the virtual network that brokers RDP/SSH sessions over TLS (443) from the portal or native clients, so VMs need only private IPs and management ports are never exposed. Just-in-time access still opens the management port on demand, an NSG rule still requires a reachable public endpoint, and a VPN gateway provides network connectivity rather than a hardened browser-based session broker. Bastion versus JIT is a frequent distractor pair.",
+    },
+    {
+        id: 1059,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Azure Key Vault",
+        format: "multiple_choice",
+        q: "An application needs its TLS certificates, API keys and encryption keys stored centrally and out of source code, with access logged. A compliance requirement adds that the encryption keys must be protected by FIPS 140 validated hardware security modules. Which service and tier should you use?",
+        options: [
+            "Azure Key Vault Standard tier",
+            "Azure Key Vault Premium tier",
+            "An Azure Storage account with encryption at rest enabled",
+            "A system-assigned managed identity",
+        ],
+        answer: [1],
+        why: "Key Vault stores secrets, keys and certificates with access policies or RBAC and full logging. The Premium tier adds HSM-protected keys, which is what the hardware security module requirement demands; Standard keeps keys software-protected. A storage account is not a secrets manager, and a managed identity is how an app authenticates to Key Vault, not where secrets are stored.",
+    },
+    {
+        id: 1060,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Network segmentation",
+        format: "multiple_choice",
+        q: "Production and development workloads must be isolated so they cannot communicate with each other by default, but the team wants to be able to allow specific, controlled traffic between them later. Which design applies network segmentation correctly?",
+        options: [
+            "One virtual network and one subnet for both workloads, relying on Azure's default isolation between VMs",
+            "Separate virtual networks (isolated by default), later connected with peering and controlled by NSGs or Azure Firewall",
+            "Different resource groups for the two workloads, which prevents network traffic between the resources in them",
+            "Different availability zones of the same subnet, because traffic between zones is blocked by default",
+        ],
+        answer: [1],
+        why: "A virtual network is the fundamental isolation boundary in Azure: resources in different VNets cannot talk unless you connect them (peering, VPN), and once connected NSGs or a firewall control what is allowed. Resources in the same subnet can communicate freely by default. Resource groups and availability zones are management and resiliency constructs and provide no network isolation at all.",
+    },
+    {
+        id: 1061,
+        topic: "Azure security & Defender for Cloud",
+        tag: "CSPM tiers",
+        format: "multiple_choice",
+        q: "A security team already uses the free capabilities of Microsoft Defender for Cloud across Azure and AWS. They now want attack path analysis, the cloud security explorer for graph-based queries, and agentless scanning of machines. What must they enable?",
+        options: [
+            "Nothing; these features are part of foundational CSPM at no cost",
+            "The Defender CSPM plan",
+            "Microsoft Sentinel",
+            "Microsoft Defender for Endpoint Plan 2",
+        ],
+        answer: [1],
+        why: "Foundational CSPM is free and provides secure score, recommendations from the Microsoft cloud security benchmark, asset inventory and basic compliance visibility. Attack path analysis, cloud security explorer, agentless scanning, governance and expanded regulatory compliance are features of the paid Defender CSPM plan. Sentinel is a SIEM and Defender for Endpoint is endpoint protection; neither provides cloud posture graphs.",
+    },
+    {
+        id: 1062,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Secure score types",
+        format: "multiple_choice",
+        q: "Which score measures the security posture of your Azure, AWS and GCP resources based on recommendations from the Microsoft cloud security benchmark?",
+        options: [
+            "Microsoft Secure Score in the Microsoft Defender portal",
+            "Secure score in Microsoft Defender for Cloud",
+            "Identity Secure Score in Microsoft Entra ID",
+            "Compliance score in Microsoft Purview Compliance Manager",
+        ],
+        answer: [1],
+        why: "Defender for Cloud's secure score aggregates the state of MCSB-based recommendations across your cloud subscriptions and connected accounts. Microsoft Secure Score in the Defender portal covers Microsoft 365 identities, apps, devices and data; Identity Secure Score is its identity subset; and compliance score measures progress on regulatory improvement actions. Four different scores, four different scopes, and the exam checks that you can tell them apart.",
+    },
+    {
+        id: 1063,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Security policies & initiatives",
+        format: "multiple_choice",
+        q: "Every new storage account must require secure transfer (HTTPS), and non-compliant resources must be surfaced as recommendations in Defender for Cloud. Which mechanism underlies this?",
+        options: [
+            "Azure resource locks applied to each storage account to prevent insecure configuration changes",
+            "Azure Policy definitions grouped into initiatives such as the Microsoft cloud security benchmark",
+            "Azure Blueprints artifacts that redeploy storage accounts whenever a non-compliant setting is detected",
+            "Role-based access control deny assignments that stop users from disabling secure transfer",
+        ],
+        answer: [1],
+        why: "Defender for Cloud security policies are built on Azure Policy: individual policy definitions are grouped into initiatives (the Microsoft cloud security benchmark is the default one), assigned to subscriptions, and each non-compliant evaluation becomes a recommendation that feeds secure score. Resource locks prevent deletion or modification, Blueprints package deployments, and RBAC controls who can act, none of which continuously evaluate configuration.",
+    },
+    {
+        id: 1064,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Cloud workload protection",
+        format: "multiple_choice",
+        q: "You need threat detection that alerts when malware is uploaded to an Azure storage account and when anomalous queries or brute-force attempts hit Azure SQL databases. Which Defender for Cloud capability provides this?",
+        options: [
+            "Foundational cloud security posture management, which is free for every subscription",
+            "Defender CSPM, the paid posture plan with attack path analysis and agentless scanning",
+            "Workload protection plans such as Defender for Storage and Defender for Databases",
+            "Microsoft Sentinel workbooks connected to the storage and SQL diagnostic logs",
+        ],
+        answer: [2],
+        why: "Cloud workload protection is delivered through per-resource-type Defender plans (Servers, Storage, Databases, Containers, App Service, Key Vault, Resource Manager, APIs and others) that add runtime threat detection and alerts. Both CSPM tiers are about posture (misconfigurations and recommendations), not runtime threats. Sentinel workbooks visualize data but do not detect threats in storage or SQL.",
+    },
+    {
+        id: 1065,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Multicloud & hybrid",
+        format: "yes_no",
+        q: "True or False: Microsoft Defender for Cloud can assess and protect servers running in AWS and GCP, as well as on-premises machines connected through Azure Arc.",
+        options: ["True", "False"],
+        answer: [0],
+        why: "True. Defender for Cloud connects to AWS and GCP accounts through native connectors and extends to on-premises and other-cloud machines through Azure Arc, giving posture management and workload protection across the hybrid, multicloud estate. Assuming it is Azure-only is a common misconception the exam probes.",
+    },
+    {
+        id: 1066,
+        topic: "Azure security & Defender for Cloud",
+        tag: "Just-in-time VM access",
+        format: "multiple_choice",
+        q: "Management ports 22 and 3389 on several VMs must stay closed by default and open only for an approved requester's IP for a limited time window. Which capability provides exactly this?",
+        options: [
+            "Azure Bastion deployed in the virtual network",
+            "Just-in-time VM access in Microsoft Defender for Servers",
+            "The default NSG rule 'DenyAllInbound' at the subnet",
+            "Azure Firewall DNAT rules for the management ports",
+        ],
+        answer: [1],
+        why: "Just-in-time VM access (part of Defender for Servers) locks down management ports in the NSG and opens them only on request for a specified source IP and duration, then closes them again. Bastion avoids exposing ports altogether by brokering sessions over TLS, which is a different approach. The default deny rule alone gives no way to open access on demand, and DNAT rules permanently publish a port.",
+    },
+    {
+        id: 1067,
+        topic: "Sentinel & Security Copilot",
+        tag: "Playbooks",
+        format: "multiple_choice",
+        q: "When Microsoft Sentinel creates a high-severity incident involving a compromised account, the SOC wants the user's sessions revoked and a ticket opened in ServiceNow automatically, with no analyst action. Which Sentinel component performs the automated response?",
+        options: [
+            "A workbook bound to the incident queue",
+            "A near-real-time analytics rule",
+            "A playbook run by an automation rule",
+            "A saved hunting query with a bookmark",
+        ],
+        answer: [2],
+        why: "Playbooks are Logic Apps workflows that carry out response actions such as disabling users, revoking sessions or opening tickets; automation rules decide when to run them (for example on incident creation). Analytics rules detect and create incidents but do not respond. Workbooks visualize data, and hunting queries are for proactive searching by analysts. This is the SOAR half of Sentinel.",
+    },
+    {
+        id: 1068,
+        topic: "Sentinel & Security Copilot",
+        tag: "Analytics rules",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn Microsoft Sentinel, [answer] run Kusto Query Language (KQL) logic on a schedule or in near real time against ingested data to generate alerts and incidents.",
+        options: [
+            "workbooks",
+            "playbooks",
+            "analytics rules",
+            "data connectors",
+        ],
+        answer: [2],
+        why: "Analytics rules are the detection logic of Sentinel: scheduled, near-real-time, Microsoft security, fusion and anomaly rules produce alerts that are grouped into incidents. Data connectors bring data in, workbooks visualize it, and playbooks automate the response. Keep the pipeline in mind: collect (connectors), detect (analytics), investigate (incidents, hunting), respond (playbooks).",
+    },
+    {
+        id: 1069,
+        topic: "Sentinel & Security Copilot",
+        tag: "Data connectors",
+        format: "multiple_choice",
+        q: "A SOC must ingest logs from a Palo Alto firewall, AWS CloudTrail and Microsoft Entra ID sign-ins into a single SIEM with cloud scale. Which Microsoft Sentinel feature is used to bring these sources in?",
+        options: [
+            "Workbook templates from the Content hub",
+            "Data connectors from the Content hub",
+            "Incidents synchronized from Defender XDR",
+            "Threat intelligence indicator feeds",
+        ],
+        answer: [1],
+        why: "Sentinel's data connectors (hundreds, including non-Microsoft, multicloud and on-premises sources) ingest data into the Log Analytics workspace and the Sentinel data lake; solutions in the Content hub package connectors with rules and workbooks. Workbooks only display data that is already ingested. Defender XDR incidents are one source, not the ingestion mechanism, and threat intelligence enriches detections rather than collecting logs.",
+    },
+    {
+        id: 1070,
+        topic: "Sentinel & Security Copilot",
+        tag: "SIEM vs XDR",
+        format: "multiple_choice",
+        q: "An organization already uses Microsoft Defender XDR across endpoints, identities, email and cloud apps. Which statement BEST describes why it might still add Microsoft Sentinel?",
+        options: [
+            "Defender XDR cannot create incidents on its own, so Sentinel is needed to provide incident management and a queue for the Defender alerts",
+            "Sentinel adds SIEM and SOAR: ingesting non-Microsoft and on-premises sources, cloud-scale retention and correlation, and automation across all of them",
+            "Sentinel replaces the individual Defender products and provides endpoint, identity and email protection from one service",
+            "Sentinel is required to enable multifactor authentication and Conditional Access for the security operations team",
+        ],
+        answer: [1],
+        why: "Defender XDR provides deep, native detection and response for Microsoft workloads and does create correlated incidents. Sentinel adds the SIEM layer (collect from any source, long-term retention, custom analytics) and SOAR automation across all sources, and its incidents are now unified with Defender XDR in the Defender portal. Sentinel does not perform endpoint protection and is unrelated to MFA.",
+    },
+    {
+        id: 1071,
+        topic: "Sentinel & Security Copilot",
+        tag: "Unified SecOps",
+        format: "multiple_choice",
+        q: "Which statement about where Microsoft Sentinel is operated today is correct?",
+        options: [
+            "Sentinel can only be used from the Azure portal, because the Defender portal is limited to the Defender XDR products",
+            "Sentinel is onboarded to the Defender portal as part of unified security operations; the Azure portal experience is being retired in 2027",
+            "Sentinel has been merged into Microsoft Purview so that security and compliance investigations share one portal",
+            "Sentinel moved to the Microsoft Entra admin center to sit alongside ID Protection and Conditional Access",
+        ],
+        answer: [1],
+        why: "Since 2024 Sentinel workspaces can be connected to the Microsoft Defender portal, which unifies SIEM, SOAR, XDR, posture and exposure management and Security Copilot in one place with a single incident queue; new customers are onboarded there by default and Microsoft announced the retirement of the Azure portal Sentinel experience for March 31, 2027. Purview is compliance, and the Entra admin center is identity, so neither hosts Sentinel.",
+    },
+    {
+        id: 1072,
+        topic: "Sentinel & Security Copilot",
+        tag: "Hunting",
+        format: "multiple_choice",
+        q: "An analyst suspects a new attacker technique is being used but no alert has fired. They want to proactively query ingested data for indicators before any detection rule exists. Which Sentinel capability is designed for this?",
+        options: [
+            "Incident queue and alerts",
+            "Hunting queries and notebooks",
+            "Playbooks and automation rules",
+            "Workbooks and dashboards",
+        ],
+        answer: [1],
+        why: "Hunting lets analysts run and save KQL queries, bookmark findings and use Jupyter notebooks to look for threats before alerts exist, closing the gap left by detections. Incidents are the reactive queue produced by analytics rules. Playbooks automate response, and workbooks are dashboards. Proactive versus reactive is the distinction the exam draws.",
+    },
+    {
+        id: 1073,
+        topic: "Sentinel & Security Copilot",
+        tag: "Security Copilot in Defender",
+        format: "multiple_choice",
+        q: "A SOC wants, inside the Microsoft Defender portal, AI-generated incident summaries, guided response recommendations, analysis of obfuscated PowerShell scripts and natural-language generation of KQL queries. Which product delivers this?",
+        options: [
+            "Microsoft 365 Copilot in the Teams client",
+            "Microsoft Security Copilot embedded in Defender",
+            "Microsoft Defender Threat Intelligence",
+            "Microsoft Sentinel notebooks with KQL",
+        ],
+        answer: [1],
+        why: "Security Copilot is the generative AI assistant for security teams; its embedded experience in the Defender portal provides incident summaries, guided responses, script and file analysis, device summaries and KQL query assistance, and it also has a standalone portal with promptbooks and agents. Microsoft 365 Copilot is the productivity assistant, Defender TI supplies threat intelligence data, and notebooks are manual analysis tools.",
+    },
+    {
+        id: 1074,
+        topic: "Sentinel & Security Copilot",
+        tag: "Security Copilot facts",
+        format: "multiple_choice",
+        q: "Which statement about Microsoft Security Copilot is correct?",
+        options: [
+            "It is licensed per user like Microsoft 365 Copilot and cannot be provisioned in a tenant without Microsoft 365 E5 licenses for every analyst",
+            "It is consumed via Security Compute Units, works standalone and embedded in Defender, Entra, Intune and Purview, and supports promptbooks and agents",
+            "It is available only as a plugin inside Microsoft Sentinel workbooks and cannot be used from the Defender portal",
+            "It replaces Microsoft Defender XDR incident management, so incidents are triaged only in the Copilot portal",
+        ],
+        answer: [1],
+        why: "Security Copilot is provisioned with Security Compute Units (SCUs), with a capacity model rather than a per-user seat, and it appears both as a standalone experience and embedded in Microsoft security products; promptbooks are multi-step reusable workflows and agents such as the phishing triage or Conditional Access optimization agents run tasks autonomously. It complements rather than replaces Defender XDR, and it is not a Sentinel workbook plugin.",
+    },
+    {
+        id: 1075,
+        topic: "Sentinel & Security Copilot",
+        tag: "Playbooks",
+        format: "yes_no",
+        q: "True or False: Microsoft Sentinel playbooks are built on Azure Logic Apps.",
+        options: ["True", "False"],
+        answer: [0],
+        why: "True. A playbook is a Logic Apps workflow with a Sentinel trigger (incident or alert) that can call hundreds of connectors to enrich, notify or remediate. Automation rules orchestrate when playbooks run and can also change incident properties without a playbook. Knowing the underlying technology is a favourite quick-fire item.",
+    },
+    {
+        id: 1076,
+        topic: "Sentinel & Security Copilot",
+        tag: "UEBA",
+        format: "multiple_choice",
+        q: "Which Microsoft Sentinel capability builds behavioral baselines for users, hosts and other entities and then flags anomalous deviations such as a first-time bulk download by an account that normally reads a few files a day?",
+        options: [
+            "User and Entity Behavior Analytics",
+            "Content hub solution packages",
+            "Watchlists of high-value assets",
+            "Automation rules for incidents",
+        ],
+        answer: [0],
+        why: "UEBA uses machine learning to profile normal behavior per entity and surfaces anomalies with investigation priority, enriching incidents. The Content hub distributes solutions (connectors, rules, workbooks). Watchlists are reference lists (for example VIP users or known-bad IPs) used in queries, and automation rules handle incident triage and playbook triggering.",
+    },
+    {
+        id: 1077,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender for Identity",
+        format: "multiple_choice",
+        q: "A SOC needs to detect attacks against the on-premises Active Directory domain, such as pass-the-hash, Golden Ticket and reconnaissance by enumeration of privileged group membership, using sensors deployed on domain controllers. Which service is designed for this?",
+        options: [
+            "Microsoft Defender for Endpoint",
+            "Microsoft Defender for Identity",
+            "Microsoft Entra ID Protection",
+            "Microsoft Defender for Cloud Apps",
+        ],
+        answer: [1],
+        why: "Defender for Identity uses sensors on domain controllers (and AD FS, AD CS and Entra Connect servers) to analyze on-premises AD signals and detect the identity attack lifecycle: reconnaissance, compromised credentials, lateral movement and domain dominance. Entra ID Protection detects risk on cloud identities (leaked credentials, anomalous sign-ins), which is the classic confusion. Defender for Endpoint is about devices and Defender for Cloud Apps about SaaS.",
+    },
+    {
+        id: 1078,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender for Cloud Apps",
+        format: "multiple_choice",
+        q: "The security team wants to discover which SaaS applications employees use (shadow IT), score their risk, unsanction risky ones, and prevent downloads from sanctioned apps when the user is on an unmanaged device. Which service provides all of this?",
+        options: [
+            "Microsoft Defender for Office 365",
+            "Microsoft Defender for Cloud Apps",
+            "Microsoft Defender for Endpoint",
+            "Microsoft Intune",
+        ],
+        answer: [1],
+        why: "Defender for Cloud Apps is Microsoft's cloud access security broker: Cloud Discovery surfaces shadow IT with risk scores, app connectors and governance sanction or unsanction apps, and Conditional Access App Control applies session controls such as blocking downloads in real time. Defender for Office 365 protects email and collaboration, Defender for Endpoint protects devices (it does feed discovery data to Cloud Apps), and Intune manages devices.",
+    },
+    {
+        id: 1079,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender for Office 365 plans",
+        format: "multiple_choice",
+        q: "An organization wants to run simulated phishing campaigns to train users and wants automated investigation and response for email threats. Which licensing level is the minimum that includes both?",
+        options: [
+            "The built-in security features included with all cloud mailboxes (Exchange Online Protection)",
+            "Microsoft Defender for Office 365 Plan 1",
+            "Microsoft Defender for Office 365 Plan 2",
+            "Microsoft Defender for Endpoint Plan 2",
+        ],
+        answer: [2],
+        why: "Attack simulation training, Threat Explorer, automated investigation and response, campaign views and threat trackers are Plan 2 capabilities. Plan 1 adds Safe Attachments, Safe Links and impersonation protection on top of the built-in anti-spam, anti-malware and anti-phishing features every cloud mailbox gets. Defender for Endpoint Plan 2 is for devices and does not include email simulations.",
+    },
+    {
+        id: 1080,
+        topic: "Microsoft Defender XDR",
+        tag: "Safe Links",
+        format: "multiple_choice",
+        q: "A phishing email is delivered with a link that is harmless at delivery time but is weaponized two days later, when users click it. Which Defender for Office 365 feature is designed to protect users at the moment they click?",
+        options: [
+            "Safe Attachments",
+            "Safe Links",
+            "Zero-hour auto purge (ZAP)",
+            "Anti-spam connection filtering",
+        ],
+        answer: [1],
+        why: "Safe Links rewrites or checks URLs at time of click, so a link that becomes malicious after delivery is still blocked. Safe Attachments detonates attachments in a sandbox before delivery. ZAP retroactively removes or quarantines messages already in mailboxes once they are identified as malicious, and connection filtering evaluates sender IP reputation at delivery. Time-of-click protection is the distinguishing phrase.",
+    },
+    {
+        id: 1081,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender for Endpoint",
+        format: "multiple_choice",
+        q: "When a laptop shows signs of ransomware behavior, the SOC wants it automatically isolated from the network while keeping a connection to the security service, and wants an automated investigation to determine the verdict of related alerts. Which product provides these capabilities?",
+        options: [
+            "Microsoft Defender for Identity",
+            "Microsoft Defender for Endpoint",
+            "Microsoft Defender for Cloud Apps",
+            "Microsoft Intune compliance policies",
+        ],
+        answer: [1],
+        why: "Defender for Endpoint combines next-generation protection, attack surface reduction, endpoint detection and response with device isolation and live response, automated investigation and remediation, and integrated vulnerability management, across Windows, macOS, Linux, iOS and Android. Defender for Identity covers directory attacks, Defender for Cloud Apps covers SaaS, and Intune compliance policies report device state rather than respond to attacks.",
+    },
+    {
+        id: 1082,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender Vulnerability Management",
+        format: "multiple_choice",
+        q: "Which Defender service provides a continuous inventory of installed software, browser extensions and digital certificates across Windows, macOS and Linux devices, and prioritizes vulnerabilities based on threat intelligence and the likelihood of breach?",
+        options: [
+            "Microsoft Defender Antivirus",
+            "Microsoft Defender Vulnerability Management",
+            "Microsoft Defender for Cloud (foundational CSPM)",
+            "Microsoft Defender Threat Intelligence",
+        ],
+        answer: [1],
+        why: "Defender Vulnerability Management delivers asset discovery, software and firmware inventories, browser extension and certificate assessments, security baselines assessment and risk-based prioritization with remediation tracking; it is included in Defender for Endpoint Plan 2 with an add-on for the premium capabilities. Antivirus blocks malware, foundational CSPM assesses cloud resource configuration, and Defender TI provides adversary and infrastructure intelligence.",
+    },
+    {
+        id: 1083,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender Threat Intelligence",
+        format: "multiple_choice",
+        q: "Analysts investigating an incident want curated intelligence profiles about the threat actor involved, its known infrastructure, indicators of compromise and tooling, to enrich the investigation. Which Microsoft service provides this content?",
+        options: [
+            "Microsoft Defender Threat Intelligence",
+            "Microsoft Defender Vulnerability Management",
+            "Microsoft Secure Score",
+            "Attack simulation training",
+        ],
+        answer: [0],
+        why: "Defender Threat Intelligence (Defender TI) aggregates Microsoft's threat research into intel profiles, articles and indicator data sets that are surfaced in the Defender portal and used to enrich incidents and hunting. Vulnerability Management is about weaknesses in your own assets, Secure Score measures your configuration posture, and attack simulation training tests users with simulated phishing.",
+    },
+    {
+        id: 1084,
+        topic: "Microsoft Defender XDR",
+        tag: "Incidents",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn the Microsoft Defender portal, an incident is a collection of correlated [answer] that together describe a single attack story across email, identities, endpoints and apps.",
+        options: [
+            "alerts",
+            "vulnerabilities",
+            "devices",
+            "secure score recommendations",
+        ],
+        answer: [0],
+        why: "Defender XDR correlates related alerts from its services into one incident with an attack story and timeline, so analysts triage a single case instead of dozens of isolated alerts. Devices and other entities are evidence within the incident, vulnerabilities are tracked in Vulnerability Management, and Secure Score recommendations relate to posture rather than active attacks.",
+    },
+    {
+        id: 1085,
+        topic: "Microsoft Defender XDR",
+        tag: "Microsoft Secure Score",
+        format: "multiple_choice",
+        q: "Your Microsoft Secure Score percentage dropped overnight although nobody changed any configuration. What is the MOST likely explanation?",
+        options: [
+            "Points expire after 30 days unless the recommended action is confirmed again by an administrator",
+            "Microsoft added new recommended actions or your environment grew, changing the points available",
+            "An attacker disabled security controls overnight and Secure Score detected the resulting breach",
+            "Secure Score only updates when an administrator manually refreshes it, so the drop is a stale value",
+        ],
+        answer: [1],
+        why: "Secure Score is a fraction of achieved points over possible points; when Microsoft adds recommendations or when the number of in-scope users or devices changes, the denominator or partial scoring shifts even if you did nothing. Points do not expire. Secure Score measures posture, not attacks, and it updates automatically (in near real time for many actions, with daily syncs).",
+    },
+    {
+        id: 1086,
+        topic: "Microsoft Defender XDR",
+        tag: "Automatic attack disruption",
+        format: "multiple_choice",
+        q: "During a human-operated ransomware attack in progress, Microsoft Defender XDR automatically contains the compromised device and disables the compromised user account before analysts have looked at the incident. Which capability is this?",
+        options: [
+            "Automated investigation and response (AIR) verdicts",
+            "Automatic attack disruption",
+            "A Microsoft Sentinel playbook",
+            "Zero-hour auto purge",
+        ],
+        answer: [1],
+        why: "Automatic attack disruption uses high-confidence cross-signal correlation to take containment actions such as isolating devices and disabling or containing users in real time to stop lateral movement. AIR investigates alerts and proposes or applies remediation for individual entities (for example quarantining a file). A Sentinel playbook is a configured Logic App, not a built-in XDR action, and ZAP removes malicious email.",
+    },
+    {
+        id: 1087,
+        topic: "Microsoft Defender XDR",
+        tag: "Exposure Management",
+        format: "multiple_choice",
+        q: "The CISO wants a single exposure score across endpoints, identities and cloud assets, security initiatives with metrics, identification of critical assets, and attack paths that show how an attacker could reach those assets, all inside the Defender portal. Which capability provides this?",
+        options: [
+            "Microsoft Secure Score",
+            "Microsoft Security Exposure Management",
+            "Microsoft Defender Vulnerability Management",
+            "Microsoft Purview Compliance Manager",
+        ],
+        answer: [1],
+        why: "Security Exposure Management provides an enterprise exposure graph, attack surface map, critical asset management, initiatives with an exposure score and attack path analysis spanning on-premises, hybrid and multicloud (using Defender for Cloud data). Secure Score measures configuration posture with recommended actions, Vulnerability Management focuses on device vulnerabilities and feeds into Exposure Management, and Compliance Manager is a regulatory compliance tool.",
+    },
+    {
+        id: 1088,
+        topic: "Microsoft Defender XDR",
+        tag: "XDR suite membership",
+        format: "multi_select",
+        q: "Which THREE of the following services are members of the Microsoft Defender XDR suite? (Select three.)",
+        options: [
+            "Microsoft Defender for Endpoint",
+            "Microsoft Defender for Office 365",
+            "Microsoft Defender for Identity",
+            "Microsoft Sentinel",
+            "Azure Firewall",
+        ],
+        answer: [0, 1, 2],
+        why: "Defender XDR natively coordinates Defender for Endpoint, Defender for Office 365, Defender for Identity, Defender for Cloud Apps and Defender Vulnerability Management (and integrates signals from Entra ID Protection, Defender for Cloud and Purview). Sentinel is the SIEM and SOAR that is now unified with XDR in the same portal but is a separate product, and Azure Firewall is a network security service in Azure.",
+    },
+    {
+        id: 1089,
+        topic: "Microsoft Defender XDR",
+        tag: "Action center",
+        format: "multiple_choice",
+        q: "An automated investigation in Defender XDR proposes quarantining a suspicious file and removing an email from 200 mailboxes, but the organization requires a human to approve such remediation. Where does the analyst review and approve these pending actions?",
+        options: [
+            "The Incidents queue",
+            "The Action center",
+            "Threat analytics",
+            "Microsoft Secure Score",
+        ],
+        answer: [1],
+        why: "The Action center is the unified place in the Defender portal for pending remediation actions awaiting approval and the history of actions already taken across the Defender products. The incident queue lists incidents, threat analytics provides intelligence reports, and Secure Score handles posture recommendations. Whether actions are automatic or require approval depends on the configured automation level.",
+    },
+    {
+        id: 1090,
+        topic: "Microsoft Defender XDR",
+        tag: "Defender for Identity sensors",
+        format: "multiple_choice",
+        q: "Where are Microsoft Defender for Identity sensors typically installed to capture the signals it analyzes?",
+        options: [
+            "On every user workstation",
+            "On domain controllers (and optionally AD FS, AD CS and Microsoft Entra Connect servers)",
+            "Only in Azure, as a cloud-only service with nothing installed on-premises",
+            "On Exchange mailbox servers",
+        ],
+        answer: [1],
+        why: "Defender for Identity is cloud-based but its sensors run on domain controllers and related identity servers to read network traffic, Windows events and directory data locally, which is how it sees Kerberos, NTLM, LDAP and replication activity. Workstations are covered by Defender for Endpoint, whose signals are correlated with Defender for Identity in the Defender portal.",
+    },
+    {
+        id: 1091,
+        topic: "Microsoft Defender XDR",
+        tag: "Session controls",
+        format: "yes_no",
+        q: "True or False: Microsoft Defender for Cloud Apps can enforce real-time session controls, such as blocking downloads of sensitive files, through its integration with Microsoft Entra Conditional Access.",
+        options: ["True", "False"],
+        answer: [0],
+        why: "True. Conditional Access App Control routes the session through Defender for Cloud Apps' reverse proxy so policies can monitor, block downloads, apply labels or block uploads in real time based on conditions such as unmanaged device. This is the 'use Conditional Access App Control' session control in a Conditional Access policy.",
+    },
+    {
+        id: 1092,
+        topic: "Microsoft Defender XDR",
+        tag: "Threat analytics",
+        format: "multiple_choice",
+        q: "In the Microsoft Defender portal, which feature provides reports written by Microsoft security researchers about emerging threats and campaigns, including which of YOUR assets are impacted and recommended mitigations?",
+        options: [
+            "Threat analytics",
+            "Advanced hunting",
+            "Attack simulation training",
+            "Microsoft Secure Score",
+        ],
+        answer: [0],
+        why: "Threat analytics combines expert threat reports with your organization's telemetry to show exposure, impacted assets, related incidents and mitigation status. Advanced hunting is the KQL query tool over raw data, attack simulation training educates users, and Secure Score tracks configuration recommendations.",
+    },
+    {
+        id: 1093,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Service Trust Portal",
+        format: "multiple_choice",
+        q: "An external auditor asks for Microsoft's latest SOC 2 Type II report and ISO/IEC 27001 certificate covering Azure and Microsoft 365, as evidence for your own audit. Where do you obtain these documents?",
+        options: [
+            "Microsoft Purview Compliance Manager",
+            "The Microsoft Service Trust Portal",
+            "The Microsoft Trust Center home page",
+            "The Microsoft 365 admin center Service health page",
+        ],
+        answer: [1],
+        why: "The Service Trust Portal publishes independent audit reports (SOC, ISO, FedRAMP, PCI and more), penetration test summaries and compliance guides that customers download for their own assurance work. The Trust Center is the public marketing and policy site about privacy and compliance, without the downloadable audit evidence. Compliance Manager measures YOUR controls, and Service health reports outages.",
+    },
+    {
+        id: 1094,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Privacy principles",
+        format: "multi_select",
+        q: "Which TWO of the following are among Microsoft's six privacy principles? (Select two.)",
+        options: [
+            "Control",
+            "No content-based targeting",
+            "Shared responsibility",
+            "Least privilege",
+            "Data residency",
+        ],
+        answer: [0, 1],
+        why: "Microsoft's six privacy principles are Control, Transparency, Security, Strong legal protections, No content-based targeting and Benefits to you. Shared responsibility and least privilege are security concepts, and data residency is a compliance concept; they are placed here precisely because they sound plausible. Expect the exam to hide a non-principle among real ones.",
+    },
+    {
+        id: 1095,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Priva Subject Rights Requests",
+        format: "multiple_choice",
+        q: "Under GDPR a customer asks for a copy of all personal data your company holds about them in Microsoft 365. The privacy team needs to find the data, review and redact it, and track the request to completion within the legal deadline. Which solution is designed for this?",
+        options: [
+            "Microsoft Priva Privacy Risk Management",
+            "Microsoft Priva Subject Rights Requests",
+            "Microsoft Purview eDiscovery",
+            "Microsoft Purview Compliance Manager",
+        ],
+        answer: [1],
+        why: "Priva Subject Rights Requests automates discovery of a data subject's personal data across Microsoft 365, supports review, redaction and collaboration, and tracks due dates. Privacy Risk Management detects privacy risks such as overexposure and data transfers. eDiscovery is a legal investigation tool that could technically search, but it lacks the DSR workflow, and Compliance Manager measures compliance posture.",
+    },
+    {
+        id: 1096,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Priva Privacy Risk Management",
+        format: "multiple_choice",
+        q: "The privacy office wants to detect when personal data is being over-shared or hoarded in SharePoint and OneDrive, or transferred between regions, and to send employees automated reminders about proper handling. Which solution fits?",
+        options: [
+            "Microsoft Purview Insider Risk Management",
+            "Microsoft Priva Privacy Risk Management",
+            "Microsoft Purview Data Loss Prevention",
+            "Microsoft Purview Communication Compliance",
+        ],
+        answer: [1],
+        why: "Priva Privacy Risk Management provides policy templates for data overexposure, data transfer and data minimization, evaluates personal data across Microsoft 365, and can notify users with remediation prompts. Insider Risk Management focuses on risky user behavior such as data theft rather than privacy-specific risk, DLP prevents sharing of sensitive information through policy actions, and Communication Compliance monitors messages for inappropriate content.",
+    },
+    {
+        id: 1097,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Purview portal",
+        format: "multiple_choice",
+        q: "Which statement about the administrative portal for Microsoft Purview compliance solutions is correct?",
+        options: [
+            "compliance.microsoft.com, the Microsoft Purview compliance portal, remains the home for compliance solutions",
+            "purview.microsoft.com is the single Purview portal; the older Purview compliance portal has been retired",
+            "Sensitivity labels are managed in the Microsoft Defender portal and all other solutions in the Azure portal",
+            "Purview solutions are configured only through PowerShell and have no browser-based administration portal",
+        ],
+        answer: [1],
+        why: "Microsoft consolidated the compliance portal and the Azure Purview governance portal into the unified Microsoft Purview portal (purview.microsoft.com), where each solution is reached under Solutions; the compliance portal was retired in 2025. The Defender portal is for security operations (it does share the Audit search), and the Azure portal is not the home for Purview solutions.",
+    },
+    {
+        id: 1098,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Compliance Manager",
+        format: "multiple_choice",
+        q: "The compliance team must demonstrate progress toward ISO/IEC 27001 and NIST CSF, with a numeric score, a list of controls, step-by-step implementation guidance and the ability to assign remediation work to owners. Which tool provides this?",
+        options: [
+            "Microsoft Secure Score",
+            "Microsoft Purview Compliance Manager",
+            "The regulatory compliance dashboard in Microsoft Defender for Cloud",
+            "The Service Trust Portal",
+        ],
+        answer: [1],
+        why: "Compliance Manager provides assessments built from regulatory templates (hundreds, covering ISO, NIST, GDPR, HIPAA and more), a compliance score, controls mapped to improvement actions with implementation and testing guidance, and assignment of actions. Secure Score is a security posture score, not a regulatory framework. Defender for Cloud's regulatory compliance dashboard evaluates cloud resources against standards but does not manage organization-wide actions, and the Service Trust Portal is Microsoft's evidence library.",
+    },
+    {
+        id: 1099,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Compliance score action types",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn Compliance Manager, an improvement action such as 'Use encryption to protect data at rest' is classified as a [answer] action, because it is intended to stop an incident from happening.",
+        options: ["preventative", "detective", "corrective", "discretionary"],
+        answer: [0],
+        why: "Compliance Manager classifies actions as preventative (stop incidents, for example encryption or access control), detective (find incidents, for example monitoring and audit), or corrective (respond after an incident, for example configuration changes to limit damage). Separately, actions are mandatory or discretionary, which describes whether they must be done, not how they work. The exam uses matching items on this taxonomy.",
+    },
+    {
+        id: 1100,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Compliance score",
+        format: "multiple_choice",
+        q: "Which statement about the compliance score in Microsoft Purview Compliance Manager is correct?",
+        options: [
+            "It includes points for Microsoft-managed controls as well as for actions your organization completes",
+            "Only actions completed and tested by your own organization contribute points toward the score",
+            "The compliance score and Microsoft Secure Score are the same number displayed in two different portals",
+            "The score measures the security configuration of Azure virtual machines against the security benchmark",
+        ],
+        answer: [0],
+        why: "Compliance score is based on improvement actions of two kinds: Microsoft-managed actions (credited automatically based on Microsoft's implementation and audits) and your improvement actions (technical actions, some tested automatically from signals in other solutions, and non-technical actions you attest). It is a different measurement from Secure Score, and it has nothing to do with VM configuration.",
+    },
+    {
+        id: 1101,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Assessment templates",
+        format: "yes_no",
+        q: "True or False: Compliance Manager provides assessment templates only for Microsoft 365 data protection baselines and cannot be used to assess against external regulations such as GDPR or ISO/IEC 27001.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Beyond the default Microsoft data protection baseline, Compliance Manager includes hundreds of premium regulatory templates (GDPR, ISO/IEC 27001, NIST, HIPAA, PCI DSS, plus AI regulations such as the EU AI Act) and supports custom assessments, with templates available for Microsoft 365, other Microsoft services and even non-Microsoft assets.",
+    },
+    {
+        id: 1102,
+        topic: "Purview — compliance, privacy & Priva",
+        tag: "Priva Tracker Scanning",
+        format: "multiple_choice",
+        q: "The marketing team must inventory the cookies, beacons and pixels used across the company's public websites to verify they match the published privacy notice. Which Microsoft Priva solution addresses this?",
+        options: [
+            "Priva Consent Management",
+            "Priva Tracker Scanning",
+            "Priva Privacy Assessments",
+            "Priva Subject Rights Requests",
+        ],
+        answer: [1],
+        why: "Priva Tracker Scanning discovers and categorizes tracking technologies on your websites to monitor non-compliance. Consent Management builds and publishes consent models for collecting user consent, Privacy Assessments automates tracking of personal data usage and risk assessments, and Subject Rights Requests handles data subject requests. Priva's five solutions each answer a different privacy need.",
+    },
+    {
+        id: 1103,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Sensitivity vs retention labels",
+        format: "multiple_choice",
+        q: "A finance document must (1) be encrypted so only the Finance group can open it and (2) be kept for seven years and then deleted. Which combination of Purview labels achieves both?",
+        options: [
+            "A single sensitivity label configured with encryption and a seven-year retention period",
+            "A sensitivity label for the encryption and a retention label for the seven-year retention",
+            "A single retention label configured with encryption",
+            "A data loss prevention policy that both encrypts and retains the file",
+        ],
+        answer: [1],
+        why: "Sensitivity labels classify and protect content (encryption, markings, access restrictions); retention labels govern how long content is kept and what happens afterwards. Neither label type does the other's job, and an item can carry one of each. DLP detects and prevents inappropriate sharing; it does not apply retention. The two label families are the single most tested distinction in the Purview domain.",
+    },
+    {
+        id: 1104,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Label policies",
+        format: "multiple_choice",
+        q: "An admin creates three sensitivity labels, but users report that the Sensitivity button in Word and Outlook shows no labels. What step was missed?",
+        options: [
+            "Enabling an auto-labeling policy so the labels are pushed to the Office apps",
+            "Publishing the labels to users or groups with a sensitivity label policy",
+            "Creating a DLP policy that references the labels as a rule condition",
+            "Assigning the Compliance Administrator role to the affected users",
+        ],
+        answer: [1],
+        why: "Creating a label defines what it does; a sensitivity label policy publishes it to specific users and groups and sets policy settings such as a default label or mandatory labeling. Without publishing, no one sees the labels in Office apps. Auto-labeling applies labels automatically by condition but also depends on the label existing and, for client-side recommendations, being published. DLP and admin roles are unrelated to label visibility.",
+    },
+    {
+        id: 1105,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Container labels",
+        format: "multiple_choice",
+        q: "Whenever a project team labels its Microsoft Teams team as 'Highly Confidential', the team must automatically become private, block guest access and prevent access from unmanaged devices. Which capability configures this?",
+        options: [
+            "A sensitivity label scoped to groups and sites with container settings for privacy, guests and unmanaged devices",
+            "A retention label applied to the Teams channel messages with a setting that converts the team to private",
+            "A DLP policy scoped to Teams that blocks guests and unmanaged devices whenever the label is detected",
+            "A Conditional Access policy targeting Microsoft Teams that requires a compliant device and blocks guests",
+        ],
+        answer: [0],
+        why: "Sensitivity labels can be scoped to groups and sites (container labels) and then carry settings such as privacy (public or private), whether guests can be added, external sharing for SharePoint, and access from unmanaged devices. Retention labels only control lifespan, DLP inspects content, and while Conditional Access can restrict unmanaged devices, it cannot make a team private or block guests based on the team's classification.",
+    },
+    {
+        id: 1106,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Auto-labeling",
+        format: "multiple_choice",
+        q: "Thousands of existing documents in SharePoint contain customer credit card numbers. You want the 'Confidential' sensitivity label applied to any file with five or more credit card numbers, without any user action and including files nobody has opened for years. Which mechanism does this?",
+        options: [
+            "Client-side recommended labeling in the Office apps for files with card numbers",
+            "A service-side auto-labeling policy for SharePoint, OneDrive and Exchange",
+            "A DLP policy with a policy tip that suggests the Confidential label",
+            "A retention label with a disposition review triggered by card numbers",
+        ],
+        answer: [1],
+        why: "Service-side auto-labeling policies scan content at rest in SharePoint, OneDrive and Exchange and apply a sensitivity label when conditions such as sensitive information types match, with no user involvement, including for files that are never opened. Client-side auto-labeling (automatic or recommended) only fires when a user edits content in an Office app. DLP policy tips warn users during sharing, and retention labels govern lifespan.",
+    },
+    {
+        id: 1107,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Classification methods",
+        format: "multi_select",
+        q: "Which THREE of the following are data classification methods available in Microsoft Purview? (Select three.)",
+        options: [
+            "Built-in and custom sensitive information types based on patterns, keywords and checksums",
+            "Trainable classifiers that learn to recognize categories of content such as resumes or source code from examples",
+            "Exact data match sensitive information types that match against your own database of actual values",
+            "Azure Policy definitions assigned to the tenant",
+            "Network security group tags",
+        ],
+        answer: [0, 1, 2],
+        why: "Purview classifies content with sensitive information types (pattern-based, built-in or custom), trainable classifiers (machine learning models trained on samples, pre-trained or custom) and exact data match, which matches actual values from a data source rather than any value matching a pattern; document fingerprinting is a fourth technique. Azure Policy and NSG tags are Azure governance and networking constructs, not content classification.",
+    },
+    {
+        id: 1108,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Explorers",
+        format: "multiple_choice",
+        q: "A compliance analyst must find out who downgraded a document's sensitivity label from 'Confidential' to 'General' last week and whether any DLP policy matched on that file. Which Purview tool shows this?",
+        options: [
+            "Data explorer (Content explorer)",
+            "Activity explorer",
+            "Compliance Manager",
+            "Content search",
+        ],
+        answer: [1],
+        why: "Activity explorer shows label and DLP-related activities over time (label applied, changed, removed, DLP rule matches, file activities) with dozens of filters. Data explorer (the successor of Content explorer) shows WHAT sensitive content exists and WHERE it lives, not who changed a label. Compliance Manager measures compliance posture, and Content search is an eDiscovery capability to find and export content.",
+    },
+    {
+        id: 1109,
+        topic: "Purview — information protection & lifecycle",
+        tag: "DLP",
+        format: "multiple_choice",
+        q: "Employees must be prevented from sending credit card numbers to external recipients in Teams chats and email. Internally, they should see a warning but be able to proceed after entering a business justification, and every override must be recorded. Which Purview capability implements this?",
+        options: [
+            "A sensitivity label with encryption restricted to internal recipients",
+            "A DLP policy with policy tips and override with business justification",
+            "An insider risk management policy using a data leak template",
+            "A communication compliance policy with a sensitive information condition",
+        ],
+        answer: [1],
+        why: "DLP policies detect sensitive information across locations such as Exchange, SharePoint, OneDrive, Teams and devices and enforce actions: block, block with override and justification, notify, and generate alerts and audit records. Sensitivity labels protect content but do not inspect messages for card numbers at send time. Insider Risk Management scores user behavior, and Communication Compliance reviews messages for inappropriate content rather than blocking data exfiltration.",
+    },
+    {
+        id: 1110,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Endpoint DLP",
+        format: "multiple_choice",
+        q: "You must prevent users from copying files that contain personal data to USB drives or uploading them to unapproved cloud storage sites from their Windows laptops. Which capability is required?",
+        options: [
+            "Sensitivity labels with content markings",
+            "Endpoint data loss prevention, with the devices onboarded",
+            "Microsoft Intune device compliance policies",
+            "Microsoft Defender for Cloud Apps Cloud Discovery",
+        ],
+        answer: [1],
+        why: "Endpoint DLP extends DLP policies to Windows and macOS devices that are onboarded to Purview or Defender for Endpoint, monitoring and restricting actions such as copying to removable media, printing and uploading to restricted service domains. Markings only label content, Intune compliance evaluates device health, and Cloud Discovery reports on app usage rather than blocking file copies.",
+    },
+    {
+        id: 1111,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Retention policy vs label",
+        format: "multiple_choice",
+        q: "Legal requires that ALL Microsoft Teams chat messages in the organization be kept for three years and then deleted. Which Purview mechanism is the correct fit?",
+        options: [
+            "A retention label published to users",
+            "A retention policy scoped to the Teams chats location",
+            "A sensitivity label with a three-year setting",
+            "A records management file plan",
+        ],
+        answer: [1],
+        why: "Retention policies apply retention settings at the location level (Exchange mailboxes, SharePoint sites, OneDrive, Microsoft 365 Groups, Teams chats and channel messages, Copilot interactions), which fits an organization-wide rule. Retention labels apply to individual items, typically for exceptions or records. Sensitivity labels have no retention settings, and a file plan is a records management construct for labels and records.",
+    },
+    {
+        id: 1112,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Principles of retention",
+        format: "multiple_choice",
+        q: "A document in a SharePoint site has a retention label that says 'delete after 3 years'. The site is also in scope of a retention policy that says 'retain for 7 years, then delete'. What happens to the document?",
+        options: [
+            "Deleted after 3 years, because the label is explicit and explicit settings win over implicit ones",
+            "Retained for 7 years, then deleted: retention wins over deletion and the longest period wins",
+            "Retained for 10 years, because the retention periods from the label and the policy are added together",
+            "Retained indefinitely, because Purview never deletes content while two settings conflict",
+        ],
+        answer: [1],
+        why: "Purview's principles of retention resolve conflicts in order: retention wins over deletion; the longest retention period wins; explicit inclusion wins over implicit inclusion; and the shortest deletion period wins. Here a retain-7-years setting beats delete-after-3, so the document is kept for seven years, after which the deletion applies. Periods are never summed, and conflicts never cause indefinite retention.",
+    },
+    {
+        id: 1113,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Records management",
+        format: "multiple_choice",
+        q: "A financial regulator requires that certain trade confirmations, once declared, can NEVER be edited, have their label removed or be deleted before the retention period ends, even by a Global Administrator. Which Purview capability satisfies this?",
+        options: [
+            "A retention label that marks the item as a record (non-regulatory)",
+            "A retention label that marks the item as a regulatory record",
+            "A sensitivity label with encryption and a do-not-forward restriction",
+            "A retention policy with preservation lock on the confirmations site",
+        ],
+        answer: [1],
+        why: "Regulatory records impose the strictest restrictions: no edits, no label removal or change, and no deletion until retention expires, and the label cannot be removed even by administrators. A standard record still allows some edits (for example editing a SharePoint file while it is unlocked) and its label can be changed by admins. Encryption controls access, not immutability, and preservation lock protects a policy from being changed, not individual items.",
+    },
+    {
+        id: 1114,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Disposition review",
+        format: "multiple_choice",
+        q: "Contracts must be retained for ten years. When the period ends, the legal team must inspect each contract and decide whether to delete it, extend retention or relabel it, with an audit trail of the decision. Which configuration provides this?",
+        options: [
+            "A retention policy that deletes the contracts automatically at the end of the ten-year period",
+            "A retention label configured to trigger a disposition review at the end of the retention period",
+            "An eDiscovery hold on the contracts library that the legal team lifts after ten years",
+            "A DLP policy that blocks deletion of contracts and alerts the legal team",
+        ],
+        answer: [1],
+        why: "Disposition review is a retention label setting: when the period ends, designated reviewers are notified and decide to delete, extend, relabel or add another review stage, and every decision is logged. Retention policies delete automatically without review. eDiscovery holds preserve content for legal cases but have no lifecycle decision workflow, and DLP does not govern deletion.",
+    },
+    {
+        id: 1115,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Unified data governance",
+        format: "multiple_choice",
+        q: "A data platform team needs to scan and catalog data assets across Azure SQL, an on-premises SQL Server, Amazon S3 and Power BI, add a business glossary, organize data into governance domains and data products, and measure data quality. Which Microsoft Purview capabilities are designed for this?",
+        options: [
+            "Compliance Manager and the Service Trust Portal",
+            "Microsoft Purview Data Map and Unified Catalog",
+            "Content explorer and Activity explorer in Purview",
+            "Microsoft Sentinel data connectors and workbooks",
+        ],
+        answer: [1],
+        why: "Purview's data governance solutions are the Data Map, which scans multicloud and on-premises sources to collect technical metadata and lineage, and the Unified Catalog, where data stewards curate governance domains, data products, glossary terms and data quality rules. The explorers show sensitive content in Microsoft 365, Compliance Manager measures regulatory posture, and Sentinel connectors ingest security logs.",
+    },
+    {
+        id: 1116,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Label rules",
+        format: "yes_no",
+        q: "True or False: A single file can carry two different sensitivity labels at the same time, for example both 'Confidential' and 'Internal'.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. An item can have only ONE sensitivity label at a time (a sub-label such as Confidential/Finance counts as that one label). By contrast, an item can have one sensitivity label AND one retention label, because they serve different purposes. Multiple DLP policies, however, can apply to the same item.",
+    },
+    {
+        id: 1117,
+        topic: "Purview — information protection & lifecycle",
+        tag: "Sensitive information types",
+        format: "dropdown",
+        q: "Select the answer that correctly completes the sentence.\n\nIn Microsoft Purview, a [answer] identifies content such as credit card numbers by using a regular expression pattern, checksum validation and supporting keywords, with configurable confidence levels.",
+        options: [
+            "trainable classifier",
+            "sensitive information type",
+            "retention label policy",
+            "document fingerprint",
+        ],
+        answer: [1],
+        why: "Sensitive information types are the pattern-based classifiers; Microsoft ships hundreds of built-in ones and you can create custom types. Trainable classifiers recognize categories of documents from examples rather than patterns, document fingerprints match content derived from a template form, and retention labels govern lifecycle, not detection.",
+    },
+    {
+        id: 1118,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Insider Risk Management",
+        format: "multiple_choice",
+        q: "HR notifies IT that an employee has resigned. The security team wants automated detection of unusual file downloads, USB copies and uploads to personal cloud storage by that employee during the notice period, with alerts scored by risk. Which Purview solution and template fit?",
+        options: [
+            "Data loss prevention with an Endpoint DLP policy for removable media",
+            "Insider Risk Management with the 'Data theft by departing users' template",
+            "Communication Compliance with a data leak detection template",
+            "eDiscovery with a custodian hold on the employee's mailbox and OneDrive",
+        ],
+        answer: [1],
+        why: "Insider Risk Management correlates signals such as downloads, exfiltration to USB, cloud uploads and printing, uses triggering events (an HR connector resignation date or an account deletion) to activate the policy, and produces risk-scored alerts. DLP can block individual actions but does not score user risk over time. Communication Compliance monitors messages, and eDiscovery preserves content for investigations rather than detecting behavior.",
+    },
+    {
+        id: 1119,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Pseudonymization",
+        format: "multiple_choice",
+        q: "An Insider Risk Management reviewer opens an alert and sees the user displayed as 'AnonIS8-988' instead of a name. Why?",
+        options: [
+            "The alert is a test alert generated by Microsoft to validate the policy configuration",
+            "IRM pseudonymizes users by default; revealing the identity is a separate, audited step",
+            "The user was deleted from the directory, so the alert shows a placeholder identifier",
+            "The reviewer's Purview license does not include the permission to view user names",
+        ],
+        answer: [1],
+        why: "Privacy by design is a core principle of Insider Risk Management: users are pseudonymized by default, role-based access controls limit who can see real names, and all reviewer actions are audited. Admins can turn anonymization off in settings, but the default is pseudonymized display. This is a frequently tested characteristic that distinguishes IRM from other Purview solutions.",
+    },
+    {
+        id: 1120,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "IRM workflow",
+        format: "multiple_choice",
+        q: "In the Insider Risk Management workflow, a reviewer evaluates a newly generated alert, decides it needs deeper review and creates a case for investigators. Which stage is the reviewer performing when evaluating the alert and deciding whether it needs review?",
+        options: ["Policies", "Triage", "Investigate", "Action"],
+        answer: [1],
+        why: "The workflow runs policies (define what to detect), alerts (generated by matched activity), triage (reviewers evaluate alerts and mark them needs review, resolved or dismissed), investigate (cases, activity explorer, content explorer) and action (notices, escalation to eDiscovery, or ServiceNow tickets). Evaluating an alert before a case exists is triage; creating and working the case is the investigate stage.",
+    },
+    {
+        id: 1121,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Adaptive Protection",
+        format: "multiple_choice",
+        q: "The security team wants DLP to automatically become stricter for a user whose insider risk level has just been elevated to high, blocking sharing that is merely audited for other users, and relaxing again when the risk level drops. Which capability does this?",
+        options: [
+            "Conditional Access risk-based policies",
+            "Adaptive Protection in Microsoft Purview",
+            "Communication Compliance",
+            "Retention lock",
+        ],
+        answer: [1],
+        why: "Adaptive Protection uses Insider Risk Management risk levels as a dynamic condition in DLP (and Conditional Access and Data Lifecycle Management) so that controls tighten for elevated-risk users and loosen when risk subsides. Conditional Access risk policies react to Entra ID Protection sign-in and user risk, a different signal. Communication Compliance and retention lock are unrelated to dynamic DLP enforcement.",
+    },
+    {
+        id: 1122,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Communication Compliance",
+        format: "multiple_choice",
+        q: "A financial services firm must detect threatening or harassing language and regulatory violations in Teams messages and email, route flagged messages to designated reviewers, and document remediation. Which Purview solution is built for this?",
+        options: [
+            "Insider Risk Management",
+            "Communication Compliance",
+            "Data loss prevention",
+            "Microsoft Priva",
+        ],
+        answer: [1],
+        why: "Communication Compliance uses classifiers (threat, harassment, discrimination, profanity) and custom conditions to detect policy violations in messages across Teams, Exchange, Viva Engage and third-party sources, with a reviewer workflow to resolve, notify, escalate or tag. Insider Risk Management scores user behavior, DLP protects sensitive information, and Priva manages personal data privacy.",
+    },
+    {
+        id: 1123,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "eDiscovery",
+        format: "multiple_choice",
+        q: "For a lawsuit, legal must preserve the mailboxes and OneDrive accounts of specific custodians so nothing can be permanently deleted, collect the relevant content into a set for review with near-duplicate detection and email threading, and export the results. Which Purview capability supports the full workflow?",
+        options: [
+            "Content search only, exported to PST for the legal team",
+            "An eDiscovery case with holds, searches, review sets and analytics",
+            "A retention policy on the custodians' mailboxes and OneDrive accounts",
+            "Communication Compliance with the custodians in scope",
+        ],
+        answer: [1],
+        why: "eDiscovery cases provide legal holds on custodial data sources, searches, review sets with analytics such as near-duplicate detection, threading and themes (premium features depending on licensing), and export. Content search finds and exports content but is not a preservation or review workflow. A retention policy keeps data generally but is not case-based, and Communication Compliance monitors messages.",
+    },
+    {
+        id: 1124,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "eDiscovery evolution",
+        format: "multiple_choice",
+        q: "Which statement about eDiscovery in Microsoft Purview is correct as of 2026?",
+        options: [
+            "eDiscovery (Standard) and eDiscovery (Premium) are two separate solutions chosen from the Purview home page",
+            "One unified eDiscovery solution; Content search runs inside it, and premium features depend on licensing",
+            "eDiscovery has been moved into Microsoft Sentinel so that legal and security investigations share tooling",
+            "Content search is a separate solution that can search but cannot place holds or export results",
+        ],
+        answer: [1],
+        why: "Microsoft retired the classic Content search, eDiscovery (Standard) and eDiscovery (Premium) experiences in 2025 in favor of one unified eDiscovery solution in the Purview portal. Content search lives inside it as a system-generated case for quick find-and-export, while cases created by users can add holds, review sets and premium analytics based on the organization's licenses. Sentinel is a SIEM and has no eDiscovery.",
+    },
+    {
+        id: 1125,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Content search",
+        format: "multiple_choice",
+        q: "A manager asks how many emails and files across the whole organization mention the code name 'Project Falcon'. Nothing needs to be preserved or reviewed; they only want counts and an export. What is the quickest appropriate tool?",
+        options: [
+            "An eDiscovery hold on all mailboxes and sites",
+            "Content search within Microsoft Purview eDiscovery",
+            "Activity explorer filtered by the code name",
+            "Audit log search for the code name keyword",
+        ],
+        answer: [1],
+        why: "Content search searches mailboxes, sites and Teams for keywords and conditions, returns statistics and allows export without creating holds, which matches a simple find-and-export need. A hold preserves data and is unnecessary here. Activity explorer shows label and DLP activity, and the audit log records user and admin actions rather than the content of messages.",
+    },
+    {
+        id: 1126,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Audit Standard vs Premium",
+        format: "multiple_choice",
+        q: "A regulated organization must retain Microsoft 365 audit records for ten years and wants intelligent insights on events such as when specific mail items were accessed. Which licensing and configuration is required?",
+        options: [
+            "Audit (Standard), which retains records for 180 days and can be extended to ten years with a retention policy",
+            "Audit (Premium) with E5 (one year by default) plus the 10-Year Audit Log Retention add-on and a retention policy",
+            "Microsoft Sentinel, because Purview audit cannot retain records beyond 90 days under any license",
+            "Microsoft Entra ID P2, which extends unified audit log retention to ten years for all workloads",
+        ],
+        answer: [1],
+        why: "Audit (Standard) keeps records for 180 days and is included in most subscriptions. Audit (Premium) extends default retention to one year for Entra ID, Exchange and SharePoint activity, allows retention policies of up to ten years with the 10-Year Audit Log Retention add-on, and adds intelligent insights. Sentinel is an optional long-term destination but not a Purview requirement, and Entra P2 affects Entra sign-in and audit log retention (30 days), not the unified audit log.",
+    },
+    {
+        id: 1127,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Audit search location",
+        format: "multiple_choice",
+        q: "From which portals can an administrator search the Microsoft 365 unified audit log?",
+        options: [
+            "Only the Microsoft Entra admin center audit logs blade",
+            "The Microsoft Purview portal and the Microsoft Defender portal",
+            "Only the Exchange admin center compliance section",
+            "Only the Azure portal Log Analytics workspace blade",
+        ],
+        answer: [1],
+        why: "Unified audit log search is available in the Microsoft Purview portal under Audit and in the Microsoft Defender portal (security.microsoft.com/auditlogsearch), which is convenient for security teams. The Entra admin center exposes Entra's own sign-in and directory audit logs, which are different logs, and Log Analytics only holds audit data if you export it there.",
+    },
+    {
+        id: 1128,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Audit retention",
+        format: "yes_no",
+        q: "True or False: With Microsoft Purview Audit (Standard), audit records are retained for 90 days.",
+        options: ["True", "False"],
+        answer: [1],
+        why: "False. Since late 2023, Audit (Standard) retains audit records for 180 days (previously 90). Audit (Premium) retains them for one year by default and up to ten years with the add-on license. Older study materials still quote 90 days, so this is a trap for anyone relying on outdated notes.",
+    },
+    {
+        id: 1129,
+        topic: "Purview — insider risk, eDiscovery & audit",
+        tag: "Information barriers",
+        format: "multiple_choice",
+        q: "A bank must prevent its Trading desk and its Research analysts from chatting, calling or sharing files with each other in Microsoft Teams and SharePoint to satisfy a conflict-of-interest regulation. Which Purview capability enforces this?",
+        options: [
+            "Data loss prevention",
+            "Information barriers",
+            "Communication Compliance",
+            "Sensitivity labels",
+        ],
+        answer: [1],
+        why: "Information barriers define segments of users and block communication and collaboration between them in Teams, SharePoint and OneDrive. DLP controls sensitive content but does not stop two groups from talking, Communication Compliance detects and reviews inappropriate messages after the fact, and sensitivity labels classify and protect content rather than restrict who may communicate with whom.",
+    },
 ];

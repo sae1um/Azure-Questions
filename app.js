@@ -70,9 +70,30 @@
         "Copilot & agents — features & licensing": "Copilot vs agents, Copilot Chat, licences vs pay-as-you-go, Researcher, Analyst, agent types",
         "Copilot & agent admin tasks": "License assignment, billing policies, usage reports, prompts, agent access, approval, lifecycle"
       }
+    },
+    dp900: {
+      code: "DP-900",
+      eyebrow: "Azure Data Fundamentals",
+      title: "DP-900 Practice",
+      store: "dp900.progress.v1",
+      bank: "__DP900_QUESTIONS__",
+      lede: " original questions across all four exam domains — core data concepts, relational data " +
+        "on Azure, non-relational data on Azure, and analytics workloads — covering everything from " +
+        "normalization and T-SQL to Cosmos DB consistency levels, Data Lake Storage, Synapse and Power BI.",
+      outline: "DP-900 skills outline",
+      desc: {
+        "Core data concepts": "Structured/semi-structured/unstructured, OLTP vs OLAP, batch vs streaming, file formats, data roles",
+        "Relational data concepts": "Keys, normalization, indexes, views, stored procedures, ACID, T-SQL basics",
+        "Relational Azure services": "Azure SQL Database, SQL Managed Instance, SQL on VMs, DTU vs vCore, elastic pools, Hyperscale",
+        "Non-relational & NoSQL concepts": "Key-value, document, column-family, graph models; Cosmos DB consistency & RUs",
+        "Azure Storage & Cosmos DB": "Blob tiers, redundancy (LRS/ZRS/GRS), Azure Files, Queues, Cosmos DB APIs & global distribution",
+        "Data Lake & big data": "Data lake vs warehouse vs lakehouse, star/snowflake schema, ETL vs ELT, OneLake",
+        "Analytics & ETL pipelines": "Azure Data Factory, Synapse SQL pools & Spark, Databricks, Stream Analytics, Event Hubs",
+        "Data visualization — Power BI": "Desktop vs Service, reports vs dashboards, dataflows, DirectQuery, RLS, gateways"
+      }
     }
   };
-  var ORDER = ["ai901", "sc900", "ab900"];
+  var ORDER = ["ai901", "sc900", "ab900", "dp900"];
 
   var FMT = {
     multiple_choice: null,
